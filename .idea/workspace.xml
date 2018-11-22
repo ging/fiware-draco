@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/add-processor.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/addConnect.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/all-running.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/architecture-nifi.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/components.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/connection1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/connection2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/controller-mysql.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/controller-postgresql.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/create-connection.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/cygnus-template1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/cygnus-toolbar-components.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/dbpc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/enable-controller-service-scope.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/fiware_architecture.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/iconConfigure.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/iconDisable.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/iconEnable.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/iconProcessor.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/nifi-provenance.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/nifi-toolbar-components.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/process-group-configuration-options.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/process-group-controller-services-scope.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/processor-connection-bubble.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/processor-http.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/processor-mongo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/processor-mysql.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/processor-postgresql.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/scenario.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/sequence_diagram_mysql.vsd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/sequence_diagram_notification_handling_default.vsd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/images/step7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/img/favicon.ico" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/img/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/fiware_architecture.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/drivers/mysql-connector-java-5.1.38.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/drivers/postgresql-42.2.4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/apiary/apiary.apib" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/index.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/connection_components.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/controllers_configuration.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/draco_gui.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/install_from_sources.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/install_with_docker.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/install_with_rpm.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/introduction.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/issues_and_contact.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/processors_configuration.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/rest_api.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/installation_and_administration_guide/templates-cygnus.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/introduction.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/issues_and_contact.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/ngsi_mongo_sink.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/ngsi_mysql_sink.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/ngsi_postgresql_sink.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/processors_catalogue/ngsi_rest_handler.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/quick_start_guide.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mkdocs.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_bazaarvoice_jolt_jolt_core_0_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_bazaarvoice_jolt_json_utils_0_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_burgstaller_okhttp_digest_1_13.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_eclipsesource_minimal_json_minimal_json_0_9_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_csv_2_9_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_fluenda_ParCEFone_1_2_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_github_jponge_lzma_java_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_github_palindromicity_simple_syslog_5424_0_0_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_github_wnameless_json_flattener_0_5_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_google_http_client_google_http_client_1_19_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_jcraft_jsch_0_1_54.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_jcraft_jzlib_1_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_martiansoftware_macnificent_0_2_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_maxmind_db_maxmind_db_1_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_maxmind_geoip2_geoip2_2_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_10_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_8_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_squareup_okio_okio_1_13_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_squareup_okio_okio_1_14_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__com_thoughtworks_paranamer_paranamer_2_7.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_dbcp_commons_dbcp_1_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_lang_commons_lang_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_net_commons_net_3_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__commons_pool_commons_pool_1_5_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__de_svenkubiak_jBCrypt_0_4_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__io_krakens_java_grok_0_1_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_activation_activation_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_el_javax_el_api_3_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_jms_javax_jms_api_2_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_mail_mail_1_4_7.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__javax_ws_rs_javax_ws_rs_api_2_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__joda_time_joda_time_2_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__junit_junit_4_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_hydromatic_aggdesigner_algorithm_6_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_java_dev_stax_utils_stax_utils_20070216.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_sf_saxon_Saxon_HE_9_6_0_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__net_sf_supercsv_super_csv_2_4_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_abego_treelayout_org_abego_treelayout_core_1_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_antlr_antlr_runtime_3_5_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_activemq_activemq_client_5_15_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_avro_avro_1_8_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_bval_bval_core_1_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_bval_bval_jsr_1_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_calcite_avatica_avatica_core_1_9_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_calcite_avatica_avatica_metrics_1_9_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_calcite_calcite_core_1_12_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_calcite_calcite_linq4j_1_12_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_commons_commons_compress_1_16_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_commons_commons_configuration2_2_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_commons_commons_csv_1_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_commons_commons_text_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_j2ee_management_1_1_spec_1_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jms_1_1_spec_1_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_avro_record_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_data_provenance_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_dbcp_service_api_1_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_dbcp_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_distributed_cache_client_service_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_distributed_cache_client_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_distributed_cache_protocol_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_expression_language_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_flowfile_packager_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_framework_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_hbase_client_service_api_1_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_http_context_map_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_load_distribution_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_logging_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_lookup_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_lookup_services_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_mock_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_mock_record_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_processor_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_properties_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_properties_loader_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_proxy_configuration_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_record_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_record_path_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_record_serialization_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_record_serialization_services_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_schema_registry_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_security_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_socket_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_ssl_context_service_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_ssl_context_service_api_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_standard_prioritizers_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_standard_processors_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_standard_record_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_standard_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_standard_web_test_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_nifi_nifi_utils_1_8_0_SNAPSHOT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_apache_tika_tika_core_1_17.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_bouncycastle_bcpg_jdk15on_1_59.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_59.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_59.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_codehaus_groovy_groovy_all_2_4_13.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_13.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_13.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_codehaus_janino_commons_compiler_2_7_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_codehaus_janino_janino_2_7_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_fusesource_hawtbuf_hawtbuf_1_11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_json_json_20160810.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_mockito_mockito_core_1_10_19.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_25.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_tukaani_xz_1_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/libraries/Maven__org_xerial_snappy_snappy_java_1_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/aggregators/HDFSAggregator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/aggregators/MongoAggregator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/HiveBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/MongoBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/MySQLBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/PostgreSQLBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/hdfs/HDFSBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/hdfs/HDFSBackendBinary.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/hdfs/HDFSBackendREST.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/http/HttpBackend.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/http/HttpClientFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/http/JsonResponse.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/http/KerberosCallbackHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/Attributes.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/CommonConstants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/Entity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/Metadata.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/NGSICharsets.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/NGSIConstants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/NGSIEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/NGSIUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/utils/TestJsonNgsi.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMongo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToHDFS.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/.dockerignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerBuild.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerImage.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerRun.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/docker-compose.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/dockerhub.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/common.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/secure.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/start.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_cluster_state_management.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_login_providers.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/templates/Orion-To-Mongo.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/templates/Orion-To-MySQL.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/templates/Orion-To-PosgreSQL.xml" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="846">
+                <caret line="47" column="102" lean-forward="false" selection-start-line="47" selection-start-column="100" selection-end-line="47" selection-end-column="102" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-988">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mkdocs.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mkdocs.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Cygnus</find>
+      <find>-ld</find>
+      <find>draco-ld</find>
+      <find>-d</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Draco</replace>
+      <replace />
+      <replace>d</replace>
+      <replace>draco</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/mkdocs.yml" />
+        <option value="$PROJECT_DIR$/README.md" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fiware-draco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fiware-draco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="ApexTest" factoryName="Apex Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="fiware-draco" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
+      <setting name="environment" value="" />
+      <setting name="specsToExecute" value="" />
+      <setting name="tags" value="" />
+      <setting name="parallelNodes" value="" />
+      <setting name="execInParallel" value="false" />
+      <setting name="programParameters" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="moduleName" value="" />
+      <envMap />
+      <setting name="rowsRange" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="" />
+      <created>1542920708872</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542920708872</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Execute" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24940239" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/mkdocs.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="44" lean-forward="false" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="846">
+            <caret line="47" column="102" lean-forward="false" selection-start-line="47" selection-start-column="100" selection-end-line="47" selection-end-column="102" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-988">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.2">
+    <description>Template for receiving NGSIv2 events coming from Orion Context broker and persist that data to MongoDB</description>
+    <groupId>853d5998-0165-1000-4ca8-a451b1f51139</groupId>
+    <name>Orion-To-Mongo</name>
+    <snippet>
+        <connections>
+            <id>64b70026-80bf-31bf-0000-000000000000</id>
+            <parentGroupId>c067ef53-51aa-3375-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>c067ef53-51aa-3375-0000-000000000000</groupId>
+                <id>8f96c89d-850a-3578-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>c067ef53-51aa-3375-0000-000000000000</groupId>
+                <id>feef5d63-6615-3fa9-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>d385f49b-7476-3daf-0000-000000000000</id>
+            <parentGroupId>c067ef53-51aa-3375-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>c067ef53-51aa-3375-0000-000000000000</groupId>
+                <id>9632bdd5-9cd6-32d8-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>c067ef53-51aa-3375-0000-000000000000</groupId>
+                <id>8f96c89d-850a-3578-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <processors>
+            <id>8f96c89d-850a-3578-0000-000000000000</id>
+            <parentGroupId>c067ef53-51aa-3375-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>229.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-ngsi-nar</artifact>
+                <group>default</group>
+                <version>unversioned</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Mongo URI</key>
+                        <value>
+                            <name>Mongo URI</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Mongo User Name</key>
+                        <value>
+                            <name>Mongo User Name</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Mongo password</key>
+                        <value>
+                            <name>Mongo password</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>
+                            <name>ngsi-version</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>
+                            <name>data-model</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>
+                            <name>attr-persistence</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>
+                            <name>enable-encoding</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>
+                            <name>enable-lowercase</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>db-prefix</key>
+                        <value>
+                            <name>db-prefix</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>collection-prefix</key>
+                        <value>
+                            <name>collection-prefix</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>data-expiration</key>
+                        <value>
+                            <name>data-expiration</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>collection-size</key>
+                        <value>
+                            <name>collection-size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>max-documents</key>
+                        <value>
+                            <name>max-documents</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Write Concern</key>
+                        <value>
+                            <name>Write Concern</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Mongo URI</key>
+                        <value>db:27017</value>
+                    </entry>
+                    <entry>
+                        <key>Mongo User Name</key>
+                    </entry>
+                    <entry>
+                        <key>Mongo password</key>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>v2</value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>db-by-service-path</value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>row</value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>db-prefix</key>
+                        <value>sth_</value>
+                    </entry>
+                    <entry>
+                        <key>collection-prefix</key>
+                        <value>sth_</value>
+                    </entry>
+                    <entry>
+                        <key>data-expiration</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>collection-size</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>max-documents</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>Write Concern</key>
+                        <value>ACKNOWLEDGED</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>NGSIToMongo</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.ngsi.NGSIToMongo</type>
+        </processors>
+        <processors>
+            <id>9632bdd5-9cd6-32d8-0000-000000000000</id>
+            <parentGroupId>c067ef53-51aa-3375-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>461.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.7.0</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Log Level</key>
+                        <value>
+                            <name>Log Level</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Log Payload</key>
+                        <value>
+                            <name>Log Payload</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Attributes to Log</key>
+                        <value>
+                            <name>Attributes to Log</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>attributes-to-log-regex</key>
+                        <value>
+                            <name>attributes-to-log-regex</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Attributes to Ignore</key>
+                        <value>
+                            <name>Attributes to Ignore</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>attributes-to-ignore-regex</key>
+                        <value>
+                            <name>attributes-to-ignore-regex</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Log prefix</key>
+                        <value>
+                            <name>Log prefix</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>character-set</key>
+                        <value>
+                            <name>character-set</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Log Level</key>
+                        <value>info</value>
+                    </entry>
+                    <entry>
+                        <key>Log Payload</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>Attributes to Log</key>
+                    </entry>
+                    <entry>
+                        <key>attributes-to-log-regex</key>
+                        <value>.*</value>
+                    </entry>
+                    <entry>
+                        <key>Attributes to Ignore</key>
+                    </entry>
+                    <entry>
+                        <key>attributes-to-ignore-regex</key>
+                    </entry>
+                    <entry>
+                        <key>Log prefix</key>
+                    </entry>
+                    <entry>
+                        <key>character-set</key>
+                        <value>UTF-8</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>LogAttribute</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.LogAttribute</type>
+        </processors>
+        <processors>
+            <id>feef5d63-6615-3fa9-0000-000000000000</id>
+            <parentGroupId>c067ef53-51aa-3375-0000-000000000000</parentGroupId>
+            <position>
+                <x>1.0</x>
+                <y>0.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.7.0</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Base Path</key>
+                        <value>
+                            <name>Base Path</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Listening Port</key>
+                        <value>
+                            <name>Listening Port</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Data to Receive per Second</key>
+                        <value>
+                            <name>Max Data to Receive per Second</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.ssl.RestrictedSSLContextService</identifiesControllerService>
+                            <name>SSL Context Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Authorized DN Pattern</key>
+                        <value>
+                            <name>Authorized DN Pattern</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Unconfirmed Flowfile Time</key>
+                        <value>
+                            <name>Max Unconfirmed Flowfile Time</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>HTTP Headers to receive as Attributes (Regex)</key>
+                        <value>
+                            <name>HTTP Headers to receive as Attributes (Regex)</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Return Code</key>
+                        <value>
+                            <name>Return Code</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Base Path</key>
+                        <value>v2/notify</value>
+                    </entry>
+                    <entry>
+                        <key>Listening Port</key>
+                        <value>5050</value>
+                    </entry>
+                    <entry>
+                        <key>Max Data to Receive per Second</key>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                    </entry>
+                    <entry>
+                        <key>Authorized DN Pattern</key>
+                        <value>.*</value>
+                    </entry>
+                    <entry>
+                        <key>Max Unconfirmed Flowfile Time</key>
+                        <value>60 secs</value>
+                    </entry>
+                    <entry>
+                        <key>HTTP Headers to receive as Attributes (Regex)</key>
+                        <value>Fiware-Service|Host|Fiware-ServicePath|X-Auth-Token</value>
+                    </entry>
+                    <entry>
+                        <key>Return Code</key>
+                        <value>200</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>NGSIv2-HTTP-INPUT</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.ListenHTTP</type>
+        </processors>
+    </snippet>
+    <timestamp>08/29/2018 10:44:14 UTC</timestamp>
+</template>
