@@ -1,8 +1,8 @@
 site_name: fiware-draco
 site_url: https://fiware-draco.readthedocs.org
-repo_url: https://github.com/ging/fiware-Draco.git
+repo_url: https://github.com/ging/fiware-draco.git
 site_description: Draco Documentation
-docs_dir: doc
+docs_dir: docs
 site_dir: html
 markdown_extensions: [toc,fenced_code]
 use_directory_urls: false
@@ -17,11 +17,11 @@ pages:
       - 'Installation via RPM': 'installation_and_administration_guide/install_with_rpm.md'
       - 'Installation from sources': 'installation_and_administration_guide/install_from_sources.md'
       - 'Installation via docker': 'installation_and_administration_guide/install_with_docker.md'
-      - 'Draco GUI': 'installation_and_administration_guide/Draco_gui.md'
+      - 'Draco GUI': 'installation_and_administration_guide/draco_gui.md'
       - 'Processors configuration': 'installation_and_administration_guide/processors_configuration.md'
       - 'Controllers configuration': 'installation_and_administration_guide/controllers_configuration.md'
       - 'Connection Components': 'installation_and_administration_guide/connection_components.md'
-      - 'Templates': 'installation_and_administration_guide/templates-Draco.md'
+      - 'Templates': 'installation_and_administration_guide/templates-draco.md'
       - 'REST API': 'installation_and_administration_guide/rest_api.md'
       - 'Issues and Contact': 'installation_and_administration_guide/issues_and_contact.md'
   - 'Processors catalogue':
