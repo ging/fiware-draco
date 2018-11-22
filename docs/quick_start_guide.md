@@ -23,7 +23,6 @@ Obviously, you will need docker and docker-compose installed and running in you 
 
     git clone https://github.com/ging/fiware-Draco.git
     cd fiware-Draco
-    git checkout release/2.0.0
 
 Change directory:
 
