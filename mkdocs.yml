@@ -2,7 +2,7 @@ site_name: fiware-draco
 site_url: https://fiware-draco.readthedocs.org
 repo_url: https://github.com/ging/fiware-draco.git
 site_description: Draco Documentation
-docs_dir: doc
+docs_dir: docs
 site_dir: html
 markdown_extensions: [toc,fenced_code]
 use_directory_urls: false
