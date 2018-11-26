@@ -52,7 +52,7 @@ First, go to your browser and open Draco using this URL http://localhost:9090/ni
 
 The next image provides you the location of many components of Draco. Please put special 
 attention to the template button, play button and processor component, you will use them later.
-![Draco-gui](./images/Draco-toolbar-components.png)
+![Draco-gui](./images/cygnus-toolbar-components.png)
 
 Now go to the Components toolbar which is placed in the upper section of the NiFi GUI,  
 find the template icon and drag and drop it inside the Draco user space. 
@@ -65,7 +65,7 @@ the second processor called NGSIToMySQL is in charge to get the NGSIv2 events an
 persist that data into the MySQL database. The third is an optional processor for storing 
 the logs of the received events.
 
-![Draco-template1](./images/Draco-template1.png)
+![Draco-template1](./images/cygnus-template1.png)
 
 Before starting the processors, you need to set your MySQL password and enable the DBCConnectionPool controller. 
 For doing that please follow the instructions:
