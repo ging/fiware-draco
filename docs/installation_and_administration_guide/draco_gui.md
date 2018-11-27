@@ -5,7 +5,7 @@ user interface usually running at 8080 port (http://localhost:8080/nifi) and ide
 
 The next image provides you the location of many components of Draco. Please put special 
 attention to the template button, play button and processor component, you will use them later.
-![Draco-gui](../images/Draco-toolbar-components.png)
+![Draco-gui](../images/cygnus-toolbar-components.png)
 There are no permissions configured by default, so anyone is able to view and modify the dataflow. 
 For information on securing the system, see the System Administrator’s Guide.
 
