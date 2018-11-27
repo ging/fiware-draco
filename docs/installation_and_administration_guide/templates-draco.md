@@ -13,7 +13,7 @@ You can access each template by dragging the Template button to the canvas in th
 the template that you need, all the processors and controllers with a basic configuration
 will be put and displayed on the Draco canvas.
 
-![Draco-template1](../images/Draco-template1.png) 
+![Draco-template1](../images/cygnus-template1.png) 
 
 
 
