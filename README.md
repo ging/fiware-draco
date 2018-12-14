@@ -9,12 +9,16 @@
 [![Documentation badge](https://img.shields.io/readthedocs/fiware-draco.svg)](http://fiware-draco.rtfd.io)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
-## Welcome
-This project is part of [FIWARE](http://fiware.org), as part of the Core Context Management Chapter .
-
 Draco is a is an easy to use, powerful, and reliable system to process and distribute data. Internally, Draco is based on [Apache NiFi](https://nifi.apache.org/docs.html),
 NiFi is a dataflow system based on the concepts of flow-based programming. It supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
 It was built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of contexts, we use it here to mean the automated and managed flow of information between systems.
+
+This project is part of [FIWARE](https://www.fiware.org/). For more information
+check the FIWARE Catalogue entry for
+[Core Context Management](https://github.com/Fiware/catalogue/tree/master/core).
+
+|  :books: [Documentation](https://fiware-draco.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | 
+|---|---|
 
 ### Terminology
 
