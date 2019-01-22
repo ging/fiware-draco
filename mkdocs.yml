@@ -30,3 +30,4 @@ pages:
       - 'MySQL backend': 'processors_catalogue/ngsi_mysql_sink.md'
       - 'PostgreSQL backend': 'processors_catalogue/ngsi_postgresql_sink.md'
       - 'Issues and Contact': 'processors_catalogue/issues_and_contact.md'
+  - 'Roadmap': 'roadmap.md'
