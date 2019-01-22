@@ -38,7 +38,7 @@ Current stable release is able to persist the following sources of data in the f
 ## Draco place in FIWARE architecture
 Draco plays the role of a connector between Orion Context Broker (which is a NGSI source of data) and many external and FIWARE storages like MySQL, MongoDB
 
-![FIWARE architecture](doc/images/fiware_architecture.png)
+![FIWARE architecture](images/fiware_architecture.png)
 
 ## Further documentation
 The **Quick Start Guide** is found at readthedocs.org provides a good documentation summary ([Draco](https://fiware-draco.readthedocs.io/en/latest/quick_start_guide/index.html)).
