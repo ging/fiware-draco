@@ -14,6 +14,7 @@ The following list of features are planned to be addressed in the short term, an
 
 ## Medium term
 The following list of features are planned to be addressed in the medium term, typically within the subsequent release(s) generated in the next 9 months after next planned release:
+ 
  * **NGSIToCartoDB Controller**: Controller for connecting between Draco and CartoDB backend.
  * **NGSIToCartoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CouchDB.
  * **NGSIToCouchDB Controller**: Controller for connecting between Draco and CouchDB backend.
