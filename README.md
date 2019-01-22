@@ -2,19 +2,23 @@
 
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Docker badge](https://img.shields.io/docker/pulls/fiware/draco-common.svg)](https://hub.docker.com/r/fiware/Draco-common/)
+[![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)
 [![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware-draco) 
 [![Support badge]( https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
 <br/>
-[![Documentation badge](https://readthedocs.org/projects/fiware-/badge/?version=latest)](http://fiware-draco.rtfd.io)
+[![Documentation badge](https://img.shields.io/readthedocs/fiware-draco.svg)](http://fiware-draco.rtfd.io)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
-
-## Welcome
-This project is part of [FIWARE](http://fiware.org), as part of the Core Context Management Chapter .
 
 Draco is a is an easy to use, powerful, and reliable system to process and distribute data. Internally, Draco is based on [Apache NiFi](https://nifi.apache.org/docs.html),
 NiFi is a dataflow system based on the concepts of flow-based programming. It supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
 It was built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of contexts, we use it here to mean the automated and managed flow of information between systems.
+
+This project is part of [FIWARE](https://www.fiware.org/). For more information
+check the FIWARE Catalogue entry for
+[Core Context Management](https://github.com/Fiware/catalogue/tree/master/core).
+
+|  :books: [Documentation](https://fiware-draco.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | 
+|---|---|
 
 ### Terminology
 
