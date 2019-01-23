@@ -104,7 +104,7 @@ This project is part of FIWARE and has been rated as follows:
 
 ## Roadmap
 
-The list of features that are planned for the subsequent release are available in the [ROADMAP](https://github.com/ging/fiware-cosmos-orion-flink-connector/blob/master/ROADMAP.md) file.
+The list of features that are planned for the subsequent release are available in the [ROADMAP](https://github.com/ging/fiware-draco/blob/develop/docs/roadmap.md) file.
 
 ## Maintainers
 
