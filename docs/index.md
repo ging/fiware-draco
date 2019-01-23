@@ -1,14 +1,39 @@
-# Draco
+# Fiware Draco
 
-[![](https://img.shields.io/badge/FIWARE-Core-233c68.svg?label=FIWARE&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAA8NJREFUSEuVlUtIFlEUx+eO+j3Uz8wSLLJ3pBiBUljRu1WLCAKXbXpQEUFERSQF0aKVFAUVrSJalNXGgmphFEhQiZEIPQwKLbEUK7VvZrRvbr8zzjfNl4/swplz7rn/8z/33HtmRhn/MWzbXmloHVeG0a+VSmAXorXS+oehVD9+0zDN9mgk8n0sWtYnHo5tT9daH4BsM+THQC8naK02jCZ83/HlKaVSzBey1sm8BP9nnUpdjOfl/Qyzj5ust6cnO5FItJLoJqB6yJ4QuNcjVOohegpihshS4F6S7DTVVlNtFFxzNBa7kcaEwUGcbVnH8xOJD67WG9n1NILuKtOsQG9FngOc+lciic1iQ8uQGhJ1kVAKKXUs60RoQ5km93IfaREvuoFj7PZsy9rGXE9G/NhBsDOJ63Acp1J82eFU7OIVO1OxWGwpSU5hb0GqfMydMHYSdiMVnncNY5Vy3VbwRUEydvEaRxmAOSSqJMlJISTxS9YWTYLcg3B253xsPkc5lXk3XLlwrPLuDPKDqDIutzYaj3eweMkPeCCahO3+fEIF8SfLtg/5oI3Mh0ylKM4YRBaYzuBgPuRnBYD3mmhA1X5Aka8NKl4nNz7BaKTzSgsLCzWbvyo4eK9r15WwLKRAmmCXXDoA1kaG2F4jWFbgkxUnlcrB/xj5iHxFPiBN4JekY4nZ6ccOiQ87hgwhe+TOdogT1nfpgEDTvYAucIwHxBfNyhpGrR+F8x00WD33VCNTOr/Wd+9C51Ben7S0ZJUq3qZJ2OkZz+cL87ZfWuePlwRcHZjeUMxFwTrJZAJfSvyWZc1VgORTY8rBcubetdiOk+CO+jPOcCRTF+oZ0okUIyuQeSNL/lPrulg8flhmJHmE2gBpE9xrJNkwpN4rQIIyujGoELCQz8ggG38iGzjKkXufJ2Klun1iu65bnJub2yut3xbEK3UvsDEInCmvA6YjMeE1bCn8F9JBe1eAnS2JksmkIlEDfi8R46kkEkMWdqOv+AvS9rcp2bvk8OAESvgox7h4aWNMLd32jSMLvuwDAwORSE7Oe3ZRKrFwvYGrPOBJ2nZ20Op/mqKNzgraOTPt6Bnx5citUINIczX/jUw3xGL2+ia8KAvsvp0ePoL5hXkXO5YvQYSFAiqcJX8E/gyX8QUvv8eh9XUq3h7mE9tLJoNKqnhHXmCO+dtJ4ybSkH1jc9XRaHTMz1tATBe2UEkeAdKu/zWIkUbZxD+veLxEQhhUFmbnvOezsJrk+zmqMo6vIL2OXzPvQ8v7dgtpoQnkF/LP8Ruu9zXdJHg4igAAAABJRU5ErkJgggA=)](https://www.fiware.org/developers/catalogue/)
-[![](https://img.shields.io/badge/tag-fiware--Draco-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware-Draco)
+[![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
+[![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware-draco) 
+[![Support badge]( https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
+<br/>
+[![Documentation badge](https://readthedocs.org/projects/fiware-/badge/?version=latest)](http://fiware-draco.rtfd.io)
+![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
-## Welcome
+## Table of Contents
+- [What is Draco?](#what-is-draco)
+- [Terminology](#terminology)
+- [Why use Draco?](#why-use-draco)
+- [Draco place in FIWARE architecture](#draco-place-in-fiware-architecture)
+- [How to Deploy?](#how-to-deploy)
+- [Usage: Overview](#usage)
+- [Training Courses](#training-courses)
+- [Testing](#testing)
+- [Quality Assurance](#quality-assurance)
+- [Roadmap](#roadmap)
+- [Maintainers](#maintainers)
+- [Licensing](#licensing)
+- [Reporting issues and contact information](#reporting-issues-and-contact-information)
+
+
+
+## What is Draco?
 This project is part of [FIWARE](http://fiware.org), as part of the Core Context Management Chapter .
 
 Draco is a is an easy to use, powerful, and reliable system to process and distribute data. Internally, Draco is based on [Apache NiFi](https://nifi.apache.org/docs.html),
 NiFi is a dataflow system based on the concepts of flow-based programming. It supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
 It was built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of contexts, we use it here to mean the automated and managed flow of information between systems.
+
+|  :books: [Documentation](https://fiware-draco.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | 
+|---|---|
 
 ### Terminology
 
@@ -18,7 +43,7 @@ In order to talk about Draco, there are a few key terms that readers should be f
 
 **Processor:** The Processor is the NiFi component that is responsible for creating, sending, receiving, transforming, routing, splitting, merging, and processing FlowFiles. It is the most important building block available to NiFi users to build their dataflows.
 
-
+## Why use Draco?
 Draco is designed to run specific set of processors and templates for 
 persistence context data to multiple sinks.
 
@@ -33,14 +58,57 @@ Current stable release is able to persist the following sources of data in the f
 Draco plays the role of a connector between Orion Context Broker (which is a NGSI source of data) and many external and FIWARE storages like MySQL, MongoDB
 
 ![FIWARE architecture](images/fiware_architecture.png)
+    
+## How to Deploy?
+ The most easy way to deploy Draco is running the container available on DockerHub.
+ 
+ Start a container for this image by typing in a terminal:
+ 
+     $ docker run --name draco -p 8080:8080 -p 5050:5050 -d ging/fiware-draco 
 
-## Further documentation
-The **Quick Start Guide** is found at readthedocs.org provides a good documentation summary ([Draco](quick_start_guide.md)).
+ However if you want to have a custom installation please go to the **Installation and Administration Guide** at [readthedocs.org](installation_and_administration_guide/README.md) 
+
+## Usage: Overview
+
+The best way to start with Draco is following the  **Quick Start Guide** found at readthedocs.org  and it provides a good documentation summary ([Draco](quick_start_guide.md)).
 
 Nevertheless, both the **Installation and Administration Guide** also found at [readthedocs.org](installation_and_administration_guide/README.md) cover more advanced topics.
 
 The **Processors Catalogue** completes the available documentation for Draco ([Draco](processors_catalogue/README.md)).
 
+## Training courses
+### Academy Courses
+Some lessons on Draco Fundamentals will be offered soon in the [FIWARE Academy](https://fiware-academy.readthedocs.io/en/latest) .
+
+### Examples
+Several examples are provided to facilitate getting started with GE. They are hosted in the official documentation at [Read the Docs](https://fiware-draco.readthedocs.io/en/latest/quick_start_guide/index.html).
+
+## Testing
+
+In order to test the code:
+
+    $mvn clean test -Dtest=*Test cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA
+
+## Quality Assurance
+
+This project is part of FIWARE and has been rated as follows:
+
+-   **Version Tested:**
+    TBD
+-   **Documentation:**
+    TBD
+-   **Responsiveness:**
+    TBD
+-   **FIWARE Testing:**
+    TBD
+
+## Roadmap
+
+The list of features that are planned for the subsequent release are available in the [ROADMAP](https://github.com/ging/fiware-cosmos-orion-flink-connector/blob/master/ROADMAP.md) file.
+
+## Maintainers
+
+[@anmunoz](https://github.com/anmunoz).
 
 ## Licensing
 Draco Except as otherwise noted this software is licensed under the Apache License, Version 2.0
