@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.Map;
 
 
 public class NGSIUtils {
@@ -29,9 +29,11 @@ public class NGSIUtils {
         });
 
         // Create the PreparedStatement to use for this FlowFile.
+        Map flowFileAttributes = flowFile.getAttributes();
+        flowFileAttributes.forEach((k,v)->{k.toString().toLowerCase();v.toString().toLowerCase();});
         final String flowFileContent = new String(buffer, StandardCharsets.UTF_8);
-        String fiwareService = (flowFile.getAttribute("fiware-service") == null) ? flowFile.getAttribute("Fiware-Service") : flowFile.getAttribute("fiware-service");
-        String fiwareServicePath = (flowFile.getAttribute("fiware-servicepath")==null) ? flowFile.getAttribute("Fiware-ServicePath"):flowFile.getAttribute("fiware-servicepath");
+        String fiwareService = (flowFileAttributes.get("fiware-service") == null) ? "default" : flowFileAttributes.get("fiware-service").toString();
+        String fiwareServicePath = (flowFileAttributes.get("fiware-servicepath")==null) ? "/":flowFileAttributes.get("fiware-servicepath").toString();
         long creationTime=flowFile.getEntryDate();
         JSONObject content = new JSONObject(flowFileContent);
         JSONArray data = null;
