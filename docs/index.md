@@ -5,7 +5,7 @@
 [![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware-draco) 
 [![Support badge]( https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
 <br/>
-[![Documentation badge](https://readthedocs.org/projects/fiware-/badge/?version=latest)](http://fiware-draco.rtfd.io)
+[![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
 ## Table of Contents
