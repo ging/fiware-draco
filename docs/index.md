@@ -7,6 +7,7 @@
 <br/>
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
 [![Build Status](https://travis-ci.com/ging/fiware-draco.svg?branch=master)](https://travis-ci.com/ging/fiware-draco)
+[![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg?branch=develop)](https://coveralls.io/github/ging/fiware-draco?branch=develop)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
 ## Table of Contents
