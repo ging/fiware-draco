@@ -11,4 +11,5 @@ jobs:
     - stage: lint
       script: mvn verify  -Padd-dependencies-for-IDEA
 after_success:
+  - cd ../..
   - mvn clean cobertura:cobertura coveralls:report
