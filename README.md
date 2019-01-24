@@ -9,8 +9,6 @@
 [![Build Status](https://travis-ci.com/ging/fiware-draco.svg?branch=master)](https://travis-ci.com/ging/fiware-draco)
 [![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg?branch=develop)](https://coveralls.io/github/ging/fiware-draco?branch=develop)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
- [![Build Status](https://travis-ci.com/ging/fiware-draco.svg?branch=master)](https://travis-ci.com/ging/fiware-draco)
-[![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg)](https://coveralls.io/github/ging/fiware-draco)
 
 ## Table of Contents
 - [What is Draco?](#what-is-draco)
@@ -18,7 +16,7 @@
 - [Why use Draco?](#why-use-draco)
 - [Draco place in FIWARE architecture](#draco-place-in-fiware-architecture)
 - [How to Deploy?](#how-to-deploy)
-- [Usage: Overview](#usage)
+- [Usage: Overview](#usage-overview)
 - [Training Courses](#training-courses)
 - [Testing](#testing)
 - [Quality Assurance](#quality-assurance)
@@ -70,15 +68,15 @@ Draco plays the role of a connector between Orion Context Broker (which is a NGS
  
      $ docker run --name draco -p 8080:8080 -p 5050:5050 -d ging/fiware-draco 
 
- However if you want to have a custom installation please go to the **Installation and Administration Guide** at [readthedocs.org](installation_and_administration_guide/README.md) 
+ However if you want to have a custom installation please go to the **Installation and Administration Guide** at [readthedocs.org](docs/installation_and_administration_guide/README.md) 
 
 ## Usage: Overview
 
-The best way to start with Draco is following the  **Quick Start Guide** found at readthedocs.org  and it provides a good documentation summary ([Draco](quick_start_guide.md)).
+The best way to start with Draco is following the  **Quick Start Guide** found at readthedocs.org  and it provides a good documentation summary ([Draco](docs/quick_start_guide.md)).
 
-Nevertheless, both the **Installation and Administration Guide** also found at [readthedocs.org](installation_and_administration_guide/README.md) cover more advanced topics.
+Nevertheless, both the **Installation and Administration Guide** also found at [readthedocs.org](docs/installation_and_administration_guide/README.md) cover more advanced topics.
 
-The **Processors Catalogue** completes the available documentation for Draco ([Draco](processors_catalogue/README.md)).
+The **Processors Catalogue** completes the available documentation for Draco ([Draco](docs/processors_catalogue/README.md)).
 
 ## Training courses
 ### Academy Courses
@@ -124,4 +122,4 @@ Draco Except as otherwise noted this software is licensed under the Apache Licen
        Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 ## Reporting issues and contact information
-Any doubt you may have, please refer to the [Draco Core Team](installation_and_administration_guide/issues_and_contact.md).
+Any doubt you may have, please refer to the [Draco Core Team](docs/installation_and_administration_guide/issues_and_contact.md).
