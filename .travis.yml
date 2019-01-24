@@ -7,7 +7,7 @@ install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependenci
 jobs:
   include:
     - stage: test
-      script: mvn clean test -Dtest=*Test cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA
+      script: mvn clean test -Dtest=*Test cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DCOVERALLS_TOKEN=$COVERALLS_TOKEN
     - stage: lint
       script: mvn verify  -Padd-dependencies-for-IDEA
 after_success:
