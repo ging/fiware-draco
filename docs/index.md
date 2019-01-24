@@ -6,6 +6,7 @@
 [![Support badge]( https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
 <br/>
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
+[![Build Status](https://travis-ci.com/ging/fiware-draco.svg?branch=master)](https://travis-ci.com/ging/fiware-draco)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
 ## Table of Contents
