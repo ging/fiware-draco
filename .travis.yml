@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+before_install:
+  - cd nifi-ngsi-resources
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA
 jobs:
   include:
