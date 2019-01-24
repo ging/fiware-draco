@@ -30,7 +30,7 @@ public class NGSIUtils {
 
         // Create the PreparedStatement to use for this FlowFile.
         Map flowFileAttributes = flowFile.getAttributes();
-        flowFileAttributes.forEach((k,v)->{k.toString().toLowerCase();v.toString().toLowerCase();});
+        flowFileAttributes.forEach((k,v)->{k.toString().toLowerCase();});
         final String flowFileContent = new String(buffer, StandardCharsets.UTF_8);
         String fiwareService = (flowFileAttributes.get("fiware-service") == null) ? "default" : flowFileAttributes.get("fiware-service").toString();
         String fiwareServicePath = (flowFileAttributes.get("fiware-servicepath")==null) ? "/":flowFileAttributes.get("fiware-servicepath").toString();
