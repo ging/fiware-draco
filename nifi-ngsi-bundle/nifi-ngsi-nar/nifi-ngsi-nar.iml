@@ -10,12 +10,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="nifi-ngsi-processors" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.8.0" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-processor-utils:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-path:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.8.0" level="project" />

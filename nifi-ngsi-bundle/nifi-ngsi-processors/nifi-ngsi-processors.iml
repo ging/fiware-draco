@@ -32,7 +32,7 @@
     <orderEntry type="library" name="Maven: com.thoughtworks.paranamer:paranamer:2.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.stax-utils:stax-utils:20070216" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-text:1.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock:1.8.0" level="project" />
