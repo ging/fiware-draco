@@ -8,6 +8,9 @@ This section elaborates on proposed new features or tasks which are expected to 
 ## Short term
 The following list of features are planned to be addressed in the short term, and incorporated in the next release of the product:
 
+* **Quality Assurance** Include quality assurance for the Draco Generic enabler
+* **Tutorials**: Include Step-by-Step tutorials fro draco
+* **Resources Fiware Academy**: Provide resources for training section in FIWARE academy
 * **NGSIToHDFS Controller**: Controller for connecting Draco and HDFS backend.
 * **NGSIToHDFS Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to HDFS file system.
 * **Tests for NGSIToHDFS**: Validation tests for NGSIToHDFS processor.
