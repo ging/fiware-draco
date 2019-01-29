@@ -89,7 +89,7 @@ Several examples are provided to facilitate getting started with GE. They are ho
 
 In order to test the code:
 
-    $mvn clean test -Dtest=*Test cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA
+    $mvn clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA
 
 ## Quality Assurance
 
