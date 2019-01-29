@@ -63,14 +63,14 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
     static final String WRITE_CONCERN_REPLICA_ACKNOWLEDGED = "REPLICA_ACKNOWLEDGED";
     static final String WRITE_CONCERN_MAJORITY = "MAJORITY";
 
-    protected static final String JSON_TYPE_EXTENDED = "Extended";
-    protected static final String JSON_TYPE_STANDARD   = "Standard";
-    protected static final AllowableValue JSON_EXTENDED = new AllowableValue(JSON_TYPE_EXTENDED, "Extended JSON",
+    static final String JSON_TYPE_EXTENDED = "Extended";
+    static final String JSON_TYPE_STANDARD   = "Standard";
+    static final AllowableValue JSON_EXTENDED = new AllowableValue(JSON_TYPE_EXTENDED, "Extended JSON",
             "Use MongoDB's \"extended JSON\". This is the JSON generated with toJson() on a MongoDB Document from the Java driver");
-    protected static final AllowableValue JSON_STANDARD = new AllowableValue(JSON_TYPE_STANDARD, "Standard JSON",
+    static final AllowableValue JSON_STANDARD = new AllowableValue(JSON_TYPE_STANDARD, "Standard JSON",
             "Generate a JSON document that conforms to typical JSON conventions instead of Mongo-specific conventions.");
 
-    protected static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
         .name("Mongo URI")
         .displayName("Mongo URI")
         .description("MongoURI, typically of the form: mongodb://host1[:port1][,host2[:port2],...]")
@@ -79,7 +79,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
 
-    protected static final PropertyDescriptor MONGO_USERNAME = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor MONGO_USERNAME = new PropertyDescriptor.Builder()
             .name("Mongo User Name")
             .description("The mongo username for authentication. If empty, no authentication is done.")
             .required(false)
@@ -97,7 +97,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor MONGO_PASSWORD = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor MONGO_PASSWORD = new PropertyDescriptor.Builder()
             .name("Mongo password")
             .description("The mongo password for authentication. If empty, no authentication is done.")
             .required(false)
@@ -141,6 +141,24 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .required(false)
             .allowableValues("v2")
             .defaultValue("v2")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+            .name("default-service")
+            .displayName("Default Service")
+            .description("Default Fiware Service for building the database name")
+            .required(false)
+            .defaultValue("test")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+            .name("default-service-path")
+            .displayName("Default Service path")
+            .description("Default Fiware ServicePath for building the table name")
+            .required(false)
+            .defaultValue("/path")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
@@ -278,6 +296,8 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         descriptors.add(NGSI_VERSION);
         descriptors.add(DATA_MODEL);
         descriptors.add(ATTR_PERSISTENCE);
+        descriptors.add(DEFAULT_SERVICE);
+        descriptors.add(DEFAULT_SERVICE_PATH);
         descriptors.add(ENABLE_ENCODING);
         descriptors.add(ENABLE_LOWERCASE);
         descriptors.add(DB_PREFIX);
@@ -361,10 +381,11 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         NGSIUtils n = new NGSIUtils();
         final String attrPersistence = context.getProperty(ATTR_PERSISTENCE).getValue();
         final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
-        final String fiwareServicePath = event.getFiwareServicePath();
+        final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
+        final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
         final long creationTime = event.getCreationTime();
         try {
-            final String dbName = mongoClient.buildDbName(event.getFiwareService(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(DB_PREFIX).getValue());
+            final String dbName = mongoClient.buildDbName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(DB_PREFIX).getValue());
 
             for (Entity entity : event.getEntities()) {
                 String collectionName = mongoClient.buildCollectionName(fiwareServicePath, entity.getEntityId(), entity.getEntityType(), entity.getEntityAttrs().get(0).getAttrName()

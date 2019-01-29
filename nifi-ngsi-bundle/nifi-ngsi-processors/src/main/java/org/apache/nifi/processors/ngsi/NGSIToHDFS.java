@@ -33,7 +33,7 @@ import java.util.*;
 
 public class NGSIToHDFS extends AbstractProcessor {
 
-    protected static final PropertyDescriptor HDFS_HOST = new PropertyDescriptor.Builder()
+     static final PropertyDescriptor HDFS_HOST = new PropertyDescriptor.Builder()
             .name("HDFS Host")
             .displayName("HDFS Host")
             .description("HDFS Host, without port")
@@ -42,7 +42,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor HDFS_PORT = new PropertyDescriptor.Builder()
+     static final PropertyDescriptor HDFS_PORT = new PropertyDescriptor.Builder()
             .name("HDFS Port")
             .displayName("HDFS Port")
             .description("HDFS Port, by desfaul is 14000")
@@ -52,7 +52,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor HDFS_USERNAME = new PropertyDescriptor.Builder()
+     static final PropertyDescriptor HDFS_USERNAME = new PropertyDescriptor.Builder()
             .name("HDFS User Name")
             .description("The HDFS username for authentication. If empty, no authentication is done.")
             .required(false)
@@ -70,7 +70,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor HDFS_PASSWORD = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor HDFS_PASSWORD = new PropertyDescriptor.Builder()
             .name("HDFS password")
             .description("The HDFS password for authentication. If empty, no authentication is done.")
             .required(false)
@@ -85,6 +85,24 @@ public class NGSIToHDFS extends AbstractProcessor {
             .required(false)
             .allowableValues("true", "false")
             .defaultValue("true")
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+            .name("default-service")
+            .displayName("Default Service")
+            .description("Default Fiware Service for building the database name")
+            .required(false)
+            .defaultValue("test")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+            .name("default-service-path")
+            .displayName("Default Service path")
+            .description("Default Fiware ServicePath for building the table name")
+            .required(false)
+            .defaultValue("/path")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
     static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
@@ -213,7 +231,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor HIVE_HOST = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor HIVE_HOST = new PropertyDescriptor.Builder()
             .name("HIVE Host")
             .displayName("HIVE Host")
             .description("HIVE Host, without port")
@@ -222,7 +240,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor HIVE_PORT = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor HIVE_PORT = new PropertyDescriptor.Builder()
             .name("HIVE Port")
             .displayName("HIVE Port")
             .description("HIVE Port, by desfaul is 10000")
@@ -252,14 +270,14 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor KRB5_USER = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor KRB5_USER = new PropertyDescriptor.Builder()
             .name("krb5_user")
             .description("Ignored if krb5_auth=false, mandatory otherwise.")
             .required(false)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor KRB5_PASSWORD = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor KRB5_PASSWORD = new PropertyDescriptor.Builder()
             .name("krb5_password")
             .description("Ignored if krb5_auth=false, mandatory otherwise.")
             .required(false)
@@ -267,7 +285,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor KRB5_LOGIN_CONF_FILE = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor KRB5_LOGIN_CONF_FILE = new PropertyDescriptor.Builder()
             .name("krb5_login_conf_file")
             .displayName("krb5_login_conf_file")
             .description("Ignored if krb5_auth=false.")
@@ -276,7 +294,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor KRB5_CONF_FILE = new PropertyDescriptor.Builder()
+    static final PropertyDescriptor KRB5_CONF_FILE = new PropertyDescriptor.Builder()
             .name("krb5_conf_file")
             .displayName("krb5_conf_file")
             .description("Ignored if krb5_auth=false.")
@@ -307,6 +325,8 @@ public class NGSIToHDFS extends AbstractProcessor {
         properties.add(HDFS_PASSWORD);
         properties.add(NGSI_VERSION);
         properties.add(DATA_MODEL);
+        properties.add(DEFAULT_SERVICE);
+        properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
         properties.add(OAUTH2_TOKEN);
@@ -346,7 +366,6 @@ public class NGSIToHDFS extends AbstractProcessor {
 
     }
 
-
     protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile,ProcessSession session) {
 
         final String[] host = {context.getProperty(HDFS_HOST).getValue()};
@@ -379,8 +398,9 @@ public class NGSIToHDFS extends AbstractProcessor {
                 hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace);
 
         final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
-        final String fiwareServicePath = event.getFiwareServicePath();
-        final String fiwareService = event.getFiwareService();
+        final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
+        final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
+
         hiveBackend = new HiveBackend(hiveServerVersion, hiveHost, hivePort, username, password);
 
         final long creationTime = event.getCreationTime();
@@ -404,12 +424,12 @@ public class NGSIToHDFS extends AbstractProcessor {
                 aggregator.initialize(fiwareService,fiwareServicePath , entity, enableEncoding);
                 aggregator.persistAggregation(aggregator, enableLowercase,persistenceBackend );
 
-                if (fileFormat == "CSVROW" || fileFormat == "CSVCOLUMN") {
+                if (fileFormat.equalsIgnoreCase("CSVROW")  || fileFormat.equalsIgnoreCase("CSVCOLUMN")) {
                     aggregator.persistMDAggregations(aggregator,persistenceBackend);
                 }
 
                 if (enableHive) {
-                    if (hiveDBType == "namespace-db") {
+                    if (hiveDBType.equalsIgnoreCase("namespace-db")) {
                         if (serviceAsNamespace) {
                             hiveBackend.doCreateDatabase(aggregator.getService());
                             aggregator.provisionHiveTable(aggregator, aggregator.getService(), enableLowercase,

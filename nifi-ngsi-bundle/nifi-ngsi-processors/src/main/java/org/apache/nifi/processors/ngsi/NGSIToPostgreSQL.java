@@ -78,6 +78,24 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
+    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+            .name("default-service")
+            .displayName("Default Service")
+            .description("Default Fiware Service for building the database name")
+            .required(false)
+            .defaultValue("test")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+            .name("default-service-path")
+            .displayName("Default Service path")
+            .description("Default Fiware ServicePath for building the table name")
+            .required(false)
+            .defaultValue("/path")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
     static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
@@ -138,6 +156,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         properties.add(NGSI_VERSION);
         properties.add(DATA_MODEL);
         properties.add(ATTR_PERSISTENCE);
+        properties.add(DEFAULT_SERVICE);
+        properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
         properties.add(BATCH_SIZE);
@@ -213,9 +233,10 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             NGSIUtils n = new NGSIUtils();
             final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
             final long creationTime = event.getCreationTime();
-            final String fiwareServicePath = event.getFiwareServicePath();
+            final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
+            final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
             try {
-                final String schemaName = postgres.buildSchemaName(event.getFiwareService(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
+                final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
                 for (Entity entity : event.getEntities()) {
                     String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
                     final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue());
