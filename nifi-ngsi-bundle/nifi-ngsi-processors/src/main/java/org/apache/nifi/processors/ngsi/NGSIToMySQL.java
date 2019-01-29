@@ -82,6 +82,24 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
+    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+            .name("default-service")
+            .displayName("Default Service")
+            .description("Default Fiware Service for building the database name")
+            .required(false)
+            .defaultValue("test")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+            .name("default-service-path")
+            .displayName("Default Service path")
+            .description("Default Fiware ServicePath for building the table name")
+            .required(false)
+            .defaultValue("/path")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
     static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
@@ -120,10 +138,12 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
             .name("success")
             .description("A FlowFile is routed to this relationship after the database is successfully updated")
             .build();
+
     static final Relationship REL_RETRY = new Relationship.Builder()
             .name("retry")
             .description("A FlowFile is routed to this relationship if the database cannot be updated but attempting the operation again may succeed")
             .build();
+
     static final Relationship REL_FAILURE = new Relationship.Builder()
             .name("failure")
             .description("A FlowFile is routed to this relationship if the database cannot be updated and retrying the operation will also fail, "
@@ -142,6 +162,8 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
         properties.add(NGSI_VERSION);
         properties.add(DATA_MODEL);
         properties.add(ATTR_PERSISTENCE);
+        properties.add(DEFAULT_SERVICE);
+        properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
         properties.add(BATCH_SIZE);
@@ -217,9 +239,10 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
             NGSIUtils n = new NGSIUtils();
             final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
             final long creationTime = event.getCreationTime();
-            final String fiwareServicePath = event.getFiwareServicePath();
+            final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
+            final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
             try {
-                final String dbName = mysql.buildDbName(event.getFiwareService(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
+                final String dbName = mysql.buildDbName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
                 for (Entity entity : event.getEntities()) {
                     String tableName = mysql.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
                     String sql = mysql.insertQuery(entity, creationTime, fiwareServicePath, tableName, context.getProperty(ATTR_PERSISTENCE).getValue());
@@ -262,7 +285,7 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
     };
 
 
-    final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
+    private final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
         final Map<String, StatementFlowFileEnclosure> sqlToEnclosure = new HashMap<>();
         final List<StatementFlowFileEnclosure> groups = new ArrayList<>();
 
@@ -281,7 +304,7 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
         return groups;
     };
 
-    final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
+    private final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
 
         if (fc.isSupportBatching()) {
 
@@ -333,6 +356,7 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
             try {
                 url = conn.getMetaData().getURL();
             } catch (final SQLException sqle) {
+                getLogger().error(sqle.toString());
             }
 
             // Emit a Provenance SEND event
