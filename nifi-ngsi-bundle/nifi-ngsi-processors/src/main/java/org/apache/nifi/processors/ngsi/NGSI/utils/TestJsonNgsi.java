@@ -94,9 +94,6 @@ public class TestJsonNgsi {
         NGSIUtils n = new NGSIUtils();
         JSONObject flow = new JSONObject(json);
         JSONArray data = (JSONArray )flow.get("data");
-        NGSIEvent event = n.getEventFromFlowFileTest(json, "v2");
-        JSONObject output = new JSONObject(event);
-        System.out.println(output.toString());
 
     }
 
