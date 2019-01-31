@@ -31,8 +31,8 @@ Where:
 |Base Path|contentListener| |Base path for incoming connections. This property has to match with the notify attribute of the subscription made in ORION.  Expression Language: true (will be evaluated using variable registry only)|
 |Listening Port| | |The port to listen on for incoming connections. This value needs to be included in the subscription. Expression Language: true (will be evaluated using variable registry only)|
 |Max Data to Receive per Second| | |The maximum amount of data to receive per second; this allows the bandwidth to be throttled to a specified data rate; if not specified, the data rate is not throttled|
-|SSL Context Service| |Controller Service API: RestrictedSSLContextServiceImplementation: StandardRestrictedSSLContextService|The Controller Service to use in order to obtain an SSL Context|
-|Authorized DN Pattern|.*| | |A Regular Expression to apply against the Distinguished Name of incoming connections. If the Pattern does not match the DN, the connection will be refused.|
+|SSL Context Service| | |Controller Service API: RestrictedSSLContextServiceImplementation: StandardRestrictedSSLContextService|The Controller Service to use in order to obtain an SSL Context|
+|Authorized DN Pattern|.*| |A Regular Expression to apply against the Distinguished Name of incoming connections. If the Pattern does not match the DN, the connection will be refused.|
 |Max Unconfirmed Flowfile Time|60 secs| |The maximum amount of time to wait for a FlowFile to be confirmed before it is removed from the cache|
 |HTTP Headers to receive as Attributes (Regex)| | |Specifies the Regular Expression that determines the names of HTTP Headers that should be passed along as FlowFile attributes. You can capture all the headers by setting to .* otherwise you have to include at least Fiware-service, Fiware-ServicePath and Optionally X-Auth-Token|
 |Return Code|200| |The HTTP return code returned after every HTTP call|
