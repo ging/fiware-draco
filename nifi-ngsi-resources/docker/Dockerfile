@@ -29,13 +29,10 @@ ENV NIFI_TOOLKIT_HOME ${NIFI_BASE_DIR}/nifi-toolkit-current
 ENV NIFI_PID_DIR=${NIFI_HOME}/run
 ENV NIFI_LOG_DIR=${NIFI_HOME}/logs
 
-ENV DRACO_HTTP_PORT=8080 \
-    DRACO_HTTP_PORT=8443 \
-    DRACO_REMOTE_INPUT=10000
-
-ENV DRACO_RELEASE="FIWARE_7.5"
-
 ADD sh/ ${NIFI_BASE_DIR}/scripts/
+
+ENV DRACO_RELEASE=1.1.0
+ENV NIFI_NGSI_NAR_VERSION=1.1.0
 
 # Setup NiFi user and create necessary directories
 
@@ -68,7 +65,7 @@ RUN curl -fSL ${MIRROR_BASE_URL}/${NIFI_BINARY_PATH} -o ${NIFI_BASE_DIR}/nifi-${
     && mkdir -p ${NIFI_HOME}/content_repository \
     && mkdir -p ${NIFI_HOME}/provenance_repository \
     && mkdir -p ${NIFI_HOME}/state \
-    && mkdir -p ${NIFI_BASE_DIR}/drivers \
+    && mkdir -p ${NIFI_HOME}/drivers \
     && mkdir -p ${NIFI_LOG_DIR} \
     && ln -s ${NIFI_HOME} ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}
 
@@ -79,21 +76,22 @@ VOLUME ${NIFI_LOG_DIR} \
        ${NIFI_HOME}/content_repository \
        ${NIFI_HOME}/provenance_repository \
        ${NIFI_HOME}/state
- 
+
+ADD drivers/ ${NIFI_HOME}/drivers/
+ADD templates/ ${NIFI_HOME}/conf/templates/
+
 # Clear nifi-env.sh in favour of configuring all environment variables in the Dockerfile 
 RUN echo "#!/bin/sh\n" > $NIFI_HOME/bin/nifi-env.sh 
 # Web HTTP(s) & Socket Site-to-Site Ports 
 
-EXPOSE ${DRACO_HTTP_PORT} ${DRACO_HTTPS_PORT} ${DRACO_REMOTE_INPUT}
+EXPOSE 8080 8443 10000
 
 WORKDIR ${NIFI_HOME} 
 
 RUN curl -L -o "nifi-ngsi-resources.tar.gz" "https://github.com/ging/fiware-Draco/releases/download/"${DRACO_RELEASE}"/nifi-ngsi-resources.tar.gz"\
 	&& tar -xvzf nifi-ngsi-resources.tar.gz -C ./ \
 	&& rm nifi-ngsi-resources.tar.gz \
-	&& cp nifi-ngsi-resources/nifi-ngsi-nar-1.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-1.0-SNAPSHOT.nar \
-	&& cp -r nifi-ngsi-resources/drivers ./ \
-	&& cp -r nifi-ngsi-resources/templates/. ${NIFI_HOME}/conf/templates
+	&& cp nifi-ngsi-resources/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-1.0-SNAPSHOT.nar
 
 # Apply configuration and start NiFi
 #

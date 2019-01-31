@@ -2,7 +2,7 @@
 <template encoding-version="1.2">
     <description>Template for receiving NGSIv2 events coming from Orion Context broker and persist that data to MongoDB</description>
     <groupId>853d5998-0165-1000-4ca8-a451b1f51139</groupId>
-    <name>Orion-To-Mongo</name>
+    <name>ORION-TO-MONGO</name>
     <snippet>
         <connections>
             <id>64b70026-80bf-31bf-0000-000000000000</id>
@@ -154,7 +154,7 @@
                 <properties>
                     <entry>
                         <key>Mongo URI</key>
-                        <value>db:27017</value>
+                        <value>mongo:27017</value>
                     </entry>
                     <entry>
                         <key>Mongo User Name</key>
@@ -236,7 +236,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>
@@ -350,7 +350,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>
