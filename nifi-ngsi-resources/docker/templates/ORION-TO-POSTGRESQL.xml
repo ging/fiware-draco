@@ -2,7 +2,7 @@
 <template encoding-version="1.2">
     <description>Template for receiving NGSIv2 notifications coming from Orion and persist that values to PosgreSQL Database</description>
     <groupId>853d5998-0165-1000-4ca8-a451b1f51139</groupId>
-    <name>Orion-To-PosgreSQL</name>
+    <name>ORION-TO-POSGRESQL</name>
     <snippet>
         <connections>
             <id>0d62a456-2d0b-3942-0000-000000000000</id>
@@ -52,7 +52,7 @@
             <bundle>
                 <artifact>nifi-dbcp-service-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
             </bundle>
             <comments></comments>
             <descriptors>
@@ -110,7 +110,7 @@
             <properties>
                 <entry>
                     <key>Database Connection URL</key>
-                    <value>jdbc:postgresql://db:5432/</value>
+                    <value>jdbc:postgresql://postgres:5432/</value>
                 </entry>
                 <entry>
                     <key>Database Driver Class Name</key>
@@ -150,7 +150,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>
@@ -394,7 +394,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.7.0</version>
+                <version>1.8.0</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>
