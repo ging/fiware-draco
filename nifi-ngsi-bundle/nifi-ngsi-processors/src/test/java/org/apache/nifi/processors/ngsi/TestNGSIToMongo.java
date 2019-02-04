@@ -1,5 +1,6 @@
 package org.apache.nifi.processors.ngsi;
 
+import com.mongodb.MongoClientURI;
 import org.apache.nifi.processors.ngsi.NGSI.backends.MongoBackend;
 import org.apache.nifi.processors.ngsi.NGSI.utils.NGSICharsets;
 import org.apache.nifi.util.TestRunner;
@@ -27,8 +28,6 @@ public class TestNGSIToMongo {
 
         runner = TestRunners.newTestRunner(NGSIToMySQL.class);
         runner.setProperty(NGSIToMongo.URI, "localhost:27017");
-        runner.setProperty(NGSIToMongo.MONGO_USERNAME, "mongo");
-        runner.setProperty(NGSIToMongo.MONGO_PASSWORD, "");
         runner.setProperty(NGSIToMongo.NGSI_VERSION, "v2");
         runner.setProperty(NGSIToMongo.DATA_MODEL, "db-by-service-path");
         runner.setProperty(NGSIToMongo.ATTR_PERSISTENCE, "row");
@@ -40,9 +39,7 @@ public class TestNGSIToMongo {
         runner.setProperty(NGSIToMongo.DATA_EXPIRATION, "0");
         runner.setProperty(NGSIToMongo.COLLECTION_SIZE, "0");
         runner.setProperty(NGSIToMongo.MAX_DOCUMENTS, "0");
-        backend = new MongoBackend(runner.getProcessContext().getProperty(NGSIToMongo.URI).getValue(),
-                runner.getProcessContext().getProperty(NGSIToMongo.MONGO_USERNAME).getValue(),
-                runner.getProcessContext().getProperty(NGSIToMongo.MONGO_PASSWORD).getValue(),
+        backend = new MongoBackend(null,
                 runner.getProcessContext().getProperty(NGSIToMongo.DATA_MODEL).getValue());
 
     }

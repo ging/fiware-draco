@@ -50,7 +50,6 @@ public class NGSIToMongo extends AbstractMongoProcessor {
     static {
         List<PropertyDescriptor> _propertyDescriptors = new ArrayList<>();
         _propertyDescriptors.addAll(descriptors);
-        _propertyDescriptors.add(WRITE_CONCERN);
         propertyDescriptors = Collections.unmodifiableList(_propertyDescriptors);
 
         final Set<Relationship> _relationships = new HashSet<>();
@@ -72,13 +71,10 @@ public class NGSIToMongo extends AbstractMongoProcessor {
     @Override
     public void onTrigger(final ProcessContext context, final ProcessSession session) throws ProcessException {
         final FlowFile flowFile = session.get();
+        final ComponentLog logger = getLogger();
         if (flowFile == null) {
             return;
         }
-
-        final ComponentLog logger = getLogger();
-        final WriteConcern writeConcern = getWriteConcern(context);
-
         try {
              persistFlowFile(context, flowFile, session);
              logger.info("inserted {} into MongoDB", new Object[]{flowFile});
@@ -89,33 +85,5 @@ public class NGSIToMongo extends AbstractMongoProcessor {
             session.transfer(flowFile, REL_FAILURE);
             context.yield();
         }
-    }
-
-    protected WriteConcern getWriteConcern(final ProcessContext context) {
-        final String writeConcernProperty = context.getProperty(WRITE_CONCERN).getValue();
-        WriteConcern writeConcern = null;
-        switch (writeConcernProperty) {
-        case WRITE_CONCERN_ACKNOWLEDGED:
-            writeConcern = WriteConcern.ACKNOWLEDGED;
-            break;
-        case WRITE_CONCERN_UNACKNOWLEDGED:
-            writeConcern = WriteConcern.UNACKNOWLEDGED;
-            break;
-        case WRITE_CONCERN_FSYNCED:
-            writeConcern = WriteConcern.FSYNCED;
-            break;
-        case WRITE_CONCERN_JOURNALED:
-            writeConcern = WriteConcern.JOURNALED;
-            break;
-        case WRITE_CONCERN_REPLICA_ACKNOWLEDGED:
-            writeConcern = WriteConcern.REPLICA_ACKNOWLEDGED;
-            break;
-        case WRITE_CONCERN_MAJORITY:
-            writeConcern = WriteConcern.MAJORITY;
-            break;
-        default:
-            writeConcern = WriteConcern.ACKNOWLEDGED;
-        }
-        return writeConcern;
     }
 }
