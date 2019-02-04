@@ -88,10 +88,8 @@ EXPOSE 8080 8443 10000
 
 WORKDIR ${NIFI_HOME} 
 
-RUN curl -L -o "nifi-ngsi-resources.tar.gz" "https://github.com/ging/fiware-Draco/releases/download/"${DRACO_RELEASE}"/nifi-ngsi-resources.tar.gz"\
-	&& tar -xvzf nifi-ngsi-resources.tar.gz -C ./ \
-	&& rm nifi-ngsi-resources.tar.gz \
-	&& cp nifi-ngsi-resources/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-1.0-SNAPSHOT.nar
+RUN curl -L -o "nifi-ngsi-nar-"${NIFI_NGSI_NAR_VERSION}".nar" "https://github.com/ging/fiware-Draco/releases/download/"${DRACO_RELEASE}"/nifi-ngsi-nar-"${NIFI_NGSI_NAR_VERSION}".nar" \
+	&& mv ./nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
 # Apply configuration and start NiFi
 #
