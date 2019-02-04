@@ -17,8 +17,6 @@ public abstract class MongoAggregator {
         // string containing the data fieldValues
         protected ArrayList<Document> aggregation;
         protected Entity entity;
-        protected String dbName;
-        protected String collectionName;
         protected String dataModel;
         protected long creationTime;
 
@@ -68,7 +66,6 @@ public abstract class MongoAggregator {
 
                     // check if the metadata contains a TimeInstant value; use the notified reception time instead
                     Long recvTimeTs;
-
                     Long timeInstant = null;
 
                     if (timeInstant != null) {
@@ -164,7 +161,6 @@ public abstract class MongoAggregator {
                 String entityType = entity.getEntityType();
                 // iterate on all this context element attributes, if there are attributes
                 ArrayList<Attributes> contextAttributes = entity.getEntityAttrs();
-
                 Document doc = createDoc(recvTimeTs, entityId, entityType);
 
                 for (Attributes contextAttribute : contextAttributes) {

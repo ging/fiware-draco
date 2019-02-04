@@ -18,26 +18,21 @@
  */
 package org.apache.nifi.processors.ngsi;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
 import com.mongodb.MongoClientURI;
-import com.mongodb.WriteConcern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.annotation.lifecycle.OnScheduled;
 import org.apache.nifi.annotation.lifecycle.OnStopped;
 import org.apache.nifi.authentication.exception.ProviderCreationException;
-import org.apache.nifi.components.AllowableValue;
 import org.apache.nifi.components.PropertyDescriptor;
 import org.apache.nifi.expression.ExpressionLanguageScope;
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.processor.AbstractProcessor;
 import org.apache.nifi.processor.ProcessContext;
 import org.apache.nifi.processor.ProcessSession;
-import org.apache.nifi.processor.Relationship;
 import org.apache.nifi.processor.util.StandardValidators;
-import org.apache.nifi.processors.mongodb.ObjectIdSerializer;
 import org.apache.nifi.processors.ngsi.NGSI.aggregators.MongoAggregator;
 import org.apache.nifi.processors.ngsi.NGSI.backends.MongoBackend;
 import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
@@ -46,14 +41,10 @@ import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
 import org.apache.nifi.security.util.SslContextFactory;
 import org.apache.nifi.ssl.SSLContextService;
 import javax.net.ssl.SSLContext;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public abstract class AbstractMongoProcessor extends AbstractProcessor {
     static final String WRITE_CONCERN_ACKNOWLEDGED = "ACKNOWLEDGED";
@@ -62,13 +53,8 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
     static final String WRITE_CONCERN_JOURNALED = "JOURNALED";
     static final String WRITE_CONCERN_REPLICA_ACKNOWLEDGED = "REPLICA_ACKNOWLEDGED";
     static final String WRITE_CONCERN_MAJORITY = "MAJORITY";
-
-    static final String JSON_TYPE_EXTENDED = "Extended";
-    static final String JSON_TYPE_STANDARD   = "Standard";
-    static final AllowableValue JSON_EXTENDED = new AllowableValue(JSON_TYPE_EXTENDED, "Extended JSON",
-            "Use MongoDB's \"extended JSON\". This is the JSON generated with toJson() on a MongoDB Document from the Java driver");
-    static final AllowableValue JSON_STANDARD = new AllowableValue(JSON_TYPE_STANDARD, "Standard JSON",
-            "Generate a JSON document that conforms to typical JSON conventions instead of Mongo-specific conventions.");
+    protected MongoBackend mongoClient;
+    protected MongoClient mongoClientSSL;
 
     static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
         .name("Mongo URI")
@@ -79,13 +65,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
 
-    static final PropertyDescriptor MONGO_USERNAME = new PropertyDescriptor.Builder()
-            .name("Mongo User Name")
-            .description("The mongo username for authentication. If empty, no authentication is done.")
-            .required(false)
-            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
-            .build();
-
     static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
             .name("data-model")
             .displayName("Data Model")
@@ -94,14 +73,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .required(false)
             .allowableValues("db-by-service-path", "db-by-entity")
             .defaultValue("db-by-service-path")
-            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
-            .build();
-
-    static final PropertyDescriptor MONGO_PASSWORD = new PropertyDescriptor.Builder()
-            .name("Mongo password")
-            .description("The mongo password for authentication. If empty, no authentication is done.")
-            .required(false)
-            .sensitive(true)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
@@ -132,7 +103,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .defaultValue("sth_")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
-
 
     static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
@@ -207,18 +177,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    protected static final PropertyDescriptor JSON_TYPE = new PropertyDescriptor.Builder()
-            .allowableValues(JSON_EXTENDED, JSON_STANDARD)
-            .defaultValue(JSON_TYPE_EXTENDED)
-            .displayName("JSON Type")
-            .name("json-type")
-            .description("By default, MongoDB's Java driver returns \"extended JSON\". Some of the features of this variant of JSON" +
-                    " may cause problems for other JSON parsers that expect only standard JSON types and conventions. This configuration setting " +
-                    " controls whether to use extended JSON or provide a clean view that conforms to standard JSON.")
-            .expressionLanguageSupported(ExpressionLanguageScope.NONE)
-            .required(true)
-            .build();
-
     public static final PropertyDescriptor SSL_CONTEXT_SERVICE = new PropertyDescriptor.Builder()
         .name("ssl-context-service")
         .displayName("SSL Context Service")
@@ -239,25 +197,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .defaultValue("REQUIRED")
         .build();
 
-    public static final PropertyDescriptor WRITE_CONCERN = new PropertyDescriptor.Builder()
-            .name("Write Concern")
-            .displayName("Write Concern")
-            .description("The write concern to use")
-            .required(true)
-            .allowableValues(WRITE_CONCERN_ACKNOWLEDGED, WRITE_CONCERN_UNACKNOWLEDGED, WRITE_CONCERN_FSYNCED, WRITE_CONCERN_JOURNALED,
-                    WRITE_CONCERN_REPLICA_ACKNOWLEDGED, WRITE_CONCERN_MAJORITY)
-            .defaultValue(WRITE_CONCERN_ACKNOWLEDGED)
-            .build();
-
-    static final PropertyDescriptor RESULTS_PER_FLOWFILE = new PropertyDescriptor.Builder()
-            .name("results-per-flowfile")
-            .displayName("Results Per FlowFile")
-            .description("How many results to put into a flowfile at once. The whole body will be treated as a JSON array of results.")
-            .required(false)
-            .addValidator(StandardValidators.POSITIVE_INTEGER_VALIDATOR)
-            .defaultValue("1")
-            .build();
-
     static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .displayName("Batch Size")
@@ -267,14 +206,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .defaultValue("100")
             .build();
 
-    static final PropertyDescriptor QUERY_ATTRIBUTE = new PropertyDescriptor.Builder()
-            .name("mongo-query-attribute")
-            .displayName("Query Output Attribute")
-            .description("If set, the query will be written to a specified attribute on the output flowfiles.")
-            .expressionLanguageSupported(ExpressionLanguageScope.FLOWFILE_ATTRIBUTES)
-            .addValidator(StandardValidators.ATTRIBUTE_KEY_PROPERTY_NAME_VALIDATOR)
-            .required(false)
-            .build();
     static final PropertyDescriptor CHARSET = new PropertyDescriptor.Builder()
             .name("mongo-charset")
             .displayName("Character Set")
@@ -291,8 +222,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         descriptors.add(URI);
        // descriptors.add(SSL_CONTEXT_SERVICE);
        // descriptors.add(CLIENT_AUTH);
-        descriptors.add(MONGO_USERNAME);
-        descriptors.add(MONGO_PASSWORD);
         descriptors.add(NGSI_VERSION);
         descriptors.add(DATA_MODEL);
         descriptors.add(ATTR_PERSISTENCE);
@@ -307,12 +236,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         descriptors.add(MAX_DOCUMENTS);
     }
 
-    protected ObjectMapper objectMapper;
-    protected MongoBackend mongoClient;
-    protected MongoClient mongoClientSSL;
-
-
-
     @OnScheduled
     public final void createClient(ProcessContext context) throws IOException {
         if (mongoClient != null) {
@@ -320,10 +243,8 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         }
 
         getLogger().info("Creating MongoClient");
-        final String mongoUsername=context.getProperty(MONGO_USERNAME).getValue();
-        final String mongoPassword=context.getProperty(MONGO_PASSWORD).getValue();
-        final String dataModel=context.getProperty(DATA_MODEL).getValue();
 
+        final String dataModel=context.getProperty(DATA_MODEL).getValue();
         // Set up the client for secure (SSL/TLS communications) if configured to do so
         final SSLContextService sslService = null;//context.getProperty(SSL_CONTEXT_SERVICE).asControllerService(SSLContextService.class);
         final String rawClientAuth = "none";//context.getProperty(CLIENT_AUTH).getValue();
@@ -348,8 +269,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
         try {
             if(sslContext == null) {
-
-                mongoClient = new MongoBackend(getURI(context),mongoUsername,mongoPassword,dataModel);
+                mongoClient = new MongoBackend(new MongoClientURI(getURI(context)),dataModel);
             } else {
                 mongoClientSSL = new MongoClient(new MongoClientURI(getURI(context), getClientOptions(sslContext)));
             }
@@ -371,8 +291,8 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         if (mongoClient != null || mongoClientSSL!=null) {
             getLogger().info("Closing MongoClient");
            // mongoClientSSL.close();
-            mongoClient = null;
-            mongoClientSSL= null;
+            mongoClient.getClient().close();
+            mongoClientSSL.close();
         }
     }
 
@@ -418,52 +338,4 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         return context.getProperty(URI).evaluateAttributeExpressions().getValue();
     }
 
-    protected WriteConcern getWriteConcern(final ProcessContext context) {
-        final String writeConcernProperty = context.getProperty(WRITE_CONCERN).getValue();
-        WriteConcern writeConcern = null;
-        switch (writeConcernProperty) {
-            case WRITE_CONCERN_ACKNOWLEDGED:
-                writeConcern = WriteConcern.ACKNOWLEDGED;
-                break;
-            case WRITE_CONCERN_UNACKNOWLEDGED:
-                writeConcern = WriteConcern.UNACKNOWLEDGED;
-                break;
-            case WRITE_CONCERN_FSYNCED:
-                writeConcern = WriteConcern.FSYNCED;
-                break;
-            case WRITE_CONCERN_JOURNALED:
-                writeConcern = WriteConcern.JOURNALED;
-                break;
-            case WRITE_CONCERN_REPLICA_ACKNOWLEDGED:
-                writeConcern = WriteConcern.REPLICA_ACKNOWLEDGED;
-                break;
-            case WRITE_CONCERN_MAJORITY:
-                writeConcern = WriteConcern.MAJORITY;
-                break;
-            default:
-                writeConcern = WriteConcern.ACKNOWLEDGED;
-        }
-        return writeConcern;
-    }
-
-    protected void writeBatch(String payload, FlowFile parent, ProcessContext context, ProcessSession session,
-            Map<String, String> extraAttributes, Relationship rel) throws UnsupportedEncodingException {
-        String charset = context.getProperty(CHARSET).evaluateAttributeExpressions(parent).getValue();
-
-        FlowFile flowFile = parent != null ? session.create(parent) : session.create();
-        flowFile = session.importFrom(new ByteArrayInputStream(payload.getBytes(charset)), flowFile);
-        flowFile = session.putAllAttributes(flowFile, extraAttributes);
-        session.getProvenanceReporter().receive(flowFile, getURI(context));
-        session.transfer(flowFile, rel);
-    }
-
-    protected synchronized void configureMapper(String setting) {
-        objectMapper = new ObjectMapper();
-
-        if (setting.equals(JSON_TYPE_STANDARD)) {
-            objectMapper.registerModule(ObjectIdSerializer.getModule());
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            objectMapper.setDateFormat(df);
-        }
-    }
 }

@@ -7,6 +7,8 @@ import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -33,9 +35,7 @@ public class MongoBackend {
     public enum Resolution { SECOND, MINUTE, HOUR, DAY, MONTH }
 
     private MongoClient client;
-    private final String mongoHosts;
-    private final String mongoUsername;
-    private final String mongoPassword;
+    private MongoClientURI mongoURI;
     private String dataModel;
 
     public MongoClient getClient() {
@@ -46,16 +46,8 @@ public class MongoBackend {
         this.client = client;
     }
 
-    public String getMongoHosts() {
-        return mongoHosts;
-    }
-
-    public String getMongoUsername() {
-        return mongoUsername;
-    }
-
-    public String getMongoPassword() {
-        return mongoPassword;
+    public MongoClientURI getMongoURI() {
+        return mongoURI;
     }
 
     public String getDataModel() {
@@ -68,17 +60,12 @@ public class MongoBackend {
 
     /**
      * Constructor.
-     * @param mongoHosts
-     * @param mongoUsername
-     * @param mongoPassword
+     * @param mongoURI
      * @param dataModel
      */
-    public MongoBackend(String mongoHosts, String mongoUsername, String mongoPassword,
-                            String dataModel) {
-        client = null;
-        this.mongoHosts = mongoHosts;
-        this.mongoUsername = mongoUsername;
-        this.mongoPassword = mongoPassword;
+    public MongoBackend(MongoClientURI mongoURI, String dataModel) {
+        this.client = null;
+        this.mongoURI = mongoURI;
         this.dataModel = dataModel;
     } // MongoBackendImpl
 
@@ -452,29 +439,10 @@ public class MongoBackend {
      * @return
      */
     public MongoDatabase getDatabase(String dbName) {
-        // create a ServerAddress object for each configured URI
-        List<ServerAddress> servers = new ArrayList<>();
-        String[] uris = mongoHosts.split(",");
-
-        for (String uri: uris) {
-            String[] uriParts = uri.split(":");
-            servers.add(new ServerAddress(uriParts[0], new Integer(uriParts[1])));
-        } // for
-
         // create a Mongo client
-
         if (client == null) {
-            if (mongoUsername!=null && mongoPassword!=null){
-                if (mongoUsername.length() != 0) {
-                    MongoCredential credential = MongoCredential.createCredential(mongoUsername, dbName,
-                            mongoPassword.toCharArray());
-                    client = new MongoClient(servers, Arrays.asList(credential));
-                }
-            } else {
-                client = new MongoClient(servers);
-            } // if else
-        } // if
-
+            client = new MongoClient(mongoURI);
+        }
         // get the database
         return client.getDatabase(dbName);
     } // getDatabase
@@ -724,7 +692,4 @@ public class MongoBackend {
 
         return doc;
     } // createDoc
-
-
-
 } // MongoBackendImpl
