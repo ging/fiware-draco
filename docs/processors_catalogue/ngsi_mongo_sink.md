@@ -290,12 +290,12 @@ If `data_model=dm-by-entity` and `attr_persistence=column` then `NGSIToMongo` wi
 
 |Name|Default Value|Allowable Values|Description|
 |---|---|---|---|
-| **Mongo URI** | no | localhost:27017 | FQDN/IP:port where the MongoDB server runs (standalone case) or comma-separated list of FQDN/IP:port pairs where the MongoDB replica set members run. |
-| Mongo username | no | <i>empty</i> | If empty, no authentication is done. |
-| Mongo password | no | <i>empty</i> | If empty, no authentication is done. |
+| **Mongo URI** | no | | "MongoURI, typically of the form: mongodb://host1[:port1][,host2[:port2],...]". Also you can add user and pass, example: mongodb://user:password@host1:port |
 | **NGSI version**| v2| |list of supported version of NGSI (v2 and ld), currently only support v2|
 | **Data Model**| db-by-entity | |The Data model for creating the tables when an event have been received you can choose between: db-by-service-path or db-by-entity, default value is db-by-service-path|
 | **Attribute persistence**| row | row, column | The mode of storing the data inside of the table allowable values are row and column|
+| Default Service|test| |In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service 
+| Default Service path|/path| |In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath |
 | Enable encoding| true | true, false | true applies the new encoding, false applies the old encoding.|
 | Enable lowercase|true| true, false |true for creating the Schema and Tables name with lowercase.|
 | Database prefix | sth_ |  ||
@@ -303,7 +303,6 @@ If `data_model=dm-by-entity` and `attr_persistence=column` then `NGSIToMongo` wi
 | Data Expiration | 0 |  | Collections will be removed if older than the value specified in seconds. The reference of time is the one stored in the `recvTime` property. Set to 0 if not wanting this policy. |
 | Collections Size | 0 |  | The oldest data (according to insertion time) will be removed if the size of the data collection gets bigger than the value specified in bytes. Notice that the size-based truncation policy takes precedence over the time-based one. Set to 0 if not wanting this policy. Minimum value (different than 0) is 4096 bytes. |
 | Max Documents | 0 |  | The oldest data (according to insertion time) will be removed if the number of documents in the data collections goes beyond the specified value. Set to 0 if not wanting this policy. |
-| Write Concern| ACKNOWLEDGED | |The write concern to use|
 
 A configuration example could be:
 
