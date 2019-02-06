@@ -221,13 +221,15 @@ Coming soon.
 
 |Name|Default Value|Allowable Values|Description|
 |--- |--- |--- |--- |
-|**JDBC Connection Pool**| | |Controller service for connecting to a specific database engine|
+|**JDBC Connection Pool**|no | |Controller service for connecting to a specific database engine|
 |**NGSI version**| v2| |list of supported version of NGSI (v2 and ld), currently only support v2|
 |**Data Model**| db-by-entity | |The Data model for creating the tables when an event have been received you can choose between: db-by-service-path or db-by-entity, default value is db-by-service-path|
 |**Attribute persistence**| row | row, column | The mode of storing the data inside of the table allowable values are row and column|
+| Default Service|test| |In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service 
+| Default Service path|/path| |In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath |
 |Enable encoding| true | true, false | true applies the new encoding, false applies the old encoding.|
 |Enable lowercase|true| true, false |true for creating the Schema and Tables name with lowercase.|
-|**Batch size**| | |The preferred number of FlowFiles to put to the database in a single transaction|
+|**Batch size**|10 | |The preferred number of FlowFiles to put to the database in a single transaction|
 |**Rollback on failure** |false | true, false|Specify how to handle error. By default (false), if an error occurs while processing a FlowFile, the FlowFile will be routed to 'failure' or 'retry' relationship based on error type, and processor can continue with next FlowFile. Instead, you may want to rollback currently processed FlowFiles and stop further processing immediately. In that case, you can do so by enabling this 'Rollback On Failure' property. If enabled, failed FlowFiles will stay in the input relationship without penalizing it and being processed repeatedly until it gets processed successfully or removed by other means. It is important to set adequate 'Yield Duration' to avoid retrying too frequently.|
 
 A configuration example could be:

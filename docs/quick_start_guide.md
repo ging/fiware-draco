@@ -21,8 +21,8 @@ Obviously, you will need docker and docker-compose installed and running in you 
 ### <a name="section2.1"></a>Building from sources
 (1) Start by cloning the `fiware-Draco` repository:
 
-    git clone https://github.com/ging/fiware-Draco.git
-    cd fiware-Draco
+    git clone https://github.com/ging/fiware-draco.git
+    cd fiware-draco
 
 Change directory:
 
@@ -39,7 +39,7 @@ If you want, you can open another terminal and check the available images at you
 ```
 sudo docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-Draco              latest              6a9e16550c82        10 seconds ago      462.1 MB
+draco              latest              6a9e16550c82        10 seconds ago      462.1 MB
 mysql               latest              273a1eca2d3a        2 weeks ago         194.6 MB
 ```
 
@@ -52,7 +52,7 @@ First, go to your browser and open Draco using this URL http://localhost:9090/ni
 
 The next image provides you the location of many components of Draco. Please put special 
 attention to the template button, play button and processor component, you will use them later.
-![Draco-gui](./images/cygnus-toolbar-components.png)
+![Draco-gui](./images/draco-toolbar-components.png)
 
 Now go to the Components toolbar which is placed in the upper section of the NiFi GUI,  
 find the template icon and drag and drop it inside the Draco user space. 
@@ -65,7 +65,7 @@ the second processor called NGSIToMySQL is in charge to get the NGSIv2 events an
 persist that data into the MySQL database. The third is an optional processor for storing 
 the logs of the received events.
 
-![Draco-template1](./images/cygnus-template1.png)
+![Draco-template1](./images/draco-template1.png)
 
 Before starting the processors, you need to set your MySQL password and enable the DBCConnectionPool controller. 
 For doing that please follow the instructions:
