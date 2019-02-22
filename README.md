@@ -8,7 +8,7 @@
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
 [![Build Status](https://travis-ci.com/ging/fiware-draco.svg?branch=master)](https://travis-ci.com/ging/fiware-draco)
 [![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg?branch=develop)](https://coveralls.io/github/ging/fiware-draco?branch=develop)
-[![Known Vulnerabilities](https://snyk.io/test/github/ging/fiware-draco?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)](https://snyk.io/test/github/ging/fiware-draco?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)
+[![Known Vulnerabilities](https://snyk.io/test/github/ging/fiware-draco/badge.svg?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)](https://snyk.io/test/github/ging/fiware-draco?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
 
 ## Table of Contents
