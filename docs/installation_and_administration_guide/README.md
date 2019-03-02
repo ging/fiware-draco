@@ -7,11 +7,11 @@
     -   [Installation from sources](./install_from_sources.md)
 -   Configuration:
 
-    -   [Draco GUI](./Draco_gui.md)
+    -   [Draco GUI](./draco_gui.md)
     -   [Controllers Configuration](./controllers_configuration.md)
     -   [NGSI Processors configuration](./processors_configuration.md)
     -   [Connection Configuration](./connection_components.md)
-    -   [Templates](./templates-Draco.md)
+    -   [Templates](./templates-draco.md)
     -   [REST API](https://nifi.apache.org/docs/nifi-docs/rest-api/index.html)
 
 -   Advanced topics:

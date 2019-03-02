@@ -29,7 +29,7 @@ The Orion-To-Mysql template includes some preconfigured processors and controlle
 
 Now you can go to the properties tab of each processor and edit their properties according to your needs. Once you have
 set up your processors, please enable the DBCPConnectionPool controller as is explained in the
-[Draco GUI](./Draco_gui.md) and start the processors. For a more guided example, please go to the
+[Draco GUI](./draco_gui.md) and start the processors. For a more guided example, please go to the
 [Quick Start Guide](../quick_start_guide.md)
 
 ### Orion-To-PostgreSQL
@@ -43,7 +43,7 @@ The Orion-To-PostgreSQL template includes some preconfigured processors and cont
 
 Now you can go to the properties tab of each processor and edit their properties according to your needs. Once you have
 set up your processors, please enable the DBCPConnectionPool controller as is explained in the
-[Draco GUI](./Draco_gui.md) and start the processors. For a more guided example, please go to the
+[Draco GUI](./draco_gui.md) and start the processors. For a more guided example, please go to the
 [Quick Start Guide](../quick_start_guide.md)
 
 ### Orion-To-Mongo
