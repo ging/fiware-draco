@@ -11,7 +11,7 @@ configure the NGSI processor listed above:
 ### Listen_HTTP Processor
 
 Fist, we need to have Draco up and running. Then you need to follow the steps to add a new processor showed in the
-[Draco GUI](../installation_and_administration_guide/Draco_gui.md) section.
+[Draco GUI](../installation_and_administration_guide/draco_gui.md) section.
 
 Once you are in the add processor window, write inside of the filter box "Http" in order to filter the processors by
 that keyword and select the "ListenHTTP" processor.

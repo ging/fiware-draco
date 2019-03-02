@@ -15,7 +15,7 @@ following DB's:
 As you can notice MySQL and PostgreSQL needs to use the DBCPConnectionPoll controller. Thus, in this section, we will
 explain how to configure that controller.
 
-First, follow the steps in [Draco GUI](./Draco_gui.md) for adding a new controller. Then, in the add controller page,
+First, follow the steps in [Draco GUI](./draco_gui.md) for adding a new controller. Then, in the add controller page,
 select the DBCPConnectionPoll controller.
 
 ![dbpc](../images/dbpc.png)
@@ -32,8 +32,7 @@ MySQL.
 
 ![dbpc-mysql](../images/controller-mysql.png)
 
-Database Connection URL  
- jdbc:mysql://<mysql-host-ip>:<mysql-port> jdbc:mysql://127.0.0.1:3306
+Database Connection URL jdbc:mysql://<mysql-host-ip>:<mysql-port> jdbc:mysql://127.0.0.1:3306
 
 Database Driver Class Name
 
@@ -47,9 +46,7 @@ Database User (full grant user)
 
     root
 
-Password  
- <your-password>  
-Max Wait Time
+Password <your-password> Max Wait Time
 
     500 millis
 
