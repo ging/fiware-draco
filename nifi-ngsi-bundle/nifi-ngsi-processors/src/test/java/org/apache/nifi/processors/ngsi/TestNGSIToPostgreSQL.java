@@ -1,6 +1,8 @@
 package org.apache.nifi.processors.ngsi;
 
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
+import org.apache.nifi.processors.ngsi.NGSI.backends.postgresql.PostgreSQLBackendImpl;
+import org.apache.nifi.processors.ngsi.NGSI.aggregators.PostgreSQLAggregator;
 import org.apache.nifi.processors.ngsi.NGSI.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
 import org.apache.nifi.util.TestRunner;
@@ -16,7 +18,8 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class TestNGSIToPostgreSQL {
     TestRunner runner;
-    PostgreSQLBackend backend;
+    PostgreSQLBackendImpl backend;
+    PostgreSQLAggregator aggregator;
 
 
     @Before
@@ -26,7 +29,10 @@ public class TestNGSIToPostgreSQL {
         final Map<String, String> dbcpProperties = new HashMap<>();
 
         runner = TestRunners.newTestRunner(NGSIToMySQL.class);
-        runner.setProperty(NGSIToPostgreSQL.CONNECTION_POOL, "dbcp");
+        runner.setProperty(NGSIToPostgreSQL.PostgreSQL_HOST,"127.0.0.1");
+        runner.setProperty(NGSIToPostgreSQL.PostgreSQL_PORT,"5432");
+        runner.setProperty(NGSIToPostgreSQL.PostgreSQL_USERNAME,"postgres");
+        runner.setProperty(NGSIToPostgreSQL.PostgreSQL_PASSWORD,"postgres");
         runner.setProperty(NGSIToPostgreSQL.NGSI_VERSION, "v2");
         runner.setProperty(NGSIToPostgreSQL.DATA_MODEL, "db-by-service-path");
         runner.setProperty(NGSIToPostgreSQL.ATTR_PERSISTENCE, "row");
@@ -34,7 +40,12 @@ public class TestNGSIToPostgreSQL {
         runner.setProperty(NGSIToPostgreSQL.ENABLE_LOWERCASE, "false");
         runner.setProperty(NGSIToPostgreSQL.BATCH_SIZE, "100");
         runner.setProperty(RollbackOnFailure.ROLLBACK_ON_FAILURE, "false");
-        backend = new PostgreSQLBackend();
+        backend = new PostgreSQLBackendImpl("127.0.0.1", "5432", "postgres", "postgres");
+        aggregator = new PostgreSQLAggregator(){
+            @Override
+            public void aggregate(long creationTime, Entity entity, String fiwareServicePath) {
+            }
+        };
     }
 
     /**
@@ -51,7 +62,7 @@ public class TestNGSIToPostgreSQL {
         String service = "someService";
 
         try {
-            String builtSchemaName = backend.buildSchemaName(service,enableEncoding,enableLowercase);
+            String builtSchemaName = aggregator.buildSchemaName(service,enableEncoding);
             String expectedDBName = "someService";
 
             try {
@@ -87,7 +98,7 @@ public class TestNGSIToPostgreSQL {
 
 
         try {
-            String builtSchemaName = backend.buildSchemaName(service,enableEncoding,enableLowercase);
+            String builtSchemaName = aggregator.buildSchemaName(service,enableEncoding);
             String expectedDBName = "somex0053ervice";
 
             try {
@@ -127,7 +138,7 @@ public class TestNGSIToPostgreSQL {
 
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "somePath";
 
             try {
@@ -165,7 +176,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "x002fsomex0050ath";
 
             try {
@@ -205,7 +216,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "somePath_someId_someType";
 
             try {
@@ -247,7 +258,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "x002fsomex0050athxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -288,7 +299,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - The root service path was not detected as not valid");
         } catch (Exception e) {
@@ -315,7 +326,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "x002f";
 
             try {
@@ -356,7 +367,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "someId_someType";
 
             try {
@@ -397,7 +408,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+            String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             String expecetedTableName = "x002fxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -431,7 +442,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String service = "tooLoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongService";
 
         try {
-            backend.buildSchemaName(service,enableEncoding,enableLowercase);
+            aggregator.buildSchemaName(service,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
                     + "- FAIL - A schema name length greater than 63 characters has not been detected");
             assertTrue(false);
@@ -462,7 +473,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase);
+            aggregator.buildTableName(servicePath,entity,dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
             assertTrue(false);
@@ -493,7 +504,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase);
+            aggregator.buildTableName(servicePath,entity,dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
             assertTrue(false);
