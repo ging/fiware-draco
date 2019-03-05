@@ -2,17 +2,11 @@ package org.apache.nifi.processors.ngsi.NGSI.aggregators;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import org.apache.nifi.processors.ngsi.log.DracoLogger;
 import org.apache.nifi.processors.ngsi.NGSI.backends.postgresql.PostgreSQLBackendImpl;
 import org.apache.nifi.processors.ngsi.NGSI.utils.*;
 import org.apache.nifi.processors.ngsi.errors.DracoBadConfiguration;
 import org.apache.nifi.processors.ngsi.errors.DracoPersistenceError;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public abstract class PostgreSQLAggregator {
   
@@ -249,9 +243,9 @@ private class ColumnAggregator extends PostgreSQLAggregator {
 } // ColumnAggregator
 
 public PostgreSQLAggregator getAggregator(String rowAttrPersistence) {
-    if (rowAttrPersistence.equals("row")) {
+    if ("row".equals(rowAttrPersistence)) {
         return new RowAggregator();
-    } else if (rowAttrPersistence.equals("column")){
+    } else if ("column".equals(rowAttrPersistence)){
         return new ColumnAggregator();
     } // if else
     return null;
@@ -337,7 +331,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
     } else {
         switch(dataModel) {
             case "db-by-service-path":
-                if (servicePath.equals("/")) {
+                if ("/".equals(servicePath)) {
                     throw new DracoBadConfiguration("Default service path '/' cannot be used with "
                             + "dm-by-service-path data model");
                 } // if
@@ -351,7 +345,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
                                 + NGSICharsets.encode(entityType, false, true);
                 break;
             default:
-                throw new DracoBadConfiguration("Unknown data model '" + dataModel.toString()
+                throw new DracoBadConfiguration("Unknown data model '" + dataModel
                             + "'. Please, use DMBYSERVICEPATH or DMBYENTITY");
         } // switch
     } // if else
