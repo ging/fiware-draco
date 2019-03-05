@@ -16,7 +16,6 @@
  */
 package org.apache.nifi.processors.ngsi;
 
-import com.mongodb.WriteConcern;
 import org.apache.nifi.annotation.behavior.EventDriven;
 import org.apache.nifi.annotation.behavior.InputRequirement;
 import org.apache.nifi.annotation.behavior.InputRequirement.Requirement;
@@ -39,9 +38,9 @@ import java.util.*;
 @CapabilityDescription("Writes the contents of a FlowFile to MongoDB")
 @SystemResourceConsideration(resource = SystemResource.MEMORY)
 public class NGSIToMongo extends AbstractMongoProcessor {
-    static final Relationship REL_SUCCESS = new Relationship.Builder().name("success")
+    protected static final Relationship REL_SUCCESS = new Relationship.Builder().name("success")
             .description("All FlowFiles that are written to MongoDB are routed to this relationship").build();
-    static final Relationship REL_FAILURE = new Relationship.Builder().name("failure")
+    protected static final Relationship REL_FAILURE = new Relationship.Builder().name("failure")
             .description("All FlowFiles that cannot be written to MongoDB are routed to this relationship").build();
 
     private final static Set<Relationship> relationships;

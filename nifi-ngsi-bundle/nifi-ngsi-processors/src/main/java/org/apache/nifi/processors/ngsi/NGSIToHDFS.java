@@ -392,8 +392,7 @@ public class NGSIToHDFS extends AbstractProcessor {
         HiveBackend hiveBackend = null;
         NGSIUtils n = new NGSIUtils();
         persistenceBackend = (backendImpl.compareToIgnoreCase("rest")==1)
-                ?new HDFSBackendREST(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
-                hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace)
+                ?new HDFSBackendREST(host,port,username,oauth2Token,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace)
                 :new HDFSBackendBinary(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
                 hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace);
 

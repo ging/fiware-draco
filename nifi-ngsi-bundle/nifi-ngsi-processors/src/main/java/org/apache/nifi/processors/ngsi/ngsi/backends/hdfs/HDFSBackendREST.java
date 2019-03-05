@@ -11,10 +11,6 @@ public class HDFSBackendREST extends HttpBackend implements HDFSBackend{
 
 
     private final String hdfsUser;
-    private final String hdfsPassword;
-    private final String hiveServerVersion;
-    private final String hiveHost;
-    private final String hivePort;
     private final boolean serviceAsNamespace;
     private static final String BASE_URL = "/webhdfs/v1/user/";
     private ArrayList<Header> headers;
@@ -26,9 +22,6 @@ public class HDFSBackendREST extends HttpBackend implements HDFSBackend{
      * @param hdfsUser
      * @param hdfsPassword
      * @param oauth2Token
-     * @param hiveServerVersion
-     * @param hiveHost
-     * @param hivePort
      * @param krb5
      * @param krb5User
      * @param krb5Password
@@ -36,16 +29,12 @@ public class HDFSBackendREST extends HttpBackend implements HDFSBackend{
      * @param krb5ConfFile
      * @param serviceAsNamespace
      */
-    public HDFSBackendREST(String[] hdfsHosts, String hdfsPort, String hdfsUser, String hdfsPassword,
-                           String oauth2Token, String hiveServerVersion, String hiveHost, String hivePort, boolean krb5,
+    public HDFSBackendREST(String[] hdfsHosts, String hdfsPort, String hdfsUser,
+                           String oauth2Token, boolean krb5,
                            String krb5User, String krb5Password, String krb5LoginConfFile, String krb5ConfFile,
                            boolean serviceAsNamespace) {
         super(hdfsHosts, hdfsPort, false, krb5, krb5User, krb5Password, krb5LoginConfFile, krb5ConfFile);
         this.hdfsUser = hdfsUser;
-        this.hdfsPassword = hdfsPassword;
-        this.hiveServerVersion = hiveServerVersion;
-        this.hiveHost = hiveHost;
-        this.hivePort = hivePort;
         this.serviceAsNamespace = serviceAsNamespace;
 
         // add the OAuth2 token as a the unique header that will be sent
