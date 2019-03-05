@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.utils;
+package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.processor.ProcessSession;

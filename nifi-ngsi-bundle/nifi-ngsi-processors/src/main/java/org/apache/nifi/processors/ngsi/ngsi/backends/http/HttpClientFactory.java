@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends.http;
+package org.apache.nifi.processors.ngsi.ngsi.backends.http;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +17,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.auth.SPNegoSchemeFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
-import org.apache.nifi.processors.ngsi.NGSI.utils.CommonConstants;
+import org.apache.nifi.processors.ngsi.ngsi.utils.CommonConstants;
 
 
 public class HttpClientFactory {

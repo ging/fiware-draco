@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.utils;
+package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 public final class NGSIConstants {
 

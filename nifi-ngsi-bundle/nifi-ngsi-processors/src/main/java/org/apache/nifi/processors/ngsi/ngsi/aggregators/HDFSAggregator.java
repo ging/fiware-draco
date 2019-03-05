@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.aggregators;
+package org.apache.nifi.processors.ngsi.ngsi.aggregators;
 
 
 import java.text.SimpleDateFormat;
@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackend;
-import org.apache.nifi.processors.ngsi.NGSI.backends.HiveBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.*;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackend;
+import org.apache.nifi.processors.ngsi.ngsi.backends.HiveBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

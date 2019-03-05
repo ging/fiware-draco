@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends;
+package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -15,14 +15,14 @@ import org.apache.nifi.processor.ProcessSession;
 import org.apache.nifi.processor.Relationship;
 import org.apache.nifi.processor.exception.ProcessException;
 import org.apache.nifi.processor.util.StandardValidators;
-import org.apache.nifi.processors.ngsi.NGSI.aggregators.HDFSAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackend;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackendBinary;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackendREST;
-import org.apache.nifi.processors.ngsi.NGSI.backends.HiveBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
+import org.apache.nifi.processors.ngsi.ngsi.aggregators.HDFSAggregator;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackend;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackendBinary;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackendREST;
+import org.apache.nifi.processors.ngsi.ngsi.backends.HiveBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 
 import java.util.*;
 

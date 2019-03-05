@@ -1,8 +1,7 @@
 package org.apache.nifi.processors.ngsi;
 
-import com.mongodb.MongoClientURI;
-import org.apache.nifi.processors.ngsi.NGSI.backends.MongoBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSICharsets;
+import org.apache.nifi.processors.ngsi.ngsi.backends.MongoBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSICharsets;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;

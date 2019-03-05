@@ -1,7 +1,5 @@
-package org.apache.nifi.processors.ngsi.NGSI.utils;
+package org.apache.nifi.processors.ngsi.ngsi.utils;
 
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

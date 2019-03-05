@@ -1,12 +1,11 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends.hdfs;
+package org.apache.nifi.processors.ngsi.ngsi.backends.hdfs;
 
 import java.util.ArrayList;
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
-import org.apache.nifi.processors.ngsi.NGSI.backends.http.HttpBackend;
-import org.apache.nifi.processors.ngsi.NGSI.backends.http.JsonResponse;
-import org.json.HTTP;
+import org.apache.nifi.processors.ngsi.ngsi.backends.http.HttpBackend;
+import org.apache.nifi.processors.ngsi.ngsi.backends.http.JsonResponse;
 
 public class HDFSBackendREST extends HttpBackend implements HDFSBackend{
 
