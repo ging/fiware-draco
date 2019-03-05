@@ -1,13 +1,13 @@
-package org.apache.nifi.processors.ngsi.NGSI.aggregators;
+package org.apache.nifi.processors.ngsi.ngsi.aggregators;
 
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.apache.nifi.processors.ngsi.NGSI.backends.MongoBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Attributes;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.backends.MongoBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.bson.Document;
 
 

@@ -2,8 +2,8 @@ package org.apache.nifi.processors.ngsi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import org.apache.nifi.processors.ngsi.NGSI.aggregators.HDFSAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.aggregators.HDFSAggregator;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;

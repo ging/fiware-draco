@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends;
+package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
@@ -8,22 +8,18 @@ import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import com.mongodb.util.JSON;
-import org.apache.nifi.processors.ngsi.NGSI.utils.CommonConstants;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSICharsets;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIConstants;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.CommonConstants;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSICharsets;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants;
 import org.bson.Document;
 
 

@@ -1,10 +1,14 @@
-package org.apache.nifi.processors.ngsi.NGSI.utils;
+package org.apache.nifi.processors.ngsi.ngsi.utils;
+
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public final class NGSICharsets {
+
+    private static final Pattern ENCODEPATTERN = Pattern.compile("[^a-zA-Z0-9\\.\\-]");
+    private static final Pattern ENCODEPATTERNSLASH = Pattern.compile("[^a-zA-Z0-9\\.\\-\\/]");
+    private static final Pattern ENCODEHIVEPATTERN = Pattern.compile("[^a-zA-Z0-9]");
+    private static final Pattern ENCODESTHDBPATTERN = Pattern.compile("[=\\/\\\\.\\$\" ]");
+    private static final Pattern ENCODESTHCOLLECTIONPATTERN = Pattern.compile("[=\\$]");
 
     /**
      * Constructor. It is private since utility classes should not have a public or default constructor.
@@ -427,14 +431,6 @@ public final class NGSICharsets {
 
         return out;
     } // encodeKafka
-
-    /*From here utils for old encoding method*/
-
-    private static final Pattern ENCODEPATTERN = Pattern.compile("[^a-zA-Z0-9\\.\\-]");
-    private static final Pattern ENCODEPATTERNSLASH = Pattern.compile("[^a-zA-Z0-9\\.\\-\\/]");
-    private static final Pattern ENCODEHIVEPATTERN = Pattern.compile("[^a-zA-Z0-9]");
-    private static final Pattern ENCODESTHDBPATTERN = Pattern.compile("[=\\/\\\\.\\$\" ]");
-    private static final Pattern ENCODESTHCOLLECTIONPATTERN = Pattern.compile("[=\\$]");
 
     /**
      * Encodes a string replacing all the non alphanumeric characters by '_' (except by '-' and '.').
