@@ -39,7 +39,8 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 
 public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
-    static final PropertyDescriptor CONNECTION_POOL = new PropertyDescriptor.Builder()
+
+    protected static final PropertyDescriptor CONNECTION_POOL = new PropertyDescriptor.Builder()
             .name("JDBC Connection Pool")
             .description("Specifies the JDBC Connection Pool to use in order to convert the JSON message to a SQL statement. "
                     + "The Connection Pool is necessary in order to determine the appropriate database column types.")
@@ -47,7 +48,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .required(true)
             .build();
 
-    static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
             .name("data-model")
             .displayName("Data Model")
             .description("The Data model for creating the tables when an event have been received you can choose between" +
@@ -58,7 +59,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
             .name("attr-persistence")
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
@@ -68,7 +69,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
             .displayName("NGSI Version")
             .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD. NGSI-LD is not supported yet ")
@@ -78,7 +79,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
             .name("default-service")
             .displayName("Default Service")
             .description("Default Fiware Service for building the database name")
@@ -87,7 +88,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
             .name("default-service-path")
             .displayName("Default Service path")
             .description("Default Fiware ServicePath for building the table name")
@@ -96,7 +97,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
             .description("true or false, true applies the new encoding, false applies the old encoding.")
@@ -105,7 +106,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
             .name("enable-lowercase")
             .displayName("Enable Lowercase")
             .description("true or false, true for creating the Schema and Tables name with lowercase.")
@@ -114,7 +115,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor TRANSACTION_TIMEOUT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor TRANSACTION_TIMEOUT = new PropertyDescriptor.Builder()
             .name("Transaction Timeout")
             .description("If the <Support Fragmented Transactions> property is set to true, specifies how long to wait for all FlowFiles for a particular fragment.identifier attribute "
                     + "to arrive before just transferring all of the FlowFiles with that identifier to the 'failure' relationship")
@@ -122,7 +123,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.TIME_PERIOD_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .description("The preferred number of FlowFiles to put to the database in a single transaction")
             .required(true)
@@ -130,15 +131,15 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .defaultValue("10")
             .build();
 
-    static final Relationship REL_SUCCESS = new Relationship.Builder()
+    protected static final Relationship REL_SUCCESS = new Relationship.Builder()
             .name("success")
             .description("A FlowFile is routed to this relationship after the database is successfully updated")
             .build();
-    static final Relationship REL_RETRY = new Relationship.Builder()
+    protected static final Relationship REL_RETRY = new Relationship.Builder()
             .name("retry")
             .description("A FlowFile is routed to this relationship if the database cannot be updated but attempting the operation again may succeed")
             .build();
-    static final Relationship REL_FAILURE = new Relationship.Builder()
+    protected static final Relationship REL_FAILURE = new Relationship.Builder()
             .name("failure")
             .description("A FlowFile is routed to this relationship if the database cannot be updated and retrying the operation will also fail, "
                     + "such as an invalid query or an integrity constraint violation")
