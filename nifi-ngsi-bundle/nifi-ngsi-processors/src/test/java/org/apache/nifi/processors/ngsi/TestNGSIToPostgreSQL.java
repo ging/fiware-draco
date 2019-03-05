@@ -3,7 +3,6 @@ package org.apache.nifi.processors.ngsi;
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.NGSI.backends.postgresql.PostgreSQLBackendImpl;
 import org.apache.nifi.processors.ngsi.NGSI.aggregators.PostgreSQLAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
