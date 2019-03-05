@@ -19,7 +19,6 @@ import org.apache.nifi.processors.ngsi.NGSI.backends.postgresql.PostgreSQLBacken
 import org.apache.nifi.processors.ngsi.errors.DracoBadConfiguration;
 import org.apache.nifi.processor.util.pattern.*;
 import org.apache.nifi.processor.util.pattern.PartialFunctions.FlowFileGroup;
-import org.apache.nifi.processors.ngsi.NGSI.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
 import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
@@ -43,7 +42,7 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 })
 
 
-public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
+public class NGSIToPostgreSQL extends AbstractProcessor {
     static final PropertyDescriptor PostgreSQL_HOST = new PropertyDescriptor.Builder()
         .name("PostgreSQL Host")
         .displayName("PostgreSQL Host")
@@ -174,11 +173,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .description("A FlowFile is routed to this relationship if the database cannot be updated and retrying the operation will also fail, "
                     + "such as an invalid query or an integrity constraint violation")
             .build();
-
-    private static final String FRAGMENT_ID_ATTR = FragmentAttributes.FRAGMENT_ID.key();
-    private static final String FRAGMENT_INDEX_ATTR = FragmentAttributes.FRAGMENT_INDEX.key();
-    private static final String FRAGMENT_COUNT_ATTR = FragmentAttributes.FRAGMENT_COUNT.key();
-    private static final PostgreSQLBackend postgres = new PostgreSQLBackend();
 
     @Override
     protected List<PropertyDescriptor> getSupportedPropertyDescriptors() {
