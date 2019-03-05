@@ -87,12 +87,6 @@ public class TestJsonNgsi {
                 "   ],\n" +
                 "   \"subscriptionId\": \"57458eb60962ef754e7c0998\"\n" +
                 "}";
-
-
-        NGSIUtils n = new NGSIUtils();
-        JSONObject flow = new JSONObject(json);
-        JSONArray data = (JSONArray )flow.get("data");
-
     }
 
 }

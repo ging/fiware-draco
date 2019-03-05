@@ -9,9 +9,6 @@ import java.util.Iterator;
 
 public class MySQLBackend {
 
-    public MySQLBackend() {
-    }
-
     public ArrayList listOfFields (String attrPersistence){
         ArrayList<String> aggregation = new ArrayList<>();
         if (attrPersistence.compareToIgnoreCase("row")==0){
@@ -32,7 +29,6 @@ public class MySQLBackend {
 
     public String getValuesForInsert(Entity entity, long creationTime, String fiwareServicePath) {
         String valuesForInsert = "";
-        boolean first = true;
             for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
                 if (i == 0) {
                     valuesForInsert += "(";
@@ -104,8 +100,8 @@ public class MySQLBackend {
         } // if else
 
         if (dbName.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-            throw new Exception("Building database name '" + dbName
-                    + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
+            Exception e = new Exception("Building database name '" + dbName+ "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
+            throw e;
         } // if
         return dbName;
     }
@@ -140,13 +136,13 @@ public class MySQLBackend {
                             + NGSICharsets.encodeMySQL(entityType);
                     break;
                 default:
-                    System.out.println("Unknown data model '" + dataModel.toString()
-                            + "'. Please, use dm-by-service-path, dm-by-entity or dm-by-attribute");
+                    System.out.println("Unknown data model '" + dataModel + "'. Please, use dm-by-service-path, dm-by-entity or dm-by-attribute");
+                    break;
             } // switch
         } else {
             switch (dataModel) {
                 case "db-by-service-path":
-                    if (servicePath.equals("/")) {
+                    if ("/".equals(servicePath)) {
                         System.out.println("Default service path '/' cannot be used with "
                                 + "dm-by-service-path data model");
                     } // if
@@ -160,8 +156,8 @@ public class MySQLBackend {
                             + NGSICharsets.encode(entityType, false, true);
                     break;
                 default:
-                    System.out.println("Unknown data model '" + dataModel.toString()
-                            + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
+                    System.out.println("Unknown data model '" + dataModel + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
+                    break;
             } // switch
         } // if else
 

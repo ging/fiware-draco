@@ -40,7 +40,6 @@ contexts, we use it here to mean the automated and managed flow of information b
 | :books: [Documentation](https://fiware-draco.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | :dart: [Roadmap](docs/roadmap.md) |
 | ----------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------- |
 
-
 ### Terminology
 
 In order to talk about Draco, there are a few key terms that readers should be familiar with. We will explain those
