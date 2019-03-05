@@ -43,6 +43,15 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 
 public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
+    
+    private PutGroup<FunctionContext, Connection, StatementFlowFileEnclosure> process;
+    private BiFunction<FunctionContext, ErrorTypes, ErrorTypes.Result> adjustError;
+    private ExceptionHandler<FunctionContext> exceptionHandler;
+    private static final String FRAGMENT_ID_ATTR = FragmentAttributes.FRAGMENT_ID.key();
+    private static final String FRAGMENT_INDEX_ATTR = FragmentAttributes.FRAGMENT_INDEX.key();
+    private static final String FRAGMENT_COUNT_ATTR = FragmentAttributes.FRAGMENT_COUNT.key();
+    private static final MySQLBackend mysql = new MySQLBackend();
+
     static final PropertyDescriptor CONNECTION_POOL = new PropertyDescriptor.Builder()
             .name("JDBC Connection Pool")
             .description("Specifies the JDBC Connection Pool to use in order to convert the JSON message to a SQL statement. "
@@ -150,11 +159,6 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
                     + "such as an invalid query or an integrity constraint violation")
             .build();
 
-    private static final String FRAGMENT_ID_ATTR = FragmentAttributes.FRAGMENT_ID.key();
-    private static final String FRAGMENT_INDEX_ATTR = FragmentAttributes.FRAGMENT_INDEX.key();
-    private static final String FRAGMENT_COUNT_ATTR = FragmentAttributes.FRAGMENT_COUNT.key();
-    private static final MySQLBackend mysql = new MySQLBackend();
-
     @Override
     protected List<PropertyDescriptor> getSupportedPropertyDescriptors() {
         final List<PropertyDescriptor> properties = new ArrayList<>();
@@ -194,11 +198,6 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
             return !obtainKeys && !fragmentedTransaction;
         }
     }
-
-    private PutGroup<FunctionContext, Connection, StatementFlowFileEnclosure> process;
-    private BiFunction<FunctionContext, ErrorTypes, ErrorTypes.Result> adjustError;
-    private ExceptionHandler<FunctionContext> exceptionHandler;
-
 
     private final PartialFunctions.FetchFlowFiles<FunctionContext> fetchFlowFiles = (c, s, fc, r) -> {
         final FlowFilePoll poll = pollFlowFiles(c, s, fc, r);
