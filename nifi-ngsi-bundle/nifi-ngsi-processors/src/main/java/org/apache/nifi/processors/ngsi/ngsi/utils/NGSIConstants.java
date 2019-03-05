@@ -2,12 +2,6 @@ package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 public final class NGSIConstants {
 
-    /**
-     * Constructor. It is private since utility classes should not have a public or default constructor.
-     */
-    private NGSIConstants() {
-    } // NGSIConstants
-
     // Common fields for sinks
     public static final String RECV_TIME_TS        = "recvTimeTs";
     public static final String RECV_TIME           = "recvTime";
@@ -61,5 +55,12 @@ public final class NGSIConstants {
     // NGSIPostgreSQLSink specific constants
     // http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS
     public static final int POSTGRESQL_MAX_NAME_LEN = 63;
+
+    /**
+     * Constructor. It is private since utility classes should not have a public or default constructor.
+     */
+    private NGSIConstants() {
+    } // NGSIConstants
+
 
 } // NGSIConstants
