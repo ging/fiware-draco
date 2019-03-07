@@ -157,7 +157,7 @@ public class PostgreSQLBackend {
                                 + NGSICharsets.encode(entityType, false, true);
                         break;
                     default:
-                        System.out.println("Unknown data model '" + dataModel.toString()
+                        System.out.println("Unknown data model '" + dataModel
                                 + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
                 } // switch
             } // if else
