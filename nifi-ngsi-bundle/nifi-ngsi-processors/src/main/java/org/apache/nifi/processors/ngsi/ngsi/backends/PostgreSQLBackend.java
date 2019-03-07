@@ -31,7 +31,6 @@ public class PostgreSQLBackend {
 
     public String getValuesForInsert(Entity entity, long creationTime, String fiwareServicePath) {
         String valuesForInsert = "";
-        boolean first = true;
             for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
                 if (i == 0) {
                     valuesForInsert += "(";
@@ -54,7 +53,6 @@ public class PostgreSQLBackend {
                     valuesForInsert += ",'[]'";
                 }
                 valuesForInsert += ")";
-
             } // for
 
         return valuesForInsert;

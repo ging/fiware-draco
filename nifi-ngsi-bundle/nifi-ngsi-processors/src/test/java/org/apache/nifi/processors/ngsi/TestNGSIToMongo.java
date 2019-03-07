@@ -8,10 +8,11 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToMongo {
@@ -21,11 +22,8 @@ public class TestNGSIToMongo {
 
     @Before
     public void setUp() throws Exception {
-        //Mock the DBCP Controller Service so we can control the Results
 
-        final Map<String, String> dbcpProperties = new HashMap<>();
-
-        runner = TestRunners.newTestRunner(NGSIToMySQL.class);
+        runner = TestRunners.newTestRunner(NGSIToMongo.class);
         runner.setProperty(NGSIToMongo.URI, "localhost:27017");
         runner.setProperty(NGSIToMongo.NGSI_VERSION, "v2");
         runner.setProperty(NGSIToMongo.DATA_MODEL, "db-by-service-path");
@@ -364,7 +362,6 @@ public class TestNGSIToMongo {
         runner.setProperty(NGSIToMongo.COLLECTION_PREFIX, "sth_");
         String collectionPrefix = runner.getProcessContext().getProperty(NGSIToMongo.COLLECTION_PREFIX).getValue();
         runner.setProperty(NGSIToMongo.DB_PREFIX, "sth_");
-        String dbPrefix = runner.getProcessContext().getProperty(NGSIToMongo.DB_PREFIX).getValue();
         runner.setProperty(NGSIToMongo.DATA_MODEL, "db-by-attribute");
         backend.setDataModel(runner.getProcessContext().getProperty(NGSIToMongo.DATA_MODEL).getValue());
         runner.setProperty(NGSIToMongo.ENABLE_ENCODING, "false");
@@ -569,11 +566,9 @@ public class TestNGSIToMongo {
 
         try {
             backend.buildCollectionName(servicePath, entityId,entityType, attribute,enableEncoding,collectionPrefix);
-            System.out.println("[NGSIToMongo.buildCollectionName]"
+            fail("[NGSIToMongo.buildCollectionName]"
                     + "- FAIL - A collection name length greater than 113 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMongo.buildCollectionName]"
                     + "-  OK  - A collection name length greater than 113 characters has been detected");
         } // try catch

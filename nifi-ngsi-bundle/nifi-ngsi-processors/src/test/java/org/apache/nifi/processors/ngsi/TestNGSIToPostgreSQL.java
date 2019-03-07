@@ -465,11 +465,9 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         try {
             backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase);
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
+            fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch
