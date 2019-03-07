@@ -411,7 +411,7 @@ public abstract class HDFSAggregator {
                 String mdAggregation = mdAggregations.get(attrMdFileName);
 
                 if (mdAggregation == null) {
-                    mdAggregation = new String();
+                    mdAggregation = "";
                 } // if
 
                 // agregate the metadata
@@ -423,7 +423,7 @@ public abstract class HDFSAggregator {
                     concatMdAggregation = mdAggregation.concat("\n" + getCSVMetadata(attrMetadata, recvTimeTs));
                 } // if else
 
-                mdAggregations.put(attrMdFileName, concatMdAggregation);
+                mdAggregations.put(attrMdFileName, "");
 
                 // create part of the line with the current attribute (a.k.a. a column)
                 line += csvSeparator + attrValue.replaceAll("\"", "") + csvSeparator + printableAttrMdFileName;
@@ -582,10 +582,10 @@ public abstract class HDFSAggregator {
 
         if (enableEncoding) {
             folderPath = NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encodeHDFS(destination, false);
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encodeHDFS(destination, false);
         } else {
             folderPath = NGSICharsets.encode(service, false, true) + NGSICharsets.encode(servicePath, false, false)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encode(destination, false, true);
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encode(destination, false, true);
         } // if else
 
         if (folderPath.length() > NGSIConstants.HDFS_MAX_NAME_LEN) {
