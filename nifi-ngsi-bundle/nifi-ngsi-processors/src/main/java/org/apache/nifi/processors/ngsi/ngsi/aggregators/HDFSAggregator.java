@@ -282,7 +282,7 @@ public abstract class HDFSAggregator {
                 String mdAggregation = mdAggregations.get(attrMdFileName);
 
                 if (mdAggregation == null) {
-                    mdAggregation = new String();
+                    mdAggregation = "";
                 } // if
 
                 // aggregate the metadata
@@ -367,7 +367,7 @@ public abstract class HDFSAggregator {
                 String attrName = attribute.getAttrName();
                 String attrType = attribute.getAttrType();
                 String attrMdFileName = buildAttrMdFilePath(service, servicePath, destination, attrName, attrType);
-                mdAggregations.put(attrMdFileName, new String());
+                mdAggregations.put(attrMdFileName, "");
                 hiveFields += ",`" + NGSICharsets.encodeHive(attrName) + "` string,"
                         + "`" + NGSICharsets.encodeHive(attrName) + "_md_file` string";
             } // for
