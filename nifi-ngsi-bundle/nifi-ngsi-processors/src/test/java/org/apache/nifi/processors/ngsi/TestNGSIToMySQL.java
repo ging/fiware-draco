@@ -409,11 +409,9 @@ public class TestNGSIToMySQL {
 
         try {
             backend.buildTableName(servicePath, entity,dataModel,enableEncoding,enableLowercase);
-            System.out.println("[NGSIToMySQL.buildTableName]"
+            fail("[NGSIToMySQL.buildTableName]"
                     + "- FAIL - A table name length greater than 64 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMySQL.buildTableName]"
                     + "-  OK  - A table name length greater than 64 characters has been detected");
         } // try catch

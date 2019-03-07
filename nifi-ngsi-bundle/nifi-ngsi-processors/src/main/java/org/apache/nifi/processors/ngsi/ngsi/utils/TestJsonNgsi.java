@@ -1,8 +1,5 @@
 package org.apache.nifi.processors.ngsi.ngsi.utils;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 public class TestJsonNgsi {
 
     public static void main(String[] args){
