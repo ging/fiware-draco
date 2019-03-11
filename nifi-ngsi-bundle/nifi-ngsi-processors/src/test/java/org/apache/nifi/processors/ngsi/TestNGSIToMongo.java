@@ -382,9 +382,8 @@ public class TestNGSIToMongo {
                 throw e;
             } // try catch
         } catch (Exception e) {
-            System.out.println("[NGSIToMongo.buildCollectionName]"
+            fail("[NGSIToMongo.buildCollectionName]"
                     + "- FAIL - There was some problem when building the collection name");
-            assertTrue(false);
         } // catch
     } // testBuildCollectionNameDMByEntityRootServicePathOldEncoding
 
@@ -427,9 +426,8 @@ public class TestNGSIToMongo {
                 throw e;
             } // try catch
         } catch (Exception e) {
-            System.out.println("[NGSIToMongo.buildCollectionName]"
+            fail("[NGSIToMongo.buildCollectionName]"
                     + "- FAIL - There was some problem when building the collection name");
-            assertTrue(false);
         } // catch
     } // testBuildCollectionNameDMByEntityRootServicePathNewEncoding
 
@@ -452,11 +450,9 @@ public class TestNGSIToMongo {
 
         try {
             backend.buildDbName(service,enableEncoding,dbPrefix);
-            System.out.println("[NGSIToMongo.buildDbName]"
+            fail("[NGSIToMongo.buildDbName]"
                     + "- FAIL - A database name length greater than 113 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMongo.buildDbName]"
                     + "-  OK  - A database name length greater than 113 characters has been detected");
         } // try catch
@@ -489,11 +485,9 @@ public class TestNGSIToMongo {
 
         try {
             backend.buildCollectionName(servicePath, entityId,entityType, attribute,enableEncoding,collectionPrefix);
-            System.out.println("[NGSIToMongo.buildCollectionName]"
+            fail("[NGSIToMongo.buildCollectionName]"
                     + "- FAIL - A collection name length greater than 113 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMongo.buildCollectionName]"
                     + "-  OK  - A collection name length greater than 113 characters has been detected");
         } // try catch
@@ -525,11 +519,9 @@ public class TestNGSIToMongo {
 
         try {
             backend.buildCollectionName(servicePath, entityId,entityType, attribute,enableEncoding,collectionPrefix);
-            System.out.println("[NGSIToMongo.buildCollectionName]"
+            fail("[NGSIToMongo.buildCollectionName]"
                     + "- FAIL - A collection name length greater than 113 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMongo.buildCollectionName]"
                     + "-  OK  - A collection name length greater than 113 characters has been detected");
         } // try catch

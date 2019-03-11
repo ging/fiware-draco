@@ -454,6 +454,9 @@ public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
                         getLogger().error("Failed to update database for {} due to {}; it is possible that retrying the operation will succeed, so routing to retry",
                                 new Object[]{il.getFlowFiles(), e}, e);
                         break;
+                    default:
+                        getLogger().error("Failed to update database for {} due to {}; routing to failure", new Object[]{il.getFlowFiles(), e}, e);
+                        break;
                 }
             });
             onGroupError.apply(c, enclosure, r, e);

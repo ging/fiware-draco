@@ -434,11 +434,9 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         try {
             backend.buildSchemaName(service,enableEncoding,enableLowercase);
-            System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
+            fail("[NGSIToPostgreSQL.buildSchemaName]"
                     + "- FAIL - A schema name length greater than 63 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
                     + "-  OK  - A schema name length greater than 63 characters has been detected");
         } // try catch
@@ -497,7 +495,6 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch
