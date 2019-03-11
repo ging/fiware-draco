@@ -402,11 +402,9 @@ public class NGSIToHDFS extends AbstractProcessor {
 
         hiveBackend = new HiveBackend(hiveServerVersion, hiveHost, hivePort, username, password);
 
-        final long creationTime = event.getCreationTime();
         try {
 
             for (Entity entity : event.getEntities()) {
-                String destination = entity.getEntityId();
                 HDFSAggregator aggregator = new HDFSAggregator() {
                     @Override
                     public void aggregate(long creationTime, Entity entity, String username) throws Exception {
@@ -461,11 +459,11 @@ public class NGSIToHDFS extends AbstractProcessor {
 
         try {
             persistFlowFile(context, flowFile, session);
-            logger.info("inserted {} into MongoDB", new Object[]{flowFile});
+            logger.info("inserted {} into HDFS", new Object[]{flowFile});
             session.getProvenanceReporter().send(flowFile, "report");
             session.transfer(flowFile, REL_SUCCESS);
         } catch (Exception e) {
-            logger.error("Failed to insert {} into MongoDB due to {}", new Object[] {flowFile, e}, e);
+            logger.error("Failed to insert {} into HDFS due to {}", new Object[] {flowFile, e}, e);
             session.transfer(flowFile, REL_FAILURE);
             context.yield();
         }

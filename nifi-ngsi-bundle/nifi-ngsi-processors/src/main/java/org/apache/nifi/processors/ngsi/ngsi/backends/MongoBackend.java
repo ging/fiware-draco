@@ -534,6 +534,7 @@ public class MongoBackend {
             default:
                 // should never be reached
                 offset = 0;
+                break;
         } // switch
 
         return offset;
@@ -544,7 +545,7 @@ public class MongoBackend {
      * @param fiwareService
      * @return
      */
-    public String buildDbName(String fiwareService,boolean enableEncoding,String dbPrefix) throws Exception {
+    public String buildDbName(String fiwareService,boolean enableEncoding,String dbPrefix) throws MongoException {
         String dbName;
 
         if (enableEncoding) {
@@ -554,7 +555,7 @@ public class MongoBackend {
         } // if else
 
         if (dbName.length() > NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES) {
-            throw new Exception ("Building database name '" + dbName + "' and its length is greater "
+            throw new MongoException ("Building database name '" + dbName + "' and its length is greater "
                     + "than " + NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES);
         } // if
 

@@ -43,7 +43,8 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 
 public class NGSIToMySQL extends AbstractSessionFactoryProcessor {
-    
+
+
     private PutGroup<FunctionContext, Connection, StatementFlowFileEnclosure> process;
     private BiFunction<FunctionContext, ErrorTypes, ErrorTypes.Result> adjustError;
     private ExceptionHandler<FunctionContext> exceptionHandler;

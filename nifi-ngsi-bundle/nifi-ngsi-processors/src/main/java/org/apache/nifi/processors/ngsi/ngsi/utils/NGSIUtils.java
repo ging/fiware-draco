@@ -42,7 +42,7 @@ public class NGSIUtils {
         ArrayList<Entity> entities = new ArrayList<>();
         NGSIEvent event;
 
-        if(version.compareToIgnoreCase("v2")==0){
+        if("v2".compareToIgnoreCase(version)==0){
             data = (JSONArray) content.get("data");
             for (int i = 0; i < data.length(); i++) {
                 JSONObject lData = data.getJSONObject(i);
@@ -52,7 +52,7 @@ public class NGSIUtils {
                 Iterator<String> keys = lData.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    if (!key.equals("id") && !key.equals("type")){
+                    if (!"id".equals(key) && !"type".equals(key)){
                         JSONObject value = lData.getJSONObject(key);
                         JSONObject mtdo = (JSONObject) value.get("metadata");
                         Iterator<String> keysOneLevel=mtdo.keys();
@@ -72,7 +72,7 @@ public class NGSIUtils {
                 }
                 entities.add(new Entity(entityId,entityType,attrs));
             }
-        }else if (version.compareToIgnoreCase("ld")==0){
+        }else if ("ld".compareToIgnoreCase(version)==0){
             System.out.println("Work in progress");
         }
         event = new NGSIEvent(creationTime,fiwareService,fiwareServicePath,entities);
