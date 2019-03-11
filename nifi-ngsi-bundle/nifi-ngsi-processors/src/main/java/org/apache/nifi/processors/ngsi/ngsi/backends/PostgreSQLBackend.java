@@ -1,8 +1,6 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
-
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

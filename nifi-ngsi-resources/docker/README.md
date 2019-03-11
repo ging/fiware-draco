@@ -19,7 +19,6 @@
 This image currently supports running in standalone mode either unsecured or with user authentication provided through:
 
 *   [Two-Way SSL with Client Certificates](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#security-configuration)
-
 *   [Lightweight Directory Access Protocol (LDAP)](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#ldap_login_identity_provider)
    
 ## Building

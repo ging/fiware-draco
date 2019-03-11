@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="improve performance code 2">
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="improve performance code 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -33,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
+            <state relative-caret-position="30">
+              <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -70,8 +61,8 @@
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="367">
-                <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+              <first_editor relative-caret-position="262">
+                <caret line="20" column="135" selection-start-line="20" selection-start-column="135" selection-end-line="20" selection-end-column="135" />
               </first_editor>
               <second_editor />
             </state>
@@ -156,9 +147,9 @@
       <find>new String()</find>
       <find>PutGroup</find>
       <find>toString()</find>
-      <find>assertT</find>
       <find>new Exception</find>
       <find>new Exce</find>
+      <find>assertT</find>
     </findStrings>
     <replaceStrings>
       <replace>Draco</replace>
@@ -226,12 +217,12 @@
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" />
       </list>
     </option>
@@ -392,6 +383,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ngsi" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
+              <item name="nifi-ngsi-resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
+              <item name="nifi-ngsi-resources" type="462c0819:PsiDirectoryNode" />
+              <item name="docker" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -402,7 +404,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552313544563" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552314220750" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -979,7 +981,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552307325121</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="improve performance code 3">
+      <created>1552313719028</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1552313719028</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1015,7 +1024,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139295000" />
+    <option name="totallyTimeSpent" value="139988000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1077,7 +1086,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="code fixing ffattrs" />
     <MESSAGE value="Merge remote-tracking branch 'remotes/origin/develop' into develop&#10;&#10;# Conflicts:&#10;#&#9;README.md" />
     <MESSAGE value="update readme" />
     <MESSAGE value="updating badges" />
@@ -1102,7 +1110,8 @@
     <MESSAGE value="fixing code with codacy recommendations 3" />
     <MESSAGE value="improve performance code" />
     <MESSAGE value="improve performance code 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve performance code 2" />
+    <MESSAGE value="improve performance code 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve performance code 3" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1384,27 +1393,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="417" column="22" lean-forward="true" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="388" column="31" selection-start-line="388" selection-start-column="31" selection-end-line="388" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="367">
-            <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -1446,10 +1438,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="262">
+            <caret line="20" column="135" selection-start-line="20" selection-start-column="135" selection-end-line="20" selection-end-column="135" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="417" column="22" lean-forward="true" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
+        <state relative-caret-position="30">
+          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
         </state>
       </provider>
     </entry>
