@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="improve performance code">
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="improve performance code 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/http/HttpBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/http/HttpBackend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/nifi-ngsi-bundle/target/" />
@@ -30,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="145" column="50" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="50" />
+            <state relative-caret-position="390">
+              <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -42,56 +42,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="361" column="5" selection-start-line="361" selection-start-column="5" selection-end-line="361" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="157">
-              <caret line="407" selection-start-line="407" selection-end-line="407" />
+              <caret line="388" column="31" selection-start-line="388" selection-start-column="31" selection-end-line="388" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="172" column="1" lean-forward="true" selection-start-line="172" selection-start-column="1" selection-end-line="172" selection-end-column="1" />
+            <state relative-caret-position="390">
+              <caret line="458" column="30" selection-start-line="458" selection-start-column="30" selection-end-line="458" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/http/HttpBackend.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
-              <caret line="157" column="41" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="547" column="103" selection-start-line="547" selection-start-column="103" selection-end-line="547" selection-end-column="103" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="367">
+                <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -99,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="313" selection-start-line="313" selection-end-line="313" />
+            <state relative-caret-position="383">
+              <caret line="563" lean-forward="true" selection-start-line="563" selection-end-line="563" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,19 +91,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToHDFS.java">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="395" column="16" selection-start-line="395" selection-start-column="16" selection-end-line="395" selection-end-column="16" />
+            <state relative-caret-position="172">
+              <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="636">
-              <caret line="299" column="12" selection-start-line="299" selection-start-column="12" selection-end-line="299" selection-end-column="12" />
+            <state relative-caret-position="496">
+              <caret line="449" column="30" selection-start-line="449" selection-start-column="30" selection-end-line="449" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="712">
+              <caret line="417" column="22" lean-forward="true" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -153,6 +156,9 @@
       <find>new String()</find>
       <find>PutGroup</find>
       <find>toString()</find>
+      <find>assertT</find>
+      <find>new Exception</find>
+      <find>new Exce</find>
     </findStrings>
     <replaceStrings>
       <replace>Draco</replace>
@@ -210,23 +216,23 @@
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMongo.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToHDFS.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/hdfs/HDFSBackendREST.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/HiveBackend.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/http/HttpBackend.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" />
       </list>
     </option>
   </component>
@@ -365,18 +371,6 @@
               <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
               <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -408,7 +402,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552307311074" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552313544563" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -438,7 +432,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestNGSIToPostgreSQL.testBuildTableNameLengthDataModelByEntity">
+  <component name="RunManager" selected="JUnit.TestNGSIToMongo">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -520,7 +514,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToMySQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestNGSIToMongo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="nifi-ngsi-processors" />
       <extension name="coverage">
         <pattern>
@@ -529,7 +523,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMongo" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -662,11 +656,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestNGSIToMongo" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL.testBuildTableNameLengthDataModelByEntity" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL.testBuildTableNameRootServicePathDataModelByServicePathOldEncoding" />
         <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
         <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" />
-        <item itemvalue="JUnit.TestNGSIToMySQL" />
       </list>
     </recent_temporary>
   </component>
@@ -978,13 +972,17 @@
       <option name="project" value="LOCAL" />
       <updated>1551974422398</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="improve performance code 2">
+      <created>1552307325121</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1552307325121</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestNGSIToMySQL_testBuildTableNameRootServicePathDataModelByServicePathNoEncoding - 2019.03.05 at 13h 08m 18s.xml">
-      <configuration name="TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestNGSIToMySQL_testBuildTableNameRootServicePathDataModelByServicePathNoEncoding - 2019.03.05 at 13h 08m 53s.xml">
       <configuration name="TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" configurationId="JUnit" />
     </history-entry>
@@ -1012,9 +1010,12 @@
     <history-entry file="TestNGSIToPostgreSQL_testBuildTableNameLengthDataModelByEntity - 2019.03.05 at 17h 16m 41s.xml">
       <configuration name="TestNGSIToPostgreSQL.testBuildTableNameLengthDataModelByEntity" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestNGSIToMongo - 2019.03.11 at 14h 46m 33s.xml">
+      <configuration name="TestNGSIToMongo" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135936000" />
+    <option name="totallyTimeSpent" value="139295000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1066,7 +1067,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Ant Build" order="9" weight="0.24935733" />
-      <window_info anchor="right" id="Maven" order="10" weight="0.24068071" />
+      <window_info anchor="right" id="Maven" order="10" visible="true" weight="0.24068071" />
       <window_info anchor="right" id="Database" order="11" />
       <window_info anchor="right" id="Bean Validation" order="12" />
       <window_info anchor="right" id="SciView" order="13" />
@@ -1076,7 +1077,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="iml files" />
     <MESSAGE value="code fixing ffattrs" />
     <MESSAGE value="Merge remote-tracking branch 'remotes/origin/develop' into develop&#10;&#10;# Conflicts:&#10;#&#9;README.md" />
     <MESSAGE value="update readme" />
@@ -1101,7 +1101,8 @@
     <MESSAGE value="fixing code with codacy recommendations" />
     <MESSAGE value="fixing code with codacy recommendations 3" />
     <MESSAGE value="improve performance code" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve performance code" />
+    <MESSAGE value="improve performance code 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve performance code 2" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1324,48 +1325,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="414" column="17" selection-start-line="414" selection-start-column="17" selection-end-line="414" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="470" selection-start-line="470" selection-end-line="470" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/HiveBackend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="178" column="47" selection-start-line="178" selection-start-column="47" selection-end-line="178" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="285">
-            <caret line="19" column="133" lean-forward="true" selection-start-line="19" selection-start-column="133" selection-end-line="19" selection-end-column="133" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-878">
-          <caret line="286" lean-forward="true" selection-start-line="286" selection-end-line="286" />
         </state>
       </provider>
     </entry>
@@ -1376,34 +1339,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="547" column="103" selection-start-line="547" selection-start-column="103" selection-end-line="547" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="145" column="50" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/http/HttpBackend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1950">
           <caret line="157" column="41" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1414,27 +1353,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="313" selection-start-line="313" selection-end-line="313" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToHDFS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="395" column="16" selection-start-line="395" selection-start-column="16" selection-end-line="395" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="407" selection-start-line="407" selection-end-line="407" />
         </state>
       </provider>
     </entry>
@@ -1445,10 +1367,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="563" lean-forward="true" selection-start-line="563" selection-end-line="563" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="417" column="22" lean-forward="true" selection-start-line="417" selection-start-column="22" selection-end-line="417" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="388" column="31" selection-start-line="388" selection-start-column="31" selection-end-line="388" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="367">
+            <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="361" column="5" selection-start-line="361" selection-start-column="5" selection-end-line="361" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="458" column="30" selection-start-line="458" selection-start-column="30" selection-end-line="458" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="299" column="12" selection-start-line="299" selection-start-column="12" selection-end-line="299" selection-end-column="12" />
+        <state relative-caret-position="496">
+          <caret line="449" column="30" selection-start-line="449" selection-start-column="30" selection-end-line="449" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="161" column="30" selection-start-line="161" selection-start-column="30" selection-end-line="161" selection-end-column="30" />
         </state>
       </provider>
     </entry>

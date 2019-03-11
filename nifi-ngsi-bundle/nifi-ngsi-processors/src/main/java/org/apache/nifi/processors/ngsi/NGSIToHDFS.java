@@ -361,11 +361,6 @@ public class NGSIToHDFS extends AbstractProcessor {
         return rels;
     }
 
-    @OnStopped
-    public final void closeClient() {
-
-    }
-
     protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile,ProcessSession session) {
 
         final String[] host = {context.getProperty(HDFS_HOST).getValue()};

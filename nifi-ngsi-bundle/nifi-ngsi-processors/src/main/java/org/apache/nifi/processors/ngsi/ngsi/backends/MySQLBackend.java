@@ -23,6 +23,7 @@ public class MySQLBackend {
             aggregation.add(NGSIConstants.ATTR_MD);
         }else if(attrPersistence.compareToIgnoreCase("column")==0){
             //TBD
+            System.out.println("column");
         }
         return aggregation;
     }

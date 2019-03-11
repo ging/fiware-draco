@@ -2,14 +2,13 @@ package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PostgreSQLBackend {
-
-    public PostgreSQLBackend() {
-    }
 
     public ArrayList listOfFields (String attrPersistence){
         ArrayList<String> aggregation = new ArrayList<>();
@@ -25,6 +24,7 @@ public class PostgreSQLBackend {
             aggregation.add(NGSIConstants.ATTR_MD);
         }else if(attrPersistence.compareToIgnoreCase("column")==0){
             //TBD
+            System.out.println("column");
         }
         return aggregation;
     }
@@ -159,11 +159,12 @@ public class PostgreSQLBackend {
                     default:
                         System.out.println("Unknown data model '" + dataModel
                                 + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
+                        break;
                 } // switch
             } // if else
 
             if (tableName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
-                throw new Exception("Building table name '" + tableName
+                throw new SQLException("Building table name '" + tableName
                         + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
             } // if
         return tableName;

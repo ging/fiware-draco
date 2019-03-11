@@ -336,6 +336,7 @@ public class MongoBackend {
                         .append("points.offset", offset);
                 break;
             default:
+                break;
                 // this will never be reached
         } // switch
 
@@ -498,6 +499,7 @@ public class MongoBackend {
             default:
                 // should never be reached
                 return null;
+
         } // switch
 
         GregorianCalendar gc = new GregorianCalendar(year, month, day, hour, minute, second);
@@ -618,11 +620,12 @@ public class MongoBackend {
                 default:
                     // this should never be reached
                     collectionName = null;
+                    break;
             } // switch
         } // else
 
         if (collectionName.getBytes().length > NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES) {
-            throw new Exception("Building collection name '" + collectionName + "' and its length is "
+            throw new MongoException("Building collection name '" + collectionName + "' and its length is "
                     + "greater than " + NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES);
         } // if
 

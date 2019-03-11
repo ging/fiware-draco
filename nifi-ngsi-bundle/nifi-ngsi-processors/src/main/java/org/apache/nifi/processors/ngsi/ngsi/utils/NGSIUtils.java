@@ -16,7 +16,6 @@ import org.apache.commons.collections.map.CaseInsensitiveMap;
 
 
 public class NGSIUtils {
-    public NGSIUtils(){}
 
     public NGSIEvent getEventFromFlowFile(FlowFile flowFile, final ProcessSession session, String version){
 

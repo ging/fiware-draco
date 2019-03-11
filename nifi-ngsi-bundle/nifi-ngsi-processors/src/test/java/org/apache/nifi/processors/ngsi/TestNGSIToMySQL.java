@@ -384,12 +384,9 @@ public class TestNGSIToMySQL {
 
         try {
             backend.buildDbName(service,enableEncoding,enableLowercase);
-            System.out.println(backend.buildDbName(service,enableEncoding,enableLowercase));
-            System.out.println("[NGSIToMySQL.buildDbName]"
+            fail("[NGSIToMySQL.buildDbName]"
                     + "- FAIL - A database name length greater than 64 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMySQL.buildDbName]"
                     + "-  OK  - A database name length greater than 64 characters has been detected");
         } // try catch

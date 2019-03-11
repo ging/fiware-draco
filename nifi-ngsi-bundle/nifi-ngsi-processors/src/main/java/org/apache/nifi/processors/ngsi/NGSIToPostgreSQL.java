@@ -446,6 +446,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         getLogger().error("Failed to update database for {} due to {}; it is possible that retrying the operation will succeed, so routing to retry",
                                 new Object[]{il.getFlowFiles(), e}, e);
                         break;
+                    default:
+                        break;
                 }
             });
             onGroupError.apply(c, enclosure, r, e);
