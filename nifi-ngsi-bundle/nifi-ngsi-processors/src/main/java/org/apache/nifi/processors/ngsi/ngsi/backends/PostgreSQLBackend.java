@@ -143,7 +143,7 @@ public class PostgreSQLBackend {
             } else {
                 switch (dataModel) {
                     case "db-by-service-path":
-                        if (servicePath.equals("/")) {
+                        if ("/".equals(servicePath)) {
                             System.out.println("Default service path '/' cannot be used with "
                                     + "dm-by-service-path data model");
                         } // if

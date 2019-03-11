@@ -84,6 +84,7 @@ public class TestJsonNgsi {
                 "   ],\n" +
                 "   \"subscriptionId\": \"57458eb60962ef754e7c0998\"\n" +
                 "}";
+        System.out.println(json);
     }
 
 }

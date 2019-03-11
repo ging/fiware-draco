@@ -167,7 +167,9 @@ public abstract class MongoAggregator {
                     String attrName = contextAttribute.getAttrName();
                     String attrType = contextAttribute.getAttrType();
                     String attrValue = contextAttribute.getAttrValue();
-                    doc.append(attrName, attrValue);
+                    doc.append("attrName", attrName)
+                            .append("attrType", attrType)
+                            .append("attrValue", attrValue);
                 } // for
 
                 aggregation.add(doc);

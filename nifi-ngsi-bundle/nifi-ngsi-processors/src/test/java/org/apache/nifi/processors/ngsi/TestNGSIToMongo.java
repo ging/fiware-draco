@@ -9,16 +9,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToMongo {
-    TestRunner runner;
-    MongoBackend backend;
 
+    private TestRunner runner;
+    private MongoBackend backend;
 
     @Before
     public void setUp() throws Exception {
@@ -36,8 +33,7 @@ public class TestNGSIToMongo {
         runner.setProperty(NGSIToMongo.DATA_EXPIRATION, "0");
         runner.setProperty(NGSIToMongo.COLLECTION_SIZE, "0");
         runner.setProperty(NGSIToMongo.MAX_DOCUMENTS, "0");
-        backend = new MongoBackend(null,
-                runner.getProcessContext().getProperty(NGSIToMongo.DATA_MODEL).getValue());
+        backend = new MongoBackend(null,runner.getProcessContext().getProperty(NGSIToMongo.DATA_MODEL).getValue());
 
     }
 
@@ -315,7 +311,6 @@ public class TestNGSIToMongo {
         runner.setProperty(NGSIToMongo.COLLECTION_PREFIX, "sth_");
         String collectionPrefix = runner.getProcessContext().getProperty(NGSIToMongo.COLLECTION_PREFIX).getValue();
         runner.setProperty(NGSIToMongo.DB_PREFIX, "sth_");
-        String dbPrefix = runner.getProcessContext().getProperty(NGSIToMongo.DB_PREFIX).getValue();
         runner.setProperty(NGSIToMongo.DATA_MODEL, "db-by-entity");
         backend.setDataModel(runner.getProcessContext().getProperty(NGSIToMongo.DATA_MODEL).getValue());
         runner.setProperty(NGSIToMongo.ENABLE_ENCODING, "true");

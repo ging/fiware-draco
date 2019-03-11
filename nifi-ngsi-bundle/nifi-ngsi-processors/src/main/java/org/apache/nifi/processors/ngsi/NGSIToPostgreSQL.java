@@ -278,7 +278,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
     };
 
 
-    final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
+    private final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
         final Map<String, StatementFlowFileEnclosure> sqlToEnclosure = new HashMap<>();
         final List<StatementFlowFileEnclosure> groups = new ArrayList<>();
 
@@ -297,7 +297,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         return groups;
     };
 
-    final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
+    private final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
 
         if (fc.isSupportBatching()) {
 

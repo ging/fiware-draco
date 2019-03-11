@@ -559,6 +559,7 @@ public abstract class HDFSAggregator {
                 break;
             default:
                 query = "";
+                break;
         } // switch
 
         // execute the query
@@ -608,11 +609,11 @@ public abstract class HDFSAggregator {
 
         if (enableEncoding) {
             filePath = NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encodeHDFS(destination, false)
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encodeHDFS(destination, false)
                     + "/" + NGSICharsets.encodeHDFS(destination, false) + ".txt";
         } else {
             filePath = NGSICharsets.encode(service, false, true) + NGSICharsets.encode(servicePath, false, false)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encode(destination, false, true)
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encode(destination, false, true)
                     + "/" + NGSICharsets.encode(destination, false, true) + ".txt";
         } // if else
 
@@ -636,7 +637,7 @@ public abstract class HDFSAggregator {
     public String buildAttrMdFolderPath(String service, String servicePath, String destination, String attrName,
                                            String attrType) {
         return NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                + (servicePath.equals("/") ? "" : "/")
+                + ("/".equals(servicePath) ? "" : "/")
                 + NGSICharsets.encodeHDFS(destination, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrName, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrType, false);
@@ -654,7 +655,7 @@ public abstract class HDFSAggregator {
     public String buildAttrMdFilePath(String service, String servicePath, String destination, String attrName,
                                          String attrType) {
         return NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                + (servicePath.equals("/") ? "" : "/")
+                + ("/".equals(servicePath) ? "" : "/")
                 + NGSICharsets.encodeHDFS(destination, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrName, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrType, false) + "/"
