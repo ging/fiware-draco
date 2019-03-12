@@ -1,8 +1,5 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends.postgresql;
 
-import org.apache.nifi.processors.ngsi.errors.DracoBadContextData;
-import org.apache.nifi.processors.ngsi.errors.DracoPersistenceError;
-import org.apache.nifi.processors.ngsi.errors.DracoRuntimeError;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -63,7 +60,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt = con.createStatement();
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Schema creation error", "SQLException", e.getMessage());
+                throw new Exception("Schema creation error", "SQLException", e.getMessage());
             } // try catch
 
             try {
@@ -71,7 +68,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
                 System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Schema creation error", "SQLException", e.getMessage());
+                throw new Exception("Schema creation error", "SQLException", e.getMessage());
             } // try catch
 
             closePostgreSQLObjects(con, stmt);
@@ -100,7 +97,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt = con.createStatement();
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Table creation error", "SQLException", e.getMessage());
+                throw new Exception("Table creation error", "SQLException", e.getMessage());
             } // try catch
 
             try {
@@ -108,7 +105,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
                 System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Table creation error", "SQLException", e.getMessage());
+                throw new Exception("Table creation error", "SQLException", e.getMessage());
             } // try catch
 
             closePostgreSQLObjects(con, stmt);
@@ -128,7 +125,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
         try {
             stmt = con.createStatement();
         } catch (SQLException e) {
-            throw new DracoRuntimeError("Data insertion error", "SQLException", e.getMessage());
+            throw new Exception("Data insertion error", "SQLException", e.getMessage());
         } // try catch
 
         try {
@@ -136,9 +133,9 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             System.out.println("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (SQLTimeoutException e) {
-            throw new DracoPersistenceError("Data insertion error", "SQLTimeoutException", e.getMessage());
+            throw new Exception("Data insertion error", "SQLTimeoutException", e.getMessage());
         } catch (SQLException e) {
-            throw new DracoBadContextData("Data insertion error", "SQLException", e.getMessage());
+            throw new Exception("Data insertion error", "SQLException", e.getMessage());
         } // try catch
     } // insertContextData
 
@@ -153,7 +150,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 con.close();
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Objects closing error", "SQLException", e.getMessage());
+                throw new Exception("Objects closing error", "SQLException", e.getMessage());
             } // try catch
         } // if
 
@@ -161,7 +158,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                throw new DracoRuntimeError("Objects closing error", "SQLException", e.getMessage());
+                throw new Exception("Objects closing error", "SQLException", e.getMessage());
             } // try catch
         } // if
     } // closePostgreSQLObjects
@@ -216,9 +213,9 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
 
                 return con;
             }  catch (ClassNotFoundException e) {
-                throw new DracoPersistenceError("Connection error", "ClassNotFoundException", e.getMessage());
+                throw new Exception("Connection error", "ClassNotFoundException", e.getMessage());
             } catch (SQLException e) {
-                throw new DracoPersistenceError("Connection error", "SQLException", e.getMessage());
+                throw new Exception("Connection error", "SQLException", e.getMessage());
             } // try catch
         } // getConnection
 
