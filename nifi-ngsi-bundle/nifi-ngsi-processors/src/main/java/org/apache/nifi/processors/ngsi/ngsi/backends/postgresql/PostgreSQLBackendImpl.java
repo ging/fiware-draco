@@ -60,7 +60,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt = con.createStatement();
             } catch (SQLException e) {
-                throw new Exception("Schema creation error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
 
             try {
@@ -68,7 +68,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
                 System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
-                throw new Exception("Schema creation error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
 
             closePostgreSQLObjects(con, stmt);
@@ -97,7 +97,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt = con.createStatement();
             } catch (SQLException e) {
-                throw new Exception("Table creation error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
 
             try {
@@ -105,7 +105,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
                 System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
-                throw new Exception("Table creation error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
 
             closePostgreSQLObjects(con, stmt);
@@ -125,7 +125,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
         try {
             stmt = con.createStatement();
         } catch (SQLException e) {
-            throw new Exception("Data insertion error", "SQLException", e.getMessage());
+            throw new Exception( e.getMessage());
         } // try catch
 
         try {
@@ -133,9 +133,9 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             System.out.println("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (SQLTimeoutException e) {
-            throw new Exception("Data insertion error", "SQLTimeoutException", e.getMessage());
+            throw new Exception(e.getMessage());
         } catch (SQLException e) {
-            throw new Exception("Data insertion error", "SQLException", e.getMessage());
+            throw new Exception(e.getMessage());
         } // try catch
     } // insertContextData
 
@@ -150,7 +150,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 con.close();
             } catch (SQLException e) {
-                throw new Exception("Objects closing error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
         } // if
 
@@ -158,7 +158,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                throw new Exception("Objects closing error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
         } // if
     } // closePostgreSQLObjects
@@ -213,9 +213,9 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
 
                 return con;
             }  catch (ClassNotFoundException e) {
-                throw new Exception("Connection error", "ClassNotFoundException", e.getMessage());
+                throw new Exception(e.getMessage());
             } catch (SQLException e) {
-                throw new Exception("Connection error", "SQLException", e.getMessage());
+                throw new Exception(e.getMessage());
             } // try catch
         } // getConnection
 
