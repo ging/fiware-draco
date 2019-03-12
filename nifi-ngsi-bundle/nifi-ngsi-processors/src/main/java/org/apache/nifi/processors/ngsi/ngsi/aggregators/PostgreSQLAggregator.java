@@ -267,7 +267,7 @@ public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLo
         // everything must be provisioned in advance
       persistenceBackend.insertContextData(schemaName, tableName, fieldNames, fieldValues);
     } catch (Exception e) {
-      throw new Exception("-, " + e.getMessage());
+      throw new Exception(e.getMessage());
     } // try catch
 } // persistAggregation
 
@@ -287,8 +287,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Exc
     } // if else
 
     if (name.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-        throw new Exception("Building schema name '" + name
-                + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
+        throw new Exception();
     } // if
 
     return name;
@@ -327,8 +326,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Exc
         switch(dataModel) {
             case "db-by-service-path":
                 if ("/".equals(servicePath)) {
-                    throw new Exception("Default service path '/' cannot be used with "
-                            + "dm-by-service-path data model");
+                    throw new Exception("Default service path '/' cannot be used with dm-by-service-path data model");
                 } // if
                    
                 name = NGSICharsets.encode(servicePath, true, false);
@@ -340,14 +338,12 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Exc
                                 + NGSICharsets.encode(entityType, false, true);
                 break;
             default:
-                throw new Exception("Unknown data model '" + dataModel
-                            + "'. Please, use DMBYSERVICEPATH or DMBYENTITY");
+                throw new Exception("Unknown data model");
         } // switch
     } // if else
 
     if (name.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-        throw new Exception("Building table name '" + name
-                + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
+        throw new Exception();
     } // if
 
     return name;
