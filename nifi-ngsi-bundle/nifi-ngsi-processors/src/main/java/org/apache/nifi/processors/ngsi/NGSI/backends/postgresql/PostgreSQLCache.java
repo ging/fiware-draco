@@ -2,12 +2,10 @@ package org.apache.nifi.processors.ngsi.NGSI.backends.postgresql;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.apache.nifi.processors.ngsi.log.DracoLogger;
 
 public class PostgreSQLCache {
     
     private HashMap<String, ArrayList<String>> cache = new HashMap<String, ArrayList<String>>();
-    private static final DracoLogger LOGGER = new DracoLogger(PostgreSQLCache.class);
     
     public HashMap<String, ArrayList<String>> getCache() {
         return cache;
@@ -23,19 +21,19 @@ public class PostgreSQLCache {
      * @return True if the schema is in the cache, otherwise false
      */
     public boolean isSchemaInCache(String schemaName) {
-        LOGGER.debug("Checking if the schema (" + schemaName + ") exists");
+        System.out.println("Checking if the schema (" + schemaName + ") exists");
         if (!cache.isEmpty()) {
             for (String schema : cache.keySet()) {
                 if (schema.equals(schemaName)) {
-                    LOGGER.debug("Schema (" + schemaName + ") exists in Cache");
+                    System.out.println("Schema (" + schemaName + ") exists in Cache");
                     return true;
                 } // if
             } // for
 
-            LOGGER.debug("Schema (" + schemaName + ") doesnt' exist in Cache");
+            System.out.println("Schema (" + schemaName + ") doesnt' exist in Cache");
             return false;
         } else {
-            LOGGER.debug("Cache is empty");
+            System.out.println("Cache is empty");
             return false;
         } // if else
 
@@ -54,24 +52,24 @@ public class PostgreSQLCache {
                 if (schema.equals(schemaName)) {
                     ArrayList<String> tables = cache.get(schemaName);
 
-                    LOGGER.info("Checking if the table (" + tableName + ") belongs to (" + schemaName + ")");
+                    System.out.println("Checking if the table (" + tableName + ") belongs to (" + schemaName + ")");
 
                     if (tables.contains(tableName)) {
-                        LOGGER.debug("Table (" + tableName + ") was found in the specified schema ("
+                        System.out.println("Table (" + tableName + ") was found in the specified schema ("
                                 + schemaName + ")");
                         return true;
                     } else {
-                        LOGGER.debug("Table (" + tableName + ") wasn't found in the specified schema ("
+                        System.out.println("Table (" + tableName + ") wasn't found in the specified schema ("
                                 + schemaName + ")");
                         return false;
                     } // if else
                 } // if
             } // for
             
-            LOGGER.debug("Schema (" + schemaName + ") wasn't found in Cache");
+            System.out.println("Schema (" + schemaName + ") wasn't found in Cache");
             return false;
         } else {
-            LOGGER.debug("Cache is empty");
+            System.out.println("Cache is empty");
             return false;
         }
     } // isTableInCachedSchema
@@ -82,7 +80,7 @@ public class PostgreSQLCache {
      */
     public void persistSchemaInCache(String schemaName) {
         cache.put(schemaName, new ArrayList<String>());
-        LOGGER.debug("Schema (" + schemaName + ") added to cache");
+        System.out.println("Schema (" + schemaName + ") added to cache");
     } // persistSchemaInCache
     
     /**
@@ -96,7 +94,7 @@ public class PostgreSQLCache {
                 ArrayList<String> tableNames = cache.get(schemaName);
                 tableNames.add(tableName);
                 cache.put(schemaName, tableNames);
-                LOGGER.debug("Table (" + tableName + ") added to schema (" + schemaName + ") in cache");
+                System.out.println("Table (" + tableName + ") added to schema (" + schemaName + ") in cache");
             } // if
         } // for
     } // persistTableInCache
