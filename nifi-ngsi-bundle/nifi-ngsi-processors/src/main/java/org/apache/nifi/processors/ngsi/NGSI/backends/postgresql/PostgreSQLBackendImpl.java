@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
-import org.apache.nifi.processors.ngsi.log.DracoLogger;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -17,7 +16,6 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
     private static final String DRIVER_NAME = "org.postgresql.Driver";
     private PostgreSQLDriver driver;
     private PostgreSQLCache cache = null;
-    private static final DracoLogger LOGGER = new DracoLogger(PostgreSQLBackendImpl.class);
 
     /**
      * Constructor.
@@ -29,7 +27,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
     public PostgreSQLBackendImpl(String postgresqlHost, String postgresqlPort,
             String postgresqlUsername, String postgresqlPassword) {
         cache = new PostgreSQLCache();
-        LOGGER.info("PostgreSQL cache created succesfully");
+        System.out.println("PostgreSQL cache created succesfully");
        
         driver = new PostgreSQLDriver(postgresqlHost, postgresqlPort, postgresqlUsername,
                 postgresqlPassword);
@@ -70,7 +68,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
 
             try {
                 String query = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
-                LOGGER.debug("Executing SQL query '" + query + "'");
+                System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
                 throw new DracoRuntimeError("Schema creation error", "SQLException", e.getMessage());
@@ -107,7 +105,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
 
             try {
                 String query = "CREATE TABLE IF NOT EXISTS " + schemaName + "." + tableName + " " + typedFieldNames;
-                LOGGER.debug("Executing SQL query '" + query + "'");
+                System.out.println("Executing SQL query '" + query + "'");
                 stmt.executeUpdate(query);
             } catch (SQLException e) {
                 throw new DracoRuntimeError("Table creation error", "SQLException", e.getMessage());
@@ -135,7 +133,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
 
         try {
             String query = "INSERT INTO " + schemaName + "." + tableName + " " + fieldNames + " VALUES " + fieldValues;
-            LOGGER.debug("Executing SQL query '" + query + "'");
+            System.out.println("Executing SQL query '" + query + "'");
             stmt.executeUpdate(query);
         } catch (SQLTimeoutException e) {
             throw new DracoPersistenceError("Data insertion error", "SQLTimeoutException", e.getMessage());
@@ -261,7 +259,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
             props.setProperty("sslmode", "disable");
             props.setProperty("charSet", "UTF-8");
 
-            LOGGER.debug("Connecting to " + url);
+            System.out.println("Connecting to " + url);
             return DriverManager.getConnection(url, props);
         } // createConnection
     } // PostgreSQLDriver
