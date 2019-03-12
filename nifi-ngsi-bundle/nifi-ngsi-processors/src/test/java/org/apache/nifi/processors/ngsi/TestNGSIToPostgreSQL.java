@@ -293,8 +293,6 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
-        String builtTableName = aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
-        String expecetedTableName = "";
 
         try {
             aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
