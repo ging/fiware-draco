@@ -258,58 +258,6 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             }
         }
     };
-
-    private GroupingFunction groupFlowFilesBySQL = (context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result) -> {
-
-    };
-
-
-    private final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
-        final Map<String, StatementFlowFileEnclosure> sqlToEnclosure = new HashMap<>();
-        final List<StatementFlowFileEnclosure> groups = new ArrayList<>();
-
-        // There are three patterns:
-        // 1. Support batching: An enclosure has multiple FlowFiles being executed in a batch operation
-        // 2. Obtain keys: An enclosure has multiple FlowFiles, and each FlowFile is executed separately
-        // 3. Fragmented transaction: One FlowFile per Enclosure?
-        if (fc.obtainKeys) {
-            groupFlowFilesBySQL.apply(context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result);
-        }
-
-        else {
-            groupFlowFilesBySQLBatch.apply(context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result);
-        }
-
-        return groups;
-    };
-
-    private final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
-
-        if (fc.isSupportBatching()) {
-
-            // We have PreparedStatement that have batches added to them.
-            // We need to execute each batch and close the PreparedStatement.
-            exceptionHandler.execute(fc, enclosure, input -> {
-                try (final PreparedStatement stmt = enclosure.getCachedStatement(conn)) {
-                    stmt.executeBatch();
-                    result.routeTo(enclosure.getFlowFiles(), REL_SUCCESS);
-                }
-            }, onBatchUpdateError(context, session, result));
-
-        } else {
-            for (final FlowFile flowFile : enclosure.getFlowFiles()) {
-
-                final StatementFlowFileEnclosure targetEnclosure
-                        = enclosure instanceof FragmentedEnclosure
-                        ? ((FragmentedEnclosure) enclosure).getTargetEnclosure(flowFile)
-                        : enclosure;
-
-            } // for
-
-        }catch (Exception e){
-        getLogger().error(e.toString());
-        }
-    }
     @Override
     public void onTrigger(final ProcessContext context, final ProcessSession session) throws ProcessException {
         final FlowFile flowFile = session.get();
