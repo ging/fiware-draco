@@ -320,14 +320,14 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Exc
                          + NGSICharsets.encodePostgreSQL(entityType);
                 break;
             default:
-                throw new Exception("Unknown data model '" + dataModel.toString()
+                throw new Exception("Unknown data model '" + dataModel
                         + "'. Please, use dm-by-service-path or dm-by-entity");
         } // switch
     } else {
         switch(dataModel) {
             case "db-by-service-path":
                 if ("/".equals(servicePath)) {
-                    throw new DracoBadConfiguration("Default service path '/' cannot be used with "
+                    throw new Exception("Default service path '/' cannot be used with "
                             + "dm-by-service-path data model");
                 } // if
                    
@@ -340,7 +340,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Exc
                                 + NGSICharsets.encode(entityType, false, true);
                 break;
             default:
-                throw new DracoBadConfiguration("Unknown data model '" + dataModel
+                throw new Exception("Unknown data model '" + dataModel
                             + "'. Please, use DMBYSERVICEPATH or DMBYENTITY");
         } // switch
     } // if else
