@@ -40,6 +40,7 @@ public class TestNGSIToPostgreSQL {
         aggregator = new PostgreSQLAggregator(){
             @Override
             public void aggregate(long creationTime, Entity entity, String fiwareServicePath) {
+                // aggregate function of class PostgreSQLAggregator
             }
         };
     }
