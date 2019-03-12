@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToPostgreSQL {
-    TestRunner runner;
-    PostgreSQLBackendImpl backend;
-    PostgreSQLAggregator aggregator;
+    private TestRunner runner;
+    private PostgreSQLBackendImpl backend;
+    private PostgreSQLAggregator aggregator;
 
 
     @Before
