@@ -207,7 +207,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
                         con.close();
                     } // if
 
-                    con = createConnection(schemaName);
+                    con = createConnection();
                     connections.put(schemaName, con);
                 } // if
 
@@ -242,7 +242,7 @@ public class PostgreSQLBackendImpl implements PostgreSQLBackend {
          * @return A PostgreSQL connection
          * @throws Exception
          */
-        private Connection createConnection(String schemaName)
+        private Connection createConnection()
             throws Exception {
             // dynamically load the PostgreSQL JDBC driver
             Class.forName(DRIVER_NAME);
