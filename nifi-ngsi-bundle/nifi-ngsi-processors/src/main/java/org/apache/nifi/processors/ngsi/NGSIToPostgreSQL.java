@@ -255,9 +255,9 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
                 }
             }catch (Exception e){
                 getLogger().error(e.toString());
-            }
         }
-    };
+    }
+
     @Override
     public void onTrigger(final ProcessContext context, final ProcessSession session) throws ProcessException {
         final FlowFile flowFile = session.get();
