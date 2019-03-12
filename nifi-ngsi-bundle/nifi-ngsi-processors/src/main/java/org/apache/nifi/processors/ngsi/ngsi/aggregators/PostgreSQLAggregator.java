@@ -2,11 +2,8 @@ package org.apache.nifi.processors.ngsi.ngsi.aggregators;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import org.apache.nifi.processors.ngsi.log.DracoLogger;
 import org.apache.nifi.processors.ngsi.ngsi.backends.postgresql.PostgreSQLBackendImpl;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
-import org.apache.nifi.processors.ngsi.errors.DracoBadConfiguration;
-import org.apache.nifi.processors.ngsi.errors.DracoPersistenceError;
 
 public abstract class PostgreSQLAggregator {
   
@@ -21,8 +18,6 @@ public abstract class PostgreSQLAggregator {
     protected String tableName;
     protected String typedFieldNames;
     protected String fieldNames;
-  
-    private static final DracoLogger LOGGER = new DracoLogger(PostgreSQLAggregator.class);
 
     public PostgreSQLAggregator() {
         aggregation = "";
@@ -56,7 +51,7 @@ public abstract class PostgreSQLAggregator {
         return fieldNames;
     } // getFieldNames
 
-    public void initialize(String fiwareService,String fiwareServicePath, Entity entity,String dataModel, boolean enableEncoding) throws DracoBadConfiguration {
+    public void initialize(String fiwareService,String fiwareServicePath, Entity entity,String dataModel, boolean enableEncoding) throws Exception {
         service = fiwareService;
         servicePath = fiwareServicePath;
         destination = entity.getEntityId();
@@ -75,7 +70,7 @@ public abstract class PostgreSQLAggregator {
 private class RowAggregator extends PostgreSQLAggregator {
 
     @Override
-    public void initialize(String fiwareService, String fiwareServicePath, Entity entity, String dataModel, boolean enableEncoding) throws DracoBadConfiguration {
+    public void initialize(String fiwareService, String fiwareServicePath, Entity entity, String dataModel, boolean enableEncoding) throws Exception {
         super.initialize(fiwareService, fiwareServicePath, entity, dataModel, enableEncoding);
         typedFieldNames = "("
                 + NGSIConstants.RECV_TIME_TS + " bigint,"
@@ -110,14 +105,14 @@ private class RowAggregator extends PostgreSQLAggregator {
         // get the event body
         String entityId = entity.getEntityId();
         String entityType = entity.getEntityType();
-        LOGGER.debug("Processing context element (id=" + entityId + ", type="
+        System.out.println("Processing context element (id=" + entityId + ", type="
                     + entityType + ")");
 
         // iterate on all this context element attributes, if there are attributes
         ArrayList<Attributes> attributes = entity.getEntityAttrs();
 
         if (attributes == null || attributes.isEmpty()) {
-            LOGGER.warn("No attributes within the notified entity, nothing is done (id=" + entityId
+            System.out.println("No attributes within the notified entity, nothing is done (id=" + entityId
                         + ", type=" + entityType + ")");
             return;
         } // if
@@ -127,7 +122,7 @@ private class RowAggregator extends PostgreSQLAggregator {
             String attrType = attribute.getAttrType();
             String attrValue = attribute.getAttrValue();
             String attrMetadata = attribute.getMetadataString();
-            LOGGER.debug("Processing context attribute (name=" + attrName + ", type="
+            System.out.println("Processing context attribute (name=" + attrName + ", type="
                         + attrType + ")");
             // create a line and aggregate it
             String row = "('"
@@ -161,7 +156,7 @@ private class RowAggregator extends PostgreSQLAggregator {
 private class ColumnAggregator extends PostgreSQLAggregator {
 
     @Override
-    public void initialize(String fiwareService,String fiwareServicePath, Entity entity, String dataModel, boolean enableEncoding) throws DracoBadConfiguration {
+    public void initialize(String fiwareService,String fiwareServicePath, Entity entity, String dataModel, boolean enableEncoding) throws Exception {
         super.initialize(fiwareService, fiwareServicePath, entity, dataModel, enableEncoding);
 
         // particulat initialization
@@ -200,14 +195,14 @@ private class ColumnAggregator extends PostgreSQLAggregator {
         // get the getRecvTimeTs body
         String entityId =  entity.getEntityId();
         String entityType = entity.getEntityType();
-        LOGGER.debug("Processing context element (id=" + entityId + ", type="
+        System.out.println("Processing context element (id=" + entityId + ", type="
                     + entityType + ")");
 
         // iterate on all this context element attributes, if there are attributes
         ArrayList<Attributes> attributes = entity.getEntityAttrs();
 
         if (attributes == null || attributes.isEmpty()) {
-            LOGGER.warn("No attributes within the notified entity, nothing is done (id=" + entityId
+            System.out.println("No attributes within the notified entity, nothing is done (id=" + entityId
                         + ", type=" + entityType + ")");
             return;
         } // if
@@ -219,7 +214,7 @@ private class ColumnAggregator extends PostgreSQLAggregator {
             String attrType = attribute.getAttrType();
             String attrValue = attribute.getAttrValue();
             String attrMetadata = attribute.getMetadataString();
-            LOGGER.debug("Processing context attribute (name=" + attrName + ", type="
+            System.out.println("Processing context attribute (name=" + attrName + ", type="
                         + attrType + ")");
 
             // create part of the column with the current attribute (a.k.a. a column)
@@ -251,7 +246,7 @@ public PostgreSQLAggregator getAggregator(String rowAttrPersistence) {
     return null;
 } // getAggregator
 
-public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLowercase, PostgreSQLBackendImpl persistenceBackend) throws DracoPersistenceError {
+public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLowercase, PostgreSQLBackendImpl persistenceBackend) throws Exception {
     //String aggregation = aggregator.getAggregation();
     String typedFieldNames = aggregator.getTypedFieldNames();
     String fieldNames = aggregator.getFieldNames();
@@ -259,7 +254,7 @@ public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLo
     String schemaName = aggregator.getSchemaName(enableLowercase);
     String tableName = aggregator.getTableName(enableLowercase);
 
-    LOGGER.info("Persisting data at NGSIPostgreSQLSink. Schema ("
+    System.out.println("Persisting data at NGSIPostgreSQLSink. Schema ("
                 + schemaName + "), Table (" + tableName + "), Fields (" + fieldNames + "), Values ("
                 + fieldValues + ")");
      
@@ -272,7 +267,7 @@ public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLo
         // everything must be provisioned in advance
       persistenceBackend.insertContextData(schemaName, tableName, fieldNames, fieldValues);
     } catch (Exception e) {
-      throw new DracoPersistenceError("-, " + e.getMessage());
+      throw new Exception("-, " + e.getMessage());
     } // try catch
 } // persistAggregation
 
@@ -282,7 +277,7 @@ public void persistAggregation(PostgreSQLAggregator aggregator, boolean enableLo
  * @return The PostgreSQL DB name
  * @throws DracoBadConfiguration
  */
-public String buildSchemaName(String service, boolean enableEncoding) throws DracoBadConfiguration {
+public String buildSchemaName(String service, boolean enableEncoding) throws Exception {
     String name;
         
     if (enableEncoding) {
@@ -292,7 +287,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
     } // if else
 
     if (name.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-        throw new DracoBadConfiguration("Building schema name '" + name
+        throw new Exception("Building schema name '" + name
                 + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
     } // if
 
@@ -307,7 +302,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
  * @return The PostgreSQL table name
  * @throws DracoBadConfiguration
  */
- public String buildTableName(String servicePath, Entity entity, String dataModel, boolean enableEncoding) throws DracoBadConfiguration {
+ public String buildTableName(String servicePath, Entity entity, String dataModel, boolean enableEncoding) throws Exception {
     String name;
     String entityId = entity.getEntityId();
     String entityType = entity.getEntityType();
@@ -325,7 +320,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
                          + NGSICharsets.encodePostgreSQL(entityType);
                 break;
             default:
-                throw new DracoBadConfiguration("Unknown data model '" + dataModel.toString()
+                throw new Exception("Unknown data model '" + dataModel.toString()
                         + "'. Please, use dm-by-service-path or dm-by-entity");
         } // switch
     } else {
@@ -351,7 +346,7 @@ public String buildSchemaName(String service, boolean enableEncoding) throws Dra
     } // if else
 
     if (name.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-        throw new DracoBadConfiguration("Building table name '" + name
+        throw new Exception("Building table name '" + name
                 + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
     } // if
 
