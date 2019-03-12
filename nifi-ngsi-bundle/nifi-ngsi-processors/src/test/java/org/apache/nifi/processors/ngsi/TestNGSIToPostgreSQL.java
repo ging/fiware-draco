@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import java.util.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToPostgreSQL {
@@ -24,9 +24,6 @@ public class TestNGSIToPostgreSQL {
     @Before
     public void setUp() throws Exception {
         //Mock the DBCP Controller Service so we can control the Results
-
-        final Map<String, String> dbcpProperties = new HashMap<>();
-
         runner = TestRunners.newTestRunner(NGSIToMySQL.class);
         runner.setProperty(NGSIToPostgreSQL.PostgreSQL_HOST,"127.0.0.1");
         runner.setProperty(NGSIToPostgreSQL.PostgreSQL_PORT,"5432");
@@ -296,14 +293,18 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
+        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
+        String expecetedTableName = "";
 
         try {
             aggregator.buildTableName(servicePath, entity, dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - The root service path was not detected as not valid");
+                    + "-  OK  - The root service path was detected as not valid");
+
         } catch (Exception e) {
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "-  OK  - The root service path was detected as not valid");
+                    + "- FAIL - The root service path was not detected as not valid");
+
         } // try catch
     } // testBuildTableNameRootServicePathDataModelByServicePathOldEncoding
 
@@ -444,9 +445,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
             aggregator.buildSchemaName(service,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
                     + "- FAIL - A schema name length greater than 63 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
                     + "-  OK  - A schema name length greater than 63 characters has been detected");
         } // try catch
@@ -475,9 +474,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
             aggregator.buildTableName(servicePath,entity,dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch
@@ -506,9 +503,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
             aggregator.buildTableName(servicePath,entity,dataModel,enableEncoding);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToPostgreSQL.buildTableName]"
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch

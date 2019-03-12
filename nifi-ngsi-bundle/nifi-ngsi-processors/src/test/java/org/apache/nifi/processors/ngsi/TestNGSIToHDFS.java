@@ -1,17 +1,17 @@
 package org.apache.nifi.processors.ngsi;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.apache.nifi.processors.ngsi.NGSI.aggregators.HDFSAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.aggregators.HDFSAggregator;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class TestNGSIToHDFS {
-    TestRunner runner;
-    HDFSAggregator aggregator;
+    private TestRunner runner;
+    private HDFSAggregator aggregator;
 
 
     @Before
@@ -415,11 +415,9 @@ public class TestNGSIToHDFS {
 
         try {
             aggregator.buildFolderPath(service, servicePath, destination,enableEncoding);
-            System.out.println("[NGSIToHDFS.buildFolderPath]"
+            fail("[NGSIToHDFS.buildFolderPath]"
                     + "- FAIL - A folder path length greater than 255 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToHDFS.buildFolderPath]"
                     + "-  OK  - A folder path length greater than 255 characters has been detected");
         } // try catch

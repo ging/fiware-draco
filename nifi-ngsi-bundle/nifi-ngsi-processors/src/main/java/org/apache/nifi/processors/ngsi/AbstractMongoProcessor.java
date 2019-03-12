@@ -33,11 +33,11 @@ import org.apache.nifi.processor.AbstractProcessor;
 import org.apache.nifi.processor.ProcessContext;
 import org.apache.nifi.processor.ProcessSession;
 import org.apache.nifi.processor.util.StandardValidators;
-import org.apache.nifi.processors.ngsi.NGSI.aggregators.MongoAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.backends.MongoBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
+import org.apache.nifi.processors.ngsi.ngsi.aggregators.MongoAggregator;
+import org.apache.nifi.processors.ngsi.ngsi.backends.MongoBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 import org.apache.nifi.security.util.SslContextFactory;
 import org.apache.nifi.ssl.SSLContextService;
 import javax.net.ssl.SSLContext;
@@ -47,16 +47,11 @@ import java.util.List;
 
 
 public abstract class AbstractMongoProcessor extends AbstractProcessor {
-    static final String WRITE_CONCERN_ACKNOWLEDGED = "ACKNOWLEDGED";
-    static final String WRITE_CONCERN_UNACKNOWLEDGED = "UNACKNOWLEDGED";
-    static final String WRITE_CONCERN_FSYNCED = "FSYNCED";
-    static final String WRITE_CONCERN_JOURNALED = "JOURNALED";
-    static final String WRITE_CONCERN_REPLICA_ACKNOWLEDGED = "REPLICA_ACKNOWLEDGED";
-    static final String WRITE_CONCERN_MAJORITY = "MAJORITY";
+
     protected MongoBackend mongoClient;
     protected MongoClient mongoClientSSL;
 
-    static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
         .name("Mongo URI")
         .displayName("Mongo URI")
         .description("MongoURI, typically of the form: mongodb://host1[:port1][,host2[:port2],...]")
@@ -65,7 +60,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
 
-    static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
             .name("data-model")
             .displayName("Data Model")
             .description("The Data model for creating the tables when an event have been received you can choose between" +
@@ -76,7 +71,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
             .name("attr-persistence")
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
@@ -86,7 +81,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DB_PREFIX = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DB_PREFIX = new PropertyDescriptor.Builder()
             .name("db-prefix")
             .displayName("Database Prefix")
             .description("TA configured prefix is added")
@@ -95,7 +90,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor COLLECTION_PREFIX = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor COLLECTION_PREFIX = new PropertyDescriptor.Builder()
             .name("collection-prefix")
             .displayName("Collection Prefix")
             .description("A configured prefix is added")
@@ -104,7 +99,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
             .displayName("NGSI Version")
             .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD. NGSI-LD is not supported yet ")
@@ -114,7 +109,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
             .name("default-service")
             .displayName("Default Service")
             .description("Default Fiware Service for building the database name")
@@ -123,7 +118,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
             .name("default-service-path")
             .displayName("Default Service path")
             .description("Default Fiware ServicePath for building the table name")
@@ -132,7 +127,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DATA_EXPIRATION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DATA_EXPIRATION = new PropertyDescriptor.Builder()
             .name("data-expiration")
             .displayName("Data Expiration")
             .description("Collections will be removed if older than the value specified in seconds. The reference of time is the one stored in the recvTime property. Set to 0 if not wanting this policy. ")
@@ -141,7 +136,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.INTEGER_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor COLLECTION_SIZE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor COLLECTION_SIZE = new PropertyDescriptor.Builder()
             .name("collection-size")
             .displayName("Collection Size")
             .description("The oldest data (according to insertion time) will be removed if the size of the data collection gets bigger than the value specified in bytes. Notice that the size-based truncation policy takes precedence over the time-based one. Set to 0 if not wanting this policy. Minimum value (different than 0) is 4096 bytes.")
@@ -150,7 +145,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.INTEGER_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor MAX_DOCUMENTS = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor MAX_DOCUMENTS = new PropertyDescriptor.Builder()
             .name("max-documents")
             .displayName("Max documents")
             .description("The oldest data (according to insertion time) will be removed if the number of documents in the data collections goes beyond the specified value. Set to 0 if not wanting this policy.")
@@ -159,7 +154,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .addValidator(StandardValidators.INTEGER_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
             .description("true or false, true applies the new encoding, false applies the old encoding.")
@@ -168,7 +163,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
             .name("enable-lowercase")
             .displayName("Enable Lowercase")
             .description("true or false, true for creating the Schema and Tables name with lowercase.")
@@ -197,7 +192,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .defaultValue("REQUIRED")
         .build();
 
-    static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .displayName("Batch Size")
             .description("The number of elements returned from the server in one batch.")
@@ -206,7 +201,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .defaultValue("100")
             .build();
 
-    static final PropertyDescriptor CHARSET = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor CHARSET = new PropertyDescriptor.Builder()
             .name("mongo-charset")
             .displayName("Character Set")
             .description("Specifies the character set of the document data.")
@@ -216,7 +211,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .expressionLanguageSupported(ExpressionLanguageScope.FLOWFILE_ATTRIBUTES)
             .build();
 
-    static List<PropertyDescriptor> descriptors = new ArrayList<>();
+    protected static List<PropertyDescriptor> descriptors = new ArrayList<>();
 
     static {
         descriptors.add(URI);

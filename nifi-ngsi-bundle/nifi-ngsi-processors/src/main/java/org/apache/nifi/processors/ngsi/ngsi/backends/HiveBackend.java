@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends;
+package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -167,7 +167,7 @@ public class HiveBackend {
      * @throws Exception
      */
     private Connection getConnection() throws Exception {
-        if (hiveServerVersion.equals("1")) {
+        if ("1".equals(hiveServerVersion)) {
             // dynamically load the Hive JDBC driver
             Class.forName(DRIVERNAME1);
 
@@ -176,7 +176,7 @@ public class HiveBackend {
                     + "&password=XXXXXXXXXX");
             return DriverManager.getConnection("jdbc:hive://" + hiveServer + ":" + hivePort + "/default?user="
                     + hadoopUser + "&password=" + hadoopPassword);
-        } else if (hiveServerVersion.equals("2")) {
+        } else if ("2".equals(hiveServerVersion)) {
             // dynamically load the Hive JDBC driver
             Class.forName(DRIVERNAME2);
 

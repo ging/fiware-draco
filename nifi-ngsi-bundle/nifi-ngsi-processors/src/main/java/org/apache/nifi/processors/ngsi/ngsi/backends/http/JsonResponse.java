@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends.http;
+package org.apache.nifi.processors.ngsi.ngsi.backends.http;
 
 import org.apache.http.Header;
 import org.json.simple.JSONObject;

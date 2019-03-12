@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends;
+package org.apache.nifi.processors.ngsi.ngsi.backends;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
@@ -8,22 +8,18 @@ import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import com.mongodb.util.JSON;
-import org.apache.nifi.processors.ngsi.NGSI.utils.CommonConstants;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSICharsets;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIConstants;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.CommonConstants;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSICharsets;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants;
 import org.bson.Document;
 
 
@@ -340,6 +336,7 @@ public class MongoBackend {
                         .append("points.offset", offset);
                 break;
             default:
+                break;
                 // this will never be reached
         } // switch
 
@@ -502,6 +499,7 @@ public class MongoBackend {
             default:
                 // should never be reached
                 return null;
+
         } // switch
 
         GregorianCalendar gc = new GregorianCalendar(year, month, day, hour, minute, second);
@@ -538,6 +536,7 @@ public class MongoBackend {
             default:
                 // should never be reached
                 offset = 0;
+                break;
         } // switch
 
         return offset;
@@ -548,7 +547,7 @@ public class MongoBackend {
      * @param fiwareService
      * @return
      */
-    public String buildDbName(String fiwareService,boolean enableEncoding,String dbPrefix) throws Exception {
+    public String buildDbName(String fiwareService,boolean enableEncoding,String dbPrefix) throws MongoException {
         String dbName;
 
         if (enableEncoding) {
@@ -558,7 +557,7 @@ public class MongoBackend {
         } // if else
 
         if (dbName.length() > NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES) {
-            throw new Exception ("Building database name '" + dbName + "' and its length is greater "
+            throw new MongoException ("Building database name '" + dbName + "' and its length is greater "
                     + "than " + NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES);
         } // if
 
@@ -599,7 +598,7 @@ public class MongoBackend {
                             + NGSICharsets.encodeMongoDBCollection(attribute);
                     break;
                 default:
-                    System.out.println("Unknown data model '" + dataModel.toString()
+                    System.out.println("Unknown data model '" + dataModel
                             + "'. Please, use dm-by-service-path, dm-by-entity or dm-by-attribute");
             } // switch
         } else {
@@ -621,11 +620,12 @@ public class MongoBackend {
                 default:
                     // this should never be reached
                     collectionName = null;
+                    break;
             } // switch
         } // else
 
         if (collectionName.getBytes().length > NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES) {
-            throw new Exception("Building collection name '" + collectionName + "' and its length is "
+            throw new MongoException("Building collection name '" + collectionName + "' and its length is "
                     + "greater than " + NGSIConstants.MONGO_DB_MAX_NAMESPACE_SIZE_IN_BYTES);
         } // if
 

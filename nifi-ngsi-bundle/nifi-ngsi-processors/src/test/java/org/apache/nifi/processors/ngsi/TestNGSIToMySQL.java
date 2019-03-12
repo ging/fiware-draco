@@ -1,8 +1,8 @@
 package org.apache.nifi.processors.ngsi;
 
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
-import org.apache.nifi.processors.ngsi.NGSI.backends.MySQLBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.backends.MySQLBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
@@ -10,23 +10,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import java.util.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.*;
 
 
 @RunWith(JUnit4.class)
 public class TestNGSIToMySQL {
 
-    TestRunner runner;
-    MySQLBackend backend;
-
+   private TestRunner runner;
+   private MySQLBackend backend;
 
     @Before
    public void setUp() throws Exception {
-        //Mock the DBCP Controller Service so we can control the Results
-
-        final Map<String, String> dbcpProperties = new HashMap<>();
 
         runner = TestRunners.newTestRunner(NGSIToMySQL.class);
         runner.setProperty(NGSIToMySQL.CONNECTION_POOL, "dbcp");
@@ -136,6 +131,7 @@ public class TestNGSIToMySQL {
         } // try catch
     } // testBuildTableNameNonRootServicePathDataModelByServicePathNoEncoding
 
+    @Test
     public void testBuildTableNameNonRootServicePathDataModelByServicePathEncoding() throws Exception {
         System.out.println("[NGSIToMySQL.buildTableName]\")\n" +
                 "                + \"-------- When encoding and when a non root service-path is notified/defaulted and data_model is \"\n" +
@@ -255,9 +251,11 @@ public class TestNGSIToMySQL {
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
+        String expecetedTableName = "";
+        String builtTableName = backend.buildTableName(servicePath, entity,dataModel,enableEncoding,enableLowercase);
 
         try {
-            backend.buildTableName(servicePath, entity,dataModel,enableEncoding,enableLowercase);
+            assertEquals(expecetedTableName, builtTableName);
             System.out.println("[NGSIToMySQL.buildTableName]"
                     + "- FAIL - The table name was built when data_model='dm-by-service-path' and using the root "
                     + "service path");
@@ -386,12 +384,9 @@ public class TestNGSIToMySQL {
 
         try {
             backend.buildDbName(service,enableEncoding,enableLowercase);
-            System.out.println(backend.buildDbName(service,enableEncoding,enableLowercase));
-            System.out.println("[NGSIToMySQL.buildDbName]"
+            fail("[NGSIToMySQL.buildDbName]"
                     + "- FAIL - A database name length greater than 64 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMySQL.buildDbName]"
                     + "-  OK  - A database name length greater than 64 characters has been detected");
         } // try catch
@@ -411,11 +406,9 @@ public class TestNGSIToMySQL {
 
         try {
             backend.buildTableName(servicePath, entity,dataModel,enableEncoding,enableLowercase);
-            System.out.println("[NGSIToMySQL.buildTableName]"
+            fail("[NGSIToMySQL.buildTableName]"
                     + "- FAIL - A table name length greater than 64 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMySQL.buildTableName]"
                     + "-  OK  - A table name length greater than 64 characters has been detected");
         } // try catch
@@ -435,11 +428,9 @@ public class TestNGSIToMySQL {
 
         try {
             backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase);
-            System.out.println("[NGSIToMySQL.buildTableName]"
+            fail("[NGSIToMySQL.buildTableName]"
                     + "- FAIL - A table name length greater than 64 characters has not been detected");
-            assertTrue(false);
         } catch (Exception e) {
-            assertTrue(true);
             System.out.println("[NGSIToMySQL.buildTableName]"
                     + "-  OK  - A table name length greater than 64 characters has been detected");
         } // try catch

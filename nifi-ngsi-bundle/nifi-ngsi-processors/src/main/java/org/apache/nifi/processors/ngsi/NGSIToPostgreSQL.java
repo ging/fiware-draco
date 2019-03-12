@@ -42,6 +42,7 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 })
 
 
+
 public class NGSIToPostgreSQL extends AbstractProcessor {
     static final PropertyDescriptor PostgreSQL_HOST = new PropertyDescriptor.Builder()
         .name("PostgreSQL Host")
@@ -77,7 +78,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
 
-    static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
             .name("data-model")
             .displayName("Data Model")
             .description("The Data model for creating the tables when an event have been received you can choose between" +
@@ -88,7 +89,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ATTR_PERSISTENCE = new PropertyDescriptor.Builder()
             .name("attr-persistence")
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
@@ -98,7 +99,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
             .displayName("NGSI Version")
             .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD. NGSI-LD is not supported yet ")
@@ -108,7 +109,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
             .name("default-service")
             .displayName("Default Service")
             .description("Default Fiware Service for building the database name")
@@ -117,7 +118,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
             .name("default-service-path")
             .displayName("Default Service path")
             .description("Default Fiware ServicePath for building the table name")
@@ -126,7 +127,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
             .description("true or false, true applies the new encoding, false applies the old encoding.")
@@ -135,7 +136,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
             .name("enable-lowercase")
             .displayName("Enable Lowercase")
             .description("true or false, true for creating the Schema and Tables name with lowercase.")
@@ -144,7 +145,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor TRANSACTION_TIMEOUT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor TRANSACTION_TIMEOUT = new PropertyDescriptor.Builder()
             .name("Transaction Timeout")
             .description("If the <Support Fragmented Transactions> property is set to true, specifies how long to wait for all FlowFiles for a particular fragment.identifier attribute "
                     + "to arrive before just transferring all of the FlowFiles with that identifier to the 'failure' relationship")
@@ -152,7 +153,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .addValidator(StandardValidators.TIME_PERIOD_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .description("The preferred number of FlowFiles to put to the database in a single transaction")
             .required(true)
@@ -160,15 +161,15 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             .defaultValue("10")
             .build();
 
-    static final Relationship REL_SUCCESS = new Relationship.Builder()
+    protected static final Relationship REL_SUCCESS = new Relationship.Builder()
             .name("success")
             .description("A FlowFile is routed to this relationship after the database is successfully updated")
             .build();
-    static final Relationship REL_RETRY = new Relationship.Builder()
+    protected static final Relationship REL_RETRY = new Relationship.Builder()
             .name("retry")
             .description("A FlowFile is routed to this relationship if the database cannot be updated but attempting the operation again may succeed")
             .build();
-    static final Relationship REL_FAILURE = new Relationship.Builder()
+    protected static final Relationship REL_FAILURE = new Relationship.Builder()
             .name("failure")
             .description("A FlowFile is routed to this relationship if the database cannot be updated and retrying the operation will also fail, "
                     + "such as an invalid query or an integrity constraint violation")
@@ -247,11 +248,61 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
                     public void aggregate(long creationTime, Entity entity, String fiwareServicePath) {
                     }
                 };
-
                 aggregator = aggregator.getAggregator(attrPersistence);
                 aggregator.initialize(fiwareService, fiwareServicePath , entity, dataModel, enableEncoding);
                 aggregator.aggregate(creationTime, entity , fiwareServicePath);
                 aggregator.persistAggregation(aggregator, enableLowercase, persistenceBackend );
+                }
+            }catch (Exception e){
+                getLogger().error(e.toString());
+            }
+        }
+    };
+
+    private GroupingFunction groupFlowFilesBySQL = (context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result) -> {
+
+    };
+
+
+    private final PutGroup.GroupFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> groupFlowFiles = (context, session, fc, conn, flowFiles, result) -> {
+        final Map<String, StatementFlowFileEnclosure> sqlToEnclosure = new HashMap<>();
+        final List<StatementFlowFileEnclosure> groups = new ArrayList<>();
+
+        // There are three patterns:
+        // 1. Support batching: An enclosure has multiple FlowFiles being executed in a batch operation
+        // 2. Obtain keys: An enclosure has multiple FlowFiles, and each FlowFile is executed separately
+        // 3. Fragmented transaction: One FlowFile per Enclosure?
+        if (fc.obtainKeys) {
+            groupFlowFilesBySQL.apply(context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result);
+        }
+
+        else {
+            groupFlowFilesBySQLBatch.apply(context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result);
+        }
+
+        return groups;
+    };
+
+    private final PutGroup.PutFlowFiles<FunctionContext, Connection, StatementFlowFileEnclosure> putFlowFiles = (context, session, fc, conn, enclosure, result) -> {
+
+        if (fc.isSupportBatching()) {
+
+            // We have PreparedStatement that have batches added to them.
+            // We need to execute each batch and close the PreparedStatement.
+            exceptionHandler.execute(fc, enclosure, input -> {
+                try (final PreparedStatement stmt = enclosure.getCachedStatement(conn)) {
+                    stmt.executeBatch();
+                    result.routeTo(enclosure.getFlowFiles(), REL_SUCCESS);
+                }
+            }, onBatchUpdateError(context, session, result));
+
+        } else {
+            for (final FlowFile flowFile : enclosure.getFlowFiles()) {
+
+                final StatementFlowFileEnclosure targetEnclosure
+                        = enclosure instanceof FragmentedEnclosure
+                        ? ((FragmentedEnclosure) enclosure).getTargetEnclosure(flowFile)
+                        : enclosure;
 
             } // for
 
@@ -259,7 +310,6 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
         getLogger().error(e.toString());
         }
     }
-
     @Override
     public void onTrigger(final ProcessContext context, final ProcessSession session) throws ProcessException {
         final FlowFile flowFile = session.get();

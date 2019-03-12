@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends.http;
+package org.apache.nifi.processors.ngsi.ngsi.backends.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -137,7 +137,7 @@ public class HttpBackend {
         HttpResponse httpRes = null;
         HttpRequestBase request = null;
 
-        if (method.equals("PUT")) {
+        if ("PUT".equals(method)) {
             HttpPut req = new HttpPut(url);
 
             if (entity != null) {
@@ -145,7 +145,7 @@ public class HttpBackend {
             } // if
 
             request = req;
-        } else if (method.equals("POST")) {
+        } else if ("POST".equals(method)) {
             HttpPost req = new HttpPost(url);
 
             if (entity != null) {
@@ -153,9 +153,9 @@ public class HttpBackend {
             } // if
 
             request = req;
-        } else if (method.equals("GET")) {
+        } else if ("GET".equals(method)) {
             request = new HttpGet(url);
-        } else if (method.equals("DELETE")) {
+        } else if ("DELETE".equals(method)) {
             request = new HttpDelete(url);
         } else {
             throw new Exception("HTTP method not supported: " + method);

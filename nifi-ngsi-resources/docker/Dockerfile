@@ -29,7 +29,7 @@ ENV NIFI_TOOLKIT_HOME ${NIFI_BASE_DIR}/nifi-toolkit-current
 ENV NIFI_PID_DIR=${NIFI_HOME}/run
 ENV NIFI_LOG_DIR=${NIFI_HOME}/logs
 
-ADD sh/ ${NIFI_BASE_DIR}/scripts/
+COPY sh/ ${NIFI_BASE_DIR}/scripts/
 
 ENV DRACO_RELEASE=1.1.0
 ENV NIFI_NGSI_NAR_VERSION=1.1.0
@@ -77,8 +77,8 @@ VOLUME ${NIFI_LOG_DIR} \
        ${NIFI_HOME}/provenance_repository \
        ${NIFI_HOME}/state
 
-ADD drivers/ ${NIFI_HOME}/drivers/
-ADD templates/ ${NIFI_HOME}/conf/templates/
+COPY drivers/ ${NIFI_HOME}/drivers/
+COPY templates/ ${NIFI_HOME}/conf/templates/
 
 # Clear nifi-env.sh in favour of configuring all environment variables in the Dockerfile 
 RUN echo "#!/bin/sh\n" > $NIFI_HOME/bin/nifi-env.sh 
@@ -88,8 +88,10 @@ EXPOSE 8080 8443 10000
 
 WORKDIR ${NIFI_HOME} 
 
-RUN curl -L -o "nifi-ngsi-nar-"${NIFI_NGSI_NAR_VERSION}".nar" "https://github.com/ging/fiware-Draco/releases/download/"${DRACO_RELEASE}"/nifi-ngsi-nar-"${NIFI_NGSI_NAR_VERSION}".nar" \
-	&& mv ./nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar
+RUN curl -L -o "nifi-ngsi-resources.tar.gz" "https://github.com/ging/fiware-Draco/releases/download/"${DRACO_RELEASE}"/nifi-ngsi-resources.tar.gz"\
+	&& tar -xvzf nifi-ngsi-resources.tar.gz -C ./ \
+	&& rm nifi-ngsi-resources.tar.gz \
+	&& cp nifi-ngsi-resources/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-1.0-SNAPSHOT.nar
 
 # Apply configuration and start NiFi
 #
@@ -103,4 +105,3 @@ RUN curl -L -o "nifi-ngsi-nar-"${NIFI_NGSI_NAR_VERSION}".nar" "https://github.co
 # exec-form-entrypoint-example
 
 ENTRYPOINT ["../scripts/start.sh"]
-

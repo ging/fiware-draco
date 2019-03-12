@@ -1,17 +1,12 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends;
+package org.apache.nifi.processors.ngsi.ngsi.backends;
 
-import org.apache.nifi.processor.ProcessContext;
-import org.apache.nifi.processors.ngsi.NGSI.utils.*;
-
-
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MySQLBackend {
-
-    public MySQLBackend() {
-    }
+public class PostgreSQLBackend {
 
     public ArrayList listOfFields (String attrPersistence){
         ArrayList<String> aggregation = new ArrayList<>();
@@ -27,13 +22,13 @@ public class MySQLBackend {
             aggregation.add(NGSIConstants.ATTR_MD);
         }else if(attrPersistence.compareToIgnoreCase("column")==0){
             //TBD
+            System.out.println("column");
         }
         return aggregation;
     }
 
     public String getValuesForInsert(Entity entity, long creationTime, String fiwareServicePath) {
         String valuesForInsert = "";
-        boolean first = true;
             for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
                 if (i == 0) {
                     valuesForInsert += "(";
@@ -48,7 +43,7 @@ public class MySQLBackend {
                 valuesForInsert += ",'" + entity.getEntityId() + "'";
                 valuesForInsert += ",'" + entity.getEntityType() + "'";
                 valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrName() + "'";
-                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrType() + "'";
+                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrType()  + "'";
                 valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
                 if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
                     valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
@@ -56,7 +51,6 @@ public class MySQLBackend {
                     valuesForInsert += ",'[]'";
                 }
                 valuesForInsert += ")";
-
             } // for
 
         return valuesForInsert;
@@ -96,86 +90,86 @@ public class MySQLBackend {
         return fieldsForInsert + ")";
     } // getFieldsForInsert
 
-    public String buildDbName(String service,boolean enableEncoding,boolean enableLowercase) throws Exception{
+    public String buildSchemaName(String service,boolean enableEncoding,boolean enableLowercase) throws Exception {
         String dbName="";
         if (enableEncoding) {
-            dbName = NGSICharsets.encodeMySQL((enableLowercase)?service.toLowerCase():service);
+            dbName = NGSICharsets.encodePostgreSQL((enableLowercase)?service.toLowerCase():service);
         } else {
             dbName = NGSICharsets.encode((enableLowercase)?service.toLowerCase():service, false, true);
         } // if else
 
-        if (dbName.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
+        if (dbName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
             throw new Exception("Building database name '" + dbName
-                    + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
+                    + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
         } // if
         return dbName;
     }
 
-    public String createDb(String dbName) {
-        String query = "create database if not exists `" + dbName + "`;";
+    public String createSchema(String schemaName) {
+        String query = "create schema if not exists " + schemaName + ";";
         return query;
     }
 
-    public String createTable(String tableName, String attrPersistence){
+    public String createTable(String schemaName,String tableName, String attrPersistence){
 
-        String query= "create table if not exists `" + tableName + "`" + getFieldsForCreate(attrPersistence) + ";";
+        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(attrPersistence) + ";";
         return query;
     }
 
-    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase) throws Exception {
+    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase)throws Exception{
         String tableName="";
-        String servicePath=(enableLowercase)? fiwareServicePath.toLowerCase():fiwareServicePath;
+        String servicePath=(enableLowercase)?fiwareServicePath.toLowerCase():fiwareServicePath;
         String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
         String entityType = (enableLowercase) ? entity.getEntityType().toLowerCase() : entity.getEntityType();
 
-        if (enableEncoding) {
-            switch (dataModel) {
-                case "db-by-service-path":
-                    tableName = NGSICharsets.encodeMySQL(servicePath);
-                    break;
-                case "db-by-entity":
-                    tableName = NGSICharsets.encodeMySQL(servicePath)
-                            + CommonConstants.CONCATENATOR
-                            + NGSICharsets.encodeMySQL(entityId)
-                            + CommonConstants.CONCATENATOR
-                            + NGSICharsets.encodeMySQL(entityType);
-                    break;
-                default:
-                    System.out.println("Unknown data model '" + dataModel.toString()
-                            + "'. Please, use dm-by-service-path, dm-by-entity or dm-by-attribute");
-            } // switch
-        } else {
-            switch (dataModel) {
-                case "db-by-service-path":
-                    if (servicePath.equals("/")) {
-                        System.out.println("Default service path '/' cannot be used with "
-                                + "dm-by-service-path data model");
-                    } // if
+            if (enableEncoding) {
+                switch (dataModel) {
+                    case "db-by-service-path":
+                        tableName = NGSICharsets.encodePostgreSQL(servicePath);
+                        break;
+                    case "db-by-entity":
+                        tableName = NGSICharsets.encodePostgreSQL(servicePath)
+                                + CommonConstants.CONCATENATOR
+                                + NGSICharsets.encodePostgreSQL(entityId)
+                                + CommonConstants.CONCATENATOR
+                                + NGSICharsets.encodePostgreSQL(entityType);
+                        break;
+                    default:
+                        System.out.println("Unknown data model '" + dataModel
+                                + "'. Please, use dm-by-service-path, dm-by-entity or dm-by-attribute");
+                } // switch
+            } else {
+                switch (dataModel) {
+                    case "db-by-service-path":
+                        if ("/".equals(servicePath)) {
+                            System.out.println("Default service path '/' cannot be used with "
+                                    + "dm-by-service-path data model");
+                        } // if
 
-                    tableName = NGSICharsets.encode(servicePath, true, false);
-                    break;
-                case "db-by-entity":
-                    String truncatedServicePath = NGSICharsets.encode(servicePath, true, false);
-                    tableName = (truncatedServicePath.isEmpty() ? "" : truncatedServicePath + '_')
-                            + NGSICharsets.encode(entityId, false, true) + "_"
-                            + NGSICharsets.encode(entityType, false, true);
-                    break;
-                default:
-                    System.out.println("Unknown data model '" + dataModel.toString()
-                            + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
-            } // switch
-        } // if else
+                        tableName = NGSICharsets.encode(servicePath, true, false);
+                        break;
+                    case "db-by-entity":
+                        String truncatedServicePath = NGSICharsets.encode(servicePath, true, false);
+                        tableName = (truncatedServicePath.isEmpty() ? "" : truncatedServicePath + '_')
+                                + NGSICharsets.encode(entityId, false, true) + "_"
+                                + NGSICharsets.encode(entityType, false, true);
+                        break;
+                    default:
+                        System.out.println("Unknown data model '" + dataModel
+                                + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
+                        break;
+                } // switch
+            } // if else
 
-        if (tableName.length() > NGSIConstants.MYSQL_MAX_NAME_LEN) {
-            throw new Exception("Building table name '" + tableName
-                    + "' and its length is greater than " + NGSIConstants.MYSQL_MAX_NAME_LEN);
-        } // if
-
+            if (tableName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
+                throw new SQLException("Building table name '" + tableName
+                        + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
+            } // if
         return tableName;
     }
 
-    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String tableName, String dataModel){
-        String query="Insert into `" + tableName + "` " +this.getFieldsForInsert(dataModel)+ " values " +this.getValuesForInsert(entity, creationTime, fiwareServicePath);
+    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, String dataModel){
+        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(dataModel)+ " values " +this.getValuesForInsert(entity, creationTime, fiwareServicePath);
         return query;
     }
 }

@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.backends.hdfs;
+package org.apache.nifi.processors.ngsi.ngsi.backends.hdfs;
 
 public interface HDFSBackend {
 

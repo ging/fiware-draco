@@ -1,4 +1,4 @@
-package org.apache.nifi.processors.ngsi.NGSI.aggregators;
+package org.apache.nifi.processors.ngsi.ngsi.aggregators;
 
 
 import java.text.SimpleDateFormat;
@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackend;
-import org.apache.nifi.processors.ngsi.NGSI.backends.HiveBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.*;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackend;
+import org.apache.nifi.processors.ngsi.ngsi.backends.HiveBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -282,7 +282,7 @@ public abstract class HDFSAggregator {
                 String mdAggregation = mdAggregations.get(attrMdFileName);
 
                 if (mdAggregation == null) {
-                    mdAggregation = new String();
+                    mdAggregation = "";
                 } // if
 
                 // aggregate the metadata
@@ -367,7 +367,7 @@ public abstract class HDFSAggregator {
                 String attrName = attribute.getAttrName();
                 String attrType = attribute.getAttrType();
                 String attrMdFileName = buildAttrMdFilePath(service, servicePath, destination, attrName, attrType);
-                mdAggregations.put(attrMdFileName, new String());
+                mdAggregations.put(attrMdFileName, "");
                 hiveFields += ",`" + NGSICharsets.encodeHive(attrName) + "` string,"
                         + "`" + NGSICharsets.encodeHive(attrName) + "_md_file` string";
             } // for
@@ -411,7 +411,7 @@ public abstract class HDFSAggregator {
                 String mdAggregation = mdAggregations.get(attrMdFileName);
 
                 if (mdAggregation == null) {
-                    mdAggregation = new String();
+                    mdAggregation = "";
                 } // if
 
                 // agregate the metadata
@@ -423,7 +423,7 @@ public abstract class HDFSAggregator {
                     concatMdAggregation = mdAggregation.concat("\n" + getCSVMetadata(attrMetadata, recvTimeTs));
                 } // if else
 
-                mdAggregations.put(attrMdFileName, concatMdAggregation);
+                mdAggregations.put(attrMdFileName, "");
 
                 // create part of the line with the current attribute (a.k.a. a column)
                 line += csvSeparator + attrValue.replaceAll("\"", "") + csvSeparator + printableAttrMdFileName;
@@ -559,6 +559,7 @@ public abstract class HDFSAggregator {
                 break;
             default:
                 query = "";
+                break;
         } // switch
 
         // execute the query
@@ -582,10 +583,10 @@ public abstract class HDFSAggregator {
 
         if (enableEncoding) {
             folderPath = NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encodeHDFS(destination, false);
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encodeHDFS(destination, false);
         } else {
             folderPath = NGSICharsets.encode(service, false, true) + NGSICharsets.encode(servicePath, false, false)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encode(destination, false, true);
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encode(destination, false, true);
         } // if else
 
         if (folderPath.length() > NGSIConstants.HDFS_MAX_NAME_LEN) {
@@ -608,11 +609,11 @@ public abstract class HDFSAggregator {
 
         if (enableEncoding) {
             filePath = NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encodeHDFS(destination, false)
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encodeHDFS(destination, false)
                     + "/" + NGSICharsets.encodeHDFS(destination, false) + ".txt";
         } else {
             filePath = NGSICharsets.encode(service, false, true) + NGSICharsets.encode(servicePath, false, false)
-                    + (servicePath.equals("/") ? "" : "/") + NGSICharsets.encode(destination, false, true)
+                    + ("/".equals(servicePath) ? "" : "/") + NGSICharsets.encode(destination, false, true)
                     + "/" + NGSICharsets.encode(destination, false, true) + ".txt";
         } // if else
 
@@ -636,7 +637,7 @@ public abstract class HDFSAggregator {
     public String buildAttrMdFolderPath(String service, String servicePath, String destination, String attrName,
                                            String attrType) {
         return NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                + (servicePath.equals("/") ? "" : "/")
+                + ("/".equals(servicePath) ? "" : "/")
                 + NGSICharsets.encodeHDFS(destination, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrName, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrType, false);
@@ -654,7 +655,7 @@ public abstract class HDFSAggregator {
     public String buildAttrMdFilePath(String service, String servicePath, String destination, String attrName,
                                          String attrType) {
         return NGSICharsets.encodeHDFS(service, false) + NGSICharsets.encodeHDFS(servicePath, true)
-                + (servicePath.equals("/") ? "" : "/")
+                + ("/".equals(servicePath) ? "" : "/")
                 + NGSICharsets.encodeHDFS(destination, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrName, false) + CommonConstants.CONCATENATOR
                 + NGSICharsets.encodeHDFS(attrType, false) + "/"

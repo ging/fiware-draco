@@ -15,14 +15,14 @@ import org.apache.nifi.processor.ProcessSession;
 import org.apache.nifi.processor.Relationship;
 import org.apache.nifi.processor.exception.ProcessException;
 import org.apache.nifi.processor.util.StandardValidators;
-import org.apache.nifi.processors.ngsi.NGSI.aggregators.HDFSAggregator;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackend;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackendBinary;
-import org.apache.nifi.processors.ngsi.NGSI.backends.hdfs.HDFSBackendREST;
-import org.apache.nifi.processors.ngsi.NGSI.backends.HiveBackend;
-import org.apache.nifi.processors.ngsi.NGSI.utils.Entity;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIEvent;
-import org.apache.nifi.processors.ngsi.NGSI.utils.NGSIUtils;
+import org.apache.nifi.processors.ngsi.ngsi.aggregators.HDFSAggregator;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackend;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackendBinary;
+import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackendREST;
+import org.apache.nifi.processors.ngsi.ngsi.backends.HiveBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 
 import java.util.*;
 
@@ -33,7 +33,7 @@ import java.util.*;
 
 public class NGSIToHDFS extends AbstractProcessor {
 
-     static final PropertyDescriptor HDFS_HOST = new PropertyDescriptor.Builder()
+     protected static final PropertyDescriptor HDFS_HOST = new PropertyDescriptor.Builder()
             .name("HDFS Host")
             .displayName("HDFS Host")
             .description("HDFS Host, without port")
@@ -42,7 +42,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-     static final PropertyDescriptor HDFS_PORT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HDFS_PORT = new PropertyDescriptor.Builder()
             .name("HDFS Port")
             .displayName("HDFS Port")
             .description("HDFS Port, by desfaul is 14000")
@@ -52,14 +52,14 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-     static final PropertyDescriptor HDFS_USERNAME = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HDFS_USERNAME = new PropertyDescriptor.Builder()
             .name("HDFS User Name")
             .description("The HDFS username for authentication. If empty, no authentication is done.")
             .required(false)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DATA_MODEL = new PropertyDescriptor.Builder()
             .name("data-model")
             .displayName("Data Model")
             .description("The Data model for creating the tables when an event have been received you can choose between" +
@@ -70,7 +70,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HDFS_PASSWORD = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HDFS_PASSWORD = new PropertyDescriptor.Builder()
             .name("HDFS password")
             .description("The HDFS password for authentication. If empty, no authentication is done.")
             .required(false)
@@ -78,7 +78,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor SERVICE_AS_NAMESPACE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor SERVICE_AS_NAMESPACE = new PropertyDescriptor.Builder()
             .name("Service as namespace")
             .displayName("Service as namespace")
             .description("If configured as true then the fiware-service (or the default one) is used as the HDFS namespace instead of hdfs_username, which in this case must be a HDFS superuser")
@@ -87,7 +87,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE = new PropertyDescriptor.Builder()
             .name("default-service")
             .displayName("Default Service")
             .description("Default Fiware Service for building the database name")
@@ -96,7 +96,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor DEFAULT_SERVICE_PATH = new PropertyDescriptor.Builder()
             .name("default-service-path")
             .displayName("Default Service path")
             .description("Default Fiware ServicePath for building the table name")
@@ -105,7 +105,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
             .description("true or false, true applies the new encoding, false applies the old encoding.")
@@ -114,7 +114,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor ENABLE_LOWERCASE= new PropertyDescriptor.Builder()
             .name("enable-lowercase")
             .displayName("Enable Lowercase")
             .description("true or false, true for creating the Schema and Tables name with lowercase.")
@@ -123,7 +123,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .defaultValue("true")
             .build();
 
-    static final PropertyDescriptor FILE_FORMAT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor FILE_FORMAT = new PropertyDescriptor.Builder()
             .name("file-format")
             .displayName("File Format")
             .description("json-row, json-column, csv-row or json-column.")
@@ -133,7 +133,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BACKEND_IMPL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BACKEND_IMPL = new PropertyDescriptor.Builder()
             .name("Backend Impl")
             .displayName("Backend Impl")
             .description("rest, if a WebHDFS/HttpFS-based implementation is used when interacting with HDFS; or binary, if a Hadoop API-based implementation is used when interacting with HDFS")
@@ -143,7 +143,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BACKEND_MAX_CONNS = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BACKEND_MAX_CONNS = new PropertyDescriptor.Builder()
             .name("Backend max connections")
             .displayName("Backend max connections")
             .description("Maximum number of connections allowed for a Http-based HDFS backend. Ignored if using a binary backend implementation.")
@@ -152,7 +152,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BACKEND_MAX_CONNS_PER_ROUTE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BACKEND_MAX_CONNS_PER_ROUTE = new PropertyDescriptor.Builder()
             .name("Backend max connections per route")
             .displayName("Backend max connections per route")
             .description("Maximum number of connections per route allowed for a Http-based HDFS backend. Ignored if using a binary backend implementation.")
@@ -162,7 +162,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .build();
 
 
-    static final PropertyDescriptor BATCH_TIMEOUT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_TIMEOUT = new PropertyDescriptor.Builder()
             .name("Batch Timeout")
             .description("Number of seconds the batch will be building before it is persisted as it is.")
             .required(false)
@@ -170,7 +170,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.TIME_PERIOD_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .description("The preferred number of FlowFiles to put to the database in a single transaction")
             .required(false)
@@ -178,7 +178,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .defaultValue("10")
             .build();
 
-    static final PropertyDescriptor BATCH_TTL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_TTL = new PropertyDescriptor.Builder()
             .name("Batch TTL")
             .description("Number of retries when a batch cannot be persisted. Use 0 for no retries, -1 for infinite retries. Please, consider an infinite TTL (even a very large one) may consume all the sink's channel capacity very quickly.")
             .required(false)
@@ -186,14 +186,14 @@ public class NGSIToHDFS extends AbstractProcessor {
             .defaultValue("10")
             .build();
 
-    static final PropertyDescriptor BATCH_RETRY_INTERVAL = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor BATCH_RETRY_INTERVAL = new PropertyDescriptor.Builder()
             .name("Batch Retry Interval")
             .description("Comma-separated list of intervals (in miliseconds) at which the retries regarding not persisted batches will be done. First retry will be done as many miliseconds after as the first value, then the second retry will be done as many miliseconds after as second value, and so on. If the batch_ttl is greater than the number of intervals, the last interval is repeated.")
             .required(false)
             .addValidator(StandardValidators.TIME_PERIOD_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor OAUTH2_TOKEN = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor OAUTH2_TOKEN = new PropertyDescriptor.Builder()
             .name("Oauth2 Token")
             .displayName("Oauth2 Token")
             .description("OAuth2 token required for the HDFS authentication.")
@@ -201,7 +201,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
             .displayName("NGSI Version")
             .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD. NGSI-LD is not supported yet ")
@@ -211,7 +211,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HIVE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HIVE = new PropertyDescriptor.Builder()
             .name("Hive")
             .displayName("Hive")
             .description("1 if the remote Hive server runs HiveServer1 or 2 if the remote Hive server runs HiveServer2.")
@@ -221,7 +221,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HIVE_SERVER_VERSION = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HIVE_SERVER_VERSION = new PropertyDescriptor.Builder()
             .name("hive.server_version")
             .displayName("hive.server_version")
             .description("1 if the remote Hive server runs HiveServer1 or 2 if the remote Hive server runs HiveServer2.")
@@ -231,7 +231,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HIVE_HOST = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HIVE_HOST = new PropertyDescriptor.Builder()
             .name("HIVE Host")
             .displayName("HIVE Host")
             .description("HIVE Host, without port")
@@ -240,7 +240,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HIVE_PORT = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HIVE_PORT = new PropertyDescriptor.Builder()
             .name("HIVE Port")
             .displayName("HIVE Port")
             .description("HIVE Port, by desfaul is 10000")
@@ -250,7 +250,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor HIVE_DB_TYPE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor HIVE_DB_TYPE = new PropertyDescriptor.Builder()
             .name("hive.db_type")
             .displayName("hive.db_type")
             .description("default-db or namespace-db. If hive.db_type=default-db then the default Hive database is used. If hive.db_type=namespace-db and service_as_namespace=false then the hdfs_username is used as Hive database. If hive.db_type=namespace-db and service_as_namespace=true then the notified fiware-service is used as Hive database.")
@@ -260,7 +260,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor KRB5_AUTH = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor KRB5_AUTH = new PropertyDescriptor.Builder()
             .name("krb5_auth")
             .displayName("krb5_auth")
             .description("true or false.")
@@ -270,14 +270,14 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor KRB5_USER = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor KRB5_USER = new PropertyDescriptor.Builder()
             .name("krb5_user")
             .description("Ignored if krb5_auth=false, mandatory otherwise.")
             .required(false)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor KRB5_PASSWORD = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor KRB5_PASSWORD = new PropertyDescriptor.Builder()
             .name("krb5_password")
             .description("Ignored if krb5_auth=false, mandatory otherwise.")
             .required(false)
@@ -285,7 +285,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor KRB5_LOGIN_CONF_FILE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor KRB5_LOGIN_CONF_FILE = new PropertyDescriptor.Builder()
             .name("krb5_login_conf_file")
             .displayName("krb5_login_conf_file")
             .description("Ignored if krb5_auth=false.")
@@ -294,7 +294,7 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final PropertyDescriptor KRB5_CONF_FILE = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor KRB5_CONF_FILE = new PropertyDescriptor.Builder()
             .name("krb5_conf_file")
             .displayName("krb5_conf_file")
             .description("Ignored if krb5_auth=false.")
@@ -303,15 +303,15 @@ public class NGSIToHDFS extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    static final Relationship REL_SUCCESS = new Relationship.Builder()
+    protected static final Relationship REL_SUCCESS = new Relationship.Builder()
             .name("success")
             .description("A FlowFile is routed to this relationship after the database is successfully updated")
             .build();
-    static final Relationship REL_RETRY = new Relationship.Builder()
+    protected static final Relationship REL_RETRY = new Relationship.Builder()
             .name("retry")
             .description("A FlowFile is routed to this relationship if the database cannot be updated but attempting the operation again may succeed")
             .build();
-    static final Relationship REL_FAILURE = new Relationship.Builder()
+    protected static final Relationship REL_FAILURE = new Relationship.Builder()
             .name("failure")
             .description("A FlowFile is routed to this relationship if the database cannot be updated and retrying the operation will also fail, "
                     + "such as an invalid query or an integrity constraint violation")
@@ -361,11 +361,6 @@ public class NGSIToHDFS extends AbstractProcessor {
         return rels;
     }
 
-    @OnStopped
-    public final void closeClient() {
-
-    }
-
     protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile,ProcessSession session) {
 
         final String[] host = {context.getProperty(HDFS_HOST).getValue()};
@@ -392,8 +387,7 @@ public class NGSIToHDFS extends AbstractProcessor {
         HiveBackend hiveBackend = null;
         NGSIUtils n = new NGSIUtils();
         persistenceBackend = (backendImpl.compareToIgnoreCase("rest")==1)
-                ?new HDFSBackendREST(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
-                hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace)
+                ?new HDFSBackendREST(host,port,username,oauth2Token,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace)
                 :new HDFSBackendBinary(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
                 hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace);
 
@@ -403,11 +397,9 @@ public class NGSIToHDFS extends AbstractProcessor {
 
         hiveBackend = new HiveBackend(hiveServerVersion, hiveHost, hivePort, username, password);
 
-        final long creationTime = event.getCreationTime();
         try {
 
             for (Entity entity : event.getEntities()) {
-                String destination = entity.getEntityId();
                 HDFSAggregator aggregator = new HDFSAggregator() {
                     @Override
                     public void aggregate(long creationTime, Entity entity, String username) throws Exception {
@@ -462,11 +454,11 @@ public class NGSIToHDFS extends AbstractProcessor {
 
         try {
             persistFlowFile(context, flowFile, session);
-            logger.info("inserted {} into MongoDB", new Object[]{flowFile});
+            logger.info("inserted {} into HDFS", new Object[]{flowFile});
             session.getProvenanceReporter().send(flowFile, "report");
             session.transfer(flowFile, REL_SUCCESS);
         } catch (Exception e) {
-            logger.error("Failed to insert {} into MongoDB due to {}", new Object[] {flowFile, e}, e);
+            logger.error("Failed to insert {} into HDFS due to {}", new Object[] {flowFile, e}, e);
             session.transfer(flowFile, REL_FAILURE);
             context.yield();
         }

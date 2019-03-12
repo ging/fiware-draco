@@ -17,8 +17,9 @@
 
 ## Capabilities
 This image currently supports running in standalone mode either unsecured or with user authentication provided through:
-   * [Two-Way SSL with Client Certificates](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#security-configuration)
-   * [Lightweight Directory Access Protocol (LDAP)](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#ldap_login_identity_provider)
+
+*   [Two-Way SSL with Client Certificates](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#security-configuration)
+*   [Lightweight Directory Access Protocol (LDAP)](http://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#ldap_login_identity_provider)
    
 ## Building
 The Docker image can be built using the following command:
@@ -92,7 +93,7 @@ DN as provided by the configured LDAP server in the `INITIAL_ADMIN_IDENTITY` env
 used to seed the instance with an initial user with administrative privileges.  Finally, this command makes use of a 
 volume to provide certificates on the host system to the container instance.
 
-#### For a minimal, connection to an LDAP server using SIMPLE authentication:
+#### For a minimal, connection to an LDAP server using SIMPLE authentication
 
     docker run --name nifi \
       -v /User/dreynolds/certs/localhost:/opt/certs \
@@ -124,7 +125,7 @@ volume to provide certificates on the host system to the container instance.
     -e LDAP_TLS_TRUSTSTORE_PASSWORD: ''
     -e LDAP_TLS_TRUSTSTORE_TYPE: ''
 
-#### Clustering can be enabled by using the following properties to Docker environment variable mappings.
+#### Clustering can be enabled by using the following properties to Docker environment variable mappings
 
 ##### nifi.properties
 
