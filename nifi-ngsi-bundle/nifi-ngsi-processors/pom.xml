@@ -221,12 +221,6 @@
           <artifactId>postgresql</artifactId>
           <version>42.2.5.jre7</version>
         </dependency>
-	      <!-- Required for logging -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
     </dependencies>
 
     <build>
