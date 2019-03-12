@@ -16,7 +16,6 @@ import org.apache.nifi.processor.exception.ProcessException;
 import org.apache.nifi.processor.util.StandardValidators;
 import org.apache.nifi.processors.ngsi.ngsi.aggregators.PostgreSQLAggregator;
 import org.apache.nifi.processors.ngsi.ngsi.backends.postgresql.PostgreSQLBackendImpl;
-import org.apache.nifi.processors.ngsi.errors.DracoBadConfiguration;
 import org.apache.nifi.processor.util.pattern.*;
 import org.apache.nifi.processor.util.pattern.PartialFunctions.FlowFileGroup;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
@@ -44,7 +43,7 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 
 public class NGSIToPostgreSQL extends AbstractProcessor {
-    static final PropertyDescriptor PostgreSQL_HOST = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor PostgreSQL_HOST = new PropertyDescriptor.Builder()
         .name("PostgreSQL Host")
         .displayName("PostgreSQL Host")
         .description("PostgreSQL Host, without port")
@@ -53,7 +52,7 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
         
-     static final PropertyDescriptor PostgreSQL_PORT = new PropertyDescriptor.Builder()
+     protected static final PropertyDescriptor PostgreSQL_PORT = new PropertyDescriptor.Builder()
         .name("PostgreSQL Port")
         .displayName("PostgreSQL Port")
         .description("PostgreSQL Port, by desfaul is 5432")
@@ -63,14 +62,14 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
         
-     static final PropertyDescriptor PostgreSQL_USERNAME = new PropertyDescriptor.Builder()
+     protected static final PropertyDescriptor PostgreSQL_USERNAME = new PropertyDescriptor.Builder()
         .name("PostgreSQL User Name")
         .description("The PostgreSQL username for authentication. If empty, no authentication is done.")
         .required(false)
         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
         .build();
             
-    static final PropertyDescriptor PostgreSQL_PASSWORD = new PropertyDescriptor.Builder()
+    protected static final PropertyDescriptor PostgreSQL_PASSWORD = new PropertyDescriptor.Builder()
         .name("PostgreSQL password")
         .description("The PostgreSQL password for authentication. If empty, no authentication is done.")
         .required(false)
@@ -241,11 +240,11 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
         try {
 
             for (Entity entity : event.getEntities()) {
-                String destination = entity.getEntityId();
                     
                 PostgreSQLAggregator aggregator = new PostgreSQLAggregator() {
                     @Override
                     public void aggregate(long creationTime, Entity entity, String fiwareServicePath) {
+                            //aggregate function of class PostgreSQLAggregator
                     }
                 };
                 aggregator = aggregator.getAggregator(attrPersistence);
@@ -272,7 +271,6 @@ public class NGSIToPostgreSQL extends AbstractProcessor {
             logger.info("inserted {} into PostgreSQL", new Object[]{flowFile});
             session.getProvenanceReporter().send(flowFile, "report");
             session.transfer(flowFile, REL_SUCCESS);
-            final Boolean rollbackOnFailure = context.getProperty(RollbackOnFailure.ROLLBACK_ON_FAILURE).asBoolean();
         } catch (Exception e) {
             logger.error("Failed to insert {} into PostgreSQL due to {}", new Object[] {flowFile, e}, e);
             session.transfer(flowFile, REL_FAILURE);
