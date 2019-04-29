@@ -11,7 +11,9 @@ The scenario presented in this guide is composed by two containers. One for runn
 
 ![start-scenario](./images/scenario.png)
 
-## <a name="section1"></a>Before starting
+<a name="section1"></a>
+
+## Before starting
 
 The aim of this document is providing an easy guide to setup FIWARE Draco and other containers for storing context data.
 In this guide we will run a basic example of Draco for storing NGSIv2 events to MySQL.
@@ -19,28 +21,38 @@ In this guide we will run a basic example of Draco for storing NGSIv2 events to 
 Obviously, you will need docker and docker-compose installed and running in you machine. Please, check
 [this](https://docs.docker.com/linux/started/) official start guide.
 
-## <a name="section2"></a>Getting an image
+<a name="section2"></a>
 
-### <a name="section2.1"></a>Building from sources
+## Getting an image
+
+<a name="section2.1"></a>
+
+### Building from sources
 
 (1) Start by cloning the `fiware-Draco` repository:
 
-    git clone https://github.com/ging/fiware-draco.git
-    cd fiware-draco
+```bash
+git clone https://github.com/ging/fiware-draco.git
+cd fiware-draco
+```
 
 Change directory:
 
-    cd nifi-ngsi-resources/docker
+```bash
+cd nifi-ngsi-resources/docker
+```
 
 And run the following command:
 
-    sudo docker-compose up -d
+```bash
+sudo docker-compose up -d
+```
 
 Once finished (it may take a while) the console will display the logs of each container.
 
 If you want, you can open another terminal and check the available images at your docker by typing:
 
-```
+```text
 sudo docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 draco              latest              6a9e16550c82        10 seconds ago      462.1 MB
@@ -91,13 +103,13 @@ Now for test your deployment, you may send a NGSI-like notification emulation to
 
 (3) Open a new terminal and create and edit somewhere a `notification.sh` file:
 
-```
+```bash
 touch notification.sh
 ```
 
 Copy and paste this content to the notification.sh file
 
-```
+```bash
 URL=$1
 
 curl $URL -v -s -S --header 'Content-Type: application/json; charset=utf-8' --header 'Accept: application/json' --header "Fiware-Service: qsg" --header "Fiware-ServicePath: test" -d @- <<EOF
@@ -123,7 +135,7 @@ service path `test`; it has a single attribute named `temperature` of type `floa
 (4) Give execution permissions to `notification.sh` and run it, passing as argument the URL of the listening
 `HTTPSource`:
 
-```
+```bash
 chmod a+x notification.sh
 ./notification.sh http://localhost:5050/v2/notify
 ```
@@ -134,21 +146,20 @@ clicking on the information icon for each event of the list. ![Draco-step7](./im
 
 (6) You can check if the database and the table has been created. First enter to the MySQL container console.
 
-```
+```bash
 sudo docker exec -it mysql /bin/bash
-
 ```
 
 Then check the created databases and his tables. For logging to mysql use "root" as user and "example" as password.
 
-```
+```bash
 $ mysql -u root -p
 mysql> show databases;
 ```
 
 output:
 
-```
+```text
 +--------------------+
 | Database           |
 +--------------------+
@@ -162,14 +173,14 @@ output:
 
 ```
 
-```
+```bash
 mysql> use qsg;
 mysql> show tables;
 ```
 
 output:
 
-```
+```text
 +---------------+
 | Tables_in_qsg |
 +---------------+
@@ -179,14 +190,13 @@ output:
 
 ```
 
-```
+```bash
 mysql> select * from test;
-
 ```
 
 output:
 
-```
+```text
 +---------------+---------------------+-------------------+----------+------------+-------------+----------+-----------+--------+
 | recvTimeTs    | recvTime            | fiwareServicePath | entityId | entityType | attrName    | attrType | attrValue | attrMd |
 +---------------+---------------------+-------------------+----------+------------+-------------+----------+-----------+--------+

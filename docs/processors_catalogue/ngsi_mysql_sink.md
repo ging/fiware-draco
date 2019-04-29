@@ -12,7 +12,9 @@ sources. In the end, the information within these events must be mapped into spe
 
 Next sections will explain this in detail.
 
-### <a name="section1.1"></a>Mapping NGSI events to `NGSIEvent` objects
+<a name="section1.1"></a>
+
+### Mapping NGSI events to `NGSIEvent` objects
 
 Notified NGSI events (containing context data) are transformed into `NGSIEvent` objects (for each context element a
 `NGSIEvent` is created; such an event is a mix of certain headers and a `ContextElement` object), independently of the
@@ -22,12 +24,16 @@ This is done at the Draco Listen HTTP Processor (also with the same name in nati
 processor map the flow file attributes and content into a NGSI event. Once translated, the data (now, as `NGSIEvent`
 objects) is put into the internal channels for future consumption (see next section).
 
-### <a name="section1.2"></a>Mapping `NGSIEvent`s to MySQL data structures
+<a name="section1.2"></a>
+
+### Mapping `NGSIEvent`s to MySQL data structures
 
 MySQL organizes the data in databases that contain tables of data rows. Such organization is exploited by `NGSIToMySQL`
 each time a `NGSIEvent` is going to be persisted.
 
-#### <a name="section1.2.1"></a>MySQL databases naming conventions
+<a name="section1.2.1"></a>
+
+#### MySQL databases naming conventions
 
 A database named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for
 the FIWARE service) is created (if not existing yet).
