@@ -2,8 +2,8 @@
 
 This quick start overviews the steps a newbie programmer will have to follow in order to get familiar with Draco and its
 basic functionality. For more detailed information, please refer to the [README](index.md); the
-[Installation and Administration Guide](./installation_and_administration_guide/README.md) and the
-[Processors Catalogue](processors_catalogue/README.md) fully document Draco.
+[Installation and Administration Guide](./installation_and_administration_guide/introduction.md) and the
+[Processors Catalogue](processors_catalogue/introduction.md) fully document Draco.
 
 ## Scenario
 
