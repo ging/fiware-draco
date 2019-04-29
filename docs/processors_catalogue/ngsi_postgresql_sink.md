@@ -241,28 +241,38 @@ Using the new encoding:
 Assuming `attr_persistence=row` as configuration parameters, then `NGSIToPostgreSQL` will persist the data within the
 body as:
 
-```bash
+```text
 $ psql -U myuser
+
 psql (9.5.0)
 Type "help" for help.
-postgres-# \c my-database
+```
 
+```text
+postgres-# \c my-database
 my-database# \dn
+
    List of schemas
    Name   |  Owner
 ----------+----------
  vehicles | postgres
  public   | postgres
 (2 rows)
+```
 
+```text
 my-database=# \dt vehicles.*
+
                List of relations
   Schema  |       Name        | Type  |  Owner
 ----------+-------------------+-------+----------
  vehicles | 4wheels_car1_car  | table | postgres
 (1 row)
+```
 
+```text
 postgresql> select * from vehicles.4wheels_car1_car;
+
 +------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
 | recvTimeTs | recvTime                   | fiwareServicePath | entityId | entityType | attrName    | attrType  | attrValue | attrMd |
 +------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
