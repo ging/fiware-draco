@@ -12,7 +12,9 @@ sources. In the end, the information within these events must be mapped into spe
 
 Next sections will explain this in detail.
 
-### <a name="section1.1"></a>Mapping NGSI events to `NGSIEvent` objects
+<a name="section1.1"></a>
+
+### Mapping NGSI events to `NGSIEvent` objects
 
 Notified NGSI events (containing context data) are transformed into `NGSIEvent` objects (for each context element a
 `NGSIEvent` is created; such an event is a mix of certain headers and a `ContextElement` object), independently of the
@@ -22,12 +24,16 @@ This is done at the Draco Listen HTTP Processor (also with the same name in nati
 processor map the flow file attributes and content into a NGSI event. Once translated, the data (now, as `NGSIEvent`
 objects) is put into the internal channels for future consumption (see next section).
 
-### <a name="section1.2"></a>Mapping `NGSIEvent`s to MySQL data structures
+<a name="section1.2"></a>
+
+### Mapping `NGSIEvent`s to MySQL data structures
 
 MySQL organizes the data in databases that contain tables of data rows. Such organization is exploited by `NGSIToMySQL`
 each time a `NGSIEvent` is going to be persisted.
 
-#### <a name="section1.2.1"></a>MySQL databases naming conventions
+<a name="section1.2.1"></a>
+
+#### MySQL databases naming conventions
 
 A database named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for
 the FIWARE service) is created (if not existing yet).
@@ -167,29 +173,35 @@ Using the new encoding:
 
 Assuming `attr_persistence=row` as configuration parameter, then `NGSIToMySQL` will persist the data within the body as:
 
-```bash
-    mysql> select * from 4wheels_car1_car;
-    +------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
-    | recvTimeTs | recvTime                   | fiwareServicePath | entityId | entityType | attrName    | attrType  | attrValue | attrMd |
-    +------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
-    | 1429535775 | 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        |  speed      | float     | 112.9     | []     |
-    | 1429535775 | 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        |  oil_level  | float     | 74.6      | []     |
-    +------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
-    2 row in set (0.00 sec)
+```sql
+mysql> select * from 4wheels_car1_car;
+```
+
+```text
++------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
+| recvTimeTs | recvTime                   | fiwareServicePath | entityId | entityType | attrName    | attrType  | attrValue | attrMd |
++------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
+| 1429535775 | 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        |  speed      | float     | 112.9     | []     |
+| 1429535775 | 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        |  oil_level  | float     | 74.6      | []     |
++------------+----------------------------+-------------------+----------+------------+-------------+-----------+-----------+--------+
+2 row in set (0.00 sec)
 ```
 
 #### Column-like storing
 
 If `attr_persistence=colum` then `NGSIToMySQL` will persist the data within the body as:
 
-```bash
-    mysql> select * from 4wheels_car1_car;
-    +----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
-    | recvTime                   | fiwareServicePath | entityId | entityType | speed | speed_md | oil_level | oil_level_md |
-    +----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
-    | 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        | 112.9 | []       |  74.6     | []           |
-    +----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
-    1 row in set (0.00 sec)
+```sql
+mysql> select * from 4wheels_car1_car;
+```
+
+```text
++----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+| recvTime                   | fiwareServicePath | entityId | entityType | speed | speed_md | oil_level | oil_level_md |
++----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+| 2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        | 112.9 | []       |  74.6     | []           |
++----------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+1 row in set (0.00 sec)
 ```
 
 ## Administration guide
