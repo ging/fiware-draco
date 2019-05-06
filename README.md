@@ -39,7 +39,8 @@ logic. It was built to automate the flow of data between systems. While the term
 contexts, we use it here to mean the automated and managed flow of information between systems.
 
 | :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | :dart: [Roadmap](docs/roadmap.md) |
-| ----------------------------------------------------- |--- | ---------------------------------------------------------------- | --------------------------------- |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- |
+
 
 ### Terminology
 

@@ -1,4 +1,6 @@
-# <a name="top"></a>ListenHTTP (NGSIRestHandler)
+# ListenHTTP (NGSIRestHandler)
+
+<a name="top"></a>
 
 Content:
 
@@ -8,9 +10,13 @@ Content:
 -   [Administration guide](#section2)
     -   [Configuration](#section2.1)
 
-## <a name="section1"></a>Functionality
+<a name="section1"></a>
 
-### <a name="section1.1"></a>Mapping NGSI events to `NGSIEvent` objects
+## Functionality
+
+<a name="section1.1"></a>
+
+### Mapping NGSI events to `NGSIEvent` objects
 
 This section explains how a notified NGSI event (a http message containing headers and payload) is used to create a
 `NGSIEvent` object, suitable for being consumed by any of the Draco processors, thanks to `ListenHTTP`.
@@ -50,12 +56,14 @@ where such data is finally persisted. If `Fiware-Correlator` header is not notif
 Finally, it must be said the `NGSIEVent` contains another field, of type `ContextElement` as well, in order the
 `NGSINameMappingsInterceptor` add a mapped version of the original context element added by this handler.
 
-### <a name="section1.2"></a>Example
+<a name="section1.2"></a>
+
+### Example
 
 Let's assume the following not-intercepted event regarding a received notification (the code below is an <i>object
 representation</i>, not any real data format):
 
-```
+```text
 notification={
    headers={
 	   fiware-service=hotel1,
@@ -85,7 +93,7 @@ As can be seen, two entities (`suite.12` and `other.9`) of the same type (`room`
 (`hotel`) but different service paths (`/suites` and `/other`) are notified. `NGSIRestHandler` will create two
 `NGSIEvent`'s:
 
-```
+```text
 ngsi-event-1={
    headers={
 	   fiware-service=hotel,
@@ -125,9 +133,13 @@ ngsi-event-2={
 }
 ```
 
-## <a name="section2"></a>Administration guide
+<a name="section2"></a>
 
-### <a name="section2.1"></a>Configuration
+## Administration guide
+
+<a name="section2.1"></a>
+
+### Configuration
 
 `ListenHTTP` is configured through the following parameters:
 

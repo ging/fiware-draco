@@ -124,10 +124,8 @@ run using `bin/nifi.sh <command>` where `<command>` is one of:
 
 For Windows users, the following scripts exist in the bin directory:
 
-```text
-    `run-nifi.bat`: runs NiFi in the foreground and waits to receive a Ctrl-C, which then shuts down NiFi
-    `status-nifi.bat`: provides the current status of NiFi
-```
+-   `run-nifi.bat`: runs NiFi in the foreground and waits to receive a Ctrl-C, which then shuts down NiFi
+-   `status-nifi.bat`: provides the current status of NiFi
 
 The configuration that is to be used when launching NiFi, such as Java heap size, the user to run as, which Java command
 to use, etc. are configurable via the `conf/bootstrap.conf` file.
