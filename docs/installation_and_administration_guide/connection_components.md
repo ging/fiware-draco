@@ -29,4 +29,4 @@ with this Draco distribution. For more information, please go to the [Templates]
 can set and test your deployment following the [Quick Start Guide](../quick_start_guide.md)
 
 Moreover, for specific information about all the properties and database structures please go to the
-[Processors Catalogue Section](../processors_catalogue/README.md).
+[Processors Catalogue Section](../processors_catalogue/introduction.md).
