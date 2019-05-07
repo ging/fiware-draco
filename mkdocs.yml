@@ -29,5 +29,6 @@ pages:
       - 'MongoDB backend': 'processors_catalogue/ngsi_mongo_sink.md'
       - 'MySQL backend': 'processors_catalogue/ngsi_mysql_sink.md'
       - 'PostgreSQL backend': 'processors_catalogue/ngsi_postgresql_sink.md'
+      - 'REST Handler': 'processors_catalogue/ngsi_rest_handler.md'
       - 'Issues and Contact': 'processors_catalogue/issues_and_contact.md'
   - 'Roadmap': roadmap.md

@@ -153,34 +153,34 @@ Assuming the following `NGSIEvent` is created from a notified NGSI context data 
 representation</i>, not any real data format):
 
 ```text
-    ngsi-event={
-        headers={
-             content-type=application/json,
-             timestamp=1429535775,
-             transactionId=1429535775-308-0000000000,
-             correlationId=1429535775-308-0000000000,
-             fiware-service=vehicles,
-             fiware-servicepath=/4wheels,
-             <grouping_rules_interceptor_headers>,
-             <name_mappings_interceptor_headers>
-        },
-        body={
-            entityId=car1,
-            entityType=car,
-            attributes=[
-                {
-                    attrName=speed,
-                    attrType=float,
-                    attrValue=112.9
-                },
-                {
-                    attrName=oil_level,
-                    attrType=float,
-                    attrValue=74.6
-                }
-            ]
-        }
+ngsi-event={
+    headers={
+         content-type=application/json,
+         timestamp=1429535775,
+         transactionId=1429535775-308-0000000000,
+         correlationId=1429535775-308-0000000000,
+         fiware-service=vehicles,
+         fiware-servicepath=/4wheels,
+         <grouping_rules_interceptor_headers>,
+         <name_mappings_interceptor_headers>
+    },
+    body={
+        entityId=car1,
+        entityType=car,
+        attributes=[
+            {
+                attrName=speed,
+                attrType=float,
+                attrValue=112.9
+            },
+            {
+                attrName=oil_level,
+                attrType=float,
+                attrValue=74.6
+            }
+        ]
     }
+}
 ```
 
 #### Database and collection names
@@ -209,66 +209,197 @@ Assuming `data_model=dm-by-service-path` and `attr_persistence=row` as configura
 persist the data within the body as:
 
 ```bash
-    $ mongo -u myuser -p
-    MongoDB shell version: 2.6.9
-    connecting to: test
-    > show databases
-    admin              (empty)
-    local              0.031GB
-    sth_vehicles       0.031GB
-    test               0.031GB
-    > use vehicles
-    switched to db vehicles
-    > show collections
-    sth_/4wheels
-    system.indexes
-    > db['sth_/4wheels'].find()
-    { "_id" : ObjectId("5534d143fa701f0be751db82"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "entityId" : "car1", "entityType" : "car", "attrName" : "speed", "attrType" : "float", "attrValue" : "112.9" }
-    { "_id" : ObjectId("5534d143fa701f0be751db83"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "entityId" : "car1", "entityType" : "car", "attrName" : "oil_level", "attrType" : "float", "attrValue" : "74.6" }
+$ mongo -u myuser -p
+```
+
+```text
+MongoDB shell version: 2.6.9
+connecting to: test
+```
+
+```sql
+> show databases
+```
+
+```text
+admin              (empty)
+local              0.031GB
+sth_vehicles       0.031GB
+test               0.031GB
+```
+
+```sql
+> use vehicles
+```
+
+```text
+switched to db vehicles
+```
+
+```sql
+> show collections
+```
+
+```text
+sth_/4wheels
+system.indexes
+```
+
+```sql
+> db['sth_/4wheels'].find()
+```
+
+```json
+({
+    "_id": ObjectId("5534d143fa701f0be751db82"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "entityId": "car1",
+    "entityType": "car",
+    "attrName": "speed",
+    "attrType": "float",
+    "attrValue": "112.9"
+},
+{
+    "_id": ObjectId("5534d143fa701f0be751db83"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "entityId": "car1",
+    "entityType": "car",
+    "attrName": "oil_level",
+    "attrType": "float",
+    "attrValue": "74.6"
+})
 ```
 
 If `data_model=dm-by-entity` and `attr_persistence=row` then `NGSIToMongo` will persist the data within the body as:
 
 ```bash
-    $ mongo -u myuser -p
-    MongoDB shell version: 2.6.9
-    connecting to: test
-    > show databases
-    admin              (empty)
-    local              0.031GB
-    sth_vehicles       0.031GB
-    test               0.031GB
-    > use vehicles
-    switched to db vehicles
-    > show collections
-    sth_/4wheels_car1_car
-    system.indexes
-    > db['sth_/4wheels_car1_car'].find()
-    { "_id" : ObjectId("5534d143fa701f0be751db82"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "attrName" : "speed", "attrType" : "float", "attrValue" : "112.9" }
-    { "_id" : ObjectId("5534d143fa701f0be751db83"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "attrName" : "oil_level", "attrType" : "float", "attrValue" : "74.6" }
+$ mongo -u myuser -p
+```
+
+```text
+MongoDB shell version: 2.6.9
+connecting to: test
+```
+
+```sql
+> show databases
+```
+
+```text
+admin              (empty)
+local              0.031GB
+sth_vehicles       0.031GB
+test               0.031GB
+```
+
+```sql
+> use vehicles
+```
+
+```text
+switched to db vehicles
+```
+
+```sql
+> show collections
+```
+
+```text
+sth_/4wheels_car1_car
+system.indexes
+```
+
+```sql
+> db['sth_/4wheels_car1_car'].find()
+```
+
+```json
+({
+    "_id": ObjectId("5534d143fa701f0be751db82"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "attrName": "speed",
+    "attrType": "float",
+    "attrValue": "112.9"
+},
+{
+    "_id": ObjectId("5534d143fa701f0be751db83"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "attrName": "oil_level",
+    "attrType": "float",
+    "attrValue": "74.6"
+})
 ```
 
 If `data_model=dm-by-attribute` and `attr_persistence=row` then `NGSIToMongo` will persist the data as:
 
 ```bash
-    $ mongo -u myuser -p
-    MongoDB shell version: 2.6.9
-    connecting to: test
-    > show databases
-    admin              (empty)
-    local              0.031GB
-    sth_vehicles       0.031GB
-    test               0.031GB
-    > use vehicles
-    switched to db vehicles
-    > show collections
-    sth_/4wheels_car1_car_speed
-    sth_/4wheels_car1_car_oil_level
-    system.indexes
-    > db['sth_/4wheels_car1_car_speed'].find()
-     { "_id" : ObjectId("5534d143fa701f0be751db87"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "attrType" : "float", "attrValue" : "112.9" }
-    > db['sth_/4wheels_car1_oil_level'].find()
-     { "_id" : ObjectId("5534d143fa701f0be751db87"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "attrType" : "float", "attrValue" : "74.6" }
+$ mongo -u myuser -p
+```
+
+```text
+MongoDB shell version: 2.6.9
+connecting to: test
+```
+
+```sql
+> show databases
+```
+
+```text
+admin              (empty)
+local              0.031GB
+sth_vehicles       0.031GB
+test               0.031GB
+```
+
+```sql
+> use vehicles
+```
+
+```text
+switched to db vehicles
+```
+
+```sql
+> show collections
+```
+
+```text
+sth_/4wheels_car1_car_speed
+sth_/4wheels_car1_car_oil_level
+system.indexes
+```
+
+```sql
+> db['sth_/4wheels_car1_car_speed'].find()
+```
+
+```json
+{
+    "_id": ObjectId("5534d143fa701f0be751db87"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "attrType": "float",
+    "attrValue": "112.9"
+}
+```
+
+```sql
+> db['sth_/4wheels_car1_oil_level'].find()
+```
+
+```json
+{
+    "_id": ObjectId("5534d143fa701f0be751db87"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "attrType": "float",
+    "attrValue": "74.6"
+}
 ```
 
 #### Column-like storing
@@ -277,41 +408,109 @@ If `data_model=dm-by-service-path` and `attr_persistence=column` then `NGSIToMon
 body as:
 
 ```bash
-    $ mongo -u myuser -p
-    MongoDB shell version: 2.6.9
-    connecting to: test
-    > show databases
-    admin              (empty)
-    local              0.031GB
-    sth_vehicles       0.031GB
-    test               0.031GB
-    > use vehicles
-    switched to db vehicles
-    > show collections
-    sth_/4wheels
-    system.indexes
-    > db['sth_/4wheels'].find()
-    { "_id" : ObjectId("5534d143fa701f0be751db86"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "entityId" : "car1", "entityType" : "car", "speed" : "112.9", "oil_level" : "74.6" }
+$ mongo -u myuser -p
+```
+
+```text
+MongoDB shell version: 2.6.9
+connecting to: test
+```
+
+```sql
+> show databases
+```
+
+```text
+admin              (empty)
+local              0.031GB
+sth_vehicles       0.031GB
+test               0.031GB
+```
+
+```sql
+> use vehicles
+```
+
+```text
+switched to db vehicles
+```
+
+```sql
+> show collections
+```
+
+```text
+sth_/4wheels
+system.indexes
+```
+
+```sql
+> db['sth_/4wheels'].find()
+```
+
+```json
+{
+    "_id": ObjectId("5534d143fa701f0be751db86"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "entityId": "car1",
+    "entityType": "car",
+    "speed": "112.9",
+    "oil_level": "74.6"
+}
 ```
 
 If `data_model=dm-by-entity` and `attr_persistence=column` then `NGSIToMongo` will persist the data within the body as:
 
 ```bash
-    $ mongo -u myuser -p
-    MongoDB shell version: 2.6.9
-    connecting to: test
-    > show databases
-    admin              (empty)
-    local              0.031GB
-    sth_vehicles       0.031GB
-    test               0.031GB
-    > use vehicles
-    switched to db vehicles
-    > show collections
-    sth_/4wheels_car1_car
-    system.indexes
-    > db['sth_/4wheels_car1_car'].find()
-    {"_id" : ObjectId("56337ea4c9e77c1614bfdbb7"), "recvTimeTs": "1402409899391", "recvTime" : "2015-04-20T12:13:22.41.412Z", "speed" : "112.9", "oil_level" : "74.6"}
+$ mongo -u myuser -p
+```
+
+```text
+MongoDB shell version: 2.6.9
+connecting to: test
+```
+
+```sql
+> show databases
+```
+
+```text
+admin              (empty)
+local              0.031GB
+sth_vehicles       0.031GB
+test               0.031GB
+```
+
+```sql
+> use vehicles
+```
+
+```text
+switched to db vehicles
+```
+
+```sql
+> show collections
+```
+
+```text
+sth_/4wheels_car1_car
+system.indexes
+```
+
+```sql
+> db['sth_/4wheels_car1_car'].find()
+```
+
+```json
+{
+    "_id": ObjectId("56337ea4c9e77c1614bfdbb7"),
+    "recvTimeTs": "1402409899391",
+    "recvTime": "2015-04-20T12:13:22.41.412Z",
+    "speed": "112.9",
+    "oil_level": "74.6"
+}
 ```
 
 ## Administration guide
