@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  draco:
+    image: ging/fiware-draco:1.1.0
+    container_name: draco
+    environment:
+      - NIFI_WEB_HTTP_PORT=9090
+    ports:
+      - "9090:9090"
+      - "5050:5050"
+  db-mysql:
+    image: mysql:5.7.22
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - "3306:3306"
+  db-postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+  mongo-db:
+    image: mongo:3.4
+    restart: always
+    ports:
+      - "27017:27017"

@@ -51,6 +51,8 @@ public final class NGSIConstants {
     //NGSIMySQLSink specific constants
     // http://dev.mysql.com/doc/refman/5.7/en/identifiers.html
     public static final int MYSQL_MAX_NAME_LEN = 64;
+    public static final int CASSANDRA_MAX_KEYSPACE_NAME_LEN = 48;
+    public static final int CASSANDRA_MAX_TABLE_NAME_LEN=48;
 
     // NGSIPostgreSQLSink specific constants
     // http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS
