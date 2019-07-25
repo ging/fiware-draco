@@ -13,6 +13,9 @@ public final class NGSIConstants {
     public static final String ATTR_VALUE          = "attrValue";
     public static final String ATTR_MD             = "attrMd";
     public static final String ATTR_MD_FILE        = "attrMdFile";
+    
+    public static final String ATTR_PER_COLUMN     = "column";
+    public static final String ATTR_PER_ROW        = "row";
 
     // FIWARE service and FIWARE service path specific constants
     public static final int SERVICE_HEADER_MAX_LEN      = 50;
