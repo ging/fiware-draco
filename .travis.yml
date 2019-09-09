@@ -7,6 +7,7 @@ jobs:
     - stage: test
       name: "Unit Tests: Java 8"
       language: java
+      dist: trusty
       jdk:
         - oraclejdk8
       before_install:
