@@ -18,8 +18,8 @@ ENV NIFI_TOOLKIT_HOME ${NIFI_BASE_DIR}/nifi-toolkit-current
 ENV NIFI_PID_DIR=${NIFI_HOME}/run
 ENV NIFI_LOG_DIR=${NIFI_HOME}/logs
 
-ENV DRACO_RELEASE=1.2.0
-ENV NIFI_NGSI_NAR_VERSION=1.2.0
+ENV DRACO_RELEASE=1.3.0
+ENV NIFI_NGSI_NAR_VERSION=1.3.0
 
 ADD sh/ ${NIFI_BASE_DIR}/scripts/
 
@@ -78,7 +78,7 @@ EXPOSE 8080 8443 10000
 
 WORKDIR ${NIFI_HOME}
 
-RUN curl -L -o "nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-nar-1.1.0.nar"\
+RUN curl -L -o "nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-nar-1.3.0.nar"\
 	&& cp ./nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
 # Apply configuration and start NiFi
