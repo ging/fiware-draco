@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TimeZone;
 
 public class PostgreSQLBackend {
 
@@ -34,6 +35,7 @@ public class PostgreSQLBackend {
     }
 
     public String getValuesForInsert(String attrPersistence, Entity entity, long creationTime, String fiwareServicePath) {
+        TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
         String valuesForInsert = "";
         if ((NGSIConstants.ATTR_PER_ROW).equalsIgnoreCase(attrPersistence)){
             for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
@@ -45,7 +47,7 @@ public class PostgreSQLBackend {
                 } // if else
 
                 valuesForInsert += "'" + creationTime + "'";
-                valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z").format(creationTime) + "'";
+                valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
                 valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
                 valuesForInsert += ",'" + entity.getEntityId() + "'";
                 valuesForInsert += ",'" + entity.getEntityType() + "'";
@@ -61,9 +63,10 @@ public class PostgreSQLBackend {
             } // for
         } //if
         else if((NGSIConstants.ATTR_PER_COLUMN).equalsIgnoreCase(attrPersistence)){
+            TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
             valuesForInsert += "(";
             valuesForInsert += "'" + creationTime + "'";
-            valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z").format(creationTime) + "'";
+            valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
             valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
             valuesForInsert += ",'" + entity.getEntityId() + "'";
             valuesForInsert += ",'" + entity.getEntityType() + "'";

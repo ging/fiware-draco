@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="U">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Fix PostgreSQl test fro travis">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
@@ -41,8 +39,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="919">
-              <caret line="590" column="89" selection-start-line="590" selection-start-column="89" selection-end-line="590" selection-end-column="89" />
+            <state relative-caret-position="334">
+              <caret line="590" column="78" selection-start-line="590" selection-start-column="78" selection-end-line="590" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -105,18 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="65" column="81" selection-start-line="65" selection-start-column="81" selection-end-line="65" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
+            <state relative-caret-position="225">
+              <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -398,7 +395,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571149534293" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571150895893" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -528,23 +525,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
-      <option name="METHOD_NAME" value="testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestNGSIToPostgreSQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="nifi-ngsi-processors" />
       <extension name="coverage">
@@ -555,6 +535,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
       <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
+      <option name="METHOD_NAME" value="testValuesForInsertColumnWithMetadata" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -654,10 +651,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada" />
+        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnWithoutMetadata" />
         <item itemvalue="JUnit.TestNGSIToCassandra" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL" />
-        <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
       </list>
     </recent_temporary>
   </component>
@@ -686,7 +683,7 @@
       <workItem from="1562237732927" duration="2217000" />
       <workItem from="1567416288314" duration="743000" />
       <workItem from="1570634415912" duration="2910000" />
-      <workItem from="1571048598612" duration="25216000" />
+      <workItem from="1571048598612" duration="26594000" />
     </task>
     <task id="LOCAL-00001" summary="adding roadmap documentation file">
       <created>1548151150989</created>
@@ -996,16 +993,17 @@
       <option name="project" value="LOCAL" />
       <updated>1571147400588</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Fix PostgreSQl test fro travis">
+      <created>1571149564705</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1571149564705</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestNGSIToMySQL_testBuildTableNameLengthDataModelByEntity - 2019.03.05 at 13h 21m 16s.xml">
-      <configuration name="TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestNGSIToMySQL_testBuildTableNameLengthDataModelByEntity - 2019.03.05 at 13h 22m 25s.xml">
-      <configuration name="TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestNGSIToCassandra - 2019.10.15 at 11h 59m 39s.xml">
       <configuration name="TestNGSIToCassandra" configurationId="JUnit" />
     </history-entry>
@@ -1030,9 +1028,15 @@
     <history-entry file="TestNGSIToPostgreSQL_testValuesForInsertColumnWithoutMetadata - 2019.10.15 at 16h 24m 30s.xml">
       <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithoutMetadata" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestNGSIToPostgreSQL_testValuesForInsertRowWithoutMetada - 2019.10.15 at 16h 25m 28s.xml">
+      <configuration name="TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestNGSIToPostgreSQL_testValuesForInsertColumnWithMetadata - 2019.10.15 at 16h 40m 46s.xml">
+      <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169542000" />
+    <option name="totallyTimeSpent" value="170920000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1095,7 +1099,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding travis ci file" />
     <MESSAGE value="travis" />
     <MESSAGE value="pom for coverage" />
     <MESSAGE value="include badges" />
@@ -1120,20 +1123,14 @@
     <MESSAGE value="Update Dockerfile for new version" />
     <MESSAGE value="Include Cassandra Processor, Update documentation, and Tests" />
     <MESSAGE value="Include Carto in processors conf file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Include Carto in processors conf file" />
+    <MESSAGE value="Fix PostgreSQl test fro travis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix PostgreSQl test fro travis" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSICharsets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3585">
-          <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
@@ -1487,17 +1484,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="65" column="81" selection-start-line="65" selection-start-column="81" selection-end-line="65" selection-end-column="81" />
+        <state relative-caret-position="225">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="919">
-          <caret line="590" column="89" selection-start-line="590" selection-start-column="89" selection-end-line="590" selection-end-column="89" />
+        <state relative-caret-position="334">
+          <caret line="590" column="78" selection-start-line="590" selection-start-column="78" selection-end-line="590" selection-end-column="78" />
         </state>
       </provider>
     </entry>
