@@ -1,32 +1,6 @@
-# <a name="top"></a>NGSIToCarto
-****
-
-Content:
-
-* [Functionality](#section1)
-    * [Mapping NGSI events to `NGSIEvent` objects](#section1.1)
-    * [Mapping `NGSIEvent`s to PostgreSQL data structures](#section1.2)
-        * [PostgreSQL databases naming conventions](#section1.2.1)
-        * [PostgreSQL schemas naming conventions](#section1.2.2)
-        * [PostgreSQL tables naming conventions](#section1.2.3)
-        * [Raw-based storing](#section1.2.4)
-        * [Distance-based storing](#section1.2.5)
-    * [Example](#section1.3)
-        * [NGSIEvent](#section1.3.1)
-        * [Database, schema and table names](#section1.3.2)
-        * [Raw-based storing](#section1.3.3)
-        * [Distance-based storing](#section1.3.4)
-* [Administration guide](#section2)
-    * [Configuration](#section2.1)
-    * [Important notes](#section2.2)
-        * [About encoding](#section2.2.1)
-        * [About distance-based storing ](#section2.2.2)
-        * [EPSG system reference](#section2.2.3)
-       
-    
-
-    
-## <a name="section1"></a>Functionality
+# NGSIToCarto
+   
+## Functionality
 
 NGSIToCarto is a processor designed to persist NGSI-like context data within a [PostgreSQL server](https://www.postgresql.org/) to be read
 by [Carto](https://carto.com/). These context data usually come from the [Orion Context Broker](https://github.com/telefonicaid/fiware-orion) instance
@@ -36,19 +10,19 @@ Independently of the data generator, NGSI context data is always transformed int
 
 [Top](#top)
 
-### <a name="section1.1"></a>Mapping NGSI events to `NGSIEvent` objects
+### Mapping NGSI events to `NGSIEvent` objects
 Notified NGSI events (containing context data) are transformed into `NGSIEvent` objects (for each context element a `NGSIEvent` is created; such an event is a mix of certain headers and a `ContextElement` object), independently of the NGSI data generator or the final backend where it is persisted.
 
 This is done at the Draco-ngsi Http listeners (in Flume jergon, sources) thanks to [`NGSIRestHandler`](ngsi_rest_handler.md). Once translated, the data (now, as `NGSIEvent` objects) is put into the internal channels for future consumption (see next section).
 
 [Top](#top)
 
-### <a name="section1.2"></a>Mapping `NGSIEvent`s to PostgreSQL data structures
+### Mapping `NGSIEvent`s to PostgreSQL data structures
 PostgreSQL organizes the data in schemas inside a database that contain tables of data rows. Such organization is exploited by `NGSIToPostgreSQL` each time a `NGSIEvent` is going to be persisted.
 
 [Top](#top)
 
-#### <a name="section1.2.1"></a>PostgreSQL databases naming conventions
+#### PostgreSQL databases naming conventions
 Previous to any operation with PostgreSQL you need to create the database to be used.
 
 It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
@@ -59,7 +33,7 @@ Also, becouse of a Carto's requirement, the name must begin with a letter (a-z).
 
 [Top](#top)
 
-#### <a name="section1.2.2"></a>PostgreSQL schemas naming conventions
+#### PostgreSQL schemas naming conventions
 A schema named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for the FIWARE service) is created (if not existing yet).
 
 It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
@@ -69,7 +43,7 @@ PostgreSQL [schemas name length](http://www.postgresql.org/docs/current/static/s
 Also, becouse of a Carto's requirement, the name must begin with a letter (a-z).
 [Top](#top)
 
-#### <a name="section1.2.3"></a>PostgreSQL tables naming conventions
+#### PostgreSQL tables naming conventions
 The name of these tables depends on the configured data model (see the [Configuration](#section2.1) section for more details):
 
 * Data model by service path (`data_model=dm-by-service-path`). As the data model name denotes, the notified FIWARE service path (or the configured one as default in [`NGSIRestHandler`](./ngsi_rest_handler.md)) is used as the name of the table. This allows the data about all the NGSI entities belonging to the same service path is stored in this unique table. The only constraint regarding this data model is the FIWARE service path cannot be the root one (`/`).
@@ -97,7 +71,7 @@ Please observe the concatenation of entity ID and type is already given in the `
 
 [Top](#top)
 
-## <a name="section1.2.4"></a>Raw-based storing
+## Raw-based storing
 
 It must be enabled the `enable_raw` parameter, unless `enable_distance` is not activated, so `enable_raw` will be enabled by default. It will have the following fields:
 
@@ -115,7 +89,7 @@ It must be enabled the `enable_raw` parameter, unless `enable_distance` is not a
 
 [Top](#top)
  
-##<a name="section1.2.5"></a>Distance-based storing
+## Distance-based storing
 
 It must be enabled the `enable_distance` parameter. It will contain the following fields:
 
@@ -148,8 +122,8 @@ It must be enabled the `enable_distance` parameter. It will contain the followin
 [Top](#top)
 
 
-### <a name="section1.3"></a>Example
-#### <a name="section1.3.1"></a>`NGSIEvent`
+### Example
+#### `NGSIEvent`
 Assuming the following `NGSIEvent` is created from a notified NGSI context data (the code below is an <i>object representation</i>, not any real data format):
 
     URL=$1
@@ -180,7 +154,7 @@ Assuming the following `NGSIEvent` is created from a notified NGSI context data 
 
 [Top](#top)
 
-## <a name="section1.3.2"></a>Database, schema and table names
+## Database, schema and table names
 
 The PostgreSQL database name will be of the user's choice.
 The name of the schema table is qsg.
@@ -200,7 +174,7 @@ Using the new encoding:
 
 [Top](#top)
 
-##<a name="section1.3.3"></a> Raw-based storing
+## Raw-based storing
 
 
     $ sudo docker exec -it db_1 /bin/bash
@@ -290,7 +264,7 @@ In addition, the same values but for the insertion in Carto
     
 [Top](#top)
 
-##<a name="section1.3.4"></a> Distance-based storing
+## Distance-based storing
 
 It must be enabled the `enable_distance` parameter, and `enable_raw` set to disabled.
 In order to show how calculations are done, another NGSI event will be notified.
@@ -477,8 +451,8 @@ In addition, the same values but for the insertion in Carto
      
     
   
-## <a section="2"></a> Administration guide
-## <a section="2.1"></a> Configuration
+##  Administration guide
+## Configuration
 
 NGSIToCarto is configured through the following parameters
 (Parameters in bold are required):
@@ -502,8 +476,8 @@ An example of this configuration can be:
 
 ![carto-processor](../images/Carto_Processor_Configuration.PNG)
 
-#### <a name="section2.2"></a> Important notes
-#### <a name="section2.2.1"></a>About the encoding
+#### Important notes
+#### About the encoding
 Until version 1.2.0 (included), Draco applied a very simple encoding:
 
 * All non alphanumeric characters were replaced by underscore, `_`.
@@ -525,14 +499,14 @@ Despite the old encoding will be deprecated in the future, it is possible to swi
 
 [Top](#top)
 
-## <a name="section2.2.2"></a>About the distance-based storing
+## About the distance-based storing
 
 In case that `enable_distance` is enabled and the table of the database is empty, the values of the parameters `stageDistance`, `stageTime`, `stageSpeed`, `sumDistance`, `sumTime`,`sumSpeed`,`sumDistance2`, `sumTime2` and `sumSpeed2` are set by default to 0 and the values of `maxDistance`,`minDistance`, `maxTime`,`minTime`,`maxSpeed` and `minSpeed` are set to infinity in the case of
 minimum values and in the other case to -infinity.
 
 If the table is not empty, the calculations of distance, speed and time will be done.
 
-## <a name="section2.2.3"></a> EPSG system reference
+## EPSG system reference
 
 Parameters `the_geom` and `the_geom_webmercator` use a system reference EPSG, that is a code in order to be read by Carto. In case of `the_geom` EPSG 4326 is the horiontal component for a 3D system
 , it is used by the nagevation system GPS. In the case of `the_geom_webmercator`, is used EPSG 3857 useful for the creation of web maps.

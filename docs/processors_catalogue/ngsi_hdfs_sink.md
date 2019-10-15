@@ -1,33 +1,5 @@
-# <a name="top"></a>NGSIToHDFS
-Content:
-
-* [Functionality](#section1)
-    * [Mapping NGSI events to `NGSIEvent` objects](#section1.1)
-    * [Mapping `NGSIEvent`s to HDFS data structures](#section1.2)
-        * [HDFS paths naming conventions](#section1.2.1)
-        * [Json row-like storing](#section1.2.2)
-        * [Json column-like storing](#section1.2.3)
-        * [CSV row-like storing](#section1.2.4)
-        * [CSV column-like storing](#section1.2.5)
-        * [Hive](#section1.2.6)
-    * [Example](#section1.3)
-        * [`NGSIEvent`](#section1.3.1)
-        * [Path names](#section1.3.2)
-        * [Json row-like storing](#section1.3.3)
-        * [Json column-like storing](#section1.3.4)
-        * [CSV row-like storing](#section1.3.5)
-        * [CSV column-like storing](#section1.3.6)
-        * [Hive storing](#section1.3.7)
-* [Administration guide](#section2)
-    * [Configuration](#section2.1)
-    * [Use cases](#section2.2)
-    * [Important notes](#section2.3)
-        * [About the persistence mode](#section2.3.1)
-        * [About the binary backend](#section2.3.2)
-        * [About batching](#section2.3.3)
-        * [About the encoding](#section2.3.4)
-
-## <a name="section1"></a>Functionality
+# NGSIToHDFS
+## Functionality
 `NGSIToHDFS` processor, or simply `NGSIToHDFS` is a sink designed to persist NGSI-like context data events within a [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html) deployment. Usually, such a context data is notified by a [Orion Context Broker](https://github.com/telefonicaid/fiware-orion) instance, but could be any other system speaking the <i>NGSI language</i>.
 
 Independently of the data generator, NGSI context data is always transformed into internal `NGSIEvent` objects at Draco sources. In the end, the information within these events must be mapped into specific HDFS data structures at the Draco sinks.
@@ -36,19 +8,19 @@ Next sections will explain this in detail.
 
 [Top](#top)
 
-### <a name="section1.1"></a>Mapping NGSI events to `NGSIEvent` objects
+### Mapping NGSI events to `NGSIEvent` objects
 Notified NGSI events (containing context data) are transformed into `NGSIEvent` objects (for each context element a `NGSIEvent` is created; such an event is a mix of certain headers and a `ContextElement` object), independently of the NGSI data generator or the final backend where it is persisted.
 
 This is done at the Draco-ngsi Http listeners (in Flume jergon, sources) thanks to [`NGSIRestHandler`](/ngsi_rest_handler.md). Once translated, the data (now, as `NGSIEvent` objects) is put into the internal channels for future consumption (see next section).
 
 [Top](#top)
 
-### <a name="section1.2"></a>Mapping `NGSIEvent`s to HDFS data structures
+### Mapping `NGSIEvent`s to HDFS data structures
 [HDFS organizes](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html#The_File_System_Namespace) the data in folders containing big data files. Such organization is exploited by `NGSIToHDFS` each time a `NGSIEvent` is going to be persisted.
 
 [Top](#top)
 
-#### <a name="section1.2.1"></a>HDFS paths naming conventions
+#### HDFS paths naming conventions
 Since the unique data model accepted for `NGSIToHDFS` is per entity (see the [Configuration](#section2.1) section for more details), a HDFS folder:
 
     /user/<hdfs_userame>/<fiware-service>/<fiware-servicePath>/<destination>
@@ -61,7 +33,7 @@ Please observe HDFS folders and files follow the [Unix rules](https://en.wikiped
 
 [Top](#top)
 
-#### <a name="section1.2.2"></a>Json row-like storing
+#### Json row-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `json-row` (default storing mode) then the notified data is stored attribute by attribute, composing a Json document for each one of them. Each append contains the following fields:
 
 * `recvTimeTs`: UTC timestamp expressed in miliseconds.
@@ -76,7 +48,7 @@ Regarding the specific data stored within the HDFS file, if `file_format` parame
 
 [Top](#top)
 
-#### <a name="section1.2.3"></a>Json column-like storing
+#### Json column-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `json-column` then a single Json document is composed for the whole notified entity, containing the following fields:
 
 * `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
@@ -88,7 +60,7 @@ Regarding the specific data stored within the HDFS file, if `file_format` parame
 
 [Top](#top)
 
-#### <a name="section1.2.4"></a>CSV row-like storing
+#### CSV row-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `csv-row` then the notified data is stored attribute by attribute, composing a CSV record for each one of them. Each record contains the following fields:
 
 * `recvTimeTs`: UTC timestamp expressed in miliseconds.
@@ -103,7 +75,7 @@ Regarding the specific data stored within the HDFS file, if `file_format` parame
 
 [Top](#top)
 
-#### <a name="section1.2.5"></a>CSV column-like storing
+#### CSV column-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `csv-column` then a single CSV record is composed for the whole notified entity, containing the following fields:
 
 * `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
@@ -115,15 +87,15 @@ Regarding the specific data stored within the HDFS file, if `file_format` parame
 
 [Top](#top)
 
-#### <a name="section1.2.6"></a>Hive
+#### Hive
 A special feature regarding HDFS persisted data is the possibility to exploit it through Hive, a SQL-like querying system. `NGSIToHDFS` automatically [creates a Hive external table](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Create/Drop/TruncateTable) (similar to a SQL table) for each persisted entity in the default database, being the name for such tables as `<username>_<fiware-service>_<fiware-servicePath>_<destination>_[row|column]`.
 
 The fields regarding each data row match the fields of the JSON documents/CSV records appended to the HDFS files. In the case of JSON, they are deserialized by using a [JSON serde](https://github.com/rcongiu/Hive-JSON-Serde). In the case of CSV they are deserialized by the delimiter fields specified in the table creation.
 
 [Top](#top)
 
-### <a name="section1.3"></a>Example
-#### <a name="section1.3.1"></a>`NGSIEvent`
+### Example
+#### `NGSIEvent`
 Assuming the following `NGSIEvent` is created from a notified NGSI context data (the code below is an <i>object representation</i>, not any real data format):
 
     ngsi-event={
@@ -157,7 +129,7 @@ Assuming the following `NGSIEvent` is created from a notified NGSI context data 
 
 [Top](#top)
 
-#### <a name="section1.3.2"></a>Path names
+#### Path names
 Assuming `hdfs_username=myuser` and `service_as_namespace=false` as configuration parameters, then `NGSIToHDFS` will persist the data within the body in this file (old encoding):
 
     $ hadoop fs -cat /user/myuser/vehicles/4wheels/car1_car/car1_car.txt
@@ -168,7 +140,7 @@ Using the new encoding:
 
 [Top](#top)
 
-#### <a name="section1.3.3"></a>Json row-like storing
+#### Json row-like storing
 A pair of Json documents are appended to the above file, one per attribute:
 
 ```
@@ -178,7 +150,7 @@ A pair of Json documents are appended to the above file, one per attribute:
 
 [Top](#top)
 
-#### <a name="section1.3.4"></a>Json column-like storing
+#### Json column-like storing
 A single Json document is appended to the above file, containing all the attributes:
 
 ```
@@ -187,7 +159,7 @@ A single Json document is appended to the above file, containing all the attribu
 
 [Top](#top)
 
-#### <a name="section1.3.5"></a>CSV row-like storing
+#### CSV row-like storing
 A pair of CSV records are appended to the above file, one per attribute:
 
 ```
@@ -211,7 +183,7 @@ then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_spe
 
 [Top](#top)
 
-#### <a name="section1.3.6"></a>CSV column-like storing
+#### CSV column-like storing
 A single CSV record is appended to the above file, containing all the attributes:
 
 ```
@@ -234,7 +206,7 @@ then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_spe
 
 [Top](#top)
 
-#### <a name="section1.3.7"></a>Hive storing
+#### Hive storing
 With respect to Hive, the content of the tables in the `json-row`, `json-column`, `csv-row` and `csv-column` modes, respectively, is:
 
     $ hive
@@ -255,8 +227,8 @@ NOTE: `hive` is the Hive CLI for locally querying the data.
 
 [Top](#top)
 
-## <a name="section2"></a>Administration guide
-### <a name="section2.1"></a>Configuration
+## Administration guide
+### Configuration
 `NGSIToHDFS` is configured through the following parameters:
 
 | Name                               | Default Value | Allowable Values         | Description                                                                                        |
@@ -301,20 +273,20 @@ A configuration example could be:
 
 [Top](#top)
 
-### <a name="section2.2"></a>Use cases
+### Use cases
 Use `NGSIToHDFS` if you are looking for a JSON or CSV-based document storage growing in the mid-long-term in estimated sizes of terabytes for future trending discovery, along the time persistent patterns of behaviour and so on.
 
 For a short-term historic, those required by dashboards and charting user interfaces, other backends are more suited such as MongoDB, STH Comet or MySQL (Draco provides sinks for them, as well).
 
 [Top](#top)
 
-### <a name="section2.3"></a>Important notes
-#### <a name="section2.3.1"></a>About the persistence mode
+### Important notes
+#### About the persistence mode
 Please observe not always the same number of attributes is notified; this depends on the subscription made to the NGSI-like sender. This is not a problem for the `*-row` persistence mode, since fixed 8-fields JSON/CSV documents are appended for each notified attribute. Nevertheless, the `*-column` mode may be affected by several JSON documents/CSV records of different lengths (in term of fields). Thus, the `*-column` mode is only recommended if your subscription is designed for always sending the same attributes, event if they were not updated since the last notification.
 
 [Top](#top)
 
-#### <a name="section2.3.2"></a>About the binary backend
+#### About the binary backend
 Current implementation of the HDFS binary backend does not support any authentication mechanism.
 
 A desirable authentication method would be OAuth2, since it is the standard in FIWARE, but this is not currently supported by the remote RPC server the binary backend accesses.
@@ -327,7 +299,7 @@ There exists an [issue](https://github.com/telefonicaid/fiware-cosmos/issues/111
 
 [Top](#top)
 
-#### <a name="section2.3.3"></a>About batching
+#### About batching
 As explained in the [programmers guide](#section3), `NGSIToHDFS` extends `NGSISink`, which provides a built-in mechanism for collecting events from the internal Flume channel. This mechanism allows extending classes have only to deal with the persistence details of such a batch of events in the final backend.
 
 What is important regarding the batch mechanism is it largely increases the performance of the sink, because the number of writes is dramatically reduced. Let's see an example, let's assume a batch of 100 `NGSIEvent`s. In the best case, all these events regard to the same entity, which means all the data within them will be persisted in the same HDFS file. If processing the events one by one, we would need 100 writes to HDFS; nevertheless, in this example only one write is required. Obviously, not all the events will always regard to the same unique entity, and many entities may be involved within a batch. But that's not a problem, since several sub-batches of events are created within a batch, one sub-batch per final destination HDFS file. In the worst case, the whole 100 entities will be about 100 different entities (100 different HDFS destinations), but that will not be the usual scenario. Thus, assuming a realistic number of 10-15 sub-batches per batch, we are replacing the 100 writes of the event by event approach with only 10-15 writes.
@@ -340,7 +312,7 @@ By default, `NGSIToHDFS` has a configured batch size and batch accumulation time
 
 [Top](#top)
 
-#### <a name="section2.3.4"></a>About the encoding
+#### About the encoding
 Until version 1.2.0 (included), Draco applied a very simple encoding:
 
 * All non alphanumeric characters were replaced by underscore, `_`.
