@@ -65,7 +65,9 @@ Current stable release is able to persist the following sources of data in the f
     -   [MySQL](https://www.mysql.com/), the well-known relational database manager.
     -   [MongoDB](https://www.mongodb.org/), the NoSQL document-oriented database.
     -   [PostgreSQL](http://www.postgresql.org/), the well-known relational database manager.
-
+    -   [Cassandra](http://www.cassandra.apache.org/)
+    -   [Carto](https://carto.com/)
+    -   [HDFS](https://hadoop.apache.org)
 ## Draco place in FIWARE architecture
 
 Draco plays the role of a connector between Orion Context Broker (which is a NGSI source of data) and many external and
