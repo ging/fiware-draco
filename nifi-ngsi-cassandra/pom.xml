@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
   contributor license agreements. See the NOTICE file distributed with
@@ -21,27 +22,14 @@
         <version>1.9.2</version>
     </parent>
 
-    <groupId>org.apache.nifi</groupId>
-    <artifactId>nifi-ngsi-bundle</artifactId>
+    <groupId>nifi-ngsi-cassandra</groupId>
+    <artifactId>nifi-ngsi-cassandra-bundle</artifactId>
     <version>1.3.1</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>nifi-ngsi-processors</module>
-        <module>nifi-ngsi-nar</module>
+        <module>nifi-ngsi-cassandra-processors</module>
+        <module>nifi-ngsi-cassandra-nar</module>
     </modules>
-
-
-<build>
-    <plugins>
-        <plugin>
-            <!-- what builds the NAR file... -->
-            <groupId>org.apache.nifi</groupId>
-            <artifactId>nifi-nar-maven-plugin</artifactId>
-            <version>1.0.1-incubating</version>
-            <extensions>true</extensions>
-        </plugin>
-    </plugins>
-</build>
 
 </project>

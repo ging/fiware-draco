@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.2">
-    <description>Template for receiving events from Orion context broker and storing data in the NGSI format into MySQL DB</description>
-    <groupId>9fdd6f13-0168-1000-7ae9-12d33b418829</groupId>
-    <name>ORION-TO-MYSQL</name>
+    <description>Template for receiving NGSIv2 events coming from Orion Context broker and persist that data to Cassandra DB</description>
+    <groupId>ce6ceec8-016d-1000-5c80-df18484d8e0a</groupId>
+    <name>ORION-TO-CASSANDRA</name>
     <snippet>
         <connections>
-            <id>2480a819-d485-3788-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
+            <id>ad94c6a4-ab33-388a-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
             <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
             <backPressureObjectThreshold>10000</backPressureObjectThreshold>
             <destination>
-                <groupId>88689c76-3d8c-3320-0000-000000000000</groupId>
-                <id>ae20bd15-eec9-3f22-0000-000000000000</id>
+                <groupId>457578db-bab3-3373-0000-000000000000</groupId>
+                <id>96b8a406-ae9b-3e11-0000-000000000000</id>
                 <type>PROCESSOR</type>
             </destination>
             <flowFileExpiration>0 sec</flowFileExpiration>
@@ -23,20 +23,20 @@
             <name></name>
             <selectedRelationships>success</selectedRelationships>
             <source>
-                <groupId>88689c76-3d8c-3320-0000-000000000000</groupId>
-                <id>0c4bab2e-a0d9-314b-0000-000000000000</id>
+                <groupId>457578db-bab3-3373-0000-000000000000</groupId>
+                <id>7055bb2f-e37f-3c93-0000-000000000000</id>
                 <type>PROCESSOR</type>
             </source>
             <zIndex>0</zIndex>
         </connections>
         <connections>
-            <id>dde7c4f5-59a5-3a04-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
+            <id>f6ea2d6d-cbd7-3ab0-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
             <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
             <backPressureObjectThreshold>10000</backPressureObjectThreshold>
             <destination>
-                <groupId>88689c76-3d8c-3320-0000-000000000000</groupId>
-                <id>0c4bab2e-a0d9-314b-0000-000000000000</id>
+                <groupId>457578db-bab3-3373-0000-000000000000</groupId>
+                <id>a8351f3b-61ed-3e20-0000-000000000000</id>
                 <type>PROCESSOR</type>
             </destination>
             <flowFileExpiration>0 sec</flowFileExpiration>
@@ -48,44 +48,50 @@
             <name></name>
             <selectedRelationships>success</selectedRelationships>
             <source>
-                <groupId>88689c76-3d8c-3320-0000-000000000000</groupId>
-                <id>137f1748-90c8-30e1-0000-000000000000</id>
+                <groupId>457578db-bab3-3373-0000-000000000000</groupId>
+                <id>96b8a406-ae9b-3e11-0000-000000000000</id>
                 <type>PROCESSOR</type>
             </source>
             <zIndex>0</zIndex>
         </connections>
         <controllerServices>
-            <id>84e313cb-a374-32bb-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
+            <id>b1075cca-0d08-3045-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
             <bundle>
-                <artifact>nifi-dbcp-service-nar</artifact>
+                <artifact>nifi-cassandra-services-nar</artifact>
                 <group>org.apache.nifi</group>
                 <version>1.9.2</version>
             </bundle>
             <comments></comments>
             <descriptors>
                 <entry>
-                    <key>Database Connection URL</key>
+                    <key>Cassandra Contact Points</key>
                     <value>
-                        <name>Database Connection URL</name>
+                        <name>Cassandra Contact Points</name>
                     </value>
                 </entry>
                 <entry>
-                    <key>Database Driver Class Name</key>
+                    <key>Client Auth</key>
                     <value>
-                        <name>Database Driver Class Name</name>
+                        <name>Client Auth</name>
                     </value>
                 </entry>
                 <entry>
-                    <key>database-driver-locations</key>
+                    <key>Consistency Level</key>
                     <value>
-                        <name>database-driver-locations</name>
+                        <name>Consistency Level</name>
                     </value>
                 </entry>
                 <entry>
-                    <key>Database User</key>
+                    <key>Keyspace</key>
                     <value>
-                        <name>Database User</name>
+                        <name>Keyspace</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Username</key>
+                    <value>
+                        <name>Username</name>
                     </value>
                 </entry>
                 <entry>
@@ -95,213 +101,48 @@
                     </value>
                 </entry>
                 <entry>
-                    <key>Max Wait Time</key>
+                    <key>SSL Context Service</key>
                     <value>
-                        <name>Max Wait Time</name>
-                    </value>
-                </entry>
-                <entry>
-                    <key>Max Total Connections</key>
-                    <value>
-                        <name>Max Total Connections</name>
-                    </value>
-                </entry>
-                <entry>
-                    <key>Validation-query</key>
-                    <value>
-                        <name>Validation-query</name>
+                        <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
+                        <name>SSL Context Service</name>
                     </value>
                 </entry>
             </descriptors>
-            <name>DBCPConnectionPool</name>
+            <name>CassandraSessionProvider</name>
             <persistsState>false</persistsState>
             <properties>
                 <entry>
-                    <key>Database Connection URL</key>
-                    <value>jdbc:mysql://mysql:3306</value>
+                    <key>Cassandra Contact Points</key>
+                    <value>localhost:9042</value>
                 </entry>
                 <entry>
-                    <key>Database Driver Class Name</key>
-                    <value>com.mysql.jdbc.Driver</value>
+                    <key>Client Auth</key>
+                    <value>NONE</value>
                 </entry>
                 <entry>
-                    <key>database-driver-locations</key>
-                    <value>./drivers/mysql-connector-java-5.1.38.jar</value>
+                    <key>Consistency Level</key>
                 </entry>
                 <entry>
-                    <key>Database User</key>
-                    <value>root</value>
+                    <key>Keyspace</key>
+                </entry>
+                <entry>
+                    <key>Username</key>
                 </entry>
                 <entry>
                     <key>Password</key>
                 </entry>
                 <entry>
-                    <key>Max Wait Time</key>
-                    <value>500 millis</value>
-                </entry>
-                <entry>
-                    <key>Max Total Connections</key>
-                    <value>8</value>
-                </entry>
-                <entry>
-                    <key>Validation-query</key>
+                    <key>SSL Context Service</key>
                 </entry>
             </properties>
-            <state>ENABLED</state>
-            <type>org.apache.nifi.dbcp.DBCPConnectionPool</type>
+            <state>ENABLING</state>
+            <type>org.apache.nifi.service.CassandraSessionProvider</type>
         </controllerServices>
         <processors>
-            <id>0c4bab2e-a0d9-314b-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
+            <id>7055bb2f-e37f-3c93-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
             <position>
-                <x>4.425048828125</x>
-                <y>225.0</y>
-            </position>
-            <bundle>
-                <artifact>nifi-ngsi-nar</artifact>
-                <group>default</group>
-                <version>unversioned</version>
-            </bundle>
-            <config>
-                <bulletinLevel>WARN</bulletinLevel>
-                <comments></comments>
-                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
-                <descriptors>
-                    <entry>
-                        <key>JDBC Connection Pool</key>
-                        <value>
-                            <identifiesControllerService>org.apache.nifi.dbcp.DBCPService</identifiesControllerService>
-                            <name>JDBC Connection Pool</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>ngsi-version</key>
-                        <value>
-                            <name>ngsi-version</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>data-model</key>
-                        <value>
-                            <name>data-model</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>attr-persistence</key>
-                        <value>
-                            <name>attr-persistence</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>default-service</key>
-                        <value>
-                            <name>default-service</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>default-service-path</key>
-                        <value>
-                            <name>default-service-path</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>enable-encoding</key>
-                        <value>
-                            <name>enable-encoding</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>enable-lowercase</key>
-                        <value>
-                            <name>enable-lowercase</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>Batch Size</key>
-                        <value>
-                            <name>Batch Size</name>
-                        </value>
-                    </entry>
-                    <entry>
-                        <key>rollback-on-failure</key>
-                        <value>
-                            <name>rollback-on-failure</name>
-                        </value>
-                    </entry>
-                </descriptors>
-                <executionNode>ALL</executionNode>
-                <lossTolerant>false</lossTolerant>
-                <penaltyDuration>30 sec</penaltyDuration>
-                <properties>
-                    <entry>
-                        <key>JDBC Connection Pool</key>
-                        <value>84e313cb-a374-32bb-0000-000000000000</value>
-                    </entry>
-                    <entry>
-                        <key>ngsi-version</key>
-                        <value>v2</value>
-                    </entry>
-                    <entry>
-                        <key>data-model</key>
-                        <value>db-by-service-path</value>
-                    </entry>
-                    <entry>
-                        <key>attr-persistence</key>
-                        <value>row</value>
-                    </entry>
-                    <entry>
-                        <key>default-service</key>
-                        <value>demo</value>
-                    </entry>
-                    <entry>
-                        <key>default-service-path</key>
-                        <value>/path</value>
-                    </entry>
-                    <entry>
-                        <key>enable-encoding</key>
-                        <value>true</value>
-                    </entry>
-                    <entry>
-                        <key>enable-lowercase</key>
-                        <value>true</value>
-                    </entry>
-                    <entry>
-                        <key>Batch Size</key>
-                        <value>10</value>
-                    </entry>
-                    <entry>
-                        <key>rollback-on-failure</key>
-                        <value>false</value>
-                    </entry>
-                </properties>
-                <runDurationMillis>0</runDurationMillis>
-                <schedulingPeriod>0 sec</schedulingPeriod>
-                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
-                <yieldDuration>1 sec</yieldDuration>
-            </config>
-            <executionNodeRestricted>false</executionNodeRestricted>
-            <name>NGSIToMySQL</name>
-            <relationships>
-                <autoTerminate>true</autoTerminate>
-                <name>failure</name>
-            </relationships>
-            <relationships>
-                <autoTerminate>true</autoTerminate>
-                <name>retry</name>
-            </relationships>
-            <relationships>
-                <autoTerminate>false</autoTerminate>
-                <name>success</name>
-            </relationships>
-            <state>STOPPED</state>
-            <style/>
-            <type>org.apache.nifi.processors.ngsi.NGSIToMySQL</type>
-        </processors>
-        <processors>
-            <id>137f1748-90c8-30e1-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
-            <position>
-                <x>4.425048828125</x>
+                <x>0.0</x>
                 <y>0.0</y>
             </position>
             <bundle>
@@ -435,11 +276,164 @@
             <type>org.apache.nifi.processors.standard.ListenHTTP</type>
         </processors>
         <processors>
-            <id>ae20bd15-eec9-3f22-0000-000000000000</id>
-            <parentGroupId>88689c76-3d8c-3320-0000-000000000000</parentGroupId>
+            <id>96b8a406-ae9b-3e11-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
             <position>
-                <x>0.0</x>
-                <y>432.19598388671875</y>
+                <x>4.0</x>
+                <y>224.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-ngsi-cassandra-nar</artifact>
+                <group>nifi-ngsi-cassandra</group>
+                <version>1.3.1</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>cassandra-connection-provider</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.cassandra.CassandraSessionProviderService</identifiesControllerService>
+                            <name>cassandra-connection-provider</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>
+                            <name>ngsi-version</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>
+                            <name>data-model</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>
+                            <name>attr-persistence</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>default-service</key>
+                        <value>
+                            <name>default-service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>default-service-path</key>
+                        <value>
+                            <name>default-service-path</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>
+                            <name>enable-encoding</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>
+                            <name>enable-lowercase</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>put-cassandra-record-batch-size</key>
+                        <value>
+                            <name>put-cassandra-record-batch-size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Consistency Level</key>
+                        <value>
+                            <name>Consistency Level</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>put-cassandra-record-batch-statement-type</key>
+                        <value>
+                            <name>put-cassandra-record-batch-statement-type</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>cassandra-connection-provider</key>
+                        <value>b1075cca-0d08-3045-0000-000000000000</value>
+                    </entry>
+                    <entry>
+                        <key>ngsi-version</key>
+                        <value>v2</value>
+                    </entry>
+                    <entry>
+                        <key>data-model</key>
+                        <value>db-by-service-path</value>
+                    </entry>
+                    <entry>
+                        <key>attr-persistence</key>
+                        <value>row</value>
+                    </entry>
+                    <entry>
+                        <key>default-service</key>
+                        <value>test</value>
+                    </entry>
+                    <entry>
+                        <key>default-service-path</key>
+                        <value>/path</value>
+                    </entry>
+                    <entry>
+                        <key>enable-encoding</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>enable-lowercase</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>put-cassandra-record-batch-size</key>
+                        <value>100</value>
+                    </entry>
+                    <entry>
+                        <key>Consistency Level</key>
+                        <value>SERIAL</value>
+                    </entry>
+                    <entry>
+                        <key>put-cassandra-record-batch-statement-type</key>
+                        <value>LOGGED</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>NGSIToCassandra</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.ngsi.cassandra.NGSIToCassandra</type>
+        </processors>
+        <processors>
+            <id>a8351f3b-61ed-3e20-0000-000000000000</id>
+            <parentGroupId>457578db-bab3-3373-0000-000000000000</parentGroupId>
+            <position>
+                <x>4.0</x>
+                <y>437.9999694824219</y>
             </position>
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
@@ -549,5 +543,5 @@
             <type>org.apache.nifi.processors.standard.LogAttribute</type>
         </processors>
     </snippet>
-    <timestamp>01/30/2019 17:50:42 UTC</timestamp>
+    <timestamp>10/15/2019 10:26:02 GMT</timestamp>
 </template>
