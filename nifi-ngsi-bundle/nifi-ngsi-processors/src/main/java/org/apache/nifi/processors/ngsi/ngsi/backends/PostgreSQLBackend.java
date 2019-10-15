@@ -45,7 +45,7 @@ public class PostgreSQLBackend {
                 } // if else
 
                 valuesForInsert += "'" + creationTime + "'";
-                valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
+                valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z").format(creationTime) + "'";
                 valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
                 valuesForInsert += ",'" + entity.getEntityId() + "'";
                 valuesForInsert += ",'" + entity.getEntityType() + "'";
@@ -63,7 +63,7 @@ public class PostgreSQLBackend {
         else if((NGSIConstants.ATTR_PER_COLUMN).equalsIgnoreCase(attrPersistence)){
             valuesForInsert += "(";
             valuesForInsert += "'" + creationTime + "'";
-            valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
+            valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z").format(creationTime) + "'";
             valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
             valuesForInsert += ",'" + entity.getEntityId() + "'";
             valuesForInsert += ",'" + entity.getEntityType() + "'";

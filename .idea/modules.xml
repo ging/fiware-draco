@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/fiware-draco.iml" filepath="$PROJECT_DIR$/.idea/fiware-draco.iml" />
       <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" filepath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-bundle.iml" filepath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/nifi-ngsi-cassandra-nar.iml" filepath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/nifi-ngsi-cassandra-nar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/nifi-ngsi-cassandra-processors.iml" filepath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/nifi-ngsi-cassandra-processors.iml" />
       <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" filepath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" />
       <module fileurl="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" filepath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" />
     </modules>

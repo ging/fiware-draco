@@ -588,7 +588,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         
         try {
             String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34','','someId','someType','someAttr','someType','someValue','[]')";
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34 CEST','','someId','someType','someAttr','someType','someValue','[]')";
            
             try {
                 assertEquals(expecetedvaluesForInsert, valuesForInsert);
@@ -623,7 +623,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         
         try {
             String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34','','someId','someType','someValue','[]')";
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34 CEST','','someId','someType','someValue','[]')";
            
             try {
                 assertEquals(expecetedvaluesForInsert, valuesForInsert);
@@ -660,7 +660,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         
         try {
             String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')";
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34 CEST','','someId','someType','someAttr','someType','someValue','someMtdStr')";
            
             try {
                 assertEquals(expecetedvaluesForInsert, valuesForInsert);
@@ -697,7 +697,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         
         try {
             String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34','','someId','someType','someValue','someMtdStr')";
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 06:55:34 CEST','','someId','someType','someValue','someMtdStr')";
            
             try {
                 assertEquals(expecetedvaluesForInsert, valuesForInsert);
