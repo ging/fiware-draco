@@ -31,4 +31,4 @@ jobs:
         - npm install
       script:
         - npm run lint:md
-        - npm run lint:text
+        #- npm run lint:text

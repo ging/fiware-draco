@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Fix PostgreSQl test fro travis">
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Fix PostgreSQl test for travis">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/nifi-ngsi-bundle/target/" />
@@ -25,18 +24,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="150">
-                <caret line="229" column="57" selection-start-line="229" selection-end-line="229" selection-end-column="57" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="334">
@@ -46,55 +33,80 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_carto_sink.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="76">
+                <caret line="453" column="3" selection-start-line="453" selection-start-column="3" selection-end-line="453" selection-end-column="3" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="45">
+                <caret line="3" column="83" selection-start-line="3" selection-start-column="83" selection-end-line="3" selection-end-column="127" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="360">
+                <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_hdfs_sink.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="285">
+                <caret line="310" column="600" selection-start-line="310" selection-start-column="600" selection-end-line="310" selection-end-column="600" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/issues_and_contact.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="120">
+                <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="58" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="393" column="9" selection-start-line="393" selection-start-column="9" selection-end-line="393" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3390">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mkdocs.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker-compose.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+            <state relative-caret-position="423">
+              <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -178,9 +190,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/Orion-To-Mongo.xml" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/ORION-TO-POSGRESQL.xml" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/aggregators/MongoAggregator.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMongo.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/MongoBackend.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" />
@@ -222,13 +231,16 @@
         <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/MULTIPLE-SINKS-TUTORIAL.xml" />
         <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/MONGO-TUTORIAL.xml" />
         <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/pom.xml" />
-        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md" />
         <option value="$PROJECT_DIR$/docs/processors_catalogue/README.md" />
-        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_hdfs_sink.md" />
         <option value="$PROJECT_DIR$/mkdocs.yml" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md" />
+        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_hdfs_sink.md" />
+        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_carto_sink.md" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -293,97 +305,13 @@
             <path>
               <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
-              <item name="backends" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ngsi" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="processors_catalogue" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -395,7 +323,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571150895893" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571218555713" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -683,14 +611,7 @@
       <workItem from="1562237732927" duration="2217000" />
       <workItem from="1567416288314" duration="743000" />
       <workItem from="1570634415912" duration="2910000" />
-      <workItem from="1571048598612" duration="26594000" />
-    </task>
-    <task id="LOCAL-00001" summary="adding roadmap documentation file">
-      <created>1548151150989</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1548151150989</updated>
+      <workItem from="1571048598612" duration="31410000" />
     </task>
     <task id="LOCAL-00002" summary="adding roadmap documentation file">
       <created>1548151438063</created>
@@ -1000,13 +921,45 @@
       <option name="project" value="LOCAL" />
       <updated>1571149564705</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Fix PostgreSQl test for travis">
+      <created>1571150915609</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1571150915609</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Update Documentation">
+      <created>1571151652092</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1571151652092</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Update travis and Readme">
+      <created>1571152233088</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1571152233088</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Fix Documentation">
+      <created>1571216821200</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1571216821200</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Fix Documentation">
+      <created>1571218128855</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1571218128856</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestNGSIToCassandra - 2019.10.15 at 11h 59m 39s.xml">
-      <configuration name="TestNGSIToCassandra" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestNGSIToCassandra - 2019.10.15 at 12h 00m 01s.xml">
       <configuration name="TestNGSIToCassandra" configurationId="JUnit" />
     </history-entry>
@@ -1034,9 +987,12 @@
     <history-entry file="TestNGSIToPostgreSQL_testValuesForInsertColumnWithMetadata - 2019.10.15 at 16h 40m 46s.xml">
       <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestNGSIToPostgreSQL_testValuesForInsertRowWithoutMetada - 2019.10.15 at 16h 48m 18s.xml">
+      <configuration name="TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170920000" />
+    <option name="totallyTimeSpent" value="175736000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1051,7 +1007,7 @@
     <frame x="67" y="25" width="1213" height="999" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3119109" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3119109" />
       <window_info id="Structure" order="1" weight="0.24959481" />
       <window_info id="Image Layers" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1062,7 +1018,7 @@
       <window_info anchor="bottom" id="Spring" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49837926" weight="0.32887402" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.49014568" visible="true" weight="0.32988507" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49014568" visible="true" weight="0.32988507" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1099,10 +1055,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="travis" />
-    <MESSAGE value="pom for coverage" />
-    <MESSAGE value="include badges" />
-    <MESSAGE value="including badges" />
     <MESSAGE value="updating roadmap" />
     <MESSAGE value="updating dependencies for 1.8.0 version" />
     <MESSAGE value="including default values for fiware service and service path and fixing methods for reading flowfile attributes with case insensitive" />
@@ -1124,30 +1076,17 @@
     <MESSAGE value="Include Cassandra Processor, Update documentation, and Tests" />
     <MESSAGE value="Include Carto in processors conf file" />
     <MESSAGE value="Fix PostgreSQl test fro travis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix PostgreSQl test fro travis" />
+    <MESSAGE value="Fix PostgreSQl test for travis" />
+    <MESSAGE value="Update Documentation" />
+    <MESSAGE value="Update travis and Readme" />
+    <MESSAGE value="Fix Documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Documentation" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="60" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1455">
-          <caret line="102" column="62" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToCarto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6030">
@@ -1390,46 +1329,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_carto_sink.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="150">
-            <caret line="229" column="57" selection-start-line="229" selection-end-line="229" selection-end-column="57" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_hdfs_sink.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="222">
-            <caret line="210" lean-forward="true" selection-start-line="210" selection-end-line="210" />
-          </first_editor>
           <second_editor />
         </state>
       </provider>
@@ -1484,13 +1387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1502,6 +1398,71 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="590" column="78" selection-start-line="590" selection-start-column="78" selection-end-line="590" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="45">
+            <caret line="3" column="83" selection-start-line="3" selection-start-column="83" selection-end-line="3" selection-end-column="127" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_hdfs_sink.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="285">
+            <caret line="310" column="600" selection-start-line="310" selection-start-column="600" selection-end-line="310" selection-end-column="600" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/issues_and_contact.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="120">
+            <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="58" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_cassandra_sink.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="360">
+            <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_carto_sink.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="76">
+            <caret line="453" column="3" selection-start-line="453" selection-start-column="3" selection-end-line="453" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
         </state>
       </provider>
     </entry>
