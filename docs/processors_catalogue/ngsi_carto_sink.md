@@ -29,7 +29,7 @@ It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/curren
 
 PostgreSQL [databases name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is limited to 63 characters.
 
-Also, becouse of a Carto's requirement, the name must begin with a letter (a-z).
+Also, because of a Carto's requirement, the name must begin with a letter (a-z).
 
 [Top](#top)
 
@@ -40,7 +40,7 @@ It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/curren
 
 PostgreSQL [schemas name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is limited to 63 characters.
 
-Also, becouse of a Carto's requirement, the name must begin with a letter (a-z).
+Also, because of a Carto's requirement, the name must begin with a letter (a-z).
 [Top](#top)
 
 #### PostgreSQL tables naming conventions
@@ -85,7 +85,7 @@ It must be enabled the `enable_raw` parameter, unless `enable_distance` is not a
     -   `geo:point`: a point.
     -   `geo:json`: GeoJSON representing a point.
 -   `the_geom_webmercator`:Exactly the same as `the_geom` bt changing the EPSH sistem reference to 3857.
--    For each not-geolocated attribute, the insert will contain two additional field, one named with the `attrName` received and another with the metadata.
+-   For each not-geolocated attribute, the insert will contain two additional field, one named with the `attrName` received and another with the metadata.
 
 [Top](#top)
  
@@ -451,7 +451,7 @@ In addition, the same values but for the insertion in Carto
      
     
   
-##  Administration guide
+## Administration guide
 ## Configuration
 
 NGSIToCarto is configured through the following parameters
@@ -470,7 +470,7 @@ NGSIToCarto is configured through the following parameters
 |Swap coordinates         |false              |true, false                       |true changes position between latitude and longitude                                                                                                                                                                                                                                                                |
 |Enable lowercase         |true               |true, false                       |true for creating the Schema and Tables name with lowercase                                                                                                                                                                                                                                                         |                                  
 |**Batch size**           |10                 |                                  |The preferred number of FlowFiles to put to the database in a single transaction                                                                                                                                                                                                                                    |              
-|Transaction timeout      |no                 |30                                |Specify how errors are going to be handled. By default(false), if there is an error the FlowFile will be routed to "failure" or "retry". If it is enabled the failure FlowFiles will stay in the input relation without penalizing it and being processed repeatedly until it gets processed succesfully or removed.| 
+|Transaction timeout      |no                 |30                                |Specify how errors are going to be handled. By default(false), if there is an error the FlowFile will be routed to "failure" or "retry". If it is enabled the failure FlowFiles will stay in the input relation without penalizing it and being processed repeatedly until it gets processed successfully or removed.| 
 
 An example of this configuration can be:
 
