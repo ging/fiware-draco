@@ -36,54 +36,54 @@ Please observe HDFS folders and files follow the [Unix rules](https://en.wikiped
 #### Json row-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `json-row` (default storing mode) then the notified data is stored attribute by attribute, composing a Json document for each one of them. Each append contains the following fields:
 
-* `recvTimeTs`: UTC timestamp expressed in miliseconds.
-* `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* `attrName`: Notified attribute name.
-* `attrType`: Notified attribute type.
-* `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 it can be JSON object or JSON array.
-* `attrMd`: It contains a string serialization of the metadata array for the attribute in JSON (if the attribute hasn't metadata, an empty array `[]` is inserted).
+-   `recvTimeTs`: UTC timestamp expressed in miliseconds.
+-   `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   `attrName`: Notified attribute name.
+-   `attrType`: Notified attribute type.
+-   `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 it can be JSON object or JSON array.
+-   `attrMd`: It contains a string serialization of the metadata array for the attribute in JSON (if the attribute hasn't metadata, an empty array `[]` is inserted).
 
 [Top](#top)
 
 #### Json column-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `json-column` then a single Json document is composed for the whole notified entity, containing the following fields:
 
-* `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `fiwareServicePath`: The notified one or default one.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* For each notified attribute, a field named as the attribute is considered. This field will store the attribute values along the time.
-* For each notified attribute, a field named as the concatenation of the attribute name and `_md` is considered. This field will store the attribute's metadata values along the time.
+-   `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `fiwareServicePath`: The notified one or default one.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   For each notified attribute, a field named as the attribute is considered. This field will store the attribute values along the time.
+-   For each notified attribute, a field named as the concatenation of the attribute name and `_md` is considered. This field will store the attribute's metadata values along the time.
 
 [Top](#top)
 
 #### CSV row-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `csv-row` then the notified data is stored attribute by attribute, composing a CSV record for each one of them. Each record contains the following fields:
 
-* `recvTimeTs`: UTC timestamp expressed in miliseconds.
-* `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* `attrName`: Notified attribute name.
-* `attrType`: Notified attribute type.
-* `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 this can be a JSON object or JSON array.
-* `attrMd`: In this case, the field does not contain the real metadata, but the name of the HDFS file storing such metadata. The reason to do this is the metadata may be an array of any length; each element within the array will be persisted as a single line in the metadata file containing the metadata's name, type and value, all of them separated by the ',' field separator. There will be a metadata file per each attribute under `/user/<hdfs_userame>/<fiware-service>/<fiware-servicePath>/<destination>_<attrName>_<attrType>/<destination>_<attrName>_<attrType>.txt`
+-   `recvTimeTs`: UTC timestamp expressed in miliseconds.
+-   `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   `attrName`: Notified attribute name.
+-   `attrType`: Notified attribute type.
+-   `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 this can be a JSON object or JSON array.
+-   `attrMd`: In this case, the field does not contain the real metadata, but the name of the HDFS file storing such metadata. The reason to do this is the metadata may be an array of any length; each element within the array will be persisted as a single line in the metadata file containing the metadata's name, type and value, all of them separated by the ',' field separator. There will be a metadata file per each attribute under `/user/<hdfs_userame>/<fiware-service>/<fiware-servicePath>/<destination>_<attrName>_<attrType>/<destination>_<attrName>_<attrType>.txt`
 
 [Top](#top)
 
 #### CSV column-like storing
 Regarding the specific data stored within the HDFS file, if `file_format` parameter is set to `csv-column` then a single CSV record is composed for the whole notified entity, containing the following fields:
 
-* `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `fiwareServicePath`: The notified one or default one.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* For each notified attribute, a field named as the attribute is considered. This field will store the attribute values along the time.
-* For each notified attribute, a field named as the concatenation of the attribute name and `_md` is considered. This field will store the attribute's metadata values along the time.
+-   `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `fiwareServicePath`: The notified one or default one.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   For each notified attribute, a field named as the attribute is considered. This field will store the attribute values along the time.
+-   For each notified attribute, a field named as the concatenation of the attribute name and `_md` is considered. This field will store the attribute's metadata values along the time.
 
 [Top](#top)
 
@@ -315,19 +315,19 @@ By default, `NGSIToHDFS` has a configured batch size and batch accumulation time
 #### About the encoding
 Until version 1.2.0 (included), Draco applied a very simple encoding:
 
-* All non alphanumeric characters were replaced by underscore, `_`.
-* The underscore was used as concatenator character as well.
-* The slash, `/`, in the FIWARE service paths is ignored.
+-   All non alphanumeric characters were replaced by underscore, `_`.
+-   The underscore was used as concatenator character as well.
+-   The slash, `/`, in the FIWARE service paths is ignored.
 
 From version 1.3.0 (included), Draco applies this specific encoding tailored to HDFS data structures:
 
-* Alphanumeric characters are not encoded.
-* Numeric characters are not encoded.
-* Equals character, `=`, is encoded as `xffff`.
-* User defined strings composed of a `x` character and a [Unicode](http://unicode-table.com) are encoded as `xx` followed by the Unicode.
-* Slash character, `/`, is encoded as `x002f`.
-* All the other characters are not encoded.
-* `xffff` is used as concatenator character.
+-   Alphanumeric characters are not encoded.
+-   Numeric characters are not encoded.
+-   Equals character, `=`, is encoded as `xffff`.
+-   User defined strings composed of a `x` character and a [Unicode](http://unicode-table.com) are encoded as `xx` followed by the Unicode.
+-   Slash character, `/`, is encoded as `x002f`.
+-   All the other characters are not encoded.
+-   `xffff` is used as concatenator character.
 
 Despite the old encoding will be deprecated in the future, it is possible to switch the encoding type through the `enable_encoding` parameter as explained in the [configuration](#section2.1) section.
 

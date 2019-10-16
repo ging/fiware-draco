@@ -46,8 +46,8 @@ Also, becouse of a Carto's requirement, the name must begin with a letter (a-z).
 #### PostgreSQL tables naming conventions
 The name of these tables depends on the configured data model (see the [Configuration](#section2.1) section for more details):
 
-* Data model by service path (`data_model=dm-by-service-path`). As the data model name denotes, the notified FIWARE service path (or the configured one as default in [`NGSIRestHandler`](./ngsi_rest_handler.md)) is used as the name of the table. This allows the data about all the NGSI entities belonging to the same service path is stored in this unique table. The only constraint regarding this data model is the FIWARE service path cannot be the root one (`/`).
-* Data model by entity (`data_model=dm-by-entity`). For each entity, the notified/default FIWARE service path is concatenated to the notified entity ID and type in order to compose the table name. If the FIWARE service path is the root one (`/`) then only the entity ID and type are concatenated.
+-   Data model by service path (`data_model=dm-by-service-path`). As the data model name denotes, the notified FIWARE service path (or the configured one as default in [`NGSIRestHandler`](./ngsi_rest_handler.md)) is used as the name of the table. This allows the data about all the NGSI entities belonging to the same service path is stored in this unique table. The only constraint regarding this data model is the FIWARE service path cannot be the root one (`/`).
+-   Data model by entity (`data_model=dm-by-entity`). For each entity, the notified/default FIWARE service path is concatenated to the notified entity ID and type in order to compose the table name. If the FIWARE service path is the root one (`/`) then only the entity ID and type are concatenated.
 
 It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
 
@@ -75,17 +75,17 @@ Please observe the concatenation of entity ID and type is already given in the `
 
 It must be enabled the `enable_raw` parameter, unless `enable_distance` is not activated, so `enable_raw` will be enabled by default. It will have the following fields:
 
-* `cartodb_id`: This column is used as the primary key of the table
-* `RecvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `RecvTimeTs`: Timestamp in milliseconds.
-* `FiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* `the_geom`: Geo-localized point that contains the longitude and latitude, of PostGIS Geometry type. It use the reference sistem EPSG 4326. It must be created by means of the ST_Point () function. It can be of three types:
-    * `geo:point`: a point.
-    * `geo:json`: GeoJSON representing a point.
-* `the_geom_webmercator`:Exactly the same as `the_geom` bt changing the EPSH sistem reference to 3857.
-*  For each not-geolocated attribute, the insert will contain two additional field, one named with the `attrName` received and another with the metadata.
+-   `cartodb_id`: This column is used as the primary key of the table
+-   `RecvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `RecvTimeTs`: Timestamp in milliseconds.
+-   `FiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   `the_geom`: Geo-localized point that contains the longitude and latitude, of PostGIS Geometry type. It use the reference sistem EPSG 4326. It must be created by means of the ST_Point () function. It can be of three types:
+    -   `geo:point`: a point.
+    -   `geo:json`: GeoJSON representing a point.
+-   `the_geom_webmercator`:Exactly the same as `the_geom` bt changing the EPSH sistem reference to 3857.
+-    For each not-geolocated attribute, the insert will contain two additional field, one named with the `attrName` received and another with the metadata.
 
 [Top](#top)
  
@@ -93,31 +93,31 @@ It must be enabled the `enable_raw` parameter, unless `enable_distance` is not a
 
 It must be enabled the `enable_distance` parameter. It will contain the following fields:
 
-* `cartodb_id`: This column is used as the primary key of the table
-* `recvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `recvTimeTs`: Timestamp in milliseconds.
-* `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-* `the_geom`: Geo-localized point that contains the longitude and latitude, of PostGIS Geometry type. It use the reference sistem EPSG 4326. It must be created by means of the ST_Point () function. It can be of three types:
-    * `geo:point`: a point.
-    * `geo:json`: GeoJSON representing a point.
-* `the_geom_webmercator`:Exactly the same as `the_geom` bt changing the EPSH sistem reference to 3857.
-* `stageDistance`: Distane between the new geopoint and the previous one.
-* `stageTime`: The elapsed time when moving from the new geopoint and the previous one.
-* `stageSpeed`: Division between the `stageDistance` and the `stageTime`.
-* `sumDistance`: Average stage distance. Division of the sum of the stage distances with the number of stages.
-* `sumTime`: Average stage time. Division of the sum of the stage times with the number of stages.
-* `sumSpeed`: Average stage speed. Division of the sum of the stage speeds with the number of stages.
-* `sum2Distance`: variance of the stage distances. Division of the square root of the sum of stage distances divided by the number of stages.
-* `sum2Time`: variance of the stage times. Division of the square root of the sum of stage times divided by the number of stages.
-* `sum2Speed`: variance of the stage speeds. Division of the square root of the sum of stage speeds divided by the number of stages.
-* `maxDistance`: Maximum of the stage distances.
-* `minDistance`: Minimum of the stage distances.
-* `maxTime`: Maximum of the stage times.
-* `minTime`: Minimum of the stage times.
-* `maxSpeed`: Maximum of the stage speeds.
-* `minSpeed`: Minimum of the stage speeds.
+-   `cartodb_id`: This column is used as the primary key of the table
+-   `recvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `recvTimeTs`: Timestamp in milliseconds.
+-   `fiwareServicePath`: Notified fiware-servicePath, or the default configured one if not notified.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   `the_geom`: Geo-localized point that contains the longitude and latitude, of PostGIS Geometry type. It use the reference sistem EPSG 4326. It must be created by means of the ST_Point () function. It can be of three types:
+    -   `geo:point`: a point.
+    -   `geo:json`: GeoJSON representing a point.
+-   `the_geom_webmercator`:Exactly the same as `the_geom` bt changing the EPSH sistem reference to 3857.
+-   `stageDistance`: Distane between the new geopoint and the previous one.
+-   `stageTime`: The elapsed time when moving from the new geopoint and the previous one.
+-   `stageSpeed`: Division between the `stageDistance` and the `stageTime`.
+-   `sumDistance`: Average stage distance. Division of the sum of the stage distances with the number of stages.
+-   `sumTime`: Average stage time. Division of the sum of the stage times with the number of stages.
+-   `sumSpeed`: Average stage speed. Division of the sum of the stage speeds with the number of stages.
+-   `sum2Distance`: variance of the stage distances. Division of the square root of the sum of stage distances divided by the number of stages.
+-   `sum2Time`: variance of the stage times. Division of the square root of the sum of stage times divided by the number of stages.
+-   `sum2Speed`: variance of the stage speeds. Division of the square root of the sum of stage speeds divided by the number of stages.
+-   `maxDistance`: Maximum of the stage distances.
+-   `minDistance`: Minimum of the stage distances.
+-   `maxTime`: Maximum of the stage times.
+-   `minTime`: Minimum of the stage times.
+-   `maxSpeed`: Maximum of the stage speeds.
+-   `minSpeed`: Minimum of the stage speeds.
 
 [Top](#top)
 
@@ -480,20 +480,20 @@ An example of this configuration can be:
 #### About the encoding
 Until version 1.2.0 (included), Draco applied a very simple encoding:
 
-* All non alphanumeric characters were replaced by underscore, `_`.
-* The underscore was used as concatenator character as well.
-* The slash, `/`, in the FIWARE service paths is ignored.
+-   All non alphanumeric characters were replaced by underscore, `_`.
+-   The underscore was used as concatenator character as well.
+-   The slash, `/`, in the FIWARE service paths is ignored.
 
 From version 1.3.0 (included), Draco applies this specific encoding tailored to PostgreSQL data structures:
 
-* Lowercase alphanumeric characters are not encoded.
-* Upercase alphanumeric characters are encoded.
-* Numeric characters are not encoded.
-* Underscore character, `_`, is not encoded.
-* Equals character, `=`, is encoded as `xffff`.
-* All other characters, including the slash in the FIWARE service paths, are encoded as a `x` character followed by the [Unicode](http://unicode-table.com) of the character.
-* User defined strings composed of a `x` character and a Unicode are encoded as `xx` followed by the Unicode.
-* `xffff` is used as concatenator character.
+-   Lowercase alphanumeric characters are not encoded.
+-   Upercase alphanumeric characters are encoded.
+-   Numeric characters are not encoded.
+-   Underscore character, `_`, is not encoded.
+-   Equals character, `=`, is encoded as `xffff`.
+-   All other characters, including the slash in the FIWARE service paths, are encoded as a `x` character followed by the [Unicode](http://unicode-table.com) of the character.
+-   User defined strings composed of a `x` character and a Unicode are encoded as `xx` followed by the Unicode.
+-   `xffff` is used as concatenator character.
 
 Despite the old encoding will be deprecated in the future, it is possible to switch the encoding type through the `enable_encoding` parameter as explained in the [configuration](#section2.1) section.
 
