@@ -74,7 +74,7 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-processor-utils</artifactId>
-            <version>1.8.0</version>
+            <version>1.10.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-flowfile-packager</artifactId>
-            <version>1.8.0</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -199,12 +199,12 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-processors</artifactId>
-            <version>1.8.0</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-json-utils</artifactId>
-            <version>1.8.0</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -214,7 +214,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
     </dependencies>
 
