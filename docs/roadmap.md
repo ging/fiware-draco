@@ -17,22 +17,20 @@ The following list of features are planned to be addressed in the short term, an
 the product:
 
 -   **Quality Assurance** Include quality assurance for the Draco Generic enabler
--   **Tutorials**: Include Step-by-Step tutorials fro draco
 -   **Resources FIWARE Academy**: Provide resources for training section in FIWARE academy
--   **NGSIToHDFS Controller**: Controller for connecting Draco and HDFS backend.
--   **NGSIToHDFS Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to HDFS file
+-   **NGSIToNeo4j Controller**: Controller for connecting Draco and Neo4j backend.
+-   **NGSIToNeo4j Processor**: Processor for storing data coming from Orion Context Broker store NGSI-LD in a graph database. 
     system.
--   **Tests for NGSIToHDFS**: Validation tests for NGSIToHDFS processor.
+-   **NGSIToDynamoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to
+    DynamoDB.
+-   **NGSIToDynamoDB Controller**: Controller for connecting between Draco and DynamoDB backend.    
 
 ## Medium term
 
 The following list of features are planned to be addressed in the medium term, typically within the subsequent
 release(s) generated in the next 9 months after next planned release:
 
--   **NGSIToCartoDB Controller**: Controller for connecting between Draco and CartoDB backend.
--   **NGSIToCartoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CouchDB.
--   **NGSIToCouchDB Controller**: Controller for connecting between Draco and CouchDB backend.
--   **NGSIToCouchDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CartoDB.
+-   **Draco over kubernetes**: For fully deployments with UCON 
 -   **NGSIToCKAN Controller**: Controller for connecting between Draco and CKAN backend.
 -   **NGSIToCKAN Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CKAN.
 
@@ -42,13 +40,9 @@ The following list of features are proposals regarding the longer-term evolution
 of these features has not yet been scheduled for a release in the near future. Please feel free to contact us if you
 wish to get involved in the implementation or influence the roadmap:
 
--   **NGSIToKafka Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to Kafka.
--   **NGSIToKafka Controller**: Controller for connecting between Draco and Kafka backend.
--   **NGSIToDynamoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to
-    DynamoDB.
--   **NGSIToDynamoDB Controller**: Controller for connecting between Draco and DynamoDB backend.
--   **Graph oriented Databases**: Add new processors and controllers for supporting graph oriented databases like neo4j
-    and RDF databases.
+-   **NGSIToCouchDB Controller**: Controller for connecting between Draco and CouchDB backend.
+-   **NGSIToCouchDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CouchDB.
 -   **Caching and batching**: Add caching and batching mechanisms for optimizing the write to the different backends.
 -   **New Data Structure for native NGSI-LD**: Planing to redefine the data models of the different backends for
     optimizing the storage of NGSI-LD data
+-   **NGSIToCouchDB Controller**:ntegration planning with the Usage control framework for monitoring the sinks operations
