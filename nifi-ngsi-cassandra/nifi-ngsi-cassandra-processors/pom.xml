@@ -21,6 +21,9 @@
         <artifactId>nifi-ngsi-cassandra-bundle</artifactId>
         <version>1.3.1</version>
     </parent>
+    <properties>
+        <nifi.version>1.9.2</nifi.version>
+    </properties>
 
     <artifactId>nifi-ngsi-cassandra-processors</artifactId>
     <packaging>jar</packaging>
@@ -34,13 +37,13 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-utils</artifactId>
-            <version>1.9.2</version>
+            <version>${nifi.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-mock</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -61,12 +64,13 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-cassandra-services-api</artifactId>
-            <version>1.9.2</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-ngsi-processors</artifactId>
             <version>1.3.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>

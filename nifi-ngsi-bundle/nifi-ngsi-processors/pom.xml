@@ -26,6 +26,7 @@
     <packaging>jar</packaging>
     <properties>
         <mongo.driver.version>3.2.2</mongo.driver.version>
+        <nifi.version>1.9.2</nifi.version>
     </properties>
 
     <dependencies>
@@ -42,23 +43,23 @@
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-record-serialization-services</artifactId>
             <version>1.8.0</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-mongodb-processors</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-mock</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -74,13 +75,13 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-processor-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-record-path</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -93,7 +94,7 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-flowfile-packager</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -118,17 +119,17 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-security-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-socket-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-load-distribution-service-api</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
@@ -138,18 +139,18 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-avro-record-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-dbcp-service-api</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-distributed-cache-client-service</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -160,25 +161,25 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-prioritizers</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-mock-record-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-lookup-services</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -187,7 +188,7 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-web-test-utils</artifactId>
-            <version>1.8.0</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
@@ -200,6 +201,7 @@
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-processors</artifactId>
             <version>1.8.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -234,7 +236,6 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
-                    <repoToken>${COVERALLS_TOKEN}</repoToken>
                     <sourceEncoding>UTF-8</sourceEncoding>
                     <sourceDirectories>
                         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
