@@ -11,9 +11,13 @@ jobs:
       jdk:
         - oraclejdk8
       before_install:
+        - wget http://apache.mirror.gtcomm.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+        - tar xzvf apache-maven-3.6.0-bin.tar.gz
+        - export PATH=`pwd`/apache-maven-3.6.0/bin:$PATH
+        - mvn -v
         - cd nifi-ngsi-bundle
       install:
-        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA > maven.log
       before_script:
         - mvn verify -Padd-dependencies-for-IDEA  
       script:
