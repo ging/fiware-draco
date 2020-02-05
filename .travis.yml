@@ -17,7 +17,8 @@ jobs:
         - mvn -v
         - cd nifi-ngsi-bundle
       install:
-        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA 
+        - mvn -v
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA
       before_script:
         - mvn verify -Padd-dependencies-for-IDEA  
       script:
