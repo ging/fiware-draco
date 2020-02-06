@@ -22,7 +22,7 @@ jobs:
         - mvn -s ../settings.xml verify -Padd-dependencies-for-IDEA > maven-verify.log
       script:
         - cd nifi-ngsi-processors
-        - mvn -s ../settings.xml clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DCOVERALLS_TOKEN=$COVERALLS_TOKEN
+        - mvn -s ../../settings.xml clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DCOVERALLS_TOKEN=$COVERALLS_TOKEN
       after_success:
         - mvn clean cobertura:cobertura coveralls:report
 
