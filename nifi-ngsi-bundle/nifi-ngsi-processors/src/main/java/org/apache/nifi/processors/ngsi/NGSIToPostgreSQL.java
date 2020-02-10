@@ -64,7 +64,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
             .required(false)
-            .allowableValues("row")
+            .allowableValues("row", "column")
             .defaultValue("row")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
@@ -255,7 +255,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         JdbcCommon.setParameters(stmt, flowFile.getAttributes());
                         try {
                             conn.createStatement().execute(postgres.createSchema(schemaName));
-                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue()));
+                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(), entity));
 
                         } catch (SQLException s) {
                             getLogger().error(s.toString());

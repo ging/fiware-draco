@@ -60,7 +60,7 @@
             <bundle>
                 <artifact>nifi-dbcp-service-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.8.0</version>
+                <version>1.9.2</version>
             </bundle>
             <comments></comments>
             <descriptors>
@@ -160,7 +160,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.8.0</version>
+                <version>1.9.2</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>
@@ -421,7 +421,7 @@
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
                 <group>org.apache.nifi</group>
-                <version>1.8.0</version>
+                <version>1.9.2</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>

@@ -3,7 +3,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35fcea6513143e4b2ac3eb28a0932c1)](https://app.codacy.com/app/anmunoz/fiware-draco?utm_source=github.com&utm_medium=referral&utm_content=ging/fiware-draco&utm_campaign=Badge_Grade_Dashboard)
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](http://stackoverflow.com/questions/tagged/fiware-draco)
+[![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
 [![Support badge](https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
 <br/>
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
@@ -65,6 +65,9 @@ Current stable release is able to persist the following sources of data in the f
     -   [MySQL](https://www.mysql.com/), the well-known relational database manager.
     -   [MongoDB](https://www.mongodb.org/), the NoSQL document-oriented database.
     -   [PostgreSQL](http://www.postgresql.org/), the well-known relational database manager.
+    -   [Cassandra](http://cassandra.apache.org/)
+    -   [Carto](https://carto.com/)
+    -   [HDFS](https://hadoop.apache.org)
 
 ## Draco place in FIWARE architecture
 

@@ -391,7 +391,7 @@ public class TestNGSIToMySQL {
                     + "-  OK  - A database name length greater than 64 characters has been detected");
         } // try catch
     }
-
+    @Test
     public void testBuildTableNameLengthDataModelByServicePath() throws Exception {
         System.out.println("[NGSIToMySQL.buildTableName]"
                 + "-------- When data model is by service path, a table name length greater than 64 characters is "

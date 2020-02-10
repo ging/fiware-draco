@@ -11,7 +11,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-framework-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-ssl-context-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-lookup-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-http-context-map-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record-serialization-service-api:1.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-proxy-configuration-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-properties:1.9.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-protocol:1.9.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-ssl-context-service:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-schema-registry-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-record-serialization-services:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-syslog-utils:1.8.0" level="project" />
@@ -34,10 +48,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.stax-utils:stax-utils:20070216" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-text:1.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-framework-api:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-framework-api:1.9.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-expression-language:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-data-provenance-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-properties-loader:1.8.0" level="project" />
@@ -50,21 +64,21 @@
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-processor-utils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-path:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-ssl-context-service-api:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-lookup-service-api:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-ssl-context-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-lookup-service-api:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-flowfile-packager:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.18" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.8.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service-api:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-http-context-map-api:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record-serialization-service-api:1.8.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-proxy-configuration-api:1.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-http-context-map-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record-serialization-service-api:1.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-proxy-configuration-api:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-security-utils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.60" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.60" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-properties:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-properties:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: de.svenkubiak:jBCrypt:0.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-socket-utils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-logging-utils:1.8.0" level="project" />
@@ -75,8 +89,8 @@
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-record-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-dbcp-service-api:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service:1.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-protocol:1.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-ssl-context-service:1.8.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-protocol:1.9.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-ssl-context-service:1.9.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-prioritizers:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock-record-utils:1.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-lookup-services:1.8.0" level="project" />
@@ -96,7 +110,7 @@
     <orderEntry type="library" name="Maven: com.bazaarvoice.jolt:json-utils:0.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.7" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.7" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-schema-registry-service-api:1.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-schema-registry-service-api:1.9.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-web-test-utils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20160810" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-processors:1.8.0" level="project" />

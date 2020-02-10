@@ -13,6 +13,9 @@ public final class NGSIConstants {
     public static final String ATTR_VALUE          = "attrValue";
     public static final String ATTR_MD             = "attrMd";
     public static final String ATTR_MD_FILE        = "attrMdFile";
+    
+    public static final String ATTR_PER_COLUMN     = "column";
+    public static final String ATTR_PER_ROW        = "row";
 
     // FIWARE service and FIWARE service path specific constants
     public static final int SERVICE_HEADER_MAX_LEN      = 50;
@@ -51,6 +54,8 @@ public final class NGSIConstants {
     //NGSIMySQLSink specific constants
     // http://dev.mysql.com/doc/refman/5.7/en/identifiers.html
     public static final int MYSQL_MAX_NAME_LEN = 64;
+    public static final int CASSANDRA_MAX_KEYSPACE_NAME_LEN = 48;
+    public static final int CASSANDRA_MAX_TABLE_NAME_LEN=48;
 
     // NGSIPostgreSQLSink specific constants
     // http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS

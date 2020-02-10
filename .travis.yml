@@ -7,18 +7,23 @@ jobs:
     - stage: test
       name: "Unit Tests: Java 8"
       language: java
+      dist: trusty
       jdk:
         - oraclejdk8
       before_install:
-        - cd nifi-ngsi-bundle/nifi-ngsi-processors
+        - wget http://apache.mirror.gtcomm.net/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+        - tar xzvf apache-maven-3.6.3-bin.tar.gz
+        - export PATH=`pwd`/apache-maven-3.6.3/bin:$PATH
+        - mvn -v
+        - cd nifi-ngsi-bundle
       install:
-        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA
+        - mvn -s ../settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA > maven-install.log
       before_script:
-        - mvn verify -Padd-dependencies-for-IDEA  
+        - mvn -s ../settings.xml verify -Padd-dependencies-for-IDEA > maven-verify.log
       script:
-        - mvn clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DCOVERALLS_TOKEN=$COVERALLS_TOKEN
+        - cd nifi-ngsi-processors
+        - mvn -s ../../settings.xml clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DCOVERALLS_TOKEN=$COVERALLS_TOKEN
       after_success:
-        - cd ../..
         - mvn clean cobertura:cobertura coveralls:report
 
     - stage: test

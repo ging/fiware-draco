@@ -3,6 +3,8 @@ package org.apache.nifi.processors.ngsi;
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+import java.util.ArrayList;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
@@ -499,7 +501,219 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch
     } // testBuildTableNameLengthDataModelByEntity
+    
+    @Test
+    public void testRowFields() throws Exception {
+        System.out.println("[PostgreSQLBackend.listOfFields ]"
+                + "-------- When attrPersistence is column");
 
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        
+        try {
+            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
+            List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "attrName", "attrType", "attrValue", "attrMd");
+            ArrayList<String> expecetedListOfFields = new ArrayList<String>();
+            expecetedListOfFields.addAll(expList);
+           
+            try {
+                assertEquals(expecetedListOfFields, listOfFields);
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "-  OK  - '" + listOfFields + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "- FAIL - '" + listOfFields + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.listOfFields]"
+                    + "- FAIL - There was some problem when building the list of fields");
+            throw e;
+        } // try catch
 
+    } // testRowFields
+
+    @Test
+    public void testColumnFields() throws Exception {
+        System.out.println("[PostgreSQLBackend.listOfFields ]"
+                + "-------- When attrPersistence is column");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        
+        try {
+            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
+            List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "someAttr", "someAttr_md");
+            ArrayList<String> expecetedListOfFields = new ArrayList<String>();
+            expecetedListOfFields.addAll(expList);
+           
+            try {
+                assertEquals(expecetedListOfFields, listOfFields);
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "-  OK  - '" + listOfFields + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "- FAIL - '" + listOfFields + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.listOfFields]"
+                    + "- FAIL - There was some problem when building the list of fields");
+            throw e;
+        } // try catch
+
+    } // testColumnFields
+    
+    @Test
+    public void testValuesForInsertRowWithoutMetada() throws Exception {
+        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                + "-------- When attrPersistence is column");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        long creationTime = 1562561734983l;
+        String fiwareServicePath = "/";
+        
+        try {
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','[]')";
+           
+            try {
+                assertEquals(expecetedvaluesForInsert, valuesForInsert);
+                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                    + "- FAIL - There was some problem when building values for insert");
+            throw e;
+        } // try catch
+
+    } // testValuesForInsertRowWithoutMetada
+    
+    @Test
+    public void testValuesForInsertColumnWithoutMetadata() throws Exception {
+        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                + "-------- When attrPersistence is column");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        long creationTime = 1562561734983l;
+        String fiwareServicePath = "/";
+        
+        try {
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','[]')";
+           
+            try {
+                assertEquals(expecetedvaluesForInsert, valuesForInsert);
+                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                    + "- FAIL - There was some problem when building values for insert");
+            throw e;
+        } // try catch
+
+    } // testValuesForInsertColumnWithoutMetadata
+    
+    @Test
+    public void testValuesForInsertRowWithMetadata() throws Exception {
+        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                + "-------- When attrPersistence is column");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Metadata> attrMetadata = new ArrayList<>();
+        attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", attrMetadata, "someMtdStr"));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        long creationTime = 1562561734983l;
+        String fiwareServicePath = "/";
+        
+        try {
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')";
+           
+            try {
+                assertEquals(expecetedvaluesForInsert, valuesForInsert);
+                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                    + "- FAIL - There was some problem when building values for insert");
+            throw e;
+        } // try catch
+
+    } // testValuesForInsertRowWithMetadata
+    
+    @Test
+    public void testValuesForInsertColumnWithMetadata() throws Exception {
+        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                + "-------- When attrPersistence is column");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Metadata> attrMetadata = new ArrayList<>();
+        attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
+        ArrayList<Attributes> entityAttrs = new ArrayList<>();
+        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", attrMetadata, "someMtdStr"));
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        long creationTime = 1562561734983l;
+        String fiwareServicePath = "/";
+        
+        try {
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath);
+            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','someMtdStr')";
+           
+            try {
+                assertEquals(expecetedvaluesForInsert, valuesForInsert);
+                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
+                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
+                throw e;
+            } // try catch
+        } catch (Exception e) {
+            System.out.println("[PostgreSQLBackend.valuesForInsert]"
+                    + "- FAIL - There was some problem when building values for insert");
+            throw e;
+        } // try catch
+
+    } // testValuesForInsertColumnWithMetadata
 
 }
