@@ -3,7 +3,7 @@ package org.apache.nifi.processors.ngsi.dynamo;
 
 import org.apache.nifi.logging.ComponentLog;
 import org.apache.nifi.processors.ngsi.dynamo.backends.DynamoBackend;
-import org.apache.nifi.processors.ngsi.dynamo.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
