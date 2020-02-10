@@ -18,12 +18,12 @@
 
     <parent>
         <groupId>org.apache.nifi</groupId>
-        <artifactId>nifi-ngsi-dynamodb</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <artifactId>nifi-ngsi-dynamodb-bundle</artifactId>
+        <version>1.3.1</version>
     </parent>
 
     <artifactId>nifi-ngsi-dynamo-nar</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.3.1</version>
     <packaging>nar</packaging>
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
@@ -34,12 +34,12 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-ngsi-dynamo-processors</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
-            <artifactId>nifi-standard-services-api-nar</artifactId>
-            <version>1.0.0</version>
+            <artifactId>nifi-cassandra-services-api-nar</artifactId>
+            <version>1.9.2</version>
             <type>nar</type>
         </dependency>
     </dependencies>
