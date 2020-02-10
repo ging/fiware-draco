@@ -26,7 +26,7 @@ import org.apache.nifi.annotation.lifecycle.OnStopped;
 import org.apache.nifi.annotation.documentation.CapabilityDescription;
 import org.apache.nifi.annotation.documentation.Tags;
 import org.apache.nifi.annotation.behavior.*;
-
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.logging.ComponentLog;
 import org.apache.nifi.processor.exception.ProcessException;
 import org.apache.nifi.processor.ProcessContext;
@@ -34,7 +34,6 @@ import org.apache.nifi.processor.ProcessSession;
 import org.apache.nifi.processor.Relationship;
 import org.apache.nifi.processor.util.StandardValidators;
 import org.apache.nifi.processors.ngsi.dynamo.backends.DynamoBackend;
-import org.apache.nifi.processors.ngsi.dynamo.utils.*;
 import org.apache.nifi.processors.aws.AbstractAWSCredentialsProviderProcessor;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
@@ -42,6 +41,8 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 
 import java.util.*;
 
