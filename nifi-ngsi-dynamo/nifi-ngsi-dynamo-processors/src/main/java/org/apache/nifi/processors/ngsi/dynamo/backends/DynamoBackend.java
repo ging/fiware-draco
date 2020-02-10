@@ -3,7 +3,8 @@ package org.apache.nifi.processors.ngsi.dynamo.backends;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.model.*;
 import org.apache.nifi.logging.ComponentLog;
-import org.apache.nifi.processors.ngsi.dynamo.utils.*;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class DynamoBackend {
         try {
             TableDescription tableDescription = dynamoDB.getTable(tableName).describe();
             return true;
-        } catch (com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException rnfe) {
+        } catch (ResourceNotFoundException rnfe) {
             return false;
         }
     }
@@ -222,7 +223,3 @@ public class DynamoBackend {
     }
 
 }
-
-
-
-
