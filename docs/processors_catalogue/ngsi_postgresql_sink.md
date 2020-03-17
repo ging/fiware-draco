@@ -286,13 +286,24 @@ postgresql> select * from vehicles.4wheels_car1_car;
 
 #### Column-like storing
 
-Coming soon.
+If `attr_persistence=column` then `NGSIToPostgreSQL` will persist the data within the body as:
 
-<a name="section2"></a>
+```sql
+postgresql> select * from 4wheels_car1_car;
+```
+
+```text
++------------+---------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+| recvTimeTs | recvTime                  | fiwareServicePath | entityId | entityType | speed | speed_md | oil_level | oil_level_md |
++------------+---------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+| 1429535775 |2015-04-20T12:13:22.41.124 | 4wheels           | car1     | car        | 112.9 | []       |  74.6     | []           |
++------------+---------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
+1 row in set (0.00 sec)
+```
 
 ## Administration guide
 
-<a name="section2.1"></a>
+
 
 ### Configuration
 
@@ -419,3 +430,8 @@ Despite the old encoding will be deprecated in the future, it is possible to swi
 
 Current implementation of `NGSIToPostgreSQL` relies on the database, username and password credentials created at the
 PostgreSQL endpoint.
+
+### About the persistence mode
+Please observe not always the same number of attributes is notified; this depends on the subscription made to the NGSI-like sender. This is not a problem for the `row` persistence mode, since fixed 8-fields data rows are inserted for each notified attribute. Nevertheless, the `column` mode may be affected by several data rows of different lengths (in term of fields). Thus, the `column` mode is only recommended if your subscription is designed for always sending the same attributes, event if they were not updated since the last notification.
+
+In addition, when running in `column` mode, due to the number of notified attributes (and therefore the number of fields to be written within the Datastore) is unknown by Cygnus, the table can not be automatically created, and must be provisioned previously to the Cygnus execution. That's not the case of the `row` mode since the number of fields to be written is always constant, independently of the number of notified attributes.

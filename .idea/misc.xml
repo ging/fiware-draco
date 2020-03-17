@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" />
         <option value="$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" />
       </list>
     </option>
   </component>

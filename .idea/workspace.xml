@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Fix coveralls test for travis">
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/test/java/org/apache/nifi/processors/ngsi/dynamo/TestNGSIToDynamo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerBuild.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerBuild.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerRun.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/DockerRun.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/common.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/common.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/start.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/toolkit.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/toolkit.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_cluster_state_management.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_cluster_state_management.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_login_providers.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/sh/update_login_providers.sh" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/nifi-ngsi-bundle/target/" />
@@ -11,6 +29,9 @@
     <ignored path="$PROJECT_DIR$/nifi-ngsi-cassandra/target/" />
     <ignored path="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/target/" />
     <ignored path="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/target/" />
+    <ignored path="$PROJECT_DIR$/nifi-ngsi-dynamo/target/" />
+    <ignored path="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/target/" />
+    <ignored path="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,80 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="75">
-                <caret line="5" column="82" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="82" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="272" column="47" selection-start-line="272" selection-start-column="47" selection-end-line="272" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.travis.yml">
+        <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-368" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+            <state relative-caret-position="148">
+              <caret line="83" column="71" selection-start-line="83" selection-start-column="71" selection-end-line="83" selection-end-column="195" />
             </state>
           </provider>
         </entry>
@@ -153,20 +105,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSI/backends/MongoBackend.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" />
-        <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMongo.java" />
-        <option value="$PROJECT_DIR$/docs/installation_and_administration_guide/processors_configuration.md" />
-        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md" />
-        <option value="$PROJECT_DIR$/docs/processors_catalogue/ngsi_rest_handler.md" />
-        <option value="$PROJECT_DIR$/docs/quick_start_guide.md" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/CommonConstants.java" />
         <option value="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile2" />
         <option value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" />
@@ -211,6 +156,13 @@
         <option value="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml" />
         <option value="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/AbstractCassandraProcessor.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/test/java/org/apache/nifi/processors/ngsi/dynamo/TestNGSIToDynamo.java" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" />
+        <option value="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" />
       </list>
     </option>
   </component>
@@ -223,7 +175,26 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand />
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="nifi-ngsi-dynamo-processors" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="nifi-ngsi-dynamo-processors" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="nifi-ngsi-dynamodb-bundle" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="nifi-ngsi-dynamodb-bundle" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
       <select />
     </treeState>
   </component>
@@ -235,17 +206,16 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="1213" />
-    <option name="height" value="999" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,25 +226,20 @@
             <path>
               <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fiware-draco" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fiware-draco" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-bundle" type="462c0819:PsiDirectoryNode" />
-              <item name="nifi-ngsi-processors" type="462c0819:PsiDirectoryNode" />
+              <item name="nifi-ngsi-resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580989709629" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583776873645" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -283,16 +248,16 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/docs/images" />
       <recent name="$PROJECT_DIR$/docs/processors_catalogue" />
       <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates" />
       <recent name="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/test/resources" />
-      <recent name="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/test/java/org.apache.nifi.processors.ngsi.cassandra" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -307,7 +272,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada">
+  <component name="RunManager" selected="JUnit.TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -389,16 +354,67 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToCassandra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-cassandra-processors" />
+    <configuration name="TestNGSIToHDFS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.cassandra.*" />
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi.cassandra" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.cassandra.TestNGSIToCassandra" />
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToHDFS" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIToMySQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
+      <option name="METHOD_NAME" value="testBuildTableNameLengthDataModelByEntity" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
+      <option name="METHOD_NAME" value="testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -414,63 +430,14 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
       <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
-      <option name="METHOD_NAME" value="testValuesForInsertColumnWithMetadata" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnWithoutMetadata" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
-      <option name="METHOD_NAME" value="testValuesForInsertColumnWithoutMetadata" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
-      <option name="METHOD_NAME" value="testValuesForInsertRowWithoutMetada" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -511,6 +478,7 @@
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -529,11 +497,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertRowWithoutMetada" />
-        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnWithoutMetadata" />
-        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnWithMetadata" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL" />
-        <item itemvalue="JUnit.TestNGSIToCassandra" />
+        <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
+        <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" />
+        <item itemvalue="JUnit.TestNGSIToMySQL" />
+        <item itemvalue="JUnit.TestNGSIToHDFS" />
       </list>
     </recent_temporary>
   </component>
@@ -563,6 +531,7 @@
       <workItem from="1567416288314" duration="743000" />
       <workItem from="1570634415912" duration="2910000" />
       <workItem from="1571048598612" duration="31410000" />
+      <workItem from="1583776710613" duration="434000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -943,7 +912,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179447000" />
+    <option name="totallyTimeSpent" value="188578000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -955,9 +924,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-2" width="1920" height="1082" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24012807" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24630873" />
       <window_info id="Structure" order="1" weight="0.24959481" />
       <window_info id="Image Layers" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -965,15 +934,16 @@
       <window_info id="Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Nl-Palette" order="7" />
+      <window_info anchor="bottom" id="ConsoleMavenPlugin" />
       <window_info anchor="bottom" id="Spring" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49837926" weight="0.32887402" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49014568" visible="true" weight="0.32988507" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49014568" weight="0.32948583" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="SBT Console" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5098543" side_tool="true" weight="0.32988507" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="8" sideWeight="0.5098543" side_tool="true" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="TODO" order="9" sideWeight="0.49918962" weight="0.32998884" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49357328" weight="0.35402298" />
       <window_info anchor="bottom" id="Debug Logs" order="11" />
@@ -983,7 +953,7 @@
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Docker" order="16" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.49675852" weight="0.32413793" />
-      <window_info anchor="bottom" id="Version Control" order="18" sideWeight="0.49271637" weight="0.32873562" />
+      <window_info anchor="bottom" id="Version Control" order="18" sideWeight="0.49271637" weight="0.32843652" />
       <window_info anchor="bottom" id="Java Enterprise" order="19" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
@@ -995,61 +965,16 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Ant Build" order="9" weight="0.24935733" />
-      <window_info anchor="right" id="Maven" order="10" weight="0.3033419" />
+      <window_info anchor="right" id="Maven" order="10" visible="true" weight="0.3" />
       <window_info anchor="right" id="Database" order="11" />
       <window_info anchor="right" id="Bean Validation" order="12" />
       <window_info anchor="right" id="SciView" order="13" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25535563" />
-      <window_info id="Structure" order="1" weight="0.24959481" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Nl-Palette" order="7" />
-      <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49837926" weight="0.32887402" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49014568" visible="true" weight="0.32988507" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="SBT Console" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5098543" side_tool="true" weight="0.32988507" />
-      <window_info anchor="bottom" id="TODO" order="9" sideWeight="0.49918962" weight="0.32998884" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49357328" weight="0.35402298" />
-      <window_info anchor="bottom" id="Debug Logs" order="11" />
-      <window_info anchor="bottom" id="Salesforce" order="12" />
-      <window_info anchor="bottom" id="SBT Execute" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Execute Anonymous" order="14" />
-      <window_info anchor="bottom" id="Database Changes" order="15" />
-      <window_info anchor="bottom" id="Docker" order="16" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.49675852" weight="0.32413793" />
-      <window_info anchor="bottom" id="Version Control" order="18" sideWeight="0.49271637" weight="0.32873562" />
-      <window_info anchor="bottom" id="Java Enterprise" order="19" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
-      <window_info anchor="right" id="LuaJ" order="2" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Properties" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Ant Build" order="9" weight="0.24935733" />
-      <window_info anchor="right" id="Maven" order="10" weight="0.2647815" />
-      <window_info anchor="right" id="Database" order="11" />
-      <window_info anchor="right" id="Bean Validation" order="12" />
-      <window_info anchor="right" id="SciView" order="13" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updating dependencies for 1.8.0 version" />
     <MESSAGE value="including default values for fiware service and service path and fixing methods for reading flowfile attributes with case insensitive" />
     <MESSAGE value="updating readme for testing" />
     <MESSAGE value="updating dockerfile with correct release of fiware" />
@@ -1074,104 +999,14 @@
     <MESSAGE value="Update travis and Readme" />
     <MESSAGE value="Fix Documentation" />
     <MESSAGE value="Fix coveralls test for travis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix coveralls test for travis" />
+    <MESSAGE value="Add nifi-ngsi-dynamo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add nifi-ngsi-dynamo" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/ORION-TO-CASSANDRA.xml" />
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/ORION-TO-MYSQL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5604">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/ORION-TO-MONGO.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="213" column="50" lean-forward="true" selection-start-line="213" selection-start-column="50" selection-end-line="213" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/ORION-TO-POSTGRESQL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="396" column="30" selection-start-line="396" selection-start-column="30" selection-end-line="396" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/POSTGRES-TUTORIAL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="442" column="30" selection-start-line="442" selection-start-column="30" selection-end-line="442" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/MYSQL-TUTORIAL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="423" column="30" selection-start-line="423" selection-start-column="30" selection-end-line="423" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/MULTIPLE-SINKS-TUTORIAL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="647" column="8" selection-start-line="647" selection-start-column="8" selection-end-line="647" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/templates/MONGO-TUTORIAL.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="172" column="5" lean-forward="true" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="120">
-            <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="53" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/introduction.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mkdocs.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker-compose.yml" />
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1233,8 +1068,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="75">
-            <caret line="5" column="82" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="82" />
+          <first_editor relative-caret-position="525">
+            <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
           </first_editor>
           <second_editor />
         </state>
@@ -1255,28 +1090,40 @@
     <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_carto_sink.md" />
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        <state relative-caret-position="480">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/backends/Neo4jBackend.java" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/PutCypher.java" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service-api/pom.xml" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service-api-nar/pom.xml" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service/src/main/resources/META-INF/services/org.apache.nifi.controller.ControllerService" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/README.md" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/NGSIToNeo4j.java" />
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/AbstractCassandraProcessor.java" />
+    <entry file="file://$PROJECT_DIR$/docs/processors_catalogue/ngsi_rest_handler.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="195">
+            <caret line="13" selection-start-line="13" selection-end-line="13" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
+        <state relative-caret-position="1530">
           <caret line="102" column="62" selection-start-line="102" selection-start-column="44" selection-end-line="102" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/index.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="120">
-            <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -1305,13 +1152,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSICharsets.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3585">
@@ -1336,99 +1176,134 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/backends/Neo4jBackend.java">
+    <entry file="file://$PROJECT_DIR$/docs/index.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="120">
+            <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="178" column="37" selection-start-line="178" selection-start-column="37" selection-end-line="178" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/PutCypher.java">
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="-284">
+          <caret line="246" column="53" selection-start-line="246" selection-start-column="53" selection-end-line="246" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor">
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/resources/META-INF/services/org.apache.nifi.processor.Processor">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        <state relative-caret-position="210">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service-api/pom.xml">
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/test/java/org/apache/nifi/processors/ngsi/dynamo/TestNGSIToDynamo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+        <state relative-caret-position="720">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service-api-nar/pom.xml">
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="34" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="34" />
-        </state>
+        <state relative-caret-position="-210" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-controller-service/src/main/resources/META-INF/services/org.apache.nifi.controller.ControllerService">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/README.md" />
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+        <state relative-caret-position="270">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-neo4j/nifi-ngsi-neo4j-processors/src/main/java/org.apache.nifi.processors.ngsi.neo4j/NGSIToNeo4j.java">
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="182" column="41" selection-start-line="182" selection-start-column="41" selection-end-line="182" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="359">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="68" column="8" selection-start-line="68" selection-start-column="8" selection-end-line="73" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3150">
+          <caret line="210" column="57" lean-forward="true" selection-start-line="210" selection-start-column="57" selection-end-line="210" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
+        <state relative-caret-position="148">
           <caret line="83" column="71" selection-start-line="83" selection-start-column="71" selection-end-line="83" selection-end-column="195" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/AbstractCassandraProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="46" selection-start-line="21" selection-end-line="22" />
         </state>
       </provider>
     </entry>
