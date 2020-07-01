@@ -18,7 +18,7 @@ import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
-import org.apache.nifi.processors.standard.util.JdbcCommon;
+import org.apache.nifi.util.db.JdbcCommon;;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -114,6 +114,14 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .allowableValues("true", "false")
             .defaultValue("true")
             .build();
+    protected static final PropertyDescriptor CKAN_COMPATIBILITY= new PropertyDescriptor.Builder()
+            .name("ckan-compatibility")
+            .displayName("CKAN compatibility")
+            .description("true or false, true invalidates the encoding for the schema and table name creation")
+            .required(false)
+            .allowableValues("true", "false")
+            .defaultValue("false")
+            .build();
 
     protected static final PropertyDescriptor TRANSACTION_TIMEOUT = new PropertyDescriptor.Builder()
             .name("Transaction Timeout")
@@ -160,6 +168,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         properties.add(DEFAULT_SERVICE);
         properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
+        properties.add(CKAN_COMPATIBILITY);
         properties.add(ENABLE_LOWERCASE);
         properties.add(BATCH_SIZE);
         properties.add(RollbackOnFailure.ROLLBACK_ON_FAILURE);
@@ -237,9 +246,9 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
             final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
             try {
-                final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
+                final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                 for (Entity entity : event.getEntities()) {
-                    String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean());
+                    String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue());
                     // Get or create the appropriate PreparedStatement to use.
                     final StatementFlowFileEnclosure enclosure = sqlToEnclosure

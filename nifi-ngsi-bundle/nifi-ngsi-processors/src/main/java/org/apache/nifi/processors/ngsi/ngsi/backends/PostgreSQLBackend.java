@@ -118,14 +118,17 @@ public class PostgreSQLBackend {
         return fieldsForInsert + ")";
     } // getFieldsForInsert
 
-    public String buildSchemaName(String service,boolean enableEncoding,boolean enableLowercase) throws Exception {
+    public String buildSchemaName(String service,boolean enableEncoding,boolean enableLowercase, boolean ckanCompatible) throws Exception {
         String dbName="";
-        if (enableEncoding) {
-            dbName = NGSICharsets.encodePostgreSQL((enableLowercase)?service.toLowerCase():service);
-        } else {
-            dbName = NGSICharsets.encode((enableLowercase)?service.toLowerCase():service, false, true);
-        } // if else
-
+        if (!ckanCompatible) {
+            if (enableEncoding) {
+                dbName = NGSICharsets.encodePostgreSQL((enableLowercase) ? service.toLowerCase() : service);
+            } else {
+                dbName = NGSICharsets.encode((enableLowercase) ? service.toLowerCase() : service, false, true);
+            } // if else
+        }else {
+            dbName = (enableLowercase) ? service.toLowerCase() : service;
+        }
         if (dbName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
             throw new Exception("Building database name '" + dbName
                     + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
@@ -144,12 +147,12 @@ public class PostgreSQLBackend {
         return query;
     }
 
-    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase)throws Exception{
+    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, boolean ckanCompatible)throws Exception{
         String tableName="";
         String servicePath=(enableLowercase)?fiwareServicePath.toLowerCase():fiwareServicePath;
         String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
         String entityType = (enableLowercase) ? entity.getEntityType().toLowerCase() : entity.getEntityType();
-
+        if (!ckanCompatible) {
             if (enableEncoding) {
                 switch (dataModel) {
                     case "db-by-service-path":
@@ -188,6 +191,29 @@ public class PostgreSQLBackend {
                         break;
                 } // switch
             } // if else
+        }
+        else{
+            switch (dataModel) {
+                case "db-by-service-path":
+                    if ("/".equals(servicePath)) {
+                        System.out.println("Default service path '/' cannot be used with "
+                                + "dm-by-service-path data model");
+                    } // if
+
+                    tableName = servicePath;
+                    break;
+                case "db-by-entity":
+                    String truncatedServicePath = NGSICharsets.encode(servicePath, true, false);
+                    tableName = (truncatedServicePath.isEmpty() ? "" : truncatedServicePath + '_')
+                            + entityId+ "_"
+                            + entityType;
+                    break;
+                default:
+                    System.out.println("Unknown data model '" + dataModel
+                            + "'. Please, use DMBYSERVICEPATH, DMBYENTITY or DMBYATTRIBUTE");
+                    break;
+            } // switch
+        }
 
             if (tableName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
                 throw new SQLException("Building table name '" + tableName

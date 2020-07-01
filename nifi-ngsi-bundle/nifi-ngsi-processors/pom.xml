@@ -144,7 +144,7 @@
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-dbcp-service-api</artifactId>
             <version>${nifi.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -196,12 +196,14 @@
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.nifi/nifi-extension-utils --><!-- https://mvnrepository.com/artifact/org.apache.nifi/nifi-database-utils -->
         <dependency>
             <groupId>org.apache.nifi</groupId>
-            <artifactId>nifi-standard-processors</artifactId>
-            <version>${nifi.version}</version>
-            <scope>provided</scope>
+            <artifactId>nifi-database-utils</artifactId>
+            <version>1.10.0</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-json-utils</artifactId>
@@ -250,6 +252,10 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>

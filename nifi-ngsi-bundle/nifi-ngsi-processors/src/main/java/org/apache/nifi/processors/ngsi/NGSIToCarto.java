@@ -19,7 +19,7 @@ import org.apache.nifi.processors.ngsi.ngsi.backends.CartoBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
-import org.apache.nifi.processors.standard.util.JdbcCommon;
+import org.apache.nifi.util.db.JdbcCommon;
 
 import java.sql.*;
 import java.util.*;
