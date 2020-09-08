@@ -9,8 +9,11 @@ import java.util.TimeZone;
 
 public class PostgreSQLBackend {
 
-    public ArrayList listOfFields (String attrPersistence, Entity entity){
+    public ArrayList listOfFields (String attrPersistence, Entity entity, boolean ckanCompatible){
         ArrayList<String> aggregation = new ArrayList<>();
+        if(ckanCompatible){
+            aggregation.add("_id");
+        }
         aggregation.add(NGSIConstants.RECV_TIME_TS);
         aggregation.add(NGSIConstants.RECV_TIME);
         aggregation.add(NGSIConstants.FIWARE_SERVICE_PATH);
@@ -34,7 +37,7 @@ public class PostgreSQLBackend {
         return aggregation;
     }
 
-    public String getValuesForInsert(String attrPersistence, Entity entity, long creationTime, String fiwareServicePath) {
+    public String getValuesForInsert(String attrPersistence, Entity entity, long creationTime, String fiwareServicePath, boolean ckanCompatible) {
         TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
         String valuesForInsert = "";
         if ((NGSIConstants.ATTR_PER_ROW).equalsIgnoreCase(attrPersistence)){
@@ -45,7 +48,9 @@ public class PostgreSQLBackend {
                 } else {
                     valuesForInsert += ",(";
                 } // if else
-
+                if (ckanCompatible){
+                     valuesForInsert += "'" + i + "',";
+                }
                 valuesForInsert += "'" + creationTime + "'";
                 valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
                 valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
@@ -64,7 +69,11 @@ public class PostgreSQLBackend {
         } //if
         else if((NGSIConstants.ATTR_PER_COLUMN).equalsIgnoreCase(attrPersistence)){
             TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
+            int i=0;
             valuesForInsert += "(";
+            if (ckanCompatible){
+                valuesForInsert += "'" + +i + "'";
+            }
             valuesForInsert += "'" + creationTime + "'";
             valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
             valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
@@ -85,8 +94,8 @@ public class PostgreSQLBackend {
     } // getValuesForInsert
 
 
-    public String getFieldsForCreate(String attrPersistence, Entity entity) {
-        Iterator it = listOfFields(attrPersistence, entity).iterator();
+    public String getFieldsForCreate(String attrPersistence, Entity entity, boolean ckanCompatible) {
+        Iterator it = listOfFields(attrPersistence, entity,ckanCompatible).iterator();
         String fieldsForCreate = "(";
         boolean first = true;
         while (it.hasNext()) {
@@ -101,11 +110,11 @@ public class PostgreSQLBackend {
         return fieldsForCreate + ")";
     } // getFieldsForCreate
 
-    public String getFieldsForInsert(String attrPersistence, Entity entity) {
+    public String getFieldsForInsert(String attrPersistence, Entity entity, boolean ckanCompatible) {
 
         String fieldsForInsert = "(";
         boolean first = true;
-        Iterator it = listOfFields(attrPersistence, entity).iterator();
+        Iterator it = listOfFields(attrPersistence, entity,ckanCompatible).iterator();
         while (it.hasNext()) {
             if (first) {
                 fieldsForInsert += (String) it.next();
@@ -141,9 +150,9 @@ public class PostgreSQLBackend {
         return query;
     }
 
-    public String createTable(String schemaName,String tableName, String attrPersistence, Entity entity){
+    public String createTable(String schemaName,String tableName, String attrPersistence, Entity entity,boolean ckanCompatible){
 
-        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(attrPersistence, entity) + ";";
+        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(attrPersistence, entity,ckanCompatible) + ";";
         return query;
     }
 
@@ -222,8 +231,8 @@ public class PostgreSQLBackend {
         return tableName;
     }
 
-    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, String dataModel){
-        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(dataModel, entity)+ " values " +this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath);
+    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, String dataModel, boolean ckanCopatible){
+        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(dataModel, entity,ckanCopatible)+ " values " +this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ckanCopatible);
         return query;
     }
 }
