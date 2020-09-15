@@ -72,7 +72,7 @@ public class PostgreSQLBackend {
             int i=0;
             valuesForInsert += "(";
             if (ckanCompatible){
-                valuesForInsert += "'" + +i + "'";
+                valuesForInsert += "'" + +i + "',";
             }
             valuesForInsert += "'" + creationTime + "'";
             valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
