@@ -76,7 +76,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
             .required(false)
-            .allowableValues("row")
+            .allowableValues("row","column")
             .defaultValue("row")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
@@ -215,8 +215,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
     static {
         descriptors.add(URI);
-       // descriptors.add(SSL_CONTEXT_SERVICE);
-       // descriptors.add(CLIENT_AUTH);
         descriptors.add(NGSI_VERSION);
         descriptors.add(DATA_MODEL);
         descriptors.add(ATTR_PERSISTENCE);

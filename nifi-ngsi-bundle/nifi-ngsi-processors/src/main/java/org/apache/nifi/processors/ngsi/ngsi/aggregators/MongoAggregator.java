@@ -159,24 +159,22 @@ public abstract class MongoAggregator {
             // get the event body
                 String entityId = entity.getEntityId();
                 String entityType = entity.getEntityType();
-                // iterate on all this context element attributes, if there are attributes
+            // iterate on all this context element attributes, if there are attributes
                 ArrayList<Attributes> contextAttributes = entity.getEntityAttrs();
-                Document doc = createDoc(recvTimeTs, entityId, entityType);
+                Document doc = createDoc(recvTimeTs, entityId, entityType, dataModel);
 
-                for (Attributes contextAttribute : contextAttributes) {
+            for (Attributes contextAttribute : contextAttributes) {
                     String attrName = contextAttribute.getAttrName();
                     String attrType = contextAttribute.getAttrType();
                     String attrValue = contextAttribute.getAttrValue();
-                    doc.append("attrName", attrName)
-                            .append("attrType", attrType)
-                            .append("attrValue", attrValue);
+                    doc.append( attrName,attrValue);
                 } // for
-
                 aggregation.add(doc);
         } // aggregate
 
-        private Document createDoc(long recvTimeTs, String entityId, String entityType) {
+        private Document createDoc(long recvTimeTs, String entityId, String entityType,String dataModel) {
             Document doc = new Document("recvTime", new Date(recvTimeTs));
+            doc.append("recvTimeTs", recvTimeTs);
 
             switch (dataModel) {
                 case "db-by-service-path":
