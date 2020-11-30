@@ -28,8 +28,8 @@ objects) is put into the internal channels for future consumption (see next sect
 
 ### Mapping `NGSIEvent`s to Cassandra data structures
 
-Cassandra organizes the data in Keyspacees that contain tables of data rows. Such organization is exploited by `NGSIToCassandra`
-each time a `NGSIEvent` is going to be persisted.
+Cassandra organizes the data in Keyspacees that contain tables of data rows. Such organization is exploited by
+`NGSIToCassandra` each time a `NGSIEvent` is going to be persisted.
 
 <a name="section1.2.1"></a>
 
@@ -38,10 +38,12 @@ each time a `NGSIEvent` is going to be persisted.
 A Keyspace named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for
 the FIWARE service) is created (if not existing yet).
 
-It must be said Cassandra [only accepts](http://cassandra.apache.org/doc/latest/cql/definitions.html) alphanumerics `$` and `_`.
-This leads to certain [encoding](#section2.3.3) is applied depending on the `enable_encoding` configuration parameter.
+It must be said Cassandra [only accepts](http://cassandra.apache.org/doc/latest/cql/definitions.html) alphanumerics `$`
+and `_`. This leads to certain [encoding](#section2.3.3) is applied depending on the `enable_encoding` configuration
+parameter.
 
-Cassandra [Keyspace name length](http://cassandra.apache.org/doc/latest/cql/definitions.html) is limited to 64 characters.
+Cassandra [Keyspace name length](http://cassandra.apache.org/doc/latest/cql/definitions.html) is limited to 64
+characters.
 
 #### Cassandra tables naming conventions
 
@@ -57,8 +59,9 @@ details):
     `_` (underscore). If the FIWARE service path is the root one (`/`) then only the entity ID and type are
     concatenated.
 
-It must be said Cassandra [only accepts](http://cassandra.apache.org/doc/latest/cql/definitions.html) alphanumerics `$` and `_`.
-This leads to certain [encoding](#section2.3.5) is applied depending on the `enable_encoding` configuration parameter.
+It must be said Cassandra [only accepts](http://cassandra.apache.org/doc/latest/cql/definitions.html) alphanumerics `$`
+and `_`. This leads to certain [encoding](#section2.3.5) is applied depending on the `enable_encoding` configuration
+parameter.
 
 Cassandra [tables name length](http://cassandra.apache.org/doc/latest/cql/definitions.html) is limited to 64 characters.
 
@@ -171,7 +174,8 @@ Using the new encoding:
 
 #### Row-like storing
 
-Assuming `attr_persistence=row` as configuration parameter, then `NGSIToCassandra` will persist the data within the body as:
+Assuming `attr_persistence=row` as configuration parameter, then `NGSIToCassandra` will persist the data within the body
+as:
 
 ```cql
 cqlsh> use vehicles;
@@ -211,19 +215,19 @@ cqlsh:vehicles> select * from 4wheels_car1_car;
 
 `NGSIToCassandra` is configured through the following parameters(the names of required properties appear in bold)):
 
-| Name                               | Default Value | Allowable Values         | Description                                                                                        |
-| ---------------------------------  | ------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Cassandra Connection Provider**  | no            |                          | Controller service for connecting to a specific Keyspace engine                                                                                                              |
-| **NGSI version**                   | v2            |                          | list of supported version of NGSI (v2 and ld), currently only support v2                                                                                                     |
-| **Data Model**                     | db-by-entity  |                          | The Data model for creating the Columns when an event have been received you can choose between: db-by-service-path or db-by-entity, default value is db-by-service-path      |
-| **Attribute persistence**          | row           | row, column              | The mode of storing the data inside of the Column allowable values are row and column                                                                                         |
-| Default Service                    | test          |                          | In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service                                                              |
-| Default Service path               | /path         |                          | In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath                                                      |
-| Enable encoding                    | true          | true, false              | true applies the new encoding, false applies the old encoding.                                                                                                               |
-| Enable lowercase                   | true          | true, false              | true for creating the Schema and Columns name with lowercase.                                                                                                                 |
-| **Batch size**                     | 10            |                          | The preferred number of FlowFiles to put to the Keyspace in a single transaction                                                                                             |
-| Consistency Level                  | Serial        | Serial, Local_serial     | The strategy for how many replicas must respond before results are returned. |
-| Batch Statement Type               | Serial        | Logged, Unlogged, Counter| Specifies the type of 'Batch Statement' to be used. |
+| Name                              | Default Value | Allowable Values          | Description                                                                                                                                                              |
+| --------------------------------- | ------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Cassandra Connection Provider** | no            |                           | Controller service for connecting to a specific Keyspace engine                                                                                                          |
+| **NGSI version**                  | v2            |                           | list of supported version of NGSI (v2 and ld), currently only support v2                                                                                                 |
+| **Data Model**                    | db-by-entity  |                           | The Data model for creating the Columns when an event have been received you can choose between: db-by-service-path or db-by-entity, default value is db-by-service-path |
+| **Attribute persistence**         | row           | row, column               | The mode of storing the data inside of the Column allowable values are row and column                                                                                    |
+| Default Service                   | test          |                           | In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service                                                          |
+| Default Service path              | /path         |                           | In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath                                                  |
+| Enable encoding                   | true          | true, false               | true applies the new encoding, false applies the old encoding.                                                                                                           |
+| Enable lowercase                  | true          | true, false               | true for creating the Schema and Columns name with lowercase.                                                                                                            |
+| **Batch size**                    | 10            |                           | The preferred number of FlowFiles to put to the Keyspace in a single transaction                                                                                         |
+| Consistency Level                 | Serial        | Serial, Local_serial      | The strategy for how many replicas must respond before results are returned.                                                                                             |
+| Batch Statement Type              | Serial        | Logged, Unlogged, Counter | Specifies the type of 'Batch Statement' to be used.                                                                                                                      |
 
 A configuration example could be:
 
@@ -239,8 +243,8 @@ Use `NGSIToCassandra` if you are looking for a Keyspace storage not growing so m
 
 The Column type configuration parameter, as seen, is a method for <i>direct</i> aggregation of data: by <i>default</i>
 destination (i.e. all the notifications about the same entity will be stored within the same Cassandra Column) or by
-<i>default</i> service-path (i.e. all the notifications about the same service-path will be stored within the same Cassandra
-Column).
+<i>default</i> service-path (i.e. all the notifications about the same service-path will be stored within the same
+Cassandra Column).
 
 #### About the persistence mode
 
@@ -263,13 +267,14 @@ deal with the persistence details of such a batch of events in the final backend
 
 What is important regarding the batch mechanism is it largely increases the performance of the sink, because the number
 of writes is dramatically reduced. Let's see an example, let's assume a batch of 100 `NGSIEvent`s. In the best case, all
-these events regard to the same entity, which means all the data within them will be persisted in the same Cassandra Column.
-If processing the events one by one, we would need 100 inserts into Cassandra; nevertheless, in this example only one insert
-is required. Obviously, not all the events will always regard to the same unique entity, and many entities may be
-involved within a batch. But that's not a problem, since several sub-batches of events are created within a batch, one
-sub-batch per final destination Cassandra Column. In the worst case, the whole 100 entities will be about 100 different
-entities (100 different Cassandra Columns), but that will not be the usual scenario. Thus, assuming a realistic number of
-10-15 sub-batches per batch, we are replacing the 100 inserts of the event by event approach with only 10-15 inserts.
+these events regard to the same entity, which means all the data within them will be persisted in the same Cassandra
+Column. If processing the events one by one, we would need 100 inserts into Cassandra; nevertheless, in this example
+only one insert is required. Obviously, not all the events will always regard to the same unique entity, and many
+entities may be involved within a batch. But that's not a problem, since several sub-batches of events are created
+within a batch, one sub-batch per final destination Cassandra Column. In the worst case, the whole 100 entities will be
+about 100 different entities (100 different Cassandra Columns), but that will not be the usual scenario. Thus, assuming
+a realistic number of 10-15 sub-batches per batch, we are replacing the 100 inserts of the event by event approach with
+only 10-15 inserts.
 
 The batch mechanism adds an accumulation timeout to prevent the sink stays in an eternal state of batch building when no
 new data arrives. If such a timeout is reached, then the batch is persisted as it is.
@@ -280,17 +285,17 @@ retry intervals can be configured. Such a list defines the first retry interval,
 on; if the TTL is greater than the length of the list, then the last retry interval is repeated as many times as
 necessary.
 
-By default, `NGSIToCassandra` has a configured batch size and batch accumulation timeout of 1 and 30 seconds, respectively.
-Nevertheless, as explained above, it is highly recommended to increase at least the batch size for performance purposes.
-Which are the optimal values? The size of the batch it is closely related to the transaction size of the channel the
-events are got from (it has no sense the first one is greater then the second one), and it depends on the number of
-estimated sub-batches as well. The accumulation timeout will depend on how often you want to see new data in the final
-storage.
+By default, `NGSIToCassandra` has a configured batch size and batch accumulation timeout of 1 and 30 seconds,
+respectively. Nevertheless, as explained above, it is highly recommended to increase at least the batch size for
+performance purposes. Which are the optimal values? The size of the batch it is closely related to the transaction size
+of the channel the events are got from (it has no sense the first one is greater then the second one), and it depends on
+the number of estimated sub-batches as well. The accumulation timeout will depend on how often you want to see new data
+in the final storage.
 
 #### Time zone information
 
-Time zone information is not added in Cassandra timestamps since Cassandra stores that information as a environment variable.
-Cassandra timestamps are stored in UTC time.
+Time zone information is not added in Cassandra timestamps since Cassandra stores that information as a environment
+variable. Cassandra timestamps are stored in UTC time.
 
 #### About the encoding
 

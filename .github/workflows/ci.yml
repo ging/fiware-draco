@@ -1,0 +1,59 @@
+name: CI
+'on':
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  # lint-dockerfile:
+  #   name: Lint Dockerfile
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Git checkout
+  #       uses: actions/checkout@v2
+  #     - name: Run Hadolint Dockerfile Linter
+  #       uses: burdzwastaken/hadolint-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         HADOLINT_ACTION_DOCKERFILE_FOLDER: nifi-ngsi-resources/docker
+
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Run Remark Markdown Linter
+        run: |
+          npm install
+          npm run lint:md
+      - name: Run Textlint Markdown Linter
+        run: npm run lint:text
+  
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Use Java 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: 'Unit Tests with Java 8'
+        run: |
+          cd nifi-ngsi-bundle
+          mvn -s ../settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA > maven-install.log
+          mvn -s ../settings.xml verify -Padd-dependencies-for-IDEA > maven-verify.log
+          cd nifi-ngsi-processors
+          mvn -s ../../settings.xml clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA -DrepoToken="${COVERALLS_TOKEN}"
+          mvn clean cobertura:cobertura coveralls:report -DrepoToken="${COVERALLS_TOKEN}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}

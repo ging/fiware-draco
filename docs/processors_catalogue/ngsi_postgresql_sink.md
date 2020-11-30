@@ -303,8 +303,6 @@ postgresql> select * from 4wheels_car1_car;
 
 ## Administration guide
 
-
-
 ### Configuration
 
 `NGSIToPostgreSQL` is configured through the following parameters:
@@ -432,6 +430,14 @@ Current implementation of `NGSIToPostgreSQL` relies on the database, username an
 PostgreSQL endpoint.
 
 ### About the persistence mode
-Please observe not always the same number of attributes is notified; this depends on the subscription made to the NGSI-like sender. This is not a problem for the `row` persistence mode, since fixed 8-fields data rows are inserted for each notified attribute. Nevertheless, the `column` mode may be affected by several data rows of different lengths (in term of fields). Thus, the `column` mode is only recommended if your subscription is designed for always sending the same attributes, event if they were not updated since the last notification.
 
-In addition, when running in `column` mode, due to the number of notified attributes (and therefore the number of fields to be written within the Datastore) is unknown by Cygnus, the table can not be automatically created, and must be provisioned previously to the Cygnus execution. That's not the case of the `row` mode since the number of fields to be written is always constant, independently of the number of notified attributes.
+Please observe not always the same number of attributes is notified; this depends on the subscription made to the
+NGSI-like sender. This is not a problem for the `row` persistence mode, since fixed 8-fields data rows are inserted for
+each notified attribute. Nevertheless, the `column` mode may be affected by several data rows of different lengths (in
+term of fields). Thus, the `column` mode is only recommended if your subscription is designed for always sending the
+same attributes, event if they were not updated since the last notification.
+
+In addition, when running in `column` mode, due to the number of notified attributes (and therefore the number of fields
+to be written within the Datastore) is unknown by Cygnus, the table can not be automatically created, and must be
+provisioned previously to the Cygnus execution. That's not the case of the `row` mode since the number of fields to be
+written is always constant, independently of the number of notified attributes.
