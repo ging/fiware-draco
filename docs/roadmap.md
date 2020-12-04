@@ -19,18 +19,18 @@ the product:
 -   **Quality Assurance** Include quality assurance for the Draco Generic enabler
 -   **Resources FIWARE Academy**: Provide resources for training section in FIWARE academy
 -   **NGSIToNeo4j Controller**: Controller for connecting Draco and Neo4j backend.
--   **NGSIToNeo4j Processor**: Processor for storing data coming from Orion Context Broker store NGSI-LD in a graph database. 
-    system.
+-   **NGSIToNeo4j Processor**: Processor for storing data coming from Orion Context Broker store NGSI-LD in a graph
+    database. system.
 -   **NGSIToDynamoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to
     DynamoDB.
--   **NGSIToDynamoDB Controller**: Controller for connecting between Draco and DynamoDB backend.    
+-   **NGSIToDynamoDB Controller**: Controller for connecting between Draco and DynamoDB backend.
 
 ## Medium term
 
 The following list of features are planned to be addressed in the medium term, typically within the subsequent
 release(s) generated in the next 9 months after next planned release:
 
--   **Draco over kubernetes**: For fully deployments with UCON 
+-   **Draco over kubernetes**: For fully deployments with UCON
 -   **NGSIToCKAN Controller**: Controller for connecting between Draco and CKAN backend.
 -   **NGSIToCKAN Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CKAN.
 
@@ -45,4 +45,5 @@ wish to get involved in the implementation or influence the roadmap:
 -   **Caching and batching**: Add caching and batching mechanisms for optimizing the write to the different backends.
 -   **New Data Structure for native NGSI-LD**: Planing to redefine the data models of the different backends for
     optimizing the storage of NGSI-LD data
--   **NGSIToCouchDB Controller**:ntegration planning with the Usage control framework for monitoring the sinks operations
+-   **NGSIToCouchDB Controller**:ntegration planning with the Usage control framework for monitoring the sinks
+    operations

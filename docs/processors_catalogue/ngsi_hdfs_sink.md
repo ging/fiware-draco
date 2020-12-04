@@ -202,7 +202,7 @@ Using the new encoding:
 
 A pair of Json documents are appended to the above file, one per attribute:
 
-```
+```json
 {"recvTimeTs":"1429535775","recvTime":"2015-04-20T12:13:22.41.124Z","fiwareServicePath":"4wheels","entityId":"car1","entityType":"car","attrName":"speed","attrType":"float","attrValue":"112.9","attrMd":[]}
 {"recvTimeTs":"1429535775","recvTime":"2015-04-20T12:13:22.41.124Z","fiwareServicePath":"4wheels","entityId":"car1","entityType":"car","attrName":"oil_level","attrType":"float","attrValue":"74.6","attrMd":[]}
 ```
@@ -213,8 +213,17 @@ A pair of Json documents are appended to the above file, one per attribute:
 
 A single Json document is appended to the above file, containing all the attributes:
 
-```
-{"recvTime":"2015-04-20T12:13:22.41.124Z","fiwareServicePath":"4wheels","entityId":"car1","entityType":"car","speed":"112.9","speed_md":[],"oil_level":"74.6","oil_level_md":[]}
+```json
+{
+    "recvTime": "2015-04-20T12:13:22.41.124Z",
+    "fiwareServicePath": "4wheels",
+    "entityId": "car1",
+    "entityType": "car",
+    "speed": "112.9",
+    "speed_md": [],
+    "oil_level": "74.6",
+    "oil_level_md": []
+}
 ```
 
 [Top](#top)
@@ -223,7 +232,7 @@ A single Json document is appended to the above file, containing all the attribu
 
 A pair of CSV records are appended to the above file, one per attribute:
 
-```
+```text
 1429535775,2015-04-20T12:13:22.41.124Z,4wheels,car1,car,speed,float,112.9,hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_speed_float.txt
 1429535775,2015-04-20T12:13:22.41.124Z,4wheels,car1,car,oil_level,float,74.6,hdfs:///user/myuser/vehicles/4wheels/car1_car_oil_level_float/car1_car_oil_level_float.txt
 ```
@@ -232,15 +241,19 @@ Please observe despite the metadata for the example above is empty, the metadata
 
 In the case the metadata for the `speed` attribute was, for instance:
 
-    [
-       {"name": "manufacturer", "type": "string", "value": "acme"},
-       {"name": "installation_year", "type": "integer", "value": 2014}
-    ]
+```json
+[
+    { "name": "manufacturer", "type": "string", "value": "acme" },
+    { "name": "installation_year", "type": "integer", "value": 2014 }
+]
+```
 
 then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_speed_float.txt` file content would be:
 
+```text
     1429535775,manufacturer,string,acme
     1429535775,installation_year,integer,2014
+```
 
 [Top](#top)
 
@@ -248,7 +261,7 @@ then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_spe
 
 A single CSV record is appended to the above file, containing all the attributes:
 
-```
+```text
 2015-04-20T12:13:22.41.124Z,112.9,4wheels,car1,car,hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_speed_float.txt,74.6,hdfs:///user/myuser/vehicles/4wheels/car1_car_oil_level_float/car1_car_oil_level_float.txt}
 ```
 
@@ -256,15 +269,19 @@ Please observe despite the metadata for the example above is empty, the metadata
 
 In the case the metadata for the `speed` attribute was, for instance:
 
-    [
-       {"name": "manufacturer", "type": "string", "value": "acme"},
-       {"name": "installation_year", "type": "integer", "value": 2014}
-    ]
+```json
+[
+    { "name": "manufacturer", "type": "string", "value": "acme" },
+    { "name": "installation_year", "type": "integer", "value": 2014 }
+]
+```
 
 then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_speed_float.txt` file content would be:
 
+```text
     1429535775,manufacturer,string,acme
     1429535775,installation_year,integer,2014
+```
 
 [Top](#top)
 
@@ -273,6 +290,7 @@ then the `hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_spe
 With respect to Hive, the content of the tables in the `json-row`, `json-column`, `csv-row` and `csv-column` modes,
 respectively, is:
 
+```bash
     $ hive
     hive> select * from myuser_vehicles_4wheels_car1_car_row;
     OK
@@ -286,6 +304,7 @@ respectively, is:
     1429535775	2015-04-20T12:13:22.41.124Z	car1	car	oil_level	float	74.6	hdfs:///user/myuser/vehicles/4wheels/car1_car_oil_level_float/car1_car_oil_level_float.txt
     hive> select * from myuser_vehicles_4wheels_car1_car_column;
     2015-04-20T12:13:22.41.124Z		4wheels	car1	car	112.9	hdfs:///user/myuser/vehicles/4wheels/car1_car_speed_float/car1_car_speed_float.txt	74.6	hdfs:///user/myuser/vehicles/4wheels/car1_car_oil_level_float/car1_car_oil_level_float.txt
+```
 
 NOTE: `hive` is the Hive CLI for locally querying the data.
 
