@@ -66,9 +66,10 @@ Current stable release is able to persist the following sources of data in the f
     -   [MySQL](https://www.mysql.com/), the well-known relational database manager.
     -   [MongoDB](https://www.mongodb.org/), the NoSQL document-oriented database.
     -   [PostgreSQL](http://www.postgresql.org/), the well-known relational database manager.
-    -   [Cassandra](http://cassandra.apache.org/)
-    -   [Carto](https://carto.com/)
-    -   [HDFS](https://hadoop.apache.org)
+    -   [Cassandra](http://cassandra.apache.org/), Distributed database.
+    -   [Carto](https://carto.com/), for geospatial Data
+    -   [HDFS](https://hadoop.apache.org), High Distributed filesystem.
+    -   [DynamoDB](https://aws.amazon.com/es/dynamodb/), A cloud key value Amazon DB. 
 
 ## Draco place in FIWARE architecture
 
