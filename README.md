@@ -69,7 +69,7 @@ Current stable release is able to persist the following sources of data in the f
     -   [Cassandra](http://cassandra.apache.org/), Distributed database.
     -   [Carto](https://carto.com/), for geospatial Data
     -   [HDFS](https://hadoop.apache.org), High Distributed filesystem.
-    -   [DynamoDB](https://aws.amazon.com/es/dynamodb/), A cloud key value Amazon DB. 
+    -   [DynamoDB](https://aws.amazon.com/es/dynamodb/), A cloud key-value Amazon DB. 
 
 ## Draco place in FIWARE architecture
 
