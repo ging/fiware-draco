@@ -11,6 +11,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg?branch=develop)](https://coveralls.io/github/ging/fiware-draco?branch=develop)
 [![Known Vulnerabilities](https://snyk.io/test/github/ging/fiware-draco/badge.svg?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)](https://snyk.io/test/github/ging/fiware-draco?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4613/badge)](https://bestpractices.coreinfrastructure.org/projects/4613)
 
 ## Table of Contents
 
