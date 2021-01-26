@@ -42,11 +42,11 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
-      - name: Use Java 13
+      - name: Use Java 8
         uses: actions/setup-java@v1
         with:
-          java-version: 13
-      - name: 'Unit Tests with Java 13'
+          java-version: 8
+      - name: 'Unit Tests with Java 8'
         run: |
           cd nifi-ngsi-bundle
           mvn -s ../settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -Padd-dependencies-for-IDEA > maven-install.log
