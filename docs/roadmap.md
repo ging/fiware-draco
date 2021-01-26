@@ -16,23 +16,22 @@ only, and this section may be revised to provide newer information at any time.
 The following list of features are planned to be addressed in the short term, and incorporated in the next release of
 the product:
 
--   **Quality Assurance** Include quality assurance for the Draco Generic enabler
--   **Resources FIWARE Academy**: Provide resources for training section in FIWARE academy
--   **NGSIToNeo4j Controller**: Controller for connecting Draco and Neo4j backend.
--   **NGSIToNeo4j Processor**: Processor for storing data coming from Orion Context Broker store NGSI-LD in a graph
-    database. system.
--   **NGSIToDynamoDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to
-    DynamoDB.
--   **NGSIToDynamoDB Controller**: Controller for connecting between Draco and DynamoDB backend.
+-   **New Data Structure for native NGSI-LD**: Planing to redefine the data models of the different backends for
+    optimizing the storage of NGSI-LD data
+-   **NGSILD Support for NGSIToPostgreSQL**:  Receive and store context information in PostgreSQL using NGSI-LD notifications. 
+-   **NGSILD Support for NGSIToCKAN**:  Receive and store context information in CKAN using NGSI-LD notifications.
 
 ## Medium term
 
 The following list of features are planned to be addressed in the medium term, typically within the subsequent
 release(s) generated in the next 9 months after next planned release:
 
--   **Draco over kubernetes**: For fully deployments with UCON
--   **NGSIToCKAN Controller**: Controller for connecting between Draco and CKAN backend.
--   **NGSIToCKAN Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CKAN.
+-   **Quality Assurance** Include quality assurance for the Draco Generic enabler
+-   **DCAT-AP compatibility with CKAN**: Managing DCAT-AP metadata for data publication in European Data Portal.
+-   **Aeronautics Templates**: New templates for providing conversion to Aeronautics data models.
+-   **NGSI-LD integration PostGIS**: Receive and store context information in PostGID using NGSI-LD notifications.
+-   **NGSIToCouchDB Controller**: Controller for connecting between Draco and CouchDB backend.
+-   **NGSIToCouchDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CouchDB.
 
 ## Long term
 
@@ -40,10 +39,10 @@ The following list of features are proposals regarding the longer-term evolution
 of these features has not yet been scheduled for a release in the near future. Please feel free to contact us if you
 wish to get involved in the implementation or influence the roadmap:
 
--   **NGSIToCouchDB Controller**: Controller for connecting between Draco and CouchDB backend.
--   **NGSIToCouchDB Processor**: Processor for storing data coming from Orion Context Broker in NGSI format to CouchDB.
+-   **UCON Integration**:  Integration planning with the Usage control framework for monitoring the sinks operations.
+-   **Draco over kubernetes:**: For fully deployments with UCON.
+-   **Blockchain integration**: Hyperledger Fabric integration : high performance. Ocean Protocol and Ethereum experimental.
+-   **Graph oriented Databases**: Add new processors and controllers for supporting graph oriented databases like neo4j
+    and RDF databases.
+-   **NGSIToNeo Processor**: Processor for storing data in NGSI-LD format to Neo4j.
 -   **Caching and batching**: Add caching and batching mechanisms for optimizing the write to the different backends.
--   **New Data Structure for native NGSI-LD**: Planing to redefine the data models of the different backends for
-    optimizing the storage of NGSI-LD data
--   **NGSIToCouchDB Controller**:ntegration planning with the Usage control framework for monitoring the sinks
-    operations
