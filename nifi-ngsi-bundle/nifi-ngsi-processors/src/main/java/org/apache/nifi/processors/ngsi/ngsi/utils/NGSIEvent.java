@@ -7,6 +7,7 @@ public class NGSIEvent {
     public String fiwareService;
     public String fiwareServicePath;
     public ArrayList <Entity> entities;
+    public ArrayList <Entity> entitiesLD;
 
 
     public NGSIEvent(long creationTime, String fiwareService, String fiwareServicePath, ArrayList<Entity> entities) {
@@ -14,6 +15,16 @@ public class NGSIEvent {
         this.fiwareService = fiwareService;
         this.fiwareServicePath = fiwareServicePath;
         this.entities = entities;
+    }
+
+    public NGSIEvent(long creationTime, String fiwareService, ArrayList<Entity> entitiesLD ){
+        this.creationTime = creationTime;
+        this.fiwareService = fiwareService;
+        this.entitiesLD = entitiesLD;
+    }
+
+    public ArrayList<Entity> getEntitiesLD() {
+        return entitiesLD;
     }
 
     public long getCreationTime() {

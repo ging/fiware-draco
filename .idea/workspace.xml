@@ -2,7 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/AttributesLD.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/EntityLD.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEncoders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToCarto.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToCarto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/CartoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/CartoBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,66 +50,31 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>-ld</find>
-      <find>draco-ld</find>
-      <find>-d</find>
-      <find>maven</find>
-      <find>mongo</find>
-      <find>1.7.0</find>
-      <find>db</find>
-      <find>client</find>
-      <find>mon</find>
-      <find>create</find>
-      <find>getDat</find>
-      <find>mongoclient</find>
-      <find>dataModel</find>
-      <find>persis</find>
-      <find>host</find>
-      <find>org.apache.hadoop</find>
-      <find>manife</find>
-      <find>site</find>
-      <find>KEYSPACE</find>
-      <find>DBName</find>
-      <find>DbName</find>
-      <find>1.8.0</find>
-      <find>mysql</find>
-      <find>Cygnus</find>
-      <find>NGSIHDFSSink</find>
-      <find>table</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>d</replace>
-      <replace>draco</replace>
-      <replace>1.8.0</replace>
-      <replace>KeyspaceName</replace>
-      <replace>1.9.2</replace>
-      <replace>Cassandra</replace>
-      <replace>Keyspace</replace>
-      <replace>column</replace>
-      <replace>Draco</replace>
-      <replace>NGSIToHDFS</replace>
-      <replace>Column</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>$PROJECT_DIR$</dir>
-    </dirStrings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="/usr/share/maven" />
+        <option name="mavenHome" value="/usr/local/Cellar/maven/3.6.3_1/libexec" />
       </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenRunner">
@@ -100,15 +100,17 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583776873645" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/ngsiLD" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -123,7 +125,7 @@
       <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity">
+  <component name="RunManager" selected="Application.TestJsonNgsi">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -203,24 +205,22 @@
         <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
+    <configuration name="TestJsonNgsi" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.ngsi.utils.TestJsonNgsi" />
+      <module name="nifi-ngsi-processors" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.ngsi.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToHDFS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToHDFS" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -352,11 +352,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestJsonNgsi" />
         <item itemvalue="JUnit.TestNGSIToPostgreSQL" />
         <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
         <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameLengthDataModelByEntity" />
         <item itemvalue="JUnit.TestNGSIToMySQL" />
-        <item itemvalue="JUnit.TestNGSIToHDFS" />
       </list>
     </recent_temporary>
   </component>
@@ -388,6 +388,8 @@
       <workItem from="1571048598612" duration="31410000" />
       <workItem from="1583776710613" duration="434000" />
       <workItem from="1609178880820" duration="421000" />
+      <workItem from="1611252439395" duration="13770000" />
+      <workItem from="1612493911859" duration="39808000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -807,95 +809,78 @@
     <MESSAGE value="Add nifi-ngsi-dynamo" />
     <option name="LAST_COMMIT_MESSAGE" value="Add nifi-ngsi-dynamo" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1613009488828">
+      <screen x="0" y="25" width="1440" height="830" />
+    </state>
+    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser/0.25.1440.829@0.25.1440.829" timestamp="1613003430400" />
+    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser/0.25.1440.830@0.25.1440.830" timestamp="1613009488828" />
+    <state x="438" y="167" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612500059872">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state x="438" y="167" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.829@0.25.1440.829" timestamp="1612500059872" />
+    <state width="667" height="197" key="GridCell.Tab.0.bottom" timestamp="1613166496918">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.829@0.25.1440.829" timestamp="1613166496918" />
+    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.830@0.25.1440.830" timestamp="1613011400227" />
+    <state width="667" height="197" key="GridCell.Tab.0.center" timestamp="1613166496917">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.829@0.25.1440.829" timestamp="1613166496917" />
+    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.830@0.25.1440.830" timestamp="1613011400226" />
+    <state width="667" height="197" key="GridCell.Tab.0.left" timestamp="1613166496916">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.829@0.25.1440.829" timestamp="1613166496916" />
+    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.830@0.25.1440.830" timestamp="1613011400225" />
+    <state width="667" height="197" key="GridCell.Tab.0.right" timestamp="1613166496918">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.829@0.25.1440.829" timestamp="1613166496918" />
+    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.830@0.25.1440.830" timestamp="1613011400226" />
+    <state width="679" height="245" key="GridCell.Tab.1.bottom" timestamp="1613166199609">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="679" height="245" key="GridCell.Tab.1.bottom/0.25.1440.829@0.25.1440.829" timestamp="1613166199609" />
+    <state width="679" height="245" key="GridCell.Tab.1.center" timestamp="1613166199607">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="679" height="245" key="GridCell.Tab.1.center/0.25.1440.829@0.25.1440.829" timestamp="1613166199607" />
+    <state width="679" height="245" key="GridCell.Tab.1.left" timestamp="1613166199607">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="679" height="245" key="GridCell.Tab.1.left/0.25.1440.829@0.25.1440.829" timestamp="1613166199607" />
+    <state width="679" height="245" key="GridCell.Tab.1.right" timestamp="1613166199608">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state width="679" height="245" key="GridCell.Tab.1.right/0.25.1440.829@0.25.1440.829" timestamp="1613166199608" />
+    <state x="238" y="75" key="Maven.ArtifactSearchDialog" timestamp="1612492712531">
+      <screen x="0" y="25" width="1440" height="830" />
+    </state>
+    <state x="238" y="75" key="Maven.ArtifactSearchDialog/0.25.1440.823@0.25.1440.823" timestamp="1611252608699" />
+    <state x="238" y="75" key="Maven.ArtifactSearchDialog/0.25.1440.830@0.25.1440.830" timestamp="1612492712531" />
+    <state x="210" y="25" width="1024" height="823" key="SettingsEditor" timestamp="1611758740749">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state x="188" y="25" width="1024" height="823" key="SettingsEditor/0.25.1440.823@0.25.1440.823" timestamp="1611252542217" />
+    <state x="188" y="25" key="SettingsEditor/0.25.1440.826@0.25.1440.826" timestamp="1611724285650" />
+    <state x="210" y="25" key="SettingsEditor/0.25.1440.829@0.25.1440.829" timestamp="1611758740749" />
+    <state width="681" height="445" key="SwitcherDM" timestamp="1613008476047">
+      <screen x="0" y="25" width="1440" height="830" />
+    </state>
+    <state width="681" height="445" key="SwitcherDM/0.25.1440.830@0.25.1440.830" timestamp="1613008476047" />
+    <state x="495" y="198" key="chooseDestDirectoryDialog" timestamp="1612500028682">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state x="495" y="198" key="chooseDestDirectoryDialog/0.25.1440.829@0.25.1440.829" timestamp="1612500028682" />
+    <state x="379" y="245" key="com.intellij.ide.util.TipDialog" timestamp="1612493917990">
+      <screen x="0" y="25" width="1440" height="829" />
+    </state>
+    <state x="379" y="245" key="com.intellij.ide.util.TipDialog/0.25.1440.829@0.25.1440.829" timestamp="1612493917990" />
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>fiware-draco</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

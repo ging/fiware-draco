@@ -10,6 +10,8 @@ import java.util.Set;
 import org.apache.nifi.processors.ngsi.ngsi.backends.hdfs.HDFSBackend;
 import org.apache.nifi.processors.ngsi.ngsi.backends.HiveBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -68,7 +70,7 @@ public abstract class HDFSAggregator {
         return service;
     }
 
-    public void initialize(String fiwareService,String fiwareServicePath, Entity entity,boolean enableEncoding) throws Exception {
+    public void initialize(String fiwareService, String fiwareServicePath, Entity entity, boolean enableEncoding) throws Exception {
         service = fiwareService;
         servicePath = fiwareServicePath;
         destination = entity.getEntityId();

@@ -4,6 +4,8 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.model.*;
 import org.apache.nifi.logging.ComponentLog;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 
 
 import java.text.SimpleDateFormat;

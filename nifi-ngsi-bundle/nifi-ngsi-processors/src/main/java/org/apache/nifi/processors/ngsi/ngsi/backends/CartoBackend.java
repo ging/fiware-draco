@@ -3,6 +3,7 @@ package org.apache.nifi.processors.ngsi.ngsi.backends;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.NGSIToCarto;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

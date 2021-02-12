@@ -29,6 +29,7 @@ import org.apache.nifi.authentication.exception.ProviderCreationException;
 import org.apache.nifi.components.PropertyDescriptor;
 import org.apache.nifi.expression.ExpressionLanguageScope;
 import org.apache.nifi.flowfile.FlowFile;
+import org.apache.nifi.mongodb.MongoDBClientService;
 import org.apache.nifi.processor.AbstractProcessor;
 import org.apache.nifi.processor.ProcessContext;
 import org.apache.nifi.processor.ProcessSession;
@@ -38,8 +39,10 @@ import org.apache.nifi.processors.ngsi.ngsi.backends.MongoBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
-import org.apache.nifi.security.util.SslContextFactory;
+import org.apache.nifi.security.util.ClientAuth;
 import org.apache.nifi.ssl.SSLContextService;
+import org.apache.nifi.security.util.SslContextFactory;
+
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +53,26 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
     protected MongoBackend mongoClient;
     protected MongoClient mongoClientSSL;
+    protected MongoDBClientService clientService;
+
+    static final PropertyDescriptor CLIENT_SERVICE = new PropertyDescriptor.Builder()
+            .name("mongo-client-service")
+            .displayName("Client Service")
+            .description("If configured, this property will use the assigned client service for connection pooling.")
+            .required(false)
+            .identifiesControllerService(MongoDBClientService.class)
+            .build();
+
+    public static final PropertyDescriptor CLIENT_AUTH = new PropertyDescriptor.Builder()
+            .name("ssl-client-auth")
+            .displayName("Client Auth")
+            .description("Client authentication policy when connecting to secure (TLS/SSL) cluster. "
+                    + "Possible values are REQUIRED, WANT, NONE. This property is only used when an SSL Context "
+                    + "has been defined and enabled.")
+            .required(false)
+            .allowableValues(ClientAuth.values())
+            .defaultValue("REQUIRED")
+            .build();
 
     protected static final PropertyDescriptor URI = new PropertyDescriptor.Builder()
         .name("Mongo URI")
@@ -181,17 +204,6 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
         .identifiesControllerService(SSLContextService.class)
         .build();
 
-    public static final PropertyDescriptor CLIENT_AUTH = new PropertyDescriptor.Builder()
-        .name("ssl-client-auth")
-        .displayName("Client Auth")
-        .description("Client authentication policy when connecting to secure (TLS/SSL) cluster. "
-                + "Possible values are REQUIRED, WANT, NONE. This property is only used when an SSL Context "
-                + "has been defined and enabled.")
-        .required(false)
-        .allowableValues(SSLContextService.ClientAuth.values())
-        .defaultValue("REQUIRED")
-        .build();
-
     protected static final PropertyDescriptor BATCH_SIZE = new PropertyDescriptor.Builder()
             .name("Batch Size")
             .displayName("Batch Size")
@@ -231,6 +243,11 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
     @OnScheduled
     public final void createClient(ProcessContext context) throws IOException {
+        if (context.getProperty(CLIENT_SERVICE).isSet()) {
+            clientService = context.getProperty(CLIENT_SERVICE).asControllerService(MongoDBClientService.class);
+            return;
+        }
+
         if (mongoClient != null) {
             closeClient();
         }
@@ -252,7 +269,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
                     clientAuth = SSLContextService.ClientAuth.valueOf(rawClientAuth);
                 } catch (final IllegalArgumentException iae) {
                     throw new ProviderCreationException(String.format("Unrecognized client auth '%s'. Possible values are [%s]",
-                            rawClientAuth, StringUtils.join(SslContextFactory.ClientAuth.values(), ", ")));
+                            rawClientAuth));
                 }
             }
             sslContext = sslService.createSSLContext(clientAuth);
@@ -262,7 +279,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
         try {
             if(sslContext == null) {
-                mongoClient = new MongoBackend(new MongoClientURI(getURI(context)),dataModel);
+                mongoClient = new MongoBackend(new MongoClientURI(getURI(context)),dataModel);;
             } else {
                 mongoClientSSL = new MongoClient(new MongoClientURI(getURI(context), getClientOptions(sslContext)));
             }
@@ -273,7 +290,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
     }
 
     protected Builder getClientOptions(final SSLContext sslContext) {
-        Builder builder = MongoClientOptions.builder();
+        MongoClientOptions.Builder builder = MongoClientOptions.builder();
         builder.sslEnabled(true);
         builder.socketFactory(sslContext.getSocketFactory());
         return builder;
@@ -281,10 +298,12 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
     @OnStopped
     public final void closeClient() {
-        if (mongoClient != null || mongoClientSSL!=null) {
+        if (mongoClient != null) {
             getLogger().info("Closing MongoClient");
-           // mongoClientSSL.close();
+            // mongoClientSSL.close();
             mongoClient.getClient().close();
+        }else if (mongoClientSSL!=null){
+            getLogger().info("Closing MongoClient");
             mongoClientSSL.close();
         }
     }

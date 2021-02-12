@@ -216,7 +216,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
 
     private final PartialFunctions.InitConnection<FunctionContext, Connection> initConnection = (c, s, fc, ff) -> {
         final Connection connection = c.getProperty(CONNECTION_POOL).asControllerService(DBCPService.class)
-                .getConnection(ff == null ? Collections.emptyMap() : ff.getAttributes());
+                .getConnection(ff == null ? Collections.emptyMap() : ff.get(0).getAttributes());
         try {
             fc.originalAutoCommit = connection.getAutoCommit();
             connection.setAutoCommit(false);
@@ -248,8 +248,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             try {
                 final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                 for (Entity entity : event.getEntities()) {
-                    String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                    final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
+                    String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
+                    final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     // Get or create the appropriate PreparedStatement to use.
                     final StatementFlowFileEnclosure enclosure = sqlToEnclosure
                             .computeIfAbsent(sql, k -> {
@@ -264,7 +264,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         JdbcCommon.setParameters(stmt, flowFile.getAttributes());
                         try {
                             conn.createStatement().execute(postgres.createSchema(schemaName));
-                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(), entity,context.getProperty(CKAN_COMPATIBILITY).asBoolean()));
+                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(), entity,context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean()));
 
                         } catch (SQLException s) {
                             getLogger().error(s.toString());

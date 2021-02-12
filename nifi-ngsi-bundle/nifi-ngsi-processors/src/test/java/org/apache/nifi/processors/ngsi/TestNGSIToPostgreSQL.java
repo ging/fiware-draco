@@ -2,9 +2,12 @@ package org.apache.nifi.processors.ngsi;
 
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
+import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
-import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+
 import java.util.ArrayList;
+
+import org.apache.nifi.processors.ngsi.ngsi.utils.Metadata;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
@@ -119,6 +122,7 @@ public class TestNGSIToPostgreSQL {
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
 
         String servicePath = "/somePath";
@@ -126,7 +130,7 @@ public class TestNGSIToPostgreSQL {
 
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "somePath";
 
             try {
@@ -159,12 +163,13 @@ public class TestNGSIToPostgreSQL {
 runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/somePath";
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "x002fsomex0050ath";
 
             try {
@@ -199,12 +204,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/somePath";
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "somePath_someId_someType";
 
             try {
@@ -241,12 +247,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/somePath";
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "x002fsomex0050athxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -282,10 +289,11 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-service-path");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
-        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
         String expecetedTableName = "";
 
         try {
@@ -316,10 +324,11 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "x002f";
 
             try {
@@ -355,12 +364,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "someId_someType";
 
             try {
@@ -396,12 +406,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             String expecetedTableName = "x002fxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -459,12 +470,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/tooLooooooooooooooooooooooooooooooooooooooooooooooooooooooongServicePath";
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,false);
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -487,13 +499,14 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
         Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
         Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/tooLooooooooooooooooooooongServicePath";
         Entity entity = new Entity("tooLooooooooooooooooooooooooooongEntity", "someType",null);
 
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,false);
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -509,13 +522,14 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
         
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
         entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,false);
+            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "attrName", "attrType", "attrValue", "attrMd");
             ArrayList<String> expecetedListOfFields = new ArrayList<String>();
             expecetedListOfFields.addAll(expList);
@@ -544,13 +558,14 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
         entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,false);
+            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "someAttr", "someAttr_md");
             ArrayList<String> expecetedListOfFields = new ArrayList<String>();
             expecetedListOfFields.addAll(expList);
@@ -579,7 +594,9 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+
+
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
         entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
         Entity entity = new Entity("someId", "someType", entityAttrs);
@@ -587,7 +604,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','[]')";
            
             try {
@@ -614,7 +631,8 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
         entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
         Entity entity = new Entity("someId", "someType", entityAttrs);
@@ -622,7 +640,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','[]')";
            
             try {
@@ -649,7 +667,9 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+
+
         ArrayList<Metadata> attrMetadata = new ArrayList<>();
         attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
@@ -659,7 +679,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')";
            
             try {
@@ -686,7 +706,9 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        
+        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+
+
         ArrayList<Metadata> attrMetadata = new ArrayList<>();
         attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
         ArrayList<Attributes> entityAttrs = new ArrayList<>();
@@ -696,7 +718,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','someMtdStr')";
            
             try {
