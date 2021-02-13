@@ -13,15 +13,16 @@ public class PostgreSQLBackend {
 
     public ArrayList listOfFields (String attrPersistence, Entity entity, String ngsiVersion ,boolean ckanCompatible){
         ArrayList<String> aggregation = new ArrayList<>();
-        aggregation.add(NGSIConstants.RECV_TIME);
-        aggregation.add(NGSIConstants.ENTITY_ID);
-        aggregation.add(NGSIConstants.ENTITY_TYPE);
+
         if ("v2".equals(ngsiVersion)){
             if(ckanCompatible){
                 aggregation.add("_id");
             }
             aggregation.add(NGSIConstants.RECV_TIME_TS);
+            aggregation.add(NGSIConstants.RECV_TIME);
             aggregation.add(NGSIConstants.FIWARE_SERVICE_PATH);
+            aggregation.add(NGSIConstants.ENTITY_ID);
+            aggregation.add(NGSIConstants.ENTITY_TYPE);
             if ((NGSIConstants.ATTR_PER_ROW).equalsIgnoreCase(attrPersistence)){
                 aggregation.add(NGSIConstants.ATTR_NAME);
                 aggregation.add(NGSIConstants.ATTR_TYPE);
@@ -39,6 +40,9 @@ public class PostgreSQLBackend {
             } //else if
         }
         else if ("ld".equals(ngsiVersion)){
+            aggregation.add(NGSIConstants.RECV_TIME);
+            aggregation.add(NGSIConstants.ENTITY_ID);
+            aggregation.add(NGSIConstants.ENTITY_TYPE);
             if(ckanCompatible){
                 aggregation.add("_id");
             }

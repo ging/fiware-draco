@@ -39,7 +39,7 @@ public class TestNGSIToMySQL {
     /**
      * [NGSIToMySQL.configure] -------- enable_encoding can only be 'true' or 'false'.
      */
-    /* @Test
+    @Test
     public void testBuildDBNameNoEncoding() throws Exception {
 
         System.out.println("[NGSIToMySQL.buildDBName]"
@@ -436,6 +436,6 @@ public class TestNGSIToMySQL {
     } // testBuildTableNameLengthDataModelByEntity
 
 
-*/
+
 }
 
