@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -355,7 +354,7 @@
       <workItem from="1583776710613" duration="434000" />
       <workItem from="1609178880820" duration="421000" />
       <workItem from="1611252439395" duration="13770000" />
-      <workItem from="1612493911859" duration="45302000" />
+      <workItem from="1612493911859" duration="45431000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>

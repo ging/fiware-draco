@@ -462,13 +462,13 @@ Coming soon.
      (1 row) 
 
      select * from openiot.urn_ngsi_ld_offstreetparking_downtown1;
-         recvtime         | fiwareservicepath |                entityid                |    entitytype    | availablespotnumber | availablespotnumber_observedat | availablespotnumber_reliability | availab
+         recvtime          |                entityid                |    entitytype    | availablespotnumber | availablespotnumber_observedat | availablespotnumber_reliability | availab
     lespotnumber_providedby |     name     |                  location                  | totalspotnumber 
     --------------------------+-------------------+----------------------------------------+------------------+---------------------+--------------------------------+---------------------------------+--------
     ------------------------+--------------+--------------------------------------------+-----------------
-     2020-05-12T15:10:39.47Z  | /def_servpath     | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
+     2020-05-12T15:10:39.47Z | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
     i-ld:Camera:C1          | Downtown One | {"type":"Point","coordinates":[-8.5,41.2]} | 200
-     2020-05-12T15:27:09.690Z | /def_servpath     | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
+     2020-05-12T15:27:09.690Z | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
     i-ld:Camera:C1          | Downtown One | {"type":"Point","coordinates":[-8.5,41.2]} | 200
     (2 rows) 
 
