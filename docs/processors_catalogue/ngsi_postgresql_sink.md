@@ -6,17 +6,28 @@ Content:
 
 -   [Functionality](#section1)
     -   [Mapping NGSI events to `NGSIEvent` objects](#section1.1)
-    -   [Mapping `NGSIEvent`s to PostgreSQL data structures](#section1.2)
-        -   [PostgreSQL databases naming conventions](#section1.2.1)
-        -   [PostgreSQL schemas naming conventions](#section1.2.2)
-        -   [PostgreSQL tables naming conventions](#section1.2.3)
-        -   [Row-like storing](#section1.2.4)
-        -   [Column-like storing](#section1.2.5)
-    -   [Example](#section1.3)
-        -   [`NGSIEvent`](#section1.3.1)
-        -   [Database, schema and table names](#section1.3.2)
-        -   [Row-like storing](#section1.3.3)
-        -   [Column-like storing](#section1.3.4)
+    -   [Managing NGSIv2 notifications](#section1.2)
+        -   [Mapping `NGSIEvent`s to PostgreSQL data structures](#section1.2.1)
+            -   [PostgreSQL databases naming conventions](#section1.2.1.1)
+            -   [PostgreSQL schemas naming conventions](#section1.2.1.2)
+            -   [PostgreSQL tables naming conventions](#section1.2.1.3)
+            -   [Row-like storing](#section1.2.1.4)
+            -   [Column-like storing](#section1.2.1.5)
+        -   [Example](#section1.2.2)
+            -   [`NGSIEvent`](#section1.2.2.1)
+            -   [Database, schema and table names](#section1.2.2.2)
+            -   [Row-like storing](#section1.2.2.3)
+            -   [Column-like storing](#section1.2.2.4)
+    -   [Managing NGSI-LD notifications](#section1.3)
+            -   [Mapping `NGSI-LD Event`s to PostgreSQL data structures](#section1.3.1)
+                -   [PostgreSQL databases naming conventions](#section1.3.1.1)
+                -   [PostgreSQL schemas naming conventions](#section1.3.1.2)
+                -   [PostgreSQL tables naming conventions](#section1.3.1.3)
+                -   [Column-like storing](#section1.3.1.4)
+            -   [Example](#section1.3.2)
+                -   [`NGSI-LD Event`](#section1.3.2.1)
+                -   [Database, schema and table names](#section1.3.2.2)
+                -   [Column-like storing](#section1.3.2.3)
 -   [Administration guide](#section2)
     -   [Configuration](#section2.1)
     -   [Use cases](#section2.2)
@@ -34,7 +45,7 @@ Content:
 
 `NGSIToPostgreSQL`is a processor designed to persist NGSI-like context data events within a
 [PostgreSQL server](https://www.postgresql.org/). Usually, such a context data is notified by a
-[Orion Context Broker](https://github.com/telefonicaid/fiware-orion) instance, but could be any other system speaking
+ Context Boker ([Orion Context Broker](https://github.com/telefonicaid/fiware-orion),[Orion-LD Context Broker](https://github.com/FIWARE/context.Orion-LD),[Scorpio Broker](https://github.com/ScorpioBroker/ScorpioBroker) ) instance, but could be any other system speaking
 the _NGSI language_.
 
 Independently of the data generator, NGSI context data is always transformed into internal `NGSIEvent` objects at Draco
@@ -50,18 +61,20 @@ Notified NGSI events (containing context data) are transformed into `NGSIEvent` 
 `NGSIEvent` is created; such an event is a mix of certain headers and a `ContextElement` object), independently of the
 NGSI data generator or the final backend where it is persisted.
 
-This is done at the Draco-ngsi Http listeners (in Flume jergon, sources) thanks to
+This is done at the Draco-ngsi Http listeners (in NiFi, processors) thanks to
 [`NGSIRestHandler`](ngsi_rest_handler.md). Once translated, the data (now, as `NGSIEvent` objects) is put into the
 internal channels for future consumption (see next section).
 
 <a name="section1.2"></a>
+## Managing NGSIv2 notifications
 
+<a name="section1.2.1"></a>
 ### Mapping `NGSIEvent`s to PostgreSQL data structures
 
 PostgreSQL organizes the data in schemas inside a database that contain tables of data rows. Such organization is
 exploited by `NGSIToPostgreSQL` each time a `NGSIEvent` is going to be persisted.
 
-<a name="section1.2.1"></a>
+<a name="section1.2.1.1"></a>
 
 #### PostgreSQL databases naming conventions
 
@@ -76,7 +89,7 @@ PostgreSQL
 [databases name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is
 limited to 63 characters.
 
-<a name="section1.2.2"></a>
+<a name="section1.2.1.2"></a>
 
 #### PostgreSQL schemas naming conventions
 
@@ -92,7 +105,7 @@ PostgreSQL
 [schemas name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is
 limited to 63 characters.
 
-<a name="section1.2.3"></a>
+<a name="section1.2.1.3"></a>
 
 #### PostgreSQL tables naming conventions
 
@@ -134,7 +147,7 @@ Please observe the concatenation of entity ID and type is already given in the `
 header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more
 details) within the `NGSIEvent`.
 
-<a name="section1.2.4"></a>
+<a name="section1.2.1.4"></a>
 
 #### Row-like storing
 
@@ -154,7 +167,7 @@ insert contains the following fields:
 -   `attrMd`: It contains a string serialization of the metadata array for the attribute in Json (if the attribute
     hasn't metadata, an empty array `[]` is inserted).
 
-<a name="section1.2.5"></a>
+<a name="section1.2.1.5"></a>
 
 #### Column-like storing
 
@@ -170,11 +183,11 @@ single line is composed for the whole notified entity, containing the following 
 -   For each notified attribute, a field named as the concatenation of the attribute name and `_md` is considered. This
     field will store the attribute's metadata values along the time.
 
-<a name="section1.3"></a>
+<a name="section1.2.2"></a>
 
 ### Example
 
-<a name="section1.3.1"></a>
+<a name="section1.2.2.1"></a>
 
 #### `NGSIEvent`
 
@@ -212,7 +225,7 @@ ngsi-event={
 }
 ```
 
-<a name="section1.3.2"></a>
+<a name="section1.2.2.2"></a>
 
 #### Database, schema and table names
 
@@ -282,7 +295,7 @@ postgresql> select * from vehicles.4wheels_car1_car;
 2 row in set (0.00 sec)
 ```
 
-<a name="section1.3.4"></a>
+<a name="section1.2.2.3"></a>
 
 #### Column-like storing
 
@@ -300,25 +313,188 @@ postgresql> select * from 4wheels_car1_car;
 +------------+---------------------------+-------------------+----------+------------+-------+----------+-----------+--------------+
 1 row in set (0.00 sec)
 ```
+<a name="section1.3"></a>
+## Managing NGSI-LD notifications
 
+### <a name="section1.3.1"></a>Mapping `NGSILDEvent`s to PostgreSQL data structures
+PostgreSQL organizes the data in schemas inside a database that contain tables of data rows. Such organization is exploited by `NGSILDPostgreSQLSink` each time a `NGSILDEvent` is going to be persisted.
+
+[Top](#top)
+
+#### <a name="section1.3.1.1"></a>PostgreSQL databases naming conventions
+Previous to any operation with PostgreSQL you need to create the database to be used.
+
+It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
+
+PostgreSQL [databases name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is limited to 63 characters.
+
+[Top](#top)
+
+#### <a name="section1.3.1.2"></a>PostgreSQL schemas naming conventions
+A schema named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for the FIWARE service) is created (if not existing yet).
+
+It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
+
+PostgreSQL [schemas name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is limited to 63 characters.
+
+[Top](#top)
+
+#### <a name="section1.3.1.3"></a>PostgreSQL tables naming conventions
+The name of these tables depends on the configured data model (see the [Configuration](#section2.1) section for more details):
+
+* Data model by entity (`data_model=dm-by-entity`). For each entity, the notified entity ID is collected in order to compose the table name, using (`_`) for encodigng the special characters presented in the id fied. 
+
+* Data model by entity type (`data_model=dm-by-entity-type`). For each entity type, the notified entity type is collected in order to compose the table name. using (`_`) for encodigng the special characters presented in the id fied.
+
+It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
+
+PostgreSQL [tables name length](http://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) is limited to 63 characters.
+
+The following table summarizes the table name composition (old encoding):
+
+| `dm-by-entity` | `dm-by-entity-type`|
+|---|---|
+|`<entityId>` |`<entityType>`|
+
+
+[Top](#top)
+
+#### <a name="section1.3.1.4"></a>Column-like storing
+Regarding the specific data stored within the above table, if `attr_persistence` parameter is set to `column` then a single line is composed for the whole notified entity, containing the following fields:
+
+* `recvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+* `entityId`: Notified entity identifier.
+* `entityType`: Notified entity type.
+*  For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
+
+
+[Top](#top)
+
+### <a name="section1.3.2"></a>Example
+#### <a name="section1.3.2.1"></a>`NGSILDEvent`
+Assuming the following `NGSILD-event` is received from the NGSIRESTHANDLER:
+
+    ngsi-notification=
+    headers={
+       fiware-service=opniot,
+       transaction-id=1234567890-0000-1234567890,
+       correlation-id=1234567890-0000-1234567890,
+       timestamp=1234567890,
+    },
+    {
+            "id": "urn:ngsi:ld:OffStreetParking:Downtown1",
+            "type": "OffStreetParking",
+            "@context": [
+            "http://example.org/ngsi-ld/parking.jsonld",
+            "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"],
+            "name": {
+            "type": "Property",
+               "value": "Downtown One"
+            },
+            "availableSpotNumber": {
+                "type": "Property",
+                "value": 122,
+                "observedAt": "2017-07-29T12:05:02Z",
+                "reliability": {
+                    "type": "Property",
+                    "value": 0.7
+                },
+                "providedBy": {
+                    "type": "Relationship",
+                    "object": "urn:ngsi-ld:Camera:C1"
+                }
+            },
+            "totalSpotNumber": {
+                "type": "Property",
+                "value": 200
+            },
+                "location": {
+                "type": "GeoProperty",
+                "value": {
+                    "type": "Point",
+                    "coordinates": [-8.5, 41.2]
+                }
+            }
+    }
+    
+
+
+[Top](#top)
+
+#### <a name="section1.3.2.2"></a>Database, schema and table names
+The PostgreSQL database name will be of the user's choice.
+
+The PostgreSQL schema will always be `openiot`.
+
+The PostgreSQL table names will be, depending on the configured data model, the following ones (old encoding):
+
+| `dm-by-entity` | `dm-by-entity-type`|
+|---|---|
+|`urn_ngsi_ld_offstreetparking_downtown1` |`OffStreetParking`|
+
+
+[Top](#top)
+
+Assuming `attr_persistence=column` as configuration parameters, then `NGSILDPostgreSQLSink` will persist the data within the body as:
+
+
+#### <a name="section1.3.2.3"></a>Column-like storing
+Coming soon.
+    
+    $ psql -U myuser
+    psql (9.5.0)
+    Type "help" for help.
+    postgres-# \c postgres
+
+    postgres=#  \dn
+        List of schemas
+        Name     |  Owner   
+    -------------+----------
+     openiot | postgres
+     public      | postgres
+    (2 rows) 
+
+    postgres=# \dt openiot.*
+                            List of relations
+       Schema    |                  Name                  | Type  |  Owner   
+    -------------+----------------------------------------+-------+----------
+     def_serv_ld | urn_ngsi_ld_offstreetparking_downtown1 | table | postgres  
+     (1 row) 
+
+     select * from openiot.urn_ngsi_ld_offstreetparking_downtown1;
+         recvtime         | fiwareservicepath |                entityid                |    entitytype    | availablespotnumber | availablespotnumber_observedat | availablespotnumber_reliability | availab
+    lespotnumber_providedby |     name     |                  location                  | totalspotnumber 
+    --------------------------+-------------------+----------------------------------------+------------------+---------------------+--------------------------------+---------------------------------+--------
+    ------------------------+--------------+--------------------------------------------+-----------------
+     2020-05-12T15:10:39.47Z  | /def_servpath     | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
+    i-ld:Camera:C1          | Downtown One | {"type":"Point","coordinates":[-8.5,41.2]} | 200
+     2020-05-12T15:27:09.690Z | /def_servpath     | urn:ngsi:ld:OffStreetParking:Downtown1 | OffStreetParking | 122                 | 2017-07-29T12:05:02Z           | 0.7                             | urn:ngs
+    i-ld:Camera:C1          | Downtown One | {"type":"Point","coordinates":[-8.5,41.2]} | 200
+    (2 rows) 
+
+
+[Top](#top)
+
+
+<a name="section2"></a>
 ## Administration guide
-
+<a name="section2.1"></a>
 ### Configuration
 
 `NGSIToPostgreSQL` is configured through the following parameters:
 
-| Name                      | Default Value | Allowable Values | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------------- | ------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **JDBC Connection Pool**  | no            |                  | Controller service for connecting to a specific database engine                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **NGSI version**          | v2            |                  | list of supported version of NGSI (v2 and ld), currently only support v2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **Data Model**            | db-by-entity  |                  | The Data model for creating the tables when an event have been received you can choose between: db-by-service-path or db-by-entity, default value is db-by-service-path                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| **Attribute persistence** | row           | row, column      | The mode of storing the data inside of the table allowable values are row and column                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Default Service           | test          |                  | In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Default Service path      | /path         |                  | In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Enable encoding           | true          | true, false      | true applies the new encoding, false applies the old encoding.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Enable lowercase          | true          | true, false      | true for creating the Schema and Tables name with lowercase.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **Batch size**            | 10            |                  | The preferred number of FlowFiles to put to the database in a single transaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| **Rollback on failure**   | false         | true, false      | Specify how to handle error. By default (false), if an error occurs while processing a FlowFile, the FlowFile will be routed to 'failure' or 'retry' relationship based on error type, and processor can continue with next FlowFile. Instead, you may want to rollback currently processed FlowFiles and stop further processing immediately. In that case, you can do so by enabling this 'Rollback On Failure' property. If enabled, failed FlowFiles will stay in the input relationship without penalizing it and being processed repeatedly until it gets processed successfully or removed by other means. It is important to set adequate 'Yield Duration' to avoid retrying too frequently. |
+| Name                      | Default Value | Allowable Values                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------- | ------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **JDBC Connection Pool**  | no            |                                                       | Controller service for connecting to a specific database engine                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **NGSI version**          | v2            |  v2, ld                                               | list of supported version of NGSI (v2 and ld)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| **Data Model**            | db-by-entity  |  db-by-entity,db-by-entity-type,db-by-service-path    | The Data model for creating the tables when an event have been received you can choose between: db-by-service-path or db-by-entity for ngsiv2 and  db-by-entity or db-by-entity-type for ngsi-ld, default value is db-by-entity                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Attribute persistence** | row           | row, column                                           | The mode of storing the data inside of the table allowable values are row and column                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Default Service           | test          |                                                       | In case you dont set the Fiware-Service header in the context broker, this value will be used as Fiware-Service                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Default Service path      | /path         |                                                       | In case you dont set the Fiware-ServicePath header in the context broker, this value will be used as Fiware-ServicePath                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Enable encoding           | true          | true, false                                           | true applies the new encoding, false applies the old encoding.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Enable lowercase          | true          | true, false                                           | true for creating the Schema and Tables name with lowercase.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Batch size**            | 10            |                                                       | The preferred number of FlowFiles to put to the database in a single transaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Rollback on failure**   | false         | true, false                                           | Specify how to handle error. By default (false), if an error occurs while processing a FlowFile, the FlowFile will be routed to 'failure' or 'retry' relationship based on error type, and processor can continue with next FlowFile. Instead, you may want to rollback currently processed FlowFiles and stop further processing immediately. In that case, you can do so by enabling this 'Rollback On Failure' property. If enabled, failed FlowFiles will stay in the input relationship without penalizing it and being processed repeatedly until it gets processed successfully or removed by other means. It is important to set adequate 'Yield Duration' to avoid retrying too frequently. |
 
 A configuration example could be:
 

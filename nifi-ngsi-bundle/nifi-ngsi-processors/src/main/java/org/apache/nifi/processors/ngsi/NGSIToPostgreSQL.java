@@ -52,10 +52,10 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .name("data-model")
             .displayName("Data Model")
             .description("The Data model for creating the tables when an event have been received you can choose between" +
-                    ":db-by-service-path or db-by-entity, default value is db-by-service-path")
+                    ":db-by-service-path or db-by-entity for ngsiv2 and  db-by-entity or db-by-entity-type for ngsi-ld, default value is db-by-entity")
             .required(false)
-            .allowableValues("db-by-service-path", "db-by-entity")
-            .defaultValue("db-by-service-path")
+            .allowableValues("db-by-service-path", "db-by-entity","db-by-entity-type")
+            .defaultValue("db-by-entity")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
@@ -72,9 +72,9 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
     protected static final PropertyDescriptor NGSI_VERSION = new PropertyDescriptor.Builder()
             .name("ngsi-version")
             .displayName("NGSI Version")
-            .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD. NGSI-LD is not supported yet ")
+            .description("The version of NGSI of your incomming events. You can choose Between v2 for NGSIv2 and ld for NGSI-LD ")
             .required(false)
-            .allowableValues("v2")
+            .allowableValues("v2","ld")
             .defaultValue("v2")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();

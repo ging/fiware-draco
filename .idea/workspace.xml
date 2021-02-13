@@ -2,42 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
-      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/AttributesLD.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/EntityLD.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEncoders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToCarto.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToCarto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToHDFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_postgresql_sink.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/HDFSAggregator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/CartoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/CartoBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MySQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-nar/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/nifi-ngsi-cassandra-processors/src/main/java/org/apache/nifi/processors/ngsi/cassandra/NGSIToCassandra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-cassandra/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-nar/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/NGSIToDynamo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/nifi-ngsi-dynamo-processors/src/main/java/org/apache/nifi/processors/ngsi/dynamo/backends/DynamoBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-dynamo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -389,7 +356,7 @@
       <workItem from="1583776710613" duration="434000" />
       <workItem from="1609178880820" duration="421000" />
       <workItem from="1611252439395" duration="13770000" />
-      <workItem from="1612493911859" duration="39808000" />
+      <workItem from="1612493911859" duration="44794000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -819,25 +786,25 @@
       <screen x="0" y="25" width="1440" height="829" />
     </state>
     <state x="438" y="167" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.829@0.25.1440.829" timestamp="1612500059872" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom" timestamp="1613166496918">
+    <state width="667" height="197" key="GridCell.Tab.0.bottom" timestamp="1613166708819">
       <screen x="0" y="25" width="1440" height="829" />
     </state>
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.829@0.25.1440.829" timestamp="1613166496918" />
+    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.829@0.25.1440.829" timestamp="1613166708819" />
     <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.830@0.25.1440.830" timestamp="1613011400227" />
-    <state width="667" height="197" key="GridCell.Tab.0.center" timestamp="1613166496917">
+    <state width="667" height="197" key="GridCell.Tab.0.center" timestamp="1613166708817">
       <screen x="0" y="25" width="1440" height="829" />
     </state>
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.829@0.25.1440.829" timestamp="1613166496917" />
+    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.829@0.25.1440.829" timestamp="1613166708817" />
     <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.830@0.25.1440.830" timestamp="1613011400226" />
-    <state width="667" height="197" key="GridCell.Tab.0.left" timestamp="1613166496916">
+    <state width="667" height="197" key="GridCell.Tab.0.left" timestamp="1613166708817">
       <screen x="0" y="25" width="1440" height="829" />
     </state>
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.829@0.25.1440.829" timestamp="1613166496916" />
+    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.829@0.25.1440.829" timestamp="1613166708817" />
     <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.830@0.25.1440.830" timestamp="1613011400225" />
-    <state width="667" height="197" key="GridCell.Tab.0.right" timestamp="1613166496918">
+    <state width="667" height="197" key="GridCell.Tab.0.right" timestamp="1613166708818">
       <screen x="0" y="25" width="1440" height="829" />
     </state>
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.829@0.25.1440.829" timestamp="1613166496918" />
+    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.829@0.25.1440.829" timestamp="1613166708818" />
     <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.830@0.25.1440.830" timestamp="1613011400226" />
     <state width="679" height="245" key="GridCell.Tab.1.bottom" timestamp="1613166199609">
       <screen x="0" y="25" width="1440" height="829" />
