@@ -81,8 +81,8 @@ WORKDIR ${NIFI_HOME}
 RUN curl -L -o "nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
 	&& cp ./nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
-RUN curl -L -o "nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
-	&& cp ./nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar
+#RUN curl -L -o "nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
+#	&& cp ./nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
 # Apply configuration and start NiFi
 #

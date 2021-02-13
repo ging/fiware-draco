@@ -34,6 +34,7 @@
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-annotations:3.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.12.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-serialization-services:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-syslog-utils:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.palindromicity:simple-syslog-5424:0.0.13" level="project" />
@@ -65,7 +66,6 @@
     <orderEntry type="library" name="Maven: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.17" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.12.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.12.1" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
