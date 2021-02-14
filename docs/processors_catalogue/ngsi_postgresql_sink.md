@@ -342,9 +342,9 @@ PostgreSQL [schemas name length](http://www.postgresql.org/docs/current/static/s
 #### <a name="section1.3.1.3"></a>PostgreSQL tables naming conventions
 The name of these tables depends on the configured data model (see the [Configuration](#section2.1) section for more details):
 
--   Data model by entity (`data_model=dm-by-entity`). For each entity, the notified entity ID is collected in order to compose the table name, using (`_`) for encodigng the special characters presented in the id fied. 
+-   Data model by entity (`data_model=dm-by-entity`). For each entity, the notified entity ID is collected in order to compose the table name, using (`_`) for encodigng the special characters presented in the ID fied. 
 
--   Data model by entity type (`data_model=dm-by-entity-type`). For each entity type, the notified entity type is collected in order to compose the table name. using (`_`) for encodigng the special characters presented in the id fied.
+-   Data model by entity type (`data_model=dm-by-entity-type`). For each entity type, the notified entity type is collected in order to compose the table name. using (`_`) for encodigng the special characters presented in the ID fied.
 
 It must be said [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) alphanumeric characters and the underscore (`_`). This leads to  certain [encoding](#section2.3.4) is applied depending on the `enable_encoding` configuration parameter.
 
