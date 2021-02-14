@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
 
@@ -35,13 +34,13 @@ public class NGSIUtils {
         final String flowFileContent = new String(buffer, StandardCharsets.UTF_8);
         String fiwareService = (newFlowFileAttributes.get("fiware-service") == null) ? "nd":newFlowFileAttributes.get("fiware-service");
         String fiwareServicePath = (newFlowFileAttributes.get("fiware-servicepath")==null) ? "/nd":newFlowFileAttributes.get("fiware-servicepath");
+        System.out.println(fiwareServicePath);
         long creationTime=flowFile.getEntryDate();
         JSONObject content = new JSONObject(flowFileContent);
         JSONArray data;
         String entityType;
         String entityId;
         ArrayList<Entity> entities = new ArrayList<>();
-        ArrayList<EntityLD> entitiesLD = new ArrayList<>();
         NGSIEvent event= null;
 
         if("v2".compareToIgnoreCase(version)==0){
@@ -76,63 +75,59 @@ public class NGSIUtils {
             }
             event = new NGSIEvent(creationTime,fiwareService,fiwareServicePath,entities);
         }else if ("ld".compareToIgnoreCase(version)==0){
-            System.out.println("Work in progress");
+            System.out.println("NGSI-LD Notification");
             boolean hasSubAttrs= false;
             data = (JSONArray) content.get("data");
             for (int i = 0; i < data.length(); i++) {
                 JSONObject lData = data.getJSONObject(i);
                 entityId = lData.getString("id");
                 entityType = lData.getString("type");
-                ArrayList<AttributesLD> attributes = new ArrayList<>();
+                ArrayList<AttributesLD> attributes  = new ArrayList<>();
                 Iterator<String> keys = lData.keys();
-                String attrType = "";
-                String attrValue = "";
-                String subAttrName = "";
-                String subAttrType = "";
-                String subAttrValue = "";
-                ArrayList<AttributesLD> subAttributes = new ArrayList<>();
+                String attrType="";
+                String attrValue="";
+                String subAttrName="";
+                String subAttrType="";
+                String subAttrValue="";
+                ArrayList<AttributesLD> subAttributes=new ArrayList<>();
 
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    if (!"id".equals(key) && !"type".equals(key) && !"@context".equals(key)) {
+                    if (!"id".equals(key) && !"type".equals(key) && !"@context".equals(key)){
                         JSONObject value = lData.getJSONObject(key);
                         attrType = value.getString("type");
-                        if ("Relationship".contentEquals(attrType)) {
+                        if ("Relationship".contentEquals(attrType)){
                             attrValue = value.get("object").toString();
-                        } else if ("Property".contentEquals(attrType)) {
+                        }else if ("Property".contentEquals(attrType)){
                             attrValue = value.get("value").toString();
-                            System.out.println(value);
                             Iterator<String> keysOneLevel = value.keys();
                             while (keysOneLevel.hasNext()) {
                                 String keyOne = keysOneLevel.next();
-                                if (!"type".equals(keyOne) && !"value".equals(keyOne) && !"observedAt".equals(keyOne)) {
+                                if (!"type".equals(keyOne)&&!"value".equals(keyOne)&&!"observedAt".equals(keyOne)){
                                     JSONObject value2 = value.getJSONObject(keyOne);
-                                    subAttrName = keyOne;
-                                    subAttrType = value2.get("type").toString();
-                                    System.out.println(value2);
-                                    if ("Relationship".contentEquals(subAttrType)) {
+                                    subAttrName=keyOne;
+                                    subAttrType=value2.get("type").toString();
+                                    if ("Relationship".contentEquals(subAttrType)){
                                         subAttrValue = value2.get("object").toString();
-                                    } else if ("Property".contentEquals(subAttrType)) {
+                                    }else if ("Property".contentEquals(subAttrType)){
                                         subAttrValue = value2.get("value").toString();
-                                    } else if ("GeoProperty".contentEquals(subAttrType)) {
+                                    }else if ("GeoProperty".contentEquals(subAttrType)){
                                         subAttrValue = value2.get("value").toString();
                                     }
-                                    System.out.println(subAttrName);
-                                    System.out.println(subAttrType);
-                                    System.out.println(subAttrValue);
-                                    hasSubAttrs = true;
-                                    subAttributes.add(new AttributesLD(subAttrName, subAttrType, subAttrValue, false, null));
+                                    hasSubAttrs= true;
+                                    subAttributes.add(new AttributesLD(subAttrName,subAttrType,subAttrValue,false,null));
                                 }
                             }
-                        } else if ("GeoProperty".contentEquals(attrType)) {
+                        }else if ("GeoProperty".contentEquals(attrType)){
                             attrValue = value.get("value").toString();
                         }
-                        attributes.add(new AttributesLD(key, attrType, attrValue, hasSubAttrs, subAttributes));
-                        hasSubAttrs = false;
+                        attributes.add(new AttributesLD(key,attrType,attrValue, hasSubAttrs,subAttributes));
+                        hasSubAttrs= false;
                     }
                 }
-                entitiesLD.add(new EntityLD(entityId, entityType, attributes));
+                entities.add(new Entity(entityId,entityType,attributes,true));
             }
+            event = new NGSIEvent(creationTime,fiwareService,entities);
         }
         return event;
     }

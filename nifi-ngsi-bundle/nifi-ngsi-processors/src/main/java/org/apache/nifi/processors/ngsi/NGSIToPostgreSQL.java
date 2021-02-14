@@ -244,13 +244,21 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
             final long creationTime = event.getCreationTime();
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
-            final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
+            final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
+            System.out.println(fiwareServicePath);
             try {
                 final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                for (Entity entity : event.getEntities()) {
+                System.out.println(schemaName);
+                System.out.println();
+                ArrayList<Entity> entities= new ArrayList<>();
+                entities = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?event.getEntitiesLD():event.getEntities();
+                System.out.println(entities);
+                for (Entity entity : entities) {
                     String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     // Get or create the appropriate PreparedStatement to use.
+                    System.out.println(tableName);
+                    System.out.println(sql);
                     final StatementFlowFileEnclosure enclosure = sqlToEnclosure
                             .computeIfAbsent(sql, k -> {
                                 final StatementFlowFileEnclosure newEnclosure = new StatementFlowFileEnclosure(sql);

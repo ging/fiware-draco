@@ -210,6 +210,7 @@ public class TestJsonNgsi {
                         attrValue = value.get("value").toString();
                         System.out.println(value);
                             Iterator<String> keysOneLevel = value.keys();
+                        System.out.println("************");
                             while (keysOneLevel.hasNext()) {
                                 String keyOne = keysOneLevel.next();
                                 if (!"type".equals(keyOne)&&!"value".equals(keyOne)&&!"observedAt".equals(keyOne)){
@@ -247,8 +248,6 @@ public class TestJsonNgsi {
         for (Entity x: event.getEntitiesLD()){
             p.listOfFields("column",x,"ld",false);
         }
-        System.out.println("xxxxxxxxxxxxxxxxx");
-
 
         for (Entity x: event.getEntitiesLD()){
             p.listOfFields("column",x,"ld",false);
