@@ -5,7 +5,7 @@ LABEL site="https://github.com/ging/fiware-draco"
 
 ARG UID=1000
 ARG GID=1000
-ARG NIFI_VERSION=1.12.1
+ARG NIFI_VERSION=1.13.0
 ARG BASE_URL=https://archive.apache.org/dist
 ARG MIRROR_BASE_URL=${MIRROR_BASE_URL:-${BASE_URL}}
 ARG NIFI_BINARY_PATH=${NIFI_BINARY_PATH:-/nifi/${NIFI_VERSION}/nifi-${NIFI_VERSION}-bin.zip}
@@ -18,8 +18,8 @@ ENV NIFI_TOOLKIT_HOME ${NIFI_BASE_DIR}/nifi-toolkit-current
 ENV NIFI_PID_DIR=${NIFI_HOME}/run
 ENV NIFI_LOG_DIR=${NIFI_HOME}/logs
 
-ENV DRACO_RELEASE=1.3.5
-ENV NIFI_NGSI_NAR_VERSION=1.3.5
+ENV DRACO_RELEASE=1.3.6
+ENV NIFI_NGSI_NAR_VERSION=1.3.6
 
 ADD sh/ ${NIFI_BASE_DIR}/scripts/
 
@@ -81,8 +81,11 @@ WORKDIR ${NIFI_HOME}
 RUN curl -L -o "nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
 	&& cp ./nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
-#RUN curl -L -o "nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
-#	&& cp ./nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar
+RUN curl -L -o "nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
+	&& cp ./nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-cassandra-nar-${NIFI_NGSI_NAR_VERSION}.nar
+
+RUN curl -L -o "nifi-ngsi-dynamo-nar-${NIFI_NGSI_NAR_VERSION}.nar" "https://github.com/ging/fiware-draco/releases/download/${DRACO_RELEASE}/nifi-ngsi-dynamo-nar-${NIFI_NGSI_NAR_VERSION}.nar"\
+	&& cp ./nifi-ngsi-dynamo-nar-${NIFI_NGSI_NAR_VERSION}.nar ${NIFI_BASE_DIR}/nifi-${NIFI_VERSION}/lib/nifi-ngsi-dynamo-nar-${NIFI_NGSI_NAR_VERSION}.nar
 
 # Apply configuration and start NiFi
 #

@@ -19,7 +19,7 @@ import org.apache.nifi.processor.exception.ProcessException;
 import org.apache.nifi.processor.util.StandardValidators;
 import org.apache.nifi.processors.ngsi.cassandra.backends.CassandraBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
-import org.apache.nifi.processors.ngsi.ngsi.utils.ngsiV2.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 import org.apache.nifi.util.StopWatch;
 

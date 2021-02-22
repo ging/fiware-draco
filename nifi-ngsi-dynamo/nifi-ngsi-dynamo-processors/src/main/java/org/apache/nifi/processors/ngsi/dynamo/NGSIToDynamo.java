@@ -41,7 +41,7 @@ import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
-import org.apache.nifi.processors.ngsi.ngsi.utils.ngsiV2.NGSIEvent;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 
 import java.util.*;

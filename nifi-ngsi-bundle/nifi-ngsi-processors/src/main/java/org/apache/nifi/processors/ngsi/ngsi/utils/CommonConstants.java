@@ -1,5 +1,7 @@
 package org.apache.nifi.processors.ngsi.ngsi.utils;
 
+import javax.xml.bind.DatatypeConverter;
+
 public final class CommonConstants {
 
     // Maximum values
@@ -16,5 +18,15 @@ public final class CommonConstants {
      */
     private CommonConstants() {
     } // CommonConstants
+
+    /**
+     * Gets the milliseconds version of the given timestamp.
+     * @param timestamp
+     * @return The milliseconds version of the given timestamp
+     * @throws java.text.ParseException
+     */
+    public static long getMilliseconds(String timestamp) throws java.text.ParseException {
+        return DatatypeConverter.parseDateTime(timestamp).getTime().getTime();
+    } // getMilliseconds
 
 } // CommonConstants

@@ -103,7 +103,11 @@ public class NGSIUtils {
                             Iterator<String> keysOneLevel = value.keys();
                             while (keysOneLevel.hasNext()) {
                                 String keyOne = keysOneLevel.next();
-                                if (!"type".equals(keyOne)&&!"value".equals(keyOne)&&!"observedAt".equals(keyOne)){
+                                if ("type".equals(keyOne)){
+                                    // Do Nothing
+                                } else if (!"observedAt".equals(keyOne) || !"unitCode".equals(keyOne)){
+                                    // TBD Do Something for unitCode and observedAt
+                                } else if (!"value".equals(keyOne)){
                                     JSONObject value2 = value.getJSONObject(keyOne);
                                     subAttrName=keyOne;
                                     subAttrType=value2.get("type").toString();

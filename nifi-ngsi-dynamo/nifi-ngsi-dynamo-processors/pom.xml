@@ -19,11 +19,15 @@
     <parent>
         <groupId>org.apache.nifi</groupId>
         <artifactId>nifi-ngsi-dynamodb-bundle</artifactId>
-        <version>1.3.5</version>
+        <version>1.3.6</version>
     </parent>
 
     <artifactId>nifi-ngsi-dynamo-processors</artifactId>
     <packaging>jar</packaging>
+
+    <properties>
+        <nifi.version>1.13.0</nifi.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -33,12 +37,12 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-utils</artifactId>
-            <version>1.9.2</version>
+            <version>${nifi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-mock</artifactId>
-            <version>1.9.2</version>
+            <version>${nifi.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -54,7 +58,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20160810</version>
+            <version>20201115</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -62,23 +66,29 @@
             <version>4.1</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.nifi</groupId>
-            <artifactId>nifi-ssl-context-service-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <version>1.11.504</version>
+            <version>1.11.959</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-aws-processors</artifactId>
-            <version>1.9.2</version>
+            <version>${nifi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.nifi</groupId>
+            <artifactId>nifi-aws-service-api</artifactId>
+            <version>${nifi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.nifi</groupId>
+            <artifactId>nifi-ssl-context-service-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-ngsi-processors</artifactId>
-            <version>1.3.5</version>
+            <version>1.3.6</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
