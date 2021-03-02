@@ -3,10 +3,13 @@ package org.apache.nifi.processors.ngsi.ngsi.backends;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.TimeZone;
 
 public class PostgreSQLBackend {
@@ -145,8 +148,8 @@ public class PostgreSQLBackend {
     } // getValuesForInsert
 
 
-    public String getFieldsForCreate(String attrPersistence, Entity entity,String ngsiVersion, boolean ckanCompatible) {
-        Iterator it = listOfFields(attrPersistence, entity, ngsiVersion ,ckanCompatible).iterator();
+    public String getFieldsForCreate(ArrayList<String> listOfFields) {
+        Iterator it = listOfFields.iterator();
         String fieldsForCreate = "(";
         boolean first = true;
         while (it.hasNext()) {
@@ -161,11 +164,11 @@ public class PostgreSQLBackend {
         return fieldsForCreate + ")";
     } // getFieldsForCreate
 
-    public String getFieldsForInsert(String attrPersistence, Entity entity,String ngsiVersion, boolean ckanCompatible) {
+    public String getFieldsForInsert(ArrayList<String> listOfFields) {
 
         String fieldsForInsert = "(";
         boolean first = true;
-        Iterator it = listOfFields(attrPersistence, entity,ngsiVersion,ckanCompatible).iterator();
+        Iterator it = listOfFields.iterator();
         while (it.hasNext()) {
             if (first) {
                 fieldsForInsert += (String) it.next();
@@ -201,9 +204,9 @@ public class PostgreSQLBackend {
         return query;
     }
 
-    public String createTable(String schemaName,String tableName, String attrPersistence, Entity entity,String ngsiVersion,boolean ckanCompatible){
+    public String createTable(String schemaName,String tableName, ArrayList<String> listOfFields){
 
-        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(attrPersistence, entity, ngsiVersion,ckanCompatible) + ";";
+        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
         return query;
     }
 
@@ -319,8 +322,59 @@ public class PostgreSQLBackend {
         return tableName;
     }
 
-    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, String dataModel, String ngsiVersion, boolean ckanCopatible){
-        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(dataModel, entity, ngsiVersion,ckanCopatible)+ " values " +this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ngsiVersion,ckanCopatible);
+    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, ArrayList<String> listOfFields,String dataModel, String ngsiVersion, boolean ckanCopatible){
+        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(listOfFields)+ " values " +this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ngsiVersion,ckanCopatible);
+        return query;
+    }
+
+    public String checkColumnNames(String tableName){
+        String query = "select column_name from information_schema.columns where table_name ='"+ tableName + "';";
+        return query;
+    }
+
+    public ArrayList<String> getNewColumns(ResultSet rs, ArrayList<String> listOfFields){
+        ArrayList<String> newColumns = listOfFields;
+        newColumns.replaceAll(String::toLowerCase);
+
+        try{
+
+            System.out.println( "columns : ");
+            System.out.println(listOfFields.size());
+            // Get the column names; column indices start from 1
+            ;
+            while (rs.next()) {
+                String columnName = rs.getString(1);
+                System.out.println(columnName);
+                System.out.println(newColumns.contains(columnName));
+                if (newColumns.contains(columnName)) {
+                    newColumns.remove(columnName);
+                    System.out.println(newColumns);
+                }
+
+            }
+            System.out.println(newColumns);
+
+        } catch (SQLException s) {
+                System.out.println(s.toString());
+        }
+        return newColumns;
+    }
+
+    public String addColumns(String schemaName, String tableName, ArrayList<String> columnNames){
+        Iterator it = columnNames.iterator();
+        String fieldsForCreate = "";
+        boolean first = true;
+        while (it.hasNext()) {
+            if (first) {
+                fieldsForCreate += " ADD COLUMN "+ (String) it.next() + " text";
+                first = false;
+            } else {
+                fieldsForCreate += ", ADD COLUMN " + (String) it.next() + " text";
+            } // if else
+        } // while
+
+        fieldsForCreate += ";";
+        String query = "Alter table "+schemaName+"."+tableName+ fieldsForCreate;
         return query;
     }
 }

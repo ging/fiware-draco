@@ -245,20 +245,16 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             final long creationTime = event.getCreationTime();
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
             final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
-            System.out.println(fiwareServicePath);
             try {
                 final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                System.out.println(schemaName);
-                System.out.println();
                 ArrayList<Entity> entities= new ArrayList<>();
                 entities = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?event.getEntitiesLD():event.getEntities();
-                System.out.println(entities);
+
                 for (Entity entity : entities) {
+                    ArrayList<String> listOfFields= postgres.listOfFields(context.getProperty(ATTR_PERSISTENCE).getValue(), entity,context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                    final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
+                    final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName,listOfFields, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
                     // Get or create the appropriate PreparedStatement to use.
-                    System.out.println(tableName);
-                    System.out.println(sql);
                     final StatementFlowFileEnclosure enclosure = sqlToEnclosure
                             .computeIfAbsent(sql, k -> {
                                 final StatementFlowFileEnclosure newEnclosure = new StatementFlowFileEnclosure(sql);
@@ -267,12 +263,18 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                             });
 
                     if (!exceptionHandler.execute(fc, flowFile, input -> {
-
                         final PreparedStatement stmt = enclosure.getCachedStatement(conn);
+                        ArrayList<String> newColumns = new ArrayList<>();
                         JdbcCommon.setParameters(stmt, flowFile.getAttributes());
                         try {
+                            System.out.println(postgres.checkColumnNames(tableName));
+                            ResultSet rs = conn.createStatement().executeQuery(postgres.checkColumnNames(tableName));
+                            newColumns = postgres.getNewColumns(rs,listOfFields);
                             conn.createStatement().execute(postgres.createSchema(schemaName));
-                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, context.getProperty(ATTR_PERSISTENCE).getValue(), entity,context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean()));
+                            conn.createStatement().execute(postgres.addColumns(schemaName,tableName,newColumns));
+
+                            conn.createStatement().execute(postgres.createTable(schemaName, tableName,listOfFields));
+                            System.out.println(schemaName+"."+tableName+" columns -------- : ");
 
                         } catch (SQLException s) {
                             getLogger().error(s.toString());

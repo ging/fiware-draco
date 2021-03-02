@@ -105,8 +105,13 @@ public class NGSIUtils {
                                 String keyOne = keysOneLevel.next();
                                 if ("type".equals(keyOne)){
                                     // Do Nothing
-                                } else if (!"observedAt".equals(keyOne) || !"unitCode".equals(keyOne)){
+                                } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)){
                                     // TBD Do Something for unitCode and observedAt
+                                    String value2 = value.getString(keyOne);
+                                    subAttrName = keyOne;
+                                    subAttrValue = value2;
+                                    hasSubAttrs = true;
+                                    subAttributes.add(new AttributesLD(subAttrName,subAttrValue,subAttrValue,false,null));
                                 } else if (!"value".equals(keyOne)){
                                     JSONObject value2 = value.getJSONObject(keyOne);
                                     subAttrName=keyOne;
@@ -126,6 +131,7 @@ public class NGSIUtils {
                             attrValue = value.get("value").toString();
                         }
                         attributes.add(new AttributesLD(key,attrType,attrValue, hasSubAttrs,subAttributes));
+                        subAttributes=new ArrayList<>();
                         hasSubAttrs= false;
                     }
                 }

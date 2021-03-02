@@ -29,7 +29,15 @@ curl -X POST 'http://localhost:5050/ld/notify' -H 'Content-Type: application/ld+
         },
         "totalSpotNumber": {
             "type": "Property",
-            "value": 200
+            "value": 200,
+            "observedAt": "2017-07-29T12:05:02Z",
+            "unitCode": "5K"
+        },
+        "newAttr": {
+            "type": "Property",
+            "value": 000,
+            "observedAt": "2007-07-29T12:05:02Z",
+            "unitCode": "50K"
         },
             "location": {
             "type": "GeoProperty",

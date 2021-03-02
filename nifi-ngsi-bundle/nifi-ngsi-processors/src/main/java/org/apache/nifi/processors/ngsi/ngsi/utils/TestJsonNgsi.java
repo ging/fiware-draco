@@ -153,7 +153,9 @@ public class TestJsonNgsi {
                  "    },\n" +
                  "    \"totalSpotNumber\": {\n" +
                  "        \"type\": \"Property\",\n" +
-                 "        \"value\": 200\n" +
+                 "        \"value\": 200,\n" +
+                "        \"observedAt\": \"2017-07-29T12:05:02Z\",\n" +
+                "        \"unitCode\": 5K\n" +
                  "    },\n" +
                  "    \"location\": {\n" +
                  "      \"type\": \"GeoProperty\",\n" +
@@ -213,7 +215,17 @@ public class TestJsonNgsi {
                         System.out.println("************");
                             while (keysOneLevel.hasNext()) {
                                 String keyOne = keysOneLevel.next();
-                                if (!"type".equals(keyOne)&&!"value".equals(keyOne)&&!"observedAt".equals(keyOne)){
+                                if ("type".equals(keyOne)){
+                                    // Do Nothing
+                                } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)){
+                                    // TBD Do Something for unitCode and observedAt
+                                    String value2 = value.getString(keyOne);
+                                    subAttrName = keyOne;
+                                    subAttrValue = value2;
+                                    hasSubAttrs = true;
+                                    subAttributes.add(new AttributesLD(subAttrName,subAttrValue,subAttrValue,false,null));
+                                }
+                                else if (!"value".equals(keyOne)){
                                     JSONObject value2 = value.getJSONObject(keyOne);
                                     subAttrName=keyOne;
                                     subAttrType=value2.get("type").toString();
@@ -236,6 +248,7 @@ public class TestJsonNgsi {
                         attrValue = value.get("value").toString();
                     }
                     attributes.add(new AttributesLD(key,attrType,attrValue, hasSubAttrs,subAttributes));
+                    subAttributes=new ArrayList<>();
                     hasSubAttrs= false;
                 }
             }
@@ -250,12 +263,18 @@ public class TestJsonNgsi {
         }
 
         for (Entity x: event.getEntitiesLD()){
-            p.listOfFields("column",x,"ld",false);
-            System.out.println(p.getFieldsForCreate("column",x,"ld",false));
-            System.out.println(p.getFieldsForInsert("column",x,"ld",false));
-            System.out.println(p.getFieldsForInsert("column",x,"ld",false));
+            ArrayList<String> list=p.listOfFields("column",x,"ld",false);
+            System.out.println(p.getFieldsForCreate(list));
+            System.out.println(p.getFieldsForInsert(list));
+            System.out.println(p.getFieldsForInsert(list));
             System.out.println(p.buildSchemaName("test",false,false,false));
             System.out.println(p.buildTableName("",x,"db-by-entity-type",true,true,"ld",false));
+            ArrayList<String> listC = new ArrayList<>();
+            listC.add("a");
+            listC.add("b");
+            listC.add("c");
+
+            System.out.println(p.addColumns("test","test",listC));
 
             System.out.println(p.getValuesForInsert("column",x,000,"","ld",false));
             for (AttributesLD y :x.getEntityAttrsLD()){
