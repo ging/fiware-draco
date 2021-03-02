@@ -9,15 +9,16 @@ import org.apache.http.message.BasicHeader;
 import org.apache.nifi.processors.ngsi.ngsi.backends.ckan.model.DataStore;
 import org.apache.nifi.processors.ngsi.ngsi.backends.http.HttpBackend;
 import org.apache.nifi.processors.ngsi.ngsi.backends.http.JsonResponse;
-import org.apache.nifi.processors.ngsi.ngsi.utils.CommonConstants;
-import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants;
-import org.json.simple.JSONArray;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+import org.json.JSONException;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class CkanBackend extends HttpBackend {
 
@@ -658,5 +659,147 @@ public class CkanBackend extends HttpBackend {
         headers.add(new BasicHeader("Content-Type", "application/json; charset=utf-8"));
         return doRequest(method, urlPath, true, headers, new StringEntity(jsonString, "UTF-8"));
     } // doCKANRequest
+
+
+    /**
+     * Builds an organization name given a fiwareService. It throws an exception if the naming conventions are violated.
+     * @param service
+     * @return Organization name
+     * @throws Exception
+     */
+    public String buildOrgName(String service, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
+        String orgName="";
+        String fiwareService=(enableLowercase)?service.toLowerCase():service;
+
+        if ("v2".equals(ngsiVersion)){
+
+        }
+        else if ("ld".equals(ngsiVersion)) {
+            switch (dataModel) {
+                case "db-by-entity-id":
+                    //FIXME
+                    //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
+                    orgName = fiwareService;
+                    break;
+                case "db-by-entity":
+                    if (enableEncoding) {
+                        orgName = NGSICharsets.encodeCKAN(fiwareService);
+                    } else {
+                        orgName = NGSICharsets.encode(fiwareService, false, true).toLowerCase(Locale.ENGLISH);
+                    } // if else
+
+                    if (orgName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
+                        throw new Exception("Building organization name '" + orgName + "' and its length is "
+                                + "greater than " + NGSIConstants.CKAN_MAX_NAME_LEN);
+                    } else if (orgName.length() < NGSIConstants.CKAN_MIN_NAME_LEN) {
+                        throw new Exception("Building organization name '" + orgName + "' and its length is "
+                                + "lower than " + NGSIConstants.CKAN_MIN_NAME_LEN);
+                    } // if else if
+                    break;
+                default:
+                    throw new Exception("Not supported Data Model for CKAN Sink: " + dataModel);
+            }
+        }
+        return orgName;
+    } // buildOrgName
+
+    /**
+     * Builds a package name given a fiwareService and a fiwareServicePath. It throws an exception if the naming
+     * conventions are violated.
+     * @param fiwareService
+     * @return Package name
+     * @throws Exception
+     */
+    public String buildPkgName( String fiwareService, Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
+        String pkgName="";
+        String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+
+        if ("v2".equals(ngsiVersion)){
+
+        }
+        else if ("ld".equals(ngsiVersion)) {
+            switch (dataModel) {
+                case "db-by-entity-id":
+                    //FIXME
+                    //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
+                    pkgName = entityId;
+                    break;
+                case "db-by-entity":
+                    if (enableEncoding) {
+                        pkgName = NGSICharsets.encodeCKAN(fiwareService);
+
+                    } else {
+                        pkgName = NGSICharsets.encode(fiwareService, false, true).toLowerCase(Locale.ENGLISH);
+                    } // if else
+                    if (pkgName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
+                        throw new Exception("Building package name '" + pkgName + "' and its length is "
+                                + "greater than " + NGSIConstants.CKAN_MAX_NAME_LEN);
+                    } else if (pkgName.length() < NGSIConstants.CKAN_MIN_NAME_LEN) {
+                        throw new Exception("Building package name '" + pkgName + "' and its length is "
+                                + "lower than " + NGSIConstants.CKAN_MIN_NAME_LEN);
+                    } // if else if
+                    break;
+                default:
+                    throw new Exception("Not supported Data Model for CKAN Sink: " + dataModel);
+            }
+        }
+        return pkgName;
+    } // buildPkgName
+
+    /**
+     * Builds a resource name given a entity. It throws an exception if the naming conventions are violated.
+     * @param entity
+     * @return Resource name
+     * @throws Exception
+     */
+    public String buildResName(Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
+        String resName="";
+        String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+        String entityType = (enableLowercase) ? entity.getEntityType().toLowerCase() : entity.getEntityType();
+        if ("v2".equals(ngsiVersion)){
+
+        }
+        else if ("ld".equals(ngsiVersion)) {
+            switch (dataModel) {
+                case "db-by-entity-id":
+                    //FIXME
+                    //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
+                    resName = entityId;
+                    break;
+                case "db-by-entity":
+                    if (enableEncoding) {
+                        resName = NGSICharsets.encodeCKAN(entityId)+"_"+NGSICharsets.encodeCKAN(entityType);
+                    } else {
+                        resName = NGSICharsets.encode(entityId, false, true).toLowerCase(Locale.ENGLISH)+"_"+NGSICharsets.encode(entityType,false,true);
+                    } // if else
+
+                    if (resName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
+                        throw new Exception("Building resource name '" + resName + "' and its length is "
+                                + "greater than " + NGSIConstants.CKAN_MAX_NAME_LEN);
+                    } else if (resName.length() < NGSIConstants.CKAN_MIN_NAME_LEN) {
+                        throw new Exception("Building resource name '" + resName + "' and its length is "
+                                + "lower than " + NGSIConstants.CKAN_MIN_NAME_LEN);
+                    } // if else if
+                    break;
+                default:
+                    throw new Exception("Not supported Data Model for CKAN Sink: " + dataModel);
+            }
+        }
+        return resName;
+    } // buildResName
+
+
+    public boolean isValid(String test) {
+        try {
+            new org.json.JSONObject(test);
+        } catch (JSONException ex) {
+            try {
+                new org.json.JSONArray(test);
+            } catch (JSONException ex1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

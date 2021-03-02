@@ -1,13 +1,13 @@
 version: '3.1'
 services:
-  # draco:
-    # image: ging/fiware-draco:1.3.6
-    # container_name: draco
-    # environment:
-    #   - NIFI_WEB_HTTP_PORT=9090
-    # ports:
-    #   - "9090:9090"
-    #   - "5050:5050"
+  draco:
+    image: ging/fiware-draco:1.3.6
+    container_name: draco
+    environment:
+      - NIFI_WEB_HTTP_PORT=9090
+    ports:
+      - "9090:9090"
+      - "5050:5050"
   # db-mysql:
   #   image: mysql:5.7.22
   #   container_name: mysql

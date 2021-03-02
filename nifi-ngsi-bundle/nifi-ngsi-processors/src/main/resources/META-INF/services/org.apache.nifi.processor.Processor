@@ -17,3 +17,4 @@ org.apache.nifi.processors.ngsi.NGSIToPostgreSQL
 org.apache.nifi.processors.ngsi.NGSIToMongo
 org.apache.nifi.processors.ngsi.NGSIToHDFS
 org.apache.nifi.processors.ngsi.NGSIToCarto
+org.apache.nifi.processors.ngsi.NGSIToCKAN
