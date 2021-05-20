@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
 
-public class CkanBackend extends HttpBackend {
+public class CKANBackend extends HttpBackend {
 
     private static final int RECORDSPERPAGE = 100;
     private final String orionUrl;
@@ -39,8 +39,8 @@ public class CkanBackend extends HttpBackend {
      * @param maxConnsPerRoute
      * @param ckanViewer
      */
-    public CkanBackend(String apiKey, String[] ckanHost, String ckanPort, String orionUrl,
-                           boolean ssl, int maxConns, int maxConnsPerRoute, String ckanViewer) {
+    public CKANBackend(String apiKey, String[] ckanHost, String ckanPort, String orionUrl,
+                       boolean ssl, int maxConns, int maxConnsPerRoute, String ckanViewer) {
         super(ckanHost, ckanPort, ssl, false, null, null, null, null);
 
         // this class attributes

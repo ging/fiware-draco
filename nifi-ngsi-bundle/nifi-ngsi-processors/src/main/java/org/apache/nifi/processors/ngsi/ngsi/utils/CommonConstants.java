@@ -1,6 +1,9 @@
 package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 import javax.xml.bind.DatatypeConverter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public final class CommonConstants {
 
@@ -28,5 +31,22 @@ public final class CommonConstants {
     public static long getMilliseconds(String timestamp) throws java.text.ParseException {
         return DatatypeConverter.parseDateTime(timestamp).getTime().getTime();
     } // getMilliseconds
+
+    /**
+     * Gets the human redable version of timestamp expressed in miliseconds.
+     * @param ts
+     * @param addUTC
+     * @return
+     */
+    public static String getHumanReadable(long ts, boolean addUTC) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String humanRedable = sdf.format(new Date(ts));
+        humanRedable += (addUTC ? "T" : " ");
+        sdf = new SimpleDateFormat("HH:mm:ss.S");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        humanRedable += sdf.format(new Date(ts)) + (addUTC ? "Z" : "");
+        return humanRedable;
+    } // getHumanRedable
 
 } // CommonConstants

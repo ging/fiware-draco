@@ -49,4 +49,4 @@ curl -X POST 'http://localhost:5050/ld/notify' -H 'Content-Type: application/ld+
     }
   ]
 }
-EO
+EOF
