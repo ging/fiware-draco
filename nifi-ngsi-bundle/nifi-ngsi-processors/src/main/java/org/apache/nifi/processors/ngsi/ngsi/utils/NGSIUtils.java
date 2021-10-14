@@ -2,12 +2,10 @@ package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.processor.ProcessSession;
-import org.apache.nifi.processor.io.InputStreamCallback;
 import org.apache.nifi.stream.io.StreamUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,15 +20,10 @@ public class NGSIUtils {
 
         final byte[] buffer = new byte[(int) flowFile.getSize()];
 
-        session.read(flowFile, new InputStreamCallback() {
-            @Override
-            public void process(final InputStream in) throws IOException {
-                StreamUtils.fillBuffer(in, buffer);
-            }
-        });
+        session.read(flowFile, in -> StreamUtils.fillBuffer(in, buffer));
         // Create the PreparedStatement to use for this FlowFile.
-        Map flowFileAttributes = flowFile.getAttributes();
-        Map <String,String> newFlowFileAttributes = new CaseInsensitiveMap(flowFileAttributes);
+        Map<String, String> flowFileAttributes = flowFile.getAttributes();
+        Map<String,String> newFlowFileAttributes = new CaseInsensitiveMap(flowFileAttributes);
         final String flowFileContent = new String(buffer, StandardCharsets.UTF_8);
         String fiwareService = (newFlowFileAttributes.get("fiware-service") == null) ? "nd":newFlowFileAttributes.get("fiware-service");
         String fiwareServicePath = (newFlowFileAttributes.get("fiware-servicepath")==null) ? "/nd":newFlowFileAttributes.get("fiware-servicepath");

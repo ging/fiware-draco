@@ -9,12 +9,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.TimeZone;
 
 public class PostgreSQLBackend {
 
-    public ArrayList listOfFields (String attrPersistence, Entity entity, String ngsiVersion ,boolean ckanCompatible){
+    public ArrayList<String> listOfFields(String attrPersistence, Entity entity, String ngsiVersion, boolean ckanCompatible) {
         ArrayList<String> aggregation = new ArrayList<>();
 
         if ("v2".equals(ngsiVersion)){
@@ -49,22 +48,22 @@ public class PostgreSQLBackend {
             if(ckanCompatible){
                 aggregation.add("_id");
             }
-                ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
-                if (attributes != null && !attributes.isEmpty()) {
-                    for (AttributesLD attribute : attributes) {
-                        String attrName = attribute.getAttrName();
-                        aggregation.add(attrName);
-                        System.out.println(attrName);
-                        if (attribute.isHasSubAttrs()) {
-                            for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                                String subAttrName = subAttribute.getAttrName();
-                                aggregation.add(attrName + "_" + subAttrName);
-                                System.out.println(attrName + "_" + subAttrName);
-                            }
+            ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
+            if (attributes != null && !attributes.isEmpty()) {
+                for (AttributesLD attribute : attributes) {
+                    String attrName = attribute.getAttrName();
+                    aggregation.add(attrName);
+                    System.out.println(attrName);
+                    if (attribute.isHasSubAttrs()) {
+                        for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                            String subAttrName = subAttribute.getAttrName();
+                            aggregation.add(attrName + "_" + subAttrName);
+                            System.out.println(attrName + "_" + subAttrName);
                         }
-                    } // for
-                } // if
-            }
+                    }
+                } // for
+            } // if
+        }
 
         return aggregation;
     }
@@ -149,15 +148,15 @@ public class PostgreSQLBackend {
 
 
     public String getFieldsForCreate(ArrayList<String> listOfFields) {
-        Iterator it = listOfFields.iterator();
+        Iterator<String> it = listOfFields.iterator();
         String fieldsForCreate = "(";
         boolean first = true;
         while (it.hasNext()) {
             if (first) {
-                fieldsForCreate += (String) it.next() + " text";
+                fieldsForCreate += it.next() + " text";
                 first = false;
             } else {
-                fieldsForCreate += "," + (String) it.next() + " text";
+                fieldsForCreate += "," + it.next() + " text";
             } // if else
         } // while
 
@@ -168,13 +167,13 @@ public class PostgreSQLBackend {
 
         String fieldsForInsert = "(";
         boolean first = true;
-        Iterator it = listOfFields.iterator();
+        Iterator<String> it = listOfFields.iterator();
         while (it.hasNext()) {
             if (first) {
-                fieldsForInsert += (String) it.next();
+                fieldsForInsert += it.next();
                 first = false;
             } else {
-                fieldsForInsert += "," + (String) it.next();
+                fieldsForInsert += "," + it.next();
             } // if else
         } // while
 
@@ -200,14 +199,11 @@ public class PostgreSQLBackend {
     }
 
     public String createSchema(String schemaName) {
-        String query = "create schema if not exists " + schemaName + ";";
-        return query;
+        return "create schema if not exists " + schemaName + ";";
     }
 
     public String createTable(String schemaName,String tableName, ArrayList<String> listOfFields){
-
-        String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
-        return query;
+        return "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
     }
 
     public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, boolean ckanCompatible)throws Exception{
@@ -323,13 +319,11 @@ public class PostgreSQLBackend {
     }
 
     public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, ArrayList<String> listOfFields,String dataModel, String ngsiVersion, boolean ckanCopatible){
-        String query="Insert into "+schemaName+"."+ tableName + " " +this.getFieldsForInsert(listOfFields)+ " values " +this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ngsiVersion,ckanCopatible);
-        return query;
+        return "Insert into "+schemaName+"."+ tableName + " " + this.getFieldsForInsert(listOfFields)+ " values " + this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ngsiVersion,ckanCopatible);
     }
 
     public String checkColumnNames(String tableName){
-        String query = "select column_name from information_schema.columns where table_name ='"+ tableName + "';";
-        return query;
+        return "select column_name from information_schema.columns where table_name ='"+ tableName + "';";
     }
 
     public ArrayList<String> getNewColumns(ResultSet rs, ArrayList<String> listOfFields){
