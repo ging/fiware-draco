@@ -9,12 +9,17 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
 
 
 public class NGSIUtils {
+
+    public static List<String> IGNORED_ATTRIBUTES_KEYS = List.of("type", "createdAt", "modifiedAt");
+    // FIXME even if createdAt and modifiedAt should not be present at entity level
+    public static List<String> IGNORED_ENTITY_KEYS = List.of("id", "type", "@context", "createdAt", "modifiedAt");
 
     public NGSIEvent getEventFromFlowFile(FlowFile flowFile, final ProcessSession session, String version){
 
@@ -86,7 +91,7 @@ public class NGSIUtils {
 
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    if (!"id".equals(key) && !"type".equals(key) && !"@context".equals(key)){
+                    if (!IGNORED_ENTITY_KEYS.contains(key)) {
                         JSONObject value = lData.getJSONObject(key);
                         attrType = value.getString("type");
                         if ("Relationship".contentEquals(attrType)){
@@ -96,7 +101,7 @@ public class NGSIUtils {
                             Iterator<String> keysOneLevel = value.keys();
                             while (keysOneLevel.hasNext()) {
                                 String keyOne = keysOneLevel.next();
-                                if ("type".equals(keyOne)){
+                                if (IGNORED_ATTRIBUTES_KEYS.contains(keyOne)){
                                     // Do Nothing
                                 } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)){
                                     // TBD Do Something for unitCode and observedAt
