@@ -21,7 +21,8 @@ public class NGSIUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(NGSIUtils.class);
 
-    public static List<String> IGNORED_KEYS_ON_ATTRIBUTES = List.of("type", "datasetId", "createdAt", "modifiedAt");
+    public static List<String> IGNORED_KEYS_ON_ATTRIBUTES =
+            List.of("type", "value", "object", "datasetId", "createdAt", "modifiedAt");
     // FIXME even if createdAt and modifiedAt should not be present at entity level
     public static List<String> IGNORED_KEYS_ON_ENTITES = List.of("id", "type", "@context", "createdAt", "modifiedAt");
 
@@ -127,36 +128,6 @@ public class NGSIUtils {
             attrValue = value.get("object").toString();
         } else if ("Property".contentEquals(attrType)) {
             attrValue = value.get("value").toString();
-            Iterator<String> keysOneLevel = value.keys();
-            while (keysOneLevel.hasNext()) {
-                String keyOne = keysOneLevel.next();
-                String subAttrName;
-                String subAttrType;
-                String subAttrValue="";
-                if (IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
-                    // Do Nothing
-                } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)) {
-                    // TBD Do Something for unitCode and observedAt
-                    String value2 = value.getString(keyOne);
-                    subAttrName = keyOne;
-                    subAttrValue = value2;
-                    hasSubAttrs = true;
-                    subAttributes.add(new AttributesLD(subAttrName, subAttrValue, "", subAttrValue, false,null));
-                } else if (!"value".equals(keyOne)) {
-                    JSONObject value2 = value.getJSONObject(keyOne);
-                    subAttrName=keyOne;
-                    subAttrType=value2.get("type").toString();
-                    if ("Relationship".contentEquals(subAttrType)){
-                        subAttrValue = value2.get("object").toString();
-                    }else if ("Property".contentEquals(subAttrType)){
-                        subAttrValue = value2.get("value").toString();
-                    }else if ("GeoProperty".contentEquals(subAttrType)){
-                        subAttrValue = value2.get("value").toString();
-                    }
-                    hasSubAttrs = true;
-                    subAttributes.add(new AttributesLD(subAttrName, subAttrType, "", subAttrValue,false,null));
-                }
-            }
         } else if ("GeoProperty".contentEquals(attrType)) {
             attrValue = value.get("value").toString();
         } else {
@@ -164,6 +135,34 @@ public class NGSIUtils {
             return null;
         }
 
+        Iterator<String> keysOneLevel = value.keys();
+        while (keysOneLevel.hasNext()) {
+            String keyOne = keysOneLevel.next();
+            if ("observedAt".equals(keyOne) || ("Property".equals(attrType) && "unitCode".equals(keyOne))) {
+                String value2 = value.getString(keyOne);
+                hasSubAttrs = true;
+                subAttributes.add(new AttributesLD(keyOne, "Property", "", value2, false,null));
+            } else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
+                AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
+                hasSubAttrs = true;
+                subAttributes.add(subAttribute);
+            }
+        }
+
         return new AttributesLD(key, attrType, datasetId, attrValue, hasSubAttrs, subAttributes);
+    }
+
+    private AttributesLD parseNgsiLdSubAttribute(String key, JSONObject value) {
+        String subAttrType = value.get("type").toString();
+        String subAttrValue = "";
+        if ("Relationship".contentEquals(subAttrType)) {
+            subAttrValue = value.get("object").toString();
+        } else if ("Property".contentEquals(subAttrType)) {
+            subAttrValue = value.get("value").toString();
+        } else if ("GeoProperty".contentEquals(subAttrType)) {
+            subAttrValue = value.get("value").toString();
+        }
+
+        return new AttributesLD(key, subAttrType, "", subAttrValue,false,null);
     }
 }
