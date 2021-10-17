@@ -6,6 +6,7 @@ public class AttributesLD {
     public String attrName;
     public String attrType;
     public String attrValue;
+    public String datasetId;
     public boolean hasSubAttrs;
     public ArrayList<AttributesLD> subAttrs;
 
@@ -41,9 +42,15 @@ public class AttributesLD {
         this.attrValue = attrValue;
     }
 
-    public AttributesLD(String attrName, String attrType, String attrValue, boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
+    public String getDatasetId() {
+        return datasetId;
+    }
+
+    public AttributesLD(String attrName, String attrType, String datasetId, String attrValue,
+            boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
         this.attrName = attrName;
         this.attrType = attrType;
+        this.datasetId = datasetId;
         this.attrValue = attrValue;
         this.hasSubAttrs = hasSubAttrs;
         this.subAttrs= subAttrs;

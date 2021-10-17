@@ -3,6 +3,8 @@ package org.apache.nifi.processors.ngsi.ngsi.backends;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ import java.util.Iterator;
 import java.util.TimeZone;
 
 public class PostgreSQLBackend {
+
+    private static final Logger logger = LoggerFactory.getLogger(PostgreSQLBackend.class);
 
     public ArrayList<String> listOfFields(String attrPersistence, Entity entity, String ngsiVersion, boolean ckanCompatible) {
         ArrayList<String> aggregation = new ArrayList<>();
@@ -51,14 +55,15 @@ public class PostgreSQLBackend {
             ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
             if (attributes != null && !attributes.isEmpty()) {
                 for (AttributesLD attribute : attributes) {
-                    String attrName = attribute.getAttrName();
+                    String attrName = attribute.getAttrName() +
+                            (!attribute.getDatasetId().equals("") ? "_" + NGSIEncoders.encodePostgreSQL(attribute.getDatasetId()) : "");
                     aggregation.add(attrName);
-                    System.out.println(attrName);
+                    logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
                     if (attribute.isHasSubAttrs()) {
                         for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                            String subAttrName = subAttribute.getAttrName();
-                            aggregation.add(attrName + "_" + subAttrName);
-                            System.out.println(attrName + "_" + subAttrName);
+                            String subAttrName = attrName + "_" + subAttribute.getAttrName();
+                            aggregation.add(subAttrName);
+                            logger.debug("Added subattribute {} to attribute {}", subAttrName, attrName);
                         }
                     }
                 } // for
@@ -164,20 +169,7 @@ public class PostgreSQLBackend {
     } // getFieldsForCreate
 
     public String getFieldsForInsert(ArrayList<String> listOfFields) {
-
-        String fieldsForInsert = "(";
-        boolean first = true;
-        Iterator<String> it = listOfFields.iterator();
-        while (it.hasNext()) {
-            if (first) {
-                fieldsForInsert += it.next();
-                first = false;
-            } else {
-                fieldsForInsert += "," + it.next();
-            } // if else
-        } // while
-
-        return fieldsForInsert + ")";
+        return "(" + String.join(",", listOfFields) + ")";
     } // getFieldsForInsert
 
     public String buildSchemaName(String service,boolean enableEncoding,boolean enableLowercase, boolean ckanCompatible) throws Exception {
@@ -318,8 +310,11 @@ public class PostgreSQLBackend {
         return tableName;
     }
 
-    public String insertQuery (Entity entity, long creationTime, String fiwareServicePath, String schemaName, String tableName, ArrayList<String> listOfFields,String dataModel, String ngsiVersion, boolean ckanCopatible){
-        return "Insert into "+schemaName+"."+ tableName + " " + this.getFieldsForInsert(listOfFields)+ " values " + this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath,ngsiVersion,ckanCopatible);
+    public String insertQuery(Entity entity, long creationTime, String fiwareServicePath, String schemaName,
+            String tableName, ArrayList<String> listOfFields, String dataModel, String ngsiVersion, boolean ckanCompatible) {
+        return "insert into " + schemaName + "." + tableName + " " +
+                this.getFieldsForInsert(listOfFields) +
+                " values " + this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible);
     }
 
     public String checkColumnNames(String tableName){

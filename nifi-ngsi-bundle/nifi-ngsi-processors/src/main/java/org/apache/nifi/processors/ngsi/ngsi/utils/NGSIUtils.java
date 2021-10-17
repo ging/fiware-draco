@@ -13,13 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class NGSIUtils {
 
-    public static List<String> IGNORED_ATTRIBUTES_KEYS = List.of("type", "createdAt", "modifiedAt");
+    private static final Logger logger = LoggerFactory.getLogger(NGSIUtils.class);
+
+    public static List<String> IGNORED_KEYS_ON_ATTRIBUTES = List.of("type", "datasetId", "createdAt", "modifiedAt");
     // FIXME even if createdAt and modifiedAt should not be present at entity level
-    public static List<String> IGNORED_ENTITY_KEYS = List.of("id", "type", "@context", "createdAt", "modifiedAt");
+    public static List<String> IGNORED_KEYS_ON_ENTITES = List.of("id", "type", "@context", "createdAt", "modifiedAt");
 
     public NGSIEvent getEventFromFlowFile(FlowFile flowFile, final ProcessSession session, String version){
 
@@ -72,65 +76,37 @@ public class NGSIUtils {
                 entities.add(new Entity(entityId,entityType,attrs));
             }
             event = new NGSIEvent(creationTime,fiwareService,fiwareServicePath,entities);
-        }else if ("ld".compareToIgnoreCase(version)==0){
-            System.out.println("NGSI-LD Notification");
-            boolean hasSubAttrs= false;
+        }else if ("ld".compareToIgnoreCase(version)==0) {
+            logger.debug("Received an NGSI-LD notification");
             data = (JSONArray) content.get("data");
             for (int i = 0; i < data.length(); i++) {
-                JSONObject lData = data.getJSONObject(i);
-                entityId = lData.getString("id");
-                entityType = lData.getString("type");
+                JSONObject entity = data.getJSONObject(i);
+                entityId = entity.getString("id");
+                entityType = entity.getString("type");
+                logger.debug("Dealing with entity {} of type {}", entityId, entityType);
                 ArrayList<AttributesLD> attributes  = new ArrayList<>();
-                Iterator<String> keys = lData.keys();
-                String attrType="";
-                String attrValue="";
-                String subAttrName="";
-                String subAttrType="";
-                String subAttrValue="";
-                ArrayList<AttributesLD> subAttributes=new ArrayList<>();
+                Iterator<String> keys = entity.keys();
 
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    if (!IGNORED_ENTITY_KEYS.contains(key)) {
-                        JSONObject value = lData.getJSONObject(key);
-                        attrType = value.getString("type");
-                        if ("Relationship".contentEquals(attrType)){
-                            attrValue = value.get("object").toString();
-                        }else if ("Property".contentEquals(attrType)){
-                            attrValue = value.get("value").toString();
-                            Iterator<String> keysOneLevel = value.keys();
-                            while (keysOneLevel.hasNext()) {
-                                String keyOne = keysOneLevel.next();
-                                if (IGNORED_ATTRIBUTES_KEYS.contains(keyOne)){
-                                    // Do Nothing
-                                } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)){
-                                    // TBD Do Something for unitCode and observedAt
-                                    String value2 = value.getString(keyOne);
-                                    subAttrName = keyOne;
-                                    subAttrValue = value2;
-                                    hasSubAttrs = true;
-                                    subAttributes.add(new AttributesLD(subAttrName,subAttrValue,subAttrValue,false,null));
-                                } else if (!"value".equals(keyOne)){
-                                    JSONObject value2 = value.getJSONObject(keyOne);
-                                    subAttrName=keyOne;
-                                    subAttrType=value2.get("type").toString();
-                                    if ("Relationship".contentEquals(subAttrType)){
-                                        subAttrValue = value2.get("object").toString();
-                                    }else if ("Property".contentEquals(subAttrType)){
-                                        subAttrValue = value2.get("value").toString();
-                                    }else if ("GeoProperty".contentEquals(subAttrType)){
-                                        subAttrValue = value2.get("value").toString();
-                                    }
-                                    hasSubAttrs= true;
-                                    subAttributes.add(new AttributesLD(subAttrName,subAttrType,subAttrValue,false,null));
-                                }
+                    if (!IGNORED_KEYS_ON_ENTITES.contains(key)) {
+                        Object object = entity.get(key);
+                        if (object instanceof JSONObject) {
+                            // it is an attribute with one instance only
+                            JSONObject value = entity.getJSONObject(key);
+                            AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
+                            attributes.add(attributesLD);
+                        } else if (object instanceof JSONArray) {
+                            // it is a multi-attribute (see section 4.5.5 in NGSI-LD specification)
+                            JSONArray values = entity.getJSONArray(key);
+                            for (int j = 0; j < values.length(); j++) {
+                                JSONObject value = values.getJSONObject(j);
+                                AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
+                                attributes.add(attributesLD);
                             }
-                        }else if ("GeoProperty".contentEquals(attrType)){
-                            attrValue = value.get("value").toString();
+                        } else {
+                            logger.warn("Attribute {} has unexpected value type: {}", key, object.getClass());
                         }
-                        attributes.add(new AttributesLD(key,attrType,attrValue, hasSubAttrs,subAttributes));
-                        subAttributes=new ArrayList<>();
-                        hasSubAttrs= false;
                     }
                 }
                 entities.add(new Entity(entityId,entityType,attributes,true));
@@ -138,5 +114,56 @@ public class NGSIUtils {
             event = new NGSIEvent(creationTime,fiwareService,entities);
         }
         return event;
+    }
+
+    private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
+        String attrType = value.getString("type");
+        String datasetId = value.optString("datasetId");
+        String attrValue;
+        boolean hasSubAttrs = false;
+        ArrayList<AttributesLD> subAttributes = new ArrayList<>();
+
+        if ("Relationship".contentEquals(attrType)) {
+            attrValue = value.get("object").toString();
+        } else if ("Property".contentEquals(attrType)) {
+            attrValue = value.get("value").toString();
+            Iterator<String> keysOneLevel = value.keys();
+            while (keysOneLevel.hasNext()) {
+                String keyOne = keysOneLevel.next();
+                String subAttrName;
+                String subAttrType;
+                String subAttrValue="";
+                if (IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
+                    // Do Nothing
+                } else if ("observedAt".equals(keyOne) || "unitCode".equals(keyOne)) {
+                    // TBD Do Something for unitCode and observedAt
+                    String value2 = value.getString(keyOne);
+                    subAttrName = keyOne;
+                    subAttrValue = value2;
+                    hasSubAttrs = true;
+                    subAttributes.add(new AttributesLD(subAttrName, subAttrValue, "", subAttrValue, false,null));
+                } else if (!"value".equals(keyOne)) {
+                    JSONObject value2 = value.getJSONObject(keyOne);
+                    subAttrName=keyOne;
+                    subAttrType=value2.get("type").toString();
+                    if ("Relationship".contentEquals(subAttrType)){
+                        subAttrValue = value2.get("object").toString();
+                    }else if ("Property".contentEquals(subAttrType)){
+                        subAttrValue = value2.get("value").toString();
+                    }else if ("GeoProperty".contentEquals(subAttrType)){
+                        subAttrValue = value2.get("value").toString();
+                    }
+                    hasSubAttrs = true;
+                    subAttributes.add(new AttributesLD(subAttrName, subAttrType, "", subAttrValue,false,null));
+                }
+            }
+        } else if ("GeoProperty".contentEquals(attrType)) {
+            attrValue = value.get("value").toString();
+        } else {
+            logger.warn("Unrecognized attribute type: {}", attrType);
+            return null;
+        }
+
+        return new AttributesLD(key, attrType, datasetId, attrValue, hasSubAttrs, subAttributes);
     }
 }
