@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class NGSIEncoders {
 
-    private static final Pattern ENCODEPOSTGRESQL = Pattern.compile("[^a-zA-Z0-9\\/]");
+    private static final Pattern ENCODEPOSTGRESQL = Pattern.compile("[^a-zA-Z0-9]");
 
     /**
      * Encodes a string replacing all the non alphanumeric characters by '_' (except by '-' and '.').
@@ -17,4 +17,10 @@ public class NGSIEncoders {
         return ENCODEPOSTGRESQL.matcher(in).replaceAll("_");
     } // encode
 
+    public static String truncateToMaxSize(String in) {
+        if (in.length() > 64)
+            return in.substring(0, 63);
+        else
+            return in;
+    }
 }

@@ -55,13 +55,16 @@ public class PostgreSQLBackend {
             ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
             if (attributes != null && !attributes.isEmpty()) {
                 for (AttributesLD attribute : attributes) {
-                    String attrName = attribute.getAttrName() +
-                            (!attribute.getDatasetId().equals("") ? "_" + NGSIEncoders.encodePostgreSQL(attribute.getDatasetId()) : "");
+                    String attrName = NGSIEncoders.encodePostgreSQL(attribute.getAttrName()) +
+                            (!attribute.getDatasetId().equals("") ?
+                                    "_" + NGSIEncoders.encodePostgreSQL(attribute.getDatasetId().replaceFirst("urn:ngsi-ld:Dataset:", "")) : "");
+                    attrName = NGSIEncoders.truncateToMaxSize(attrName);
                     aggregation.add(attrName);
                     logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
                     if (attribute.isHasSubAttrs()) {
                         for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                            String subAttrName = attrName + "_" + subAttribute.getAttrName();
+                            String subAttrName = attrName + "_" + NGSIEncoders.encodePostgreSQL(subAttribute.getAttrName());
+                            subAttrName = NGSIEncoders.truncateToMaxSize(subAttrName);
                             aggregation.add(subAttrName);
                             logger.debug("Added subattribute {} to attribute {}", subAttrName, attrName);
                         }
@@ -325,26 +328,18 @@ public class PostgreSQLBackend {
         ArrayList<String> newColumns = listOfFields;
         newColumns.replaceAll(String::toLowerCase);
 
-        try{
-
-            System.out.println( "columns : ");
-            System.out.println(listOfFields.size());
+        try {
             // Get the column names; column indices start from 1
-            ;
             while (rs.next()) {
                 String columnName = rs.getString(1);
-                System.out.println(columnName);
-                System.out.println(newColumns.contains(columnName));
-                if (newColumns.contains(columnName)) {
-                    newColumns.remove(columnName);
-                    System.out.println(newColumns);
-                }
-
+                logger.debug("Looking at column {} (exists: {})", columnName, newColumns.contains(columnName));
+                newColumns.remove(columnName);
             }
-            System.out.println(newColumns);
+
+            logger.debug("New columns to create: {}", newColumns);
 
         } catch (SQLException s) {
-                System.out.println(s.toString());
+            logger.error("Error while inspecting columns: {}", s.getMessage(), s);
         }
         return newColumns;
     }
