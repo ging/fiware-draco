@@ -1,0 +1,19 @@
+{
+    "enabler": "FIWARE Draco",
+    "chapter": "core",
+    "academy": "core/draco",
+    "readthedocs": "fiware-draco",
+    "helpdesk": "",
+    "coveralls": "https://coveralls.io/github/ging/fiware-draco",
+    "github": ["ging/fiware-draco"],
+    "dockerregistry": ["hub.docker.com"],
+    "docker": ["ging/fiware-draco"],
+    "email": "",
+    "status": "full",
+    "compose": "https://github.com/ging/fiware-draco/blob/master/nifi-ngsi-resources/docker-compose.yml",
+    "exclude": [""],
+    "stackexchange": [""],
+    "unit-test": "",
+    "smoke-test": "",
+    "dockerfile": "https://github.com/ging/fiware-draco/blob/master/nifi-ngsi-resources/docker/Dockerfile"
+}
