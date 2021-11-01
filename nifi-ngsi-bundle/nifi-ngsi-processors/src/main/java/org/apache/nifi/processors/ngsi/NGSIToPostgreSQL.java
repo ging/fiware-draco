@@ -29,8 +29,8 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 @SupportsBatching
 @InputRequirement(Requirement.INPUT_REQUIRED)
-@Tags({"Postgresql","sql", "put", "rdbms", "database", "create", "insert", "relational","NGSIv2", "NGSI","FIWARE"})
-@CapabilityDescription("Create a Data Base if not exits using the information coming from and NGSI event converted to flow file." +
+@Tags({"Postgresql","sql", "put", "rdbms", "database", "create", "insert", "relational","NGSIv2", "NGSI", "NGSI-LD", "FIWARE"})
+@CapabilityDescription("Create a database if not exists using the information coming from an NGSI event converted to flow file." +
         "After insert all of the vales of the flow file content extraction the entities and attributes")
 
 @WritesAttributes({
@@ -95,6 +95,15 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .description("Default Fiware ServicePath for building the table name")
             .required(false)
             .defaultValue("/path")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    protected static final PropertyDescriptor DATASETID_PREFIX_TRUNCATE = new PropertyDescriptor.Builder()
+            .name("datasetid-prefix-truncate")
+            .displayName("Dataset id prefix to truncate")
+            .description("Prefix to truncate from dataset ids when generating column names for multi-attributes")
+            .required(false)
+            .defaultValue("")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
@@ -168,6 +177,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         properties.add(ATTR_PERSISTENCE);
         properties.add(DEFAULT_SERVICE);
         properties.add(DEFAULT_SERVICE_PATH);
+        properties.add(DATASETID_PREFIX_TRUNCATE);
         properties.add(ENABLE_ENCODING);
         properties.add(CKAN_COMPATIBILITY);
         properties.add(ENABLE_LOWERCASE);
@@ -263,7 +273,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     context.getProperty(ATTR_PERSISTENCE).getValue(),
                                     entity,
                                     context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
                             );
                     String tableName =
                             postgres.buildTableName(
@@ -285,7 +296,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     listOfFields,
                                     context.getProperty(ATTR_PERSISTENCE).getValue(),
                                     context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
                             );
                     getLogger().debug("Prepared insert query: {}", sql);
                     // Get or create the appropriate PreparedStatement to use.

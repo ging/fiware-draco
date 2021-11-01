@@ -22,7 +22,13 @@ public class PostgreSQLBackend {
 
     private static final Logger logger = LoggerFactory.getLogger(PostgreSQLBackend.class);
 
-    public Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields(String attrPersistence, Entity entity, String ngsiVersion, boolean ckanCompatible) {
+    public Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields(
+            String attrPersistence,
+            Entity entity,
+            String ngsiVersion,
+            boolean ckanCompatible,
+            String datasetIdPrefixToTruncate
+    ) {
         Map<String, POSTGRESQL_COLUMN_TYPES> aggregation = new TreeMap<>();
 
         if ("v2".equals(ngsiVersion)){
@@ -60,7 +66,7 @@ public class PostgreSQLBackend {
             ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
             if (attributes != null && !attributes.isEmpty()) {
                 for (AttributesLD attribute : attributes) {
-                    String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId());
+                    String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
                     if (attribute.getAttrValue() instanceof BigDecimal)
                         aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
                     else
@@ -69,7 +75,7 @@ public class PostgreSQLBackend {
                     if (attribute.isHasSubAttrs()) {
                         for (AttributesLD subAttribute : attribute.getSubAttrs()) {
                             String subAttrName = subAttribute.getAttrName();
-                            String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName);
+                            String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName, datasetIdPrefixToTruncate);
                             if ("observedAt".equals(subAttrName))
                                 aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
                             else if (subAttribute.getAttrValue() instanceof BigDecimal)
@@ -86,15 +92,15 @@ public class PostgreSQLBackend {
         return aggregation;
     }
 
-    private String encodeAttributeToColumnName(String attributeName, String datasetId) {
+    private String encodeAttributeToColumnName(String attributeName, String datasetId, String datasetIdPrefixToTruncate) {
         String encodedName = NGSIEncoders.encodePostgreSQL(attributeName) +
                 (!datasetId.equals("") ?
-                        "_" + NGSIEncoders.encodePostgreSQL(datasetId.replaceFirst("urn:ngsi-ld:Dataset:", "")) : "");
+                        "_" + NGSIEncoders.encodePostgreSQL(datasetId.replaceFirst(datasetIdPrefixToTruncate, "")) : "");
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
 
-    private String encodeSubAttributeToColumnName(String attributeName, String datasetId, String subAttributeName) {
-        String encodedAttributeName = encodeAttributeToColumnName(attributeName, datasetId);
+    private String encodeSubAttributeToColumnName(String attributeName, String datasetId, String subAttributeName, String datasetIdPrefixToTruncate) {
+        String encodedAttributeName = encodeAttributeToColumnName(attributeName, datasetId, datasetIdPrefixToTruncate);
         String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(subAttributeName);
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
@@ -106,7 +112,8 @@ public class PostgreSQLBackend {
             long creationTime,
             String fiwareServicePath,
             String ngsiVersion,
-            boolean ckanCompatible
+            boolean ckanCompatible,
+            String datasetIdPrefixToTruncate
     ) {
         TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
         String valuesForInsert = "";
@@ -172,11 +179,11 @@ public class PostgreSQLBackend {
             valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
             valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
             for (AttributesLD attribute : entity.getEntityAttrsLD()) {
-                String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId());
+                String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
                 valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
                 if (attribute.isHasSubAttrs()) {
                     for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                        String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName());
+                        String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName(), datasetIdPrefixToTruncate);
                         valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
                   }
                 }
@@ -355,11 +362,20 @@ public class PostgreSQLBackend {
         return tableName;
     }
 
-    public String insertQuery(Entity entity, long creationTime, String fiwareServicePath, String schemaName,
-            String tableName, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields, String dataModel, String ngsiVersion, boolean ckanCompatible) {
+    public String insertQuery(
+            Entity entity,
+            long creationTime,
+            String fiwareServicePath,
+            String schemaName,
+            String tableName,
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields,
+            String dataModel,
+            String ngsiVersion,
+            boolean ckanCompatible,
+            String datasetIdPrefixToTruncate) {
         return "insert into " + schemaName + "." + tableName + " " +
                 this.getFieldsForInsert(listOfFields.keySet()) +
-                " values " + this.getValuesForInsert(dataModel, entity, listOfFields, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible);
+                " values " + this.getValuesForInsert(dataModel, entity, listOfFields, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible, datasetIdPrefixToTruncate);
     }
 
     public String checkColumnNames(String tableName){
