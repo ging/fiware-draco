@@ -120,14 +120,13 @@ public class NGSIUtils {
     private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
         String attrType = value.getString("type");
         String datasetId = value.optString("datasetId");
-        String attrValue;
-        boolean hasSubAttrs = false;
+        Object attrValue;
         ArrayList<AttributesLD> subAttributes = new ArrayList<>();
 
         if ("Relationship".contentEquals(attrType)) {
             attrValue = value.get("object").toString();
         } else if ("Property".contentEquals(attrType)) {
-            attrValue = value.get("value").toString();
+            attrValue = value.get("value");
         } else if ("GeoProperty".contentEquals(attrType)) {
             attrValue = value.get("value").toString();
         } else {
@@ -140,25 +139,23 @@ public class NGSIUtils {
             String keyOne = keysOneLevel.next();
             if ("observedAt".equals(keyOne) || ("Property".equals(attrType) && "unitCode".equals(keyOne))) {
                 String value2 = value.getString(keyOne);
-                hasSubAttrs = true;
                 subAttributes.add(new AttributesLD(keyOne, "Property", "", value2, false,null));
             } else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
                 AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
-                hasSubAttrs = true;
                 subAttributes.add(subAttribute);
             }
         }
 
-        return new AttributesLD(key, attrType, datasetId, attrValue, hasSubAttrs, subAttributes);
+        return new AttributesLD(key, attrType, datasetId, attrValue, !subAttributes.isEmpty(), subAttributes);
     }
 
     private AttributesLD parseNgsiLdSubAttribute(String key, JSONObject value) {
         String subAttrType = value.get("type").toString();
-        String subAttrValue = "";
+        Object subAttrValue = "";
         if ("Relationship".contentEquals(subAttrType)) {
             subAttrValue = value.get("object").toString();
         } else if ("Property".contentEquals(subAttrType)) {
-            subAttrValue = value.get("value").toString();
+            subAttrValue = value.get("value");
         } else if ("GeoProperty".contentEquals(subAttrType)) {
             subAttrValue = value.get("value").toString();
         }

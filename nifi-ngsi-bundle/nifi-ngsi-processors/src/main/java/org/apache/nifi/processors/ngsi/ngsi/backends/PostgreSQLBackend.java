@@ -3,70 +3,80 @@ package org.apache.nifi.processors.ngsi.ngsi.backends;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.TimeZone;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PostgreSQLBackend {
 
     private static final Logger logger = LoggerFactory.getLogger(PostgreSQLBackend.class);
 
-    public ArrayList<String> listOfFields(String attrPersistence, Entity entity, String ngsiVersion, boolean ckanCompatible) {
-        ArrayList<String> aggregation = new ArrayList<>();
+    public Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields(String attrPersistence, Entity entity, String ngsiVersion, boolean ckanCompatible) {
+        Map<String, POSTGRESQL_COLUMN_TYPES> aggregation = new TreeMap<>();
 
         if ("v2".equals(ngsiVersion)){
             if(ckanCompatible){
-                aggregation.add("_id");
+                aggregation.put("_id", POSTGRESQL_COLUMN_TYPES.TEXT);
             }
-            aggregation.add(NGSIConstants.RECV_TIME_TS);
-            aggregation.add(NGSIConstants.RECV_TIME);
-            aggregation.add(NGSIConstants.FIWARE_SERVICE_PATH);
-            aggregation.add(NGSIConstants.ENTITY_ID);
-            aggregation.add(NGSIConstants.ENTITY_TYPE);
+            aggregation.put(NGSIConstants.RECV_TIME_TS, POSTGRESQL_COLUMN_TYPES.TEXT);
+            aggregation.put(NGSIConstants.RECV_TIME, POSTGRESQL_COLUMN_TYPES.TEXT);
+            aggregation.put(NGSIConstants.FIWARE_SERVICE_PATH, POSTGRESQL_COLUMN_TYPES.TEXT);
+            aggregation.put(NGSIConstants.ENTITY_ID, POSTGRESQL_COLUMN_TYPES.TEXT);
+            aggregation.put(NGSIConstants.ENTITY_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
             if ((NGSIConstants.ATTR_PER_ROW).equalsIgnoreCase(attrPersistence)){
-                aggregation.add(NGSIConstants.ATTR_NAME);
-                aggregation.add(NGSIConstants.ATTR_TYPE);
-                aggregation.add(NGSIConstants.ATTR_VALUE);
-                aggregation.add(NGSIConstants.ATTR_MD);
+                aggregation.put(NGSIConstants.ATTR_NAME, POSTGRESQL_COLUMN_TYPES.TEXT);
+                aggregation.put(NGSIConstants.ATTR_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
+                aggregation.put(NGSIConstants.ATTR_VALUE, POSTGRESQL_COLUMN_TYPES.TEXT);
+                aggregation.put(NGSIConstants.ATTR_MD, POSTGRESQL_COLUMN_TYPES.TEXT);
             }else if((NGSIConstants.ATTR_PER_COLUMN).equalsIgnoreCase(attrPersistence)){
                 ArrayList<Attributes> attributes = entity.getEntityAttrs();
                 if (attributes != null && !attributes.isEmpty()) {
                     for (Attributes attribute : attributes) {
                         String attrName = attribute.getAttrName();
-                        aggregation.add(attrName);
-                        aggregation.add(attrName + "_md");
+                        aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
+                        aggregation.put(attrName + "_md", POSTGRESQL_COLUMN_TYPES.TEXT);
                     } // for
                 } // if
             } //else if
         }
         else if ("ld".equals(ngsiVersion)){
-            aggregation.add(NGSIConstants.RECV_TIME);
-            aggregation.add(NGSIConstants.ENTITY_ID);
-            aggregation.add(NGSIConstants.ENTITY_TYPE);
+            aggregation.put(NGSIConstants.RECV_TIME, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+            aggregation.put(NGSIConstants.ENTITY_ID, POSTGRESQL_COLUMN_TYPES.TEXT);
+            aggregation.put(NGSIConstants.ENTITY_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
             if(ckanCompatible){
-                aggregation.add("_id");
+                aggregation.put("_id", POSTGRESQL_COLUMN_TYPES.TEXT);
             }
             ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
             if (attributes != null && !attributes.isEmpty()) {
                 for (AttributesLD attribute : attributes) {
-                    String attrName = NGSIEncoders.encodePostgreSQL(attribute.getAttrName()) +
-                            (!attribute.getDatasetId().equals("") ?
-                                    "_" + NGSIEncoders.encodePostgreSQL(attribute.getDatasetId().replaceFirst("urn:ngsi-ld:Dataset:", "")) : "");
-                    attrName = NGSIEncoders.truncateToMaxSize(attrName);
-                    aggregation.add(attrName);
+                    String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId());
+                    if (attribute.getAttrValue() instanceof BigDecimal)
+                        aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                    else
+                        aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
                     logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
                     if (attribute.isHasSubAttrs()) {
                         for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                            String subAttrName = attrName + "_" + NGSIEncoders.encodePostgreSQL(subAttribute.getAttrName());
-                            subAttrName = NGSIEncoders.truncateToMaxSize(subAttrName);
-                            aggregation.add(subAttrName);
-                            logger.debug("Added subattribute {} to attribute {}", subAttrName, attrName);
+                            String subAttrName = subAttribute.getAttrName();
+                            String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName);
+                            if ("observedAt".equals(subAttrName))
+                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                            else if (subAttribute.getAttrValue() instanceof BigDecimal)
+                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            else
+                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TEXT);
+                            logger.debug("Added subattribute {} ({}) to attribute {}", encodedSubAttrName, subAttrName, attrName);
                         }
                     }
                 } // for
@@ -76,7 +86,28 @@ public class PostgreSQLBackend {
         return aggregation;
     }
 
-    public String getValuesForInsert(String attrPersistence, Entity entity, long creationTime, String fiwareServicePath, String ngsiVersion, boolean ckanCompatible) {
+    private String encodeAttributeToColumnName(String attributeName, String datasetId) {
+        String encodedName = NGSIEncoders.encodePostgreSQL(attributeName) +
+                (!datasetId.equals("") ?
+                        "_" + NGSIEncoders.encodePostgreSQL(datasetId.replaceFirst("urn:ngsi-ld:Dataset:", "")) : "");
+        return NGSIEncoders.truncateToMaxSize(encodedName);
+    }
+
+    private String encodeSubAttributeToColumnName(String attributeName, String datasetId, String subAttributeName) {
+        String encodedAttributeName = encodeAttributeToColumnName(attributeName, datasetId);
+        String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(subAttributeName);
+        return NGSIEncoders.truncateToMaxSize(encodedName);
+    }
+
+    public String getValuesForInsert(
+            String attrPersistence,
+            Entity entity,
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields,
+            long creationTime,
+            String fiwareServicePath,
+            String ngsiVersion,
+            boolean ckanCompatible
+    ) {
         TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
         String valuesForInsert = "";
         if ("v2".equals(ngsiVersion)) {
@@ -130,49 +161,60 @@ public class PostgreSQLBackend {
                 valuesForInsert += ")";
             } //else if
         }
-        else if ("ld".equals(ngsiVersion)){
-                TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
-                int i = 0;
-                valuesForInsert += "(";
-                if (ckanCompatible) {
-                    valuesForInsert += "'" + +i + "',";
+        else if ("ld".equals(ngsiVersion)) {
+            Map<String, String> valuesForColumns = new TreeMap<>();
+            int i = 0;
+            if (ckanCompatible) {
+                valuesForColumns.put("_id", "'" + +i + "'");
+            }
+            ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
+            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
+            valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
+            valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
+            for (AttributesLD attribute : entity.getEntityAttrsLD()) {
+                String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId());
+                valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
+                if (attribute.isHasSubAttrs()) {
+                    for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                        String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName());
+                        valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
+                  }
                 }
-                valuesForInsert += "'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
-                valuesForInsert += ",'" + entity.getEntityId() + "'";
-                valuesForInsert += ",'" + entity.getEntityType() + "'";
-                for (AttributesLD attribute : entity.getEntityAttrsLD()) {
-                    valuesForInsert += ",'" + attribute.getAttrValue() + "'";
-                    if (attribute.isHasSubAttrs()) {
-                        for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                            String subAttrValue = subAttribute.getAttrValue();
-                            valuesForInsert += ",'" + subAttrValue + "'";
-                      }
-                    }
-                } //for
-                valuesForInsert += ")";
+            } //for
+            valuesForInsert = "(" + String.join(",", valuesForColumns.values()) + ")";
         } // if
         return valuesForInsert;
     } // getValuesForInsert
 
+    private String formatFieldForValueInsert(Object attributeValue, POSTGRESQL_COLUMN_TYPES columnType) {
+        String formattedField;
+        switch (columnType) {
+            case NUMERIC: formattedField = attributeValue.toString(); break;
+            default: formattedField = "'" + attributeValue.toString() + "'";
+        }
 
-    public String getFieldsForCreate(ArrayList<String> listOfFields) {
-        Iterator<String> it = listOfFields.iterator();
+        return formattedField;
+    }
+
+    public String getFieldsForCreate(Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields) {
+        Iterator<Map.Entry<String, POSTGRESQL_COLUMN_TYPES>> it = listOfFields.entrySet().iterator();
         String fieldsForCreate = "(";
         boolean first = true;
         while (it.hasNext()) {
+            Map.Entry<String, POSTGRESQL_COLUMN_TYPES> entry = it.next();
             if (first) {
-                fieldsForCreate += it.next() + " text";
+                fieldsForCreate += entry.getKey() + " " + entry.getValue().name();
                 first = false;
             } else {
-                fieldsForCreate += "," + it.next() + " text";
+                fieldsForCreate += "," + entry.getKey() + " " + entry.getValue().name();
             } // if else
         } // while
 
         return fieldsForCreate + ")";
     } // getFieldsForCreate
 
-    public String getFieldsForInsert(ArrayList<String> listOfFields) {
-        return "(" + String.join(",", listOfFields) + ")";
+    public String getFieldsForInsert(Set<String> listOfFieldsNames) {
+        return "(" + String.join(",", listOfFieldsNames) + ")";
     } // getFieldsForInsert
 
     public String buildSchemaName(String service,boolean enableEncoding,boolean enableLowercase, boolean ckanCompatible) throws Exception {
@@ -197,7 +239,7 @@ public class PostgreSQLBackend {
         return "create schema if not exists " + schemaName + ";";
     }
 
-    public String createTable(String schemaName,String tableName, ArrayList<String> listOfFields){
+    public String createTable(String schemaName, String tableName, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields) {
         return "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
     }
 
@@ -314,51 +356,54 @@ public class PostgreSQLBackend {
     }
 
     public String insertQuery(Entity entity, long creationTime, String fiwareServicePath, String schemaName,
-            String tableName, ArrayList<String> listOfFields, String dataModel, String ngsiVersion, boolean ckanCompatible) {
+            String tableName, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields, String dataModel, String ngsiVersion, boolean ckanCompatible) {
         return "insert into " + schemaName + "." + tableName + " " +
-                this.getFieldsForInsert(listOfFields) +
-                " values " + this.getValuesForInsert(dataModel, entity, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible);
+                this.getFieldsForInsert(listOfFields.keySet()) +
+                " values " + this.getValuesForInsert(dataModel, entity, listOfFields, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible);
     }
 
     public String checkColumnNames(String tableName){
         return "select column_name from information_schema.columns where table_name ='"+ tableName + "';";
     }
 
-    public ArrayList<String> getNewColumns(ResultSet rs, ArrayList<String> listOfFields){
-        ArrayList<String> newColumns = listOfFields;
-        newColumns.replaceAll(String::toLowerCase);
+    public Map<String, POSTGRESQL_COLUMN_TYPES> getNewColumns(ResultSet rs, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields) {
+        // create an initial map containing all the fields with columns names in lowercase
+        Map<String, POSTGRESQL_COLUMN_TYPES> newFields = new HashMap<>(listOfFields).entrySet().stream()
+                .map(e -> Map.entry(e.getKey().toLowerCase(), e.getValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         try {
             // Get the column names; column indices start from 1
             while (rs.next()) {
                 String columnName = rs.getString(1);
-                logger.debug("Looking at column {} (exists: {})", columnName, newColumns.contains(columnName));
-                newColumns.remove(columnName);
+                logger.debug("Looking at column {} (exists: {})", columnName, newFields.containsKey(columnName));
+                newFields.remove(columnName);
             }
 
-            logger.debug("New columns to create: {}", newColumns);
-
+            logger.debug("New columns to create: {}", newFields.keySet());
         } catch (SQLException s) {
             logger.error("Error while inspecting columns: {}", s.getMessage(), s);
         }
-        return newColumns;
+
+        return newFields;
     }
 
-    public String addColumns(String schemaName, String tableName, ArrayList<String> columnNames){
-        Iterator it = columnNames.iterator();
+    public String addColumns(String schemaName, String tableName, Map<String, POSTGRESQL_COLUMN_TYPES> columnNames){
+        Iterator<Map.Entry<String, POSTGRESQL_COLUMN_TYPES>> it = columnNames.entrySet().iterator();
         String fieldsForCreate = "";
         boolean first = true;
         while (it.hasNext()) {
+            Map.Entry<String, POSTGRESQL_COLUMN_TYPES> entry = it.next();
             if (first) {
-                fieldsForCreate += " ADD COLUMN "+ (String) it.next() + " text";
+                fieldsForCreate += " ADD COLUMN " + entry.getKey() + " " + entry.getValue().name();
                 first = false;
             } else {
-                fieldsForCreate += ", ADD COLUMN " + (String) it.next() + " text";
+                fieldsForCreate += ", ADD COLUMN " + entry.getKey() + " " + entry.getValue().name();
             } // if else
         } // while
 
         fieldsForCreate += ";";
-        String query = "Alter table "+schemaName+"."+tableName+ fieldsForCreate;
-        return query;
+
+        return "Alter table " + schemaName + "." + tableName + fieldsForCreate;
     }
 }

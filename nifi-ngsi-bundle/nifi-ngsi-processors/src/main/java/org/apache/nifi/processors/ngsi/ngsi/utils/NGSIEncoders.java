@@ -2,6 +2,8 @@ package org.apache.nifi.processors.ngsi.ngsi.utils;
 
 import java.util.regex.Pattern;
 
+import static org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_MAX_NAME_LEN;
+
 public class NGSIEncoders {
 
     private static final Pattern ENCODEPOSTGRESQL = Pattern.compile("[^a-zA-Z0-9]");
@@ -19,7 +21,7 @@ public class NGSIEncoders {
 
     public static String truncateToMaxSize(String in) {
         if (in.length() > 64)
-            return in.substring(0, 63);
+            return in.substring(0, POSTGRESQL_MAX_NAME_LEN);
         else
             return in;
     }

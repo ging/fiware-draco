@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AttributesLD {
     public String attrName;
     public String attrType;
-    public String attrValue;
+    public Object attrValue;
     public String datasetId;
     public boolean hasSubAttrs;
     public ArrayList<AttributesLD> subAttrs;
@@ -34,11 +34,11 @@ public class AttributesLD {
         this.attrType = attrType;
     }
 
-    public String getAttrValue() {
+    public Object getAttrValue() {
         return attrValue;
     }
 
-    public void setAttrValue(String attrValue) {
+    public void setAttrValue(Object attrValue) {
         this.attrValue = attrValue;
     }
 
@@ -46,7 +46,7 @@ public class AttributesLD {
         return datasetId;
     }
 
-    public AttributesLD(String attrName, String attrType, String datasetId, String attrValue,
+    public AttributesLD(String attrName, String attrType, String datasetId, Object attrValue,
             boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
         this.attrName = attrName;
         this.attrType = attrType;

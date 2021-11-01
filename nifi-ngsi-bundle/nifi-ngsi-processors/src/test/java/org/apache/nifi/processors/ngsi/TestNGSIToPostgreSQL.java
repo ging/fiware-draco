@@ -8,6 +8,7 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import java.util.ArrayList;
 
 import org.apache.nifi.processors.ngsi.ngsi.utils.Metadata;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.junit.Before;
@@ -529,13 +530,12 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "attrName", "attrType", "attrValue", "attrMd");
-            ArrayList<String> expecetedListOfFields = new ArrayList<String>();
-            expecetedListOfFields.addAll(expList);
+            Set<String> expecetedListOfFields = new HashSet<>(expList);
            
             try {
-                assertEquals(expecetedListOfFields, listOfFields);
+                assertEquals(expecetedListOfFields, listOfFields.keySet());
                 System.out.println("[PostgreSQLBackend.listOfFields]"
                         + "-  OK  - '" + listOfFields + "' is equals to the expected output");
             } catch (AssertionError e) {
@@ -565,13 +565,12 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false);
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "someAttr", "someAttr_md");
-            ArrayList<String> expecetedListOfFields = new ArrayList<String>();
-            expecetedListOfFields.addAll(expList);
+            Set<String> expecetedListOfFields = new HashSet<>(expList);
            
             try {
-                assertEquals(expecetedListOfFields, listOfFields);
+                assertEquals(expecetedListOfFields, listOfFields.keySet());
                 System.out.println("[PostgreSQLBackend.listOfFields]"
                         + "-  OK  - '" + listOfFields + "' is equals to the expected output");
             } catch (AssertionError e) {
@@ -604,7 +603,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','[]')";
            
             try {
@@ -640,7 +639,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','[]')";
            
             try {
@@ -679,7 +678,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')";
            
             try {
@@ -718,7 +717,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, creationTime, fiwareServicePath,ngsiVersion,false);
+            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false);
             String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','someMtdStr')";
            
             try {
