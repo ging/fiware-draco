@@ -22,7 +22,7 @@
         <version>1.3.6</version>
     </parent>
     <properties>
-        <nifi.version>1.13.0</nifi.version>
+        <nifi.version>1.14.0</nifi.version>
     </properties>
 
     <artifactId>nifi-ngsi-cassandra-processors</artifactId>

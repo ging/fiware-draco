@@ -10,16 +10,17 @@ public class Entity {
     public ArrayList<AttributesLD> entityAttrsLD;
 
 
-    public  Entity(String entityId, String entityType, ArrayList<Attributes> entityAttrs) {
+    public Entity(String entityId, String entityType, ArrayList<Attributes> entityAttrs) {
         this.entityId = entityId;
         this.entityType = entityType;
         this.entityAttrs = entityAttrs;
-        this.ldVersion=false;
+        this.ldVersion = false;
     }
-    public  Entity(String entityId, String entityType, ArrayList<AttributesLD> entityAttrsLD,boolean ldVersion) {
+
+    public Entity(String entityId, String entityType, ArrayList<AttributesLD> entityAttrsLD, boolean ldVersion) {
         this.entityId = entityId;
         this.entityType = entityType;
-        this.ldVersion = true;
+        this.ldVersion = ldVersion;
         this.entityAttrsLD=entityAttrsLD;
     }
 

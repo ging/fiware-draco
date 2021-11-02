@@ -16,9 +16,10 @@ import org.apache.nifi.processor.util.pattern.*;
 import org.apache.nifi.processor.util.pattern.PartialFunctions.FlowFileGroup;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
-import org.apache.nifi.util.db.JdbcCommon;;
+import org.apache.nifi.util.db.JdbcCommon;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +29,8 @@ import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnEr
 
 @SupportsBatching
 @InputRequirement(Requirement.INPUT_REQUIRED)
-@Tags({"Postgresql","sql", "put", "rdbms", "database", "create", "insert", "relational","NGSIv2", "NGSI","FIWARE"})
-@CapabilityDescription("Create a Data Base if not exits using the information coming from and NGSI event converted to flow file." +
+@Tags({"Postgresql","sql", "put", "rdbms", "database", "create", "insert", "relational","NGSIv2", "NGSI", "NGSI-LD", "FIWARE"})
+@CapabilityDescription("Create a database if not exists using the information coming from an NGSI event converted to flow file." +
         "After insert all of the vales of the flow file content extraction the entities and attributes")
 
 @WritesAttributes({
@@ -94,6 +95,15 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .description("Default Fiware ServicePath for building the table name")
             .required(false)
             .defaultValue("/path")
+            .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
+            .build();
+
+    protected static final PropertyDescriptor DATASETID_PREFIX_TRUNCATE = new PropertyDescriptor.Builder()
+            .name("datasetid-prefix-truncate")
+            .displayName("Dataset id prefix to truncate")
+            .description("Prefix to truncate from dataset ids when generating column names for multi-attributes")
+            .required(false)
+            .defaultValue("")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
@@ -167,6 +177,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         properties.add(ATTR_PERSISTENCE);
         properties.add(DEFAULT_SERVICE);
         properties.add(DEFAULT_SERVICE_PATH);
+        properties.add(DATASETID_PREFIX_TRUNCATE);
         properties.add(ENABLE_ENCODING);
         properties.add(CKAN_COMPATIBILITY);
         properties.add(ENABLE_LOWERCASE);
@@ -246,14 +257,49 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
             final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
             try {
-                final String schemaName = postgres.buildSchemaName(fiwareService, context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                ArrayList<Entity> entities= new ArrayList<>();
-                entities = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?event.getEntitiesLD():event.getEntities();
+                final String schemaName =
+                        postgres.buildSchemaName(
+                                fiwareService,
+                                context.getProperty(ENABLE_ENCODING).asBoolean(),
+                                context.getProperty(ENABLE_LOWERCASE).asBoolean(),
+                                context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                        );
+                ArrayList<Entity> entities =
+                        "ld".equals(context.getProperty(NGSI_VERSION).getValue()) ? event.getEntitiesLD() : event.getEntities();
 
                 for (Entity entity : entities) {
-                    ArrayList<String> listOfFields= postgres.listOfFields(context.getProperty(ATTR_PERSISTENCE).getValue(), entity,context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                    String tableName = postgres.buildTableName(fiwareServicePath, entity, context.getProperty(DATA_MODEL).getValue(), context.getProperty(ENABLE_ENCODING).asBoolean(), context.getProperty(ENABLE_LOWERCASE).asBoolean(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
-                    final String sql = postgres.insertQuery(entity, creationTime, fiwareServicePath, schemaName, tableName,listOfFields, context.getProperty(ATTR_PERSISTENCE).getValue(),context.getProperty(NGSI_VERSION).getValue(),context.getProperty(CKAN_COMPATIBILITY).asBoolean());
+                    Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields =
+                            postgres.listOfFields(
+                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
+                                    entity,
+                                    context.getProperty(NGSI_VERSION).getValue(),
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
+                            );
+                    String tableName =
+                            postgres.buildTableName(
+                                    fiwareServicePath,
+                                    entity,
+                                    context.getProperty(DATA_MODEL).getValue(),
+                                    context.getProperty(ENABLE_ENCODING).asBoolean(),
+                                    context.getProperty(ENABLE_LOWERCASE).asBoolean(),
+                                    context.getProperty(NGSI_VERSION).getValue(),
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                            );
+                    final String sql =
+                            postgres.insertQuery(
+                                    entity,
+                                    creationTime,
+                                    fiwareServicePath,
+                                    schemaName,
+                                    tableName,
+                                    listOfFields,
+                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
+                                    context.getProperty(NGSI_VERSION).getValue(),
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
+                            );
+                    getLogger().debug("Prepared insert query: {}", sql);
                     // Get or create the appropriate PreparedStatement to use.
                     final StatementFlowFileEnclosure enclosure = sqlToEnclosure
                             .computeIfAbsent(sql, k -> {
@@ -264,19 +310,18 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
 
                     if (!exceptionHandler.execute(fc, flowFile, input -> {
                         final PreparedStatement stmt = enclosure.getCachedStatement(conn);
-                        ArrayList<String> newColumns = new ArrayList<>();
                         JdbcCommon.setParameters(stmt, flowFile.getAttributes());
                         try {
-                            System.out.println(postgres.checkColumnNames(tableName));
+                            getLogger().info("Gonna create schema {}", schemaName);
                             conn.createStatement().execute(postgres.createSchema(schemaName));
-                            conn.createStatement().execute(postgres.createTable(schemaName, tableName,listOfFields));
+                            getLogger().info("Gonna create table {} with columns {}", tableName, listOfFields);
+                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, listOfFields));
                             ResultSet rs = conn.createStatement().executeQuery(postgres.checkColumnNames(tableName));
-                            newColumns = postgres.getNewColumns(rs,listOfFields);
-                            if (newColumns.size()>0){
-                                conn.createStatement().execute(postgres.addColumns(schemaName,tableName,newColumns));
+                            Map<String, POSTGRESQL_COLUMN_TYPES> newColumns = postgres.getNewColumns(rs, listOfFields);
+                            if (newColumns.size() > 0) {
+                                getLogger().info("Identified new columns to create: {}", newColumns);
+                                conn.createStatement().execute(postgres.addColumns(schemaName, tableName, newColumns));
                             }
-                            System.out.println(schemaName+"."+tableName+" columns -------- : ");
-
                         } catch (SQLException s) {
                             getLogger().error(s.toString());
                         }
