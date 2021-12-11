@@ -19,7 +19,7 @@ the product:
 -   **New Data Structure for native NGSI-LD**: Planing to redefine the data models of the different backends for
     optimizing the storage of NGSI-LD data
 -   **NGSILD Support for NGSIToPostgreSQL**:  Receive and store context information in PostgreSQL using NGSI-LD notifications. 
--   **NGSILD Support for NGSIToCKAN**:  Receive and store context information in CKAN using NGSI-LD notifications.
+-   **NGSILD Support for NGSIToCKAN**:  Receive and store context information and metadata in CKAN using NGSI-LD notifications.
 
 ## Medium term
 
