@@ -201,13 +201,16 @@ public class PostgreSQLBackend {
 
     public String createSchema(String schemaName) {
         String query = "create schema if not exists " + schemaName + ";";
+        System.out.println(query);
         return query;
     }
 
     public String createTable(String schemaName,String tableName, ArrayList<String> listOfFields){
 
         String query= "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
+        System.out.println(query);
         return query;
+
     }
 
     public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, boolean ckanCompatible)throws Exception{

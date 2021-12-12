@@ -270,11 +270,11 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                             System.out.println(postgres.checkColumnNames(tableName));
                             conn.createStatement().execute(postgres.createSchema(schemaName));
                             conn.createStatement().execute(postgres.createTable(schemaName, tableName,listOfFields));
-                            ResultSet rs = conn.createStatement().executeQuery(postgres.checkColumnNames(tableName));
+                            /*ResultSet rs = conn.createStatement().executeQuery(postgres.checkColumnNames(tableName));
                             newColumns = postgres.getNewColumns(rs,listOfFields);
                             if (newColumns.size()>0){
                                 conn.createStatement().execute(postgres.addColumns(schemaName,tableName,newColumns));
-                            }
+                            }*/
                             System.out.println(schemaName+"."+tableName+" columns -------- : ");
 
                         } catch (SQLException s) {
