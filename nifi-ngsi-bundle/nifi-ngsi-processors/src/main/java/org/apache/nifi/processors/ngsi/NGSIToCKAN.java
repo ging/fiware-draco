@@ -14,9 +14,8 @@ import org.apache.nifi.processor.util.StandardValidators;
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.aggregators.CKANAggregator;
 import org.apache.nifi.processors.ngsi.ngsi.backends.ckan.CKANBackend;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
-import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
-import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -136,6 +135,15 @@ public class NGSIToCKAN extends AbstractProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
+    protected static final PropertyDescriptor CREATE_DATASTORE= new PropertyDescriptor.Builder()
+            .name("create-datastore")
+            .displayName("Create DataStore")
+            .description("true or false, true applies create the DataStore resource")
+            .required(false)
+            .allowableValues("true", "false")
+            .defaultValue("true")
+            .build();
+
     protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
@@ -214,6 +222,7 @@ public class NGSIToCKAN extends AbstractProcessor {
         properties.add(ATTR_PERSISTENCE);
         properties.add(DEFAULT_SERVICE);
         properties.add(DEFAULT_SERVICE_PATH);
+        properties.add(CREATE_DATASTORE);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
         properties.add(BATCH_SIZE);
@@ -244,9 +253,12 @@ public class NGSIToCKAN extends AbstractProcessor {
         final int maxConnectionsPerRoute = context.getProperty(MAX_CONNECTIONS_PER_ROUTE).asInteger();
         final boolean enableEncoding = context.getProperty(ENABLE_ENCODING).asBoolean();
         final boolean enableLowercase = context.getProperty(ENABLE_LOWERCASE).asBoolean();
+        final boolean createDataStore = context.getProperty(CREATE_DATASTORE).asBoolean();
         final String attrPersistence = context.getProperty(ATTR_PERSISTENCE).getValue();
         final CKANBackend ckanBackend = new CKANBackend(apiKey,host,port,orioUrl,ssl,maxConnections,maxConnectionsPerRoute,ckanViewer);
         final NGSIUtils n = new NGSIUtils();
+        final BuildDCATMetadata buildDCATMetadata = new BuildDCATMetadata();
+        final DCATMetadata dcatMetadata= buildDCATMetadata.getMetadataFromFlowFile(flowFile,session);
         final String ngsiVersion=context.getProperty(NGSI_VERSION).getValue();
         final String dataModel=context.getProperty(DATA_MODEL).getValue();
         final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,ngsiVersion);
@@ -262,14 +274,15 @@ public class NGSIToCKAN extends AbstractProcessor {
         aggregator = aggregator.getAggregator(("row".equals(attrPersistence))?true:false);
         try {
 
-            final String orgName = ckanBackend.buildOrgName(fiwareService,dataModel,enableEncoding,enableLowercase,ngsiVersion);
+            final String orgName = ckanBackend.buildOrgName(fiwareService,dataModel,enableEncoding,enableLowercase,ngsiVersion,dcatMetadata);
             ArrayList<Entity> entities= new ArrayList<>();
             entities = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?event.getEntitiesLD():event.getEntities();
             getLogger().info("[] Persisting data at NGSICKANSink (orgName=" + orgName+ ", ");
+            System.out.println(dcatMetadata.toString());
 
             for (Entity entity : entities) {
-                final String pkgName = ckanBackend.buildPkgName(fiwareService,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion);
-                final String resName = ckanBackend.buildResName(entity,dataModel,enableEncoding,enableLowercase,ngsiVersion);
+                final String pkgName = ckanBackend.buildPkgName(fiwareService,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,dcatMetadata);
+                final String resName = ckanBackend.buildResName(entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,dcatMetadata);
                 aggregator.initialize(entity,context.getProperty(NGSI_VERSION).getValue());
                 aggregator.aggregate(entity, creationTime, context.getProperty(NGSI_VERSION).getValue());
                 ArrayList<JsonObject> jsonObjects = CKANAggregator.linkedHashMapToJson(aggregator.getAggregationToPersist());
@@ -290,9 +303,9 @@ public class NGSIToCKAN extends AbstractProcessor {
                 // Do try-catch only for metrics gathering purposes... after that, re-throw
                 try {
                     if (aggregator instanceof CKANAggregator.RowAggregator) {
-                        ckanBackend.persist(orgName, pkgName, resName, aggregation, true);
+                        ckanBackend.persist(orgName, pkgName, resName, aggregation, true, dcatMetadata,createDataStore);
                     } else {
-                        ckanBackend.persist(orgName, pkgName, resName, aggregation, false);
+                        ckanBackend.persist(orgName, pkgName, resName, aggregation, false, dcatMetadata,createDataStore);
                     } // if else
 
                 } catch (Exception e) {

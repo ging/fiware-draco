@@ -1,6 +1,7 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends.ckan;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.apache.http.Header;
@@ -52,23 +53,30 @@ public class CKANBackend extends HttpBackend {
         cache = new CKANCache(ckanHost, ckanPort, ssl, apiKey, maxConns, maxConnsPerRoute);
     } // CKANBackendImpl
 
-    public void persist(String orgName, String pkgName, String resName, String records, boolean createEnabled)
+    public void persist(String orgName, String pkgName, String resName, String records, boolean createEnabled, DCATMetadata dcatMetadata, boolean createDataStore)
             throws Exception {
         System.out.println("Going to lookup for the resource id, the cache may be updated during the process (orgName="
                 + orgName + ", pkgName=" + pkgName + ", resName=" + resName + ")");
         String resId = "";
         if (!createEnabled) {
-            resId= resourceLookupOrCreateDynamicFields(orgName, pkgName, resName,records);
+            resId= resourceLookupOrCreateDynamicFields(orgName, pkgName, resName,records, dcatMetadata,createDataStore);
         } else {
-            resId = resourceLookupOrCreate(orgName, pkgName, resName, createEnabled);
+            resId = resourceLookupOrCreate(orgName, pkgName, resName, createEnabled, dcatMetadata,createDataStore);
         }
         if (resId == null) {
             throw new Error("Cannot persist the data (orgName=" + orgName + ", pkgName=" + pkgName
                     + ", resName=" + resName + ")");
         } else {
-            System.out.println("Going to persist the data (orgName=" + orgName + ", pkgName=" + pkgName
+            if (createDataStore){
+                System.out.println("Going to persist the data (orgName=" + orgName + ", pkgName=" + pkgName
                     + ", resName/resId=" + resName + "/" + resId + ")");
-            insert(resId, records);
+
+                    insert(resId, records);
+                }
+            else{
+                System.out.println("DataStore was not created in the resource (orgName=" + orgName + ", pkgName=" + pkgName
+                        + ", resName/resId=" + resName + "/" + resId + ")");
+                }
         } // if else
     } // persist
 
@@ -80,22 +88,24 @@ public class CKANBackend extends HttpBackend {
      * @param records Te records to be inserted and used to create the datastore fields
      * @throws Exception
      */
-    private String resourceLookupOrCreateDynamicFields(String orgName, String pkgName, String resName, String records)
+    private String resourceLookupOrCreateDynamicFields(String orgName, String pkgName, String resName, String records,DCATMetadata dcatMetadata, boolean createDataStore)
             throws Exception {
         if (!cache.isCachedOrg(orgName)) {
             System.out.println("The organization was not cached nor existed in CKAN (orgName=" + orgName + ")");
 
-            String orgId = createOrganization(orgName);
+            String orgId = createOrganization(orgName,dcatMetadata);
             cache.addOrg(orgName);
             cache.setOrgId(orgName, orgId);
-            String pkgId = createPackage(pkgName, orgId);
+            String pkgId = createPackage(pkgName, orgId,dcatMetadata);
             cache.addPkg(orgName, pkgName);
             cache.setPkgId(orgName, pkgName, pkgId);
-            String resId = createResource(resName, pkgId);
+            String resId = createResource(resName, pkgId, dcatMetadata);
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
-            createDataStoreWithFields(resId,records);
-            createView(resId);
+            if(createDataStore){
+                createDataStoreWithFields(resId,records);
+                createView(resId);
+            }
             return resId;
             // if else
         } // if
@@ -106,14 +116,16 @@ public class CKANBackend extends HttpBackend {
             System.out.println("The package was not cached nor existed in CKAN (orgName=" + orgName + ", pkgName="
                     + pkgName + ")");
 
-            String pkgId = createPackage(pkgName, cache.getOrgId(orgName));
+            String pkgId = createPackage(pkgName, cache.getOrgId(orgName), dcatMetadata);
             cache.addPkg(orgName, pkgName);
             cache.setPkgId(orgName, pkgName, pkgId);
-            String resId = createResource(resName, pkgId);
+            String resId = createResource(resName, pkgId, dcatMetadata);
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
-            createDataStoreWithFields(resId,records);
-            createView(resId);
+            if(createDataStore){
+                createDataStoreWithFields(resId,records);
+                createView(resId);
+            }
             return resId;
 
         } // if
@@ -124,11 +136,13 @@ public class CKANBackend extends HttpBackend {
             System.out.println("The resource was not cached nor existed in CKAN (orgName=" + orgName + ", pkgName="
                     + pkgName + ", resName=" + resName + ")");
 
-            String resId = this.createResource(resName, cache.getPkgId(orgName, pkgName));
+            String resId = this.createResource(resName, cache.getPkgId(orgName, pkgName), dcatMetadata);
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
-            createDataStoreWithFields(resId,records);
-            createView(resId);
+            if(createDataStore){
+                createDataStoreWithFields(resId,records);
+                createView(resId);
+            }
             return resId;
 
         } // if
@@ -139,23 +153,25 @@ public class CKANBackend extends HttpBackend {
         return cache.getResId(orgName, pkgName, resName);
     } // resourceLookupOrCreate
 
-    private String resourceLookupOrCreate(String orgName, String pkgName, String resName, boolean createEnabled)
+    private String resourceLookupOrCreate(String orgName, String pkgName, String resName, boolean createEnabled, DCATMetadata dcatMetadata, boolean createDataStore)
             throws Exception {
         if (!cache.isCachedOrg(orgName)) {
             System.out.println("The organization was not cached nor existed in CKAN (orgName=" + orgName + ")");
 
             if (createEnabled) {
-                String orgId = createOrganization(orgName);
+                String orgId = createOrganization(orgName,dcatMetadata);
                 cache.addOrg(orgName);
                 cache.setOrgId(orgName, orgId);
-                String pkgId = createPackage(pkgName, orgId);
+                String pkgId = createPackage(pkgName, orgId, dcatMetadata);
                 cache.addPkg(orgName, pkgName);
                 cache.setPkgId(orgName, pkgName, pkgId);
-                String resId = createResource(resName, pkgId);
+                String resId = createResource(resName, pkgId, dcatMetadata);
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
-                createDataStore(resId);
-                createView(resId);
+                if(createDataStore){
+                    createDataStore(resId);
+                    createView(resId);
+                }
                 return resId;
             } else {
                 return null;
@@ -169,14 +185,16 @@ public class CKANBackend extends HttpBackend {
                     + pkgName + ")");
 
             if (createEnabled) {
-                String pkgId = createPackage(pkgName, cache.getOrgId(orgName));
+                String pkgId = createPackage(pkgName, cache.getOrgId(orgName), dcatMetadata);
                 cache.addPkg(orgName, pkgName);
                 cache.setPkgId(orgName, pkgName, pkgId);
-                String resId = createResource(resName, pkgId);
+                String resId = createResource(resName, pkgId, dcatMetadata);
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
-                createDataStore(resId);
-                createView(resId);
+                if(createDataStore){
+                    createDataStore(resId);
+                    createView(resId);
+                }
                 return resId;
             } else {
                 return null;
@@ -190,11 +208,13 @@ public class CKANBackend extends HttpBackend {
                     + pkgName + ", resName=" + resName + ")");
 
             if (createEnabled) {
-                String resId = this.createResource(resName, cache.getPkgId(orgName, pkgName));
+                String resId = this.createResource(resName, cache.getPkgId(orgName, pkgName), dcatMetadata);
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
-                createDataStore(resId);
-                createView(resId);
+                if(createDataStore){
+                    createDataStore(resId);
+                    createView(resId);
+                }
                 return resId;
             } else {
                 return null;
@@ -240,15 +260,26 @@ public class CKANBackend extends HttpBackend {
      * @throws Exception
      * @return The organization id
      */
-    private String createOrganization(String orgName) throws Exception {
+    private String createOrganization(String orgName, DCATMetadata dcatMetadata) throws Exception {
         // create the CKAN request JSON
-        String jsonString = "{ \"name\": \"" + orgName + "\"}";
+        JsonArray extrasJsonArray = new JsonArray();
+        JsonObject extrasJson = new JsonObject();
+        JsonObject dataJson = new JsonObject();
+        dataJson.addProperty("name",orgName);
+
+        if (dcatMetadata!=null){
+            dataJson.addProperty("title",orgName);
+            dataJson.addProperty("name",orgName);
+
+            //dataJson.add("extras",extrasJsonArray);
+        }
+        System.out.println(dataJson.toString());
 
         // create the CKAN request URL
         String urlPath = "/api/3/action/organization_create";
 
         // do the CKAN request
-        JsonResponse res = doCKANRequest("POST", urlPath, jsonString);
+        JsonResponse res = doCKANRequest("POST", urlPath, dataJson.toString());
 
         // check the status
         if (res.getStatusCode() == 200) {
@@ -268,15 +299,81 @@ public class CKANBackend extends HttpBackend {
      * @return A package identifier if the package was created or an exception if something went wrong
      * @throws Exception
      */
-    private String createPackage(String pkgName, String orgId) throws Exception {
+    private String createPackage(String pkgName, String orgId, DCATMetadata dcatMetadata) throws Exception {
         // create the CKAN request JSON
-        String jsonString = "{ \"name\": \"" + pkgName + "\", " + "\"owner_org\": \"" + orgId + "\" }";
+        JsonArray extrasJsonArray = new JsonArray();
+        JsonArray tagsJsonArray = new JsonArray();
+        String[] keywords;
+        JsonObject extrasJson = new JsonObject();
+        JsonObject tags = new JsonObject();
 
+        JsonObject dataJson = new JsonObject();
+        dataJson.addProperty("name",pkgName);
+        dataJson.addProperty("owner_org",orgId);
+
+        if (dcatMetadata!=null){
+            dataJson.addProperty("notes",dcatMetadata.getPackageDescription());
+            dataJson.addProperty("title",pkgName);
+            dataJson.addProperty("version",dcatMetadata.getVersion());
+            dataJson.addProperty("url",dcatMetadata.getLandingPage());
+            dataJson.addProperty("visibility",dcatMetadata.getVisibility());
+            dataJson.addProperty("url",dcatMetadata.getLandingPage());
+
+
+            extrasJson.addProperty("key","publisher_type");
+            extrasJson.addProperty("value",dcatMetadata.getOrganizationType());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","contact_uri");
+            extrasJson.addProperty("value",dcatMetadata.getContactPoint());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","contact_name");
+            extrasJson.addProperty("value",dcatMetadata.getContactName());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","contact_email");
+            extrasJson.addProperty("value",dcatMetadata.getContactEmail());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","spatial_uri");
+            extrasJson.addProperty("value",dcatMetadata.getSpatialUri());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","spatial");
+            extrasJson.addProperty("value",dcatMetadata.getSpatialCoverage());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","temporal_start");
+            extrasJson.addProperty("value",dcatMetadata.getTemporalStart());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","temporal_end");
+            extrasJson.addProperty("value",dcatMetadata.getTemporalEnd());
+            extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","theme");
+            extrasJson.addProperty("value",dcatMetadata.getThemes());
+            extrasJsonArray.add(extrasJson);
+
+            //espacio para tags
+            keywords=dcatMetadata.getKeywords();
+            for (String tag: keywords){
+                tags=new JsonObject();
+                //tags.addProperty("vocabulary_id","null");
+                tags.addProperty("name",tag);
+                tagsJsonArray.add(tags);
+            }
+            //extrasJsonArray.add(extrasJson);}
+            dataJson.add("extras",extrasJsonArray);
+            dataJson.add("tags",tagsJsonArray);
+        }
+        System.out.println(dataJson.toString());
         // create the CKAN request URL
         String urlPath = "/api/3/action/package_create";
 
         // do the CKAN request
-        JsonResponse res = doCKANRequest("POST", urlPath, jsonString);
+        JsonResponse res = doCKANRequest("POST", urlPath, dataJson.toString());
 
         // check the status
         if (res.getStatusCode() == 200) {
@@ -311,18 +408,35 @@ public class CKANBackend extends HttpBackend {
      * @return A resource identifier if the resource was created or an exception if something went wrong
      * @throws Exception
      */
-    private String createResource(String resName, String pkgId) throws Exception {
+    private String createResource(String resName, String pkgId, DCATMetadata dcatMetadata) throws Exception {
         // create the CKAN request JSON
-        String jsonString = "{ \"name\": \"" + resName + "\", "
-                + "\"url\": \"none\", "
-                + "\"format\": \"\", "
-                + "\"package_id\": \"" + pkgId + "\" }";
 
+        JsonArray extrasJsonArray = new JsonArray();
+        JsonObject extrasJson = new JsonObject();
+
+        JsonObject dataJson = new JsonObject();
+        dataJson.addProperty("package_id",pkgId);
+        dataJson.addProperty("name",resName);
+        dataJson.addProperty("access_url",dcatMetadata.getAccessURL());
+        dataJson.addProperty("format",dcatMetadata.getFormat());
+        dataJson.addProperty("availability",dcatMetadata.getAvailability());
+        dataJson.addProperty("description",dcatMetadata.getResourceDescription());
+        dataJson.addProperty("mimetype",dcatMetadata.getMimeType());
+        dataJson.addProperty("license",dcatMetadata.getLicense());
+        dataJson.addProperty("download_url",dcatMetadata.getDownloadURL());
+        dataJson.addProperty("size",dcatMetadata.getByteSize());
+        dataJson.addProperty("url",dcatMetadata.getDownloadURL());
+
+        extrasJson.addProperty("key","license_type");
+        extrasJson.addProperty("value",dcatMetadata.getLicenseType());
+        //extrasJsonArray.add(extrasJson);
+        dataJson.add("extras",extrasJsonArray);
+        System.out.println(dataJson.toString());
         // create the CKAN request URL
         String urlPath = "/api/3/action/resource_create";
 
         // do the CKAN request
-        JsonResponse res = doCKANRequest("POST", urlPath, jsonString);
+        JsonResponse res = doCKANRequest("POST", urlPath, dataJson.toString());
 
         // check the status
         if (res.getStatusCode() == 200) {
@@ -667,9 +781,18 @@ public class CKANBackend extends HttpBackend {
      * @return Organization name
      * @throws Exception
      */
-    public String buildOrgName(String service, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
+    public String buildOrgName(String service, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, DCATMetadata dcatMetadata) throws Exception {
         String orgName="";
-        String fiwareService=(enableLowercase)?service.toLowerCase():service;
+        String fiwareService="";
+        if (dcatMetadata!=null){
+            if (dcatMetadata.getOrganizationName()!=null){
+                fiwareService=(enableLowercase)?service.toLowerCase():dcatMetadata.getOrganizationName();
+            }else{
+                fiwareService=(enableLowercase)?service.toLowerCase():service;
+            }
+        }else{
+            fiwareService=(enableLowercase)?service.toLowerCase():service;
+        }
 
         if ("v2".equals(ngsiVersion)){
 
@@ -679,7 +802,7 @@ public class CKANBackend extends HttpBackend {
                 case "db-by-entity-id":
                     //FIXME
                     //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
-                    orgName = fiwareService;
+                    orgName = NGSICharsets.encodeCKAN(fiwareService);
                     break;
                 case "db-by-entity":
                     if (enableEncoding) {
@@ -710,9 +833,20 @@ public class CKANBackend extends HttpBackend {
      * @return Package name
      * @throws Exception
      */
-    public String buildPkgName( String fiwareService, Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
+    public String buildPkgName( String fiwareService, Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion,DCATMetadata dcatMetadata) throws Exception {
         String pkgName="";
-        String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+        String entityId = "";
+
+        if (dcatMetadata!=null){
+            if (dcatMetadata.getPackageName()!=null){
+                fiwareService=(enableLowercase)? entity.getEntityId().toLowerCase() :dcatMetadata.getPackageName();
+                entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() :dcatMetadata.getPackageName();
+            }else{
+                entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+            }
+        }else{
+            entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+        }
 
         if ("v2".equals(ngsiVersion)){
 
@@ -722,14 +856,14 @@ public class CKANBackend extends HttpBackend {
                 case "db-by-entity-id":
                     //FIXME
                     //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
-                    pkgName = entityId;
+                    pkgName = NGSICharsets.encodeCKAN(entityId);
                     break;
                 case "db-by-entity":
                     if (enableEncoding) {
-                        pkgName = NGSICharsets.encodeCKAN(fiwareService);
+                        pkgName = NGSICharsets.encodeCKAN(entityId);
 
                     } else {
-                        pkgName = NGSICharsets.encode(fiwareService, false, true).toLowerCase(Locale.ENGLISH);
+                        pkgName = NGSICharsets.encode(entityId, false, true).toLowerCase(Locale.ENGLISH);
                     } // if else
                     if (pkgName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
                         throw new Exception("Building package name '" + pkgName + "' and its length is "
@@ -752,37 +886,42 @@ public class CKANBackend extends HttpBackend {
      * @return Resource name
      * @throws Exception
      */
-    public String buildResName(Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion) throws Exception {
-        String resName="";
+    public String buildResName(Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, DCATMetadata dcatMetadata) throws Exception {
+        String resName = "";
         String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
         String entityType = (enableLowercase) ? entity.getEntityType().toLowerCase() : entity.getEntityType();
-        if ("v2".equals(ngsiVersion)){
+        if ("v2".equals(ngsiVersion)) {
 
-        }
-        else if ("ld".equals(ngsiVersion)) {
-            switch (dataModel) {
-                case "db-by-entity-id":
-                    //FIXME
-                    //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
-                    resName = entityId;
-                    break;
-                case "db-by-entity":
-                    if (enableEncoding) {
-                        resName = NGSICharsets.encodeCKAN(entityId)+"_"+NGSICharsets.encodeCKAN(entityType);
-                    } else {
-                        resName = NGSICharsets.encode(entityId, false, true).toLowerCase(Locale.ENGLISH)+"_"+NGSICharsets.encode(entityType,false,true);
-                    } // if else
+        } else if ("ld".equals(ngsiVersion)) {
+            if (dcatMetadata != null && dcatMetadata.getResourceName() != null) {
+                resName = (enableLowercase) ? entity.getEntityId().toLowerCase() : dcatMetadata.getResourceName();
 
-                    if (resName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
-                        throw new Exception("Building resource name '" + resName + "' and its length is "
-                                + "greater than " + NGSIConstants.CKAN_MAX_NAME_LEN);
-                    } else if (resName.length() < NGSIConstants.CKAN_MIN_NAME_LEN) {
-                        throw new Exception("Building resource name '" + resName + "' and its length is "
-                                + "lower than " + NGSIConstants.CKAN_MIN_NAME_LEN);
-                    } // if else if
-                    break;
-                default:
-                    throw new Exception("Not supported Data Model for CKAN Sink: " + dataModel);
+            } else {
+                entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
+                switch (dataModel) {
+                    case "db-by-entity-id":
+                        //FIXME
+                        //note that if we enable encode() and/or encodeCKAN() in this datamodel we could have problems, although it need to be analyzed in deep
+                        resName = entityId;
+                        break;
+                    case "db-by-entity":
+                        if (enableEncoding) {
+                            resName = NGSICharsets.encodeCKAN(entityId) + "_" + NGSICharsets.encodeCKAN(entityType);
+                        } else {
+                            resName = NGSICharsets.encode(entityId, false, true).toLowerCase(Locale.ENGLISH) + "_" + NGSICharsets.encode(entityType, false, true);
+                        } // if else
+
+                        if (resName.length() > NGSIConstants.CKAN_MAX_NAME_LEN) {
+                            throw new Exception("Building resource name '" + resName + "' and its length is "
+                                    + "greater than " + NGSIConstants.CKAN_MAX_NAME_LEN);
+                        } else if (resName.length() < NGSIConstants.CKAN_MIN_NAME_LEN) {
+                            throw new Exception("Building resource name '" + resName + "' and its length is "
+                                    + "lower than " + NGSIConstants.CKAN_MIN_NAME_LEN);
+                        } // if else if
+                        break;
+                    default:
+                        throw new Exception("Not supported Data Model for CKAN Sink: " + dataModel);
+                }
             }
         }
         return resName;
