@@ -19,7 +19,7 @@
     <parent>
         <groupId>nifi-ngsi-cassandra</groupId>
         <artifactId>nifi-ngsi-cassandra-bundle</artifactId>
-        <version>1.3.6</version>
+        <version>1.3.7</version>
     </parent>
     <properties>
         <nifi.version>1.13.0</nifi.version>
