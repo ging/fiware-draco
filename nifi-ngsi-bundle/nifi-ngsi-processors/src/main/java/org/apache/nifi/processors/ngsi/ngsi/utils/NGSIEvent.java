@@ -59,4 +59,8 @@ public class NGSIEvent {
         this.entities = entities;
     }
 
+    public long getRecvTimeTs() {
+        return new Long(this.creationTime);
+    } // getRecvTimeTs
+
 }
