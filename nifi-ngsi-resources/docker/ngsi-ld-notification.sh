@@ -1,11 +1,11 @@
-curl -X POST 'http://localhost:5050/ld/notify' -H 'Content-Type: application/ld+json' -H 'Fiware-service: upm' -d @- <<EOF 
+curl -X POST 'http://localhost:5050/ld/notify' -H 'Content-Type: application/ld+json' -H 'Fiware-service: moncloa' -d @- <<EOF 
 {
   "id": "urn:ngsi-ld:Notification:352334523452",
   "type": "Notification",
   "subscriptionId": "urn:ngsi-ld:Subscription:5e6257789f300bcd70b7b6e",
   "data": [
     {
-        "id": "urn:ngsi:ld:OffStreetParking:Downtown0004",
+        "id": "urn:ngsi:ld:OffStreetParking:Downtown0005",
         "type": "OffStreetParking",
         "@context": [
         "http://example.org/ngsi-ld/parking.jsonld",
