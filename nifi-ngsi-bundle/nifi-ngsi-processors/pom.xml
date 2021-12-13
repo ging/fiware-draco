@@ -25,7 +25,7 @@
     <artifactId>nifi-ngsi-processors</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <mongo.driver.version>3.12.7</mongo.driver.version>
+        <mongo.driver.version>3.12.10</mongo.driver.version>
         <nifi.version>1.15.0</nifi.version>
     </properties>
 
