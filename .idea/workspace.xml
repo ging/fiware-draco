@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo" />
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change afterPath="$PROJECT_DIR$/docs/images/processor-ckan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/processor-updateckan-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/processor-updateckan-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/processor-updateckan-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_ckan_sink.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/processors_catalogue/upadate_ckan_metadata.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +63,9 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1mIQxul0zguxgxrZjrYgn5nrSEK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -77,16 +88,16 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.apache.nifi.processors.ngsi.ngsi.aggregators" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/docs/images" />
-      <recent name="$PROJECT_DIR$/docs/processors_catalogue" />
-      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/processors_catalogue" />
+      <recent name="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/docs/images" />
+      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates" />
     </key>
   </component>
   <component name="RunManager" selected="Application.TestJsonNgsi">
@@ -365,6 +376,9 @@
       <workItem from="1632816129480" duration="12591000" />
       <workItem from="1633376891941" duration="55000" />
       <workItem from="1638981192185" duration="21973000" />
+      <workItem from="1643032251395" duration="7805000" />
+      <workItem from="1643286648342" duration="7574000" />
+      <workItem from="1643295969265" duration="374000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -725,6 +739,7 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="including default values for fiware service and service path and fixing methods for reading flowfile attributes with case insensitive" />
     <MESSAGE value="updating readme for testing" />
     <MESSAGE value="updating dockerfile with correct release of fiware" />
@@ -756,7 +771,6 @@
     <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser" timestamp="1639000564538">
       <screen x="1440" y="25" width="1440" height="875" />
     </state>
-    <state x="533" y="120" key="#com.intellij.ide.util.MemberChooser/0.25.1440.817@0.25.1440.817" timestamp="1632819555511" />
     <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639000564538" />
     <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638990845245" />
     <state width="686" height="200" key="GridCell.Tab.0.bottom" timestamp="1639311208607">
@@ -795,17 +809,11 @@
     <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639056584544" />
     <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639311208593" />
     <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638998440760" />
-    <state x="349" y="132" key="NewModule_or_Project.wizard" timestamp="1633376932614">
-      <screen x="0" y="25" width="1440" height="818" />
+    <state x="1839" y="278" key="com.intellij.ide.util.TipDialog" timestamp="1643295977681">
+      <screen x="1440" y="25" width="1440" height="875" />
     </state>
-    <state x="349" y="132" key="NewModule_or_Project.wizard/0.25.1440.818@0.25.1440.818" timestamp="1633376932614" />
-    <state x="1795" y="314" key="com.intellij.ide.util.TipDialog" timestamp="1638981195302">
-      <screen x="1440" y="25" width="1280" height="999" />
-    </state>
-    <state x="399" y="261" key="com.intellij.ide.util.TipDialog/0.25.1440.814@0.25.1440.814" timestamp="1632814524772" />
-    <state x="399" y="261" key="com.intellij.ide.util.TipDialog/0.25.1440.815@0.25.1440.815" timestamp="1632816133917" />
-    <state x="399" y="262" key="com.intellij.ide.util.TipDialog/0.25.1440.818@0.25.1440.818" timestamp="1633376899890" />
     <state x="1795" y="314" key="com.intellij.ide.util.TipDialog/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638981195302" />
+    <state x="1839" y="278" key="com.intellij.ide.util.TipDialog/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1643295977681" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1638996209454">
       <screen x="1440" y="25" width="1440" height="875" />
     </state>
@@ -814,6 +822,10 @@
       <screen x="1440" y="25" width="1440" height="875" />
     </state>
     <state x="1915" y="43" key="refactoring.ChangeSignatureDialog/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639000549965" />
+    <state x="1825" y="220" key="run.anything.popup" timestamp="1643293642900">
+      <screen x="1440" y="25" width="1440" height="875" />
+    </state>
+    <state x="1825" y="220" key="run.anything.popup/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1643293642900" />
     <state x="1825" y="199" width="670" height="676" key="search.everywhere.popup" timestamp="1639054468638">
       <screen x="1440" y="25" width="1440" height="875" />
     </state>
