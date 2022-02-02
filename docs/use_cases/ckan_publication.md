@@ -79,15 +79,15 @@ It emulates the creation of a dataset with the context data about a Building ent
 * Each Building belongs to a city 
 * Each city has its organization in the CKAN portal
 Example:
-[use-case-example-entity](../images/use-case-example-entity.png)
+![use-case-example-entity](../images/use-case-example-entity.png)
 
 The entity and subscription created in Orion for this use case are showed in the next figure:
 
-[use-case-entity-subs](../images/use-case-entity-subs.png)
+![use-case-entity-subs](../images/use-case-entity-subs.png)
 
 An overview of the configuration used for the UpdateCKANMetadata and NGSIToCKAN processors are presented in the nest figures respectively:
-[use-case-configuration-metadata](../images/use-case-configuration-metadata.png)
-[use-case-configuration-ckan](../images/use-case-configuration-ckan.png)
+![use-case-configuration-metadata](../images/use-case-configuration-metadata.png)
+![use-case-configuration-ckan](../images/use-case-configuration-ckan.png)
 
 
 From this point, a step-by-step guide is going to be provided to replicate this use case. 
