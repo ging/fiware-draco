@@ -36,4 +36,6 @@ pages:
       - 'Update CKAN Metadata backend': 'processors_catalogue/update_ckan_metadata.md'
       - 'REST Handler': 'processors_catalogue/ngsi_rest_handler.md'
       - 'Issues and Contact': 'processors_catalogue/issues_and_contact.md'
+  - 'Use Cases':
+      - 'Data and Metadata publication into CKAN': 'use_cases/ckan_publication.md'
   - 'Roadmap': roadmap.md

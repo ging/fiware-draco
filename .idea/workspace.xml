@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change afterPath="$PROJECT_DIR$/docs/images/connector-ngsi-draco-ckan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/ngsi-draco-ckan-so.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/template-dcat-ckan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/use-case-configuration-ckan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/images/use-case-example-entity.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/use_cases/ckan_publication.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mkdocs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mkdocs.yml" afterDir="false" />
     </list>
@@ -72,7 +78,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583776873645" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/ngsiLD" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/use_cases" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -83,16 +89,16 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.apache.nifi.processors.ngsi.ngsi.aggregators" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/use_cases" />
       <recent name="$PROJECT_DIR$/docs/processors_catalogue" />
       <recent name="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/docs/images" />
-      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker" />
     </key>
   </component>
   <component name="RunManager" selected="Application.TestJsonNgsi">
@@ -373,7 +379,7 @@
       <workItem from="1638981192185" duration="21973000" />
       <workItem from="1643032251395" duration="7805000" />
       <workItem from="1643286648342" duration="7574000" />
-      <workItem from="1643295969265" duration="775000" />
+      <workItem from="1643295969265" duration="13974000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
