@@ -82,10 +82,10 @@ Example:
 ![use-case-example-entity](../images/use-case-example-entity.png)
 
 The entity and subscription created in Orion for this use case are showed in the next figure:
-
 ![use-case-entity-subs](../images/use-case-entity-subs.png)
 
-An overview of the configuration used for the UpdateCKANMetadata and NGSIToCKAN processors are presented in the nest figures respectively:
+An overview of the configuration used for the UpdateCKANMetadata and NGSIToCKAN processors are presented in the next figures respectively:
+
 ![use-case-configuration-metadata](../images/use-case-configuration-metadata.png)
 
 ![use-case-configuration-ckan](../images/use-case-configuration-ckan.png)
