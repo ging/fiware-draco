@@ -3,7 +3,7 @@
 This document presents a complete description of a use case using Draco for data and metadata publication into an Open Data portal, in this specific case using CKAN.
   
 
-This guide was written in for of a quick start guide that overviews the steps a newbie programmer will have to follow to get familiar with Draco and its
+This guide was written in form of a quick start guide that overviews the steps a newbie programmer will have to follow to get familiar with Draco and its
 basic functionality focused on providing the needed procedure for configuring and deploying the use cases presented. For more detailed information, please refer to the [README](index.md); the
 [Installation and Administration Guide](./installation_and_administration_guide/introduction.md) and the
 [Processors Catalogue](processors_catalogue/introduction.md) fully document Draco.
@@ -49,9 +49,9 @@ A graphical view of this template is presented in the next figure:
 
 ![connector-ngsi-draco-ckan](../images/connector-ngsi-draco-ckan.png)
 
-* [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions
-* [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores
-* [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN
+* [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions.
+* [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
+* [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN.
 
 For more details about the configuration of processors listed above, please go to the de documentation link provided. 
 
@@ -71,7 +71,7 @@ In this guide, we will run a basic example of Draco for publishing data into CKA
 All the scenario is running using docker containers. Thus, it is needed to have docker and docker-compose installed and running in your machine. Please, check
 [this](https://docs.docker.com/linux/started/) official start guide.
 
-This use case provides an example of how the user can publish data and metadata using the NGSI-DRACO-CKAN connector and other Generic enablers of the fiware ecosystem.
+This use case provides an example of how the user can publish data and metadata using the NGSI-DRACO-CKAN connector and other Generic enablers of the FIWARE ecosystem.
 It emulates the creation of a dataset with the context data about a Building entity containing information about buildings, their coordinates, and the city that the building belongs to.
 
 * Building Entities that want to be published in a CKAN portal
