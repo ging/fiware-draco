@@ -49,9 +49,9 @@ A graphical view of this template is presented in the next figure:
 
 ![connector-ngsi-draco-ckan](../images/connector-ngsi-draco-ckan.png)
 
-* [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions
-* [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores
-* [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN
+* [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions.
+* [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
+* [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN.
 
 For more details about the configuration of processors listed above, please go to the de documentation link provided. 
 
@@ -71,7 +71,7 @@ In this guide, we will run a basic example of Draco for publishing data into CKA
 All the scenario is running using docker containers. Thus, it is needed to have docker and docker-compose installed and running in your machine. Please, check
 [this](https://docs.docker.com/linux/started/) official start guide.
 
-This use case provides an example of how the user can publish data and metadata using the NGSI-DRACO-CKAN connector and other Generic enablers of the fiware ecosystem.
+This use case provides an example of how the user can publish data and metadata using the NGSI-DRACO-CKAN connector and other Generic enablers of the FIWARE ecosystem.
 It emulates the creation of a dataset with the context data about a Building entity containing information about buildings, their coordinates, and the city that the building belongs to.
 
 * Building Entities that want to be published in a CKAN portal
