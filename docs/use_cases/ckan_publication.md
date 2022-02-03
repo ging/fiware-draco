@@ -150,11 +150,11 @@ according to the received NGSI-LD event.
 
 ![Draco-template1](../images/template-dcat-ckan.png)
 
-Before starting the processors, you need to set your MySQL password and enable the DBCConnectionPool controller. For
+Before starting the processors, you need to set your CKAN API KEY  For
 doing that please follow the instructions:
 
 1.  Do right-click on any part of the Draco GUI userspace, and then click on configure.
-    ![Draco-step1](../images/step1.png)
+    ![ckan-configurarion](../images/step1.pg)
 
 2. Select all the processors (press shift and click on every processor) and start them by clicking on the start button.
     Now, you can see that the status icon of each processor turned from red to green.
