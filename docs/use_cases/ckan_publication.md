@@ -3,7 +3,7 @@
 This document presents a complete description of a use case using Draco for data and metadata publication into an Open Data portal, in this specific case using CKAN.
   
 
-This guide was written in for of a quick start guide that overviews the steps a newbie programmer will have to follow to get familiar with Draco and its
+This guide was written in form of a quick start guide that overviews the steps a newbie programmer will have to follow to get familiar with Draco and its
 basic functionality focused on providing the needed procedure for configuring and deploying the use cases presented. For more detailed information, please refer to the [README](index.md); the
 [Installation and Administration Guide](./installation_and_administration_guide/introduction.md) and the
 [Processors Catalogue](processors_catalogue/introduction.md) fully document Draco.
