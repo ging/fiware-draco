@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo" />
+    <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/use_cases/ckan_publication.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/use_cases/ckan_publication.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -370,7 +373,7 @@
       <workItem from="1638981192185" duration="21973000" />
       <workItem from="1643032251395" duration="7805000" />
       <workItem from="1643286648342" duration="7574000" />
-      <workItem from="1643295969265" duration="14508000" />
+      <workItem from="1643295969265" duration="17804000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -822,6 +825,10 @@
       <screen x="1440" y="25" width="1440" height="875" />
     </state>
     <state x="1825" y="199" width="670" height="676" key="search.everywhere.popup/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639054468638" />
+    <state x="450" y="399" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1643886663136">
+      <screen x="0" y="25" width="1440" height="813" />
+    </state>
+    <state x="450" y="399" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.25.1440.813@0.25.1440.813" timestamp="1643886663136" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

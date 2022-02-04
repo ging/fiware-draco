@@ -84,7 +84,7 @@ Example:
 The entity and subscription created in Orion for this use case are showed in the next figure:
 ![use-case-entity-subs](../images/use-case-entity-subs.png)
 
-An overview of the configuration used for the UpdateCKANMetadata and NGSIToCKAN processors are presented in the next figures respectively:
+An overview of the configuration used for the [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md) and [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md) processors are presented in the next figures respectively:
 
 ![use-case-configuration-metadata](../images/use-case-configuration-metadata.png)
 
@@ -142,7 +142,7 @@ Now go to the Components toolbar which is placed in the upper section of the NiF
 and drop it inside the Draco user space. At this point, a popup should be displayed with a list of all the templates
 available. Please select the template NGSI-DRACO-CKAN.
 
-The NGSI-DRACO-CKAN template contains four processors. The first processor opens a connection for getting NGSI-LD
+The NGSI-DRACO-CKAN template contains four processors. The first processor [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md) opens a connection for getting NGSI-LD
 notifications through the 5050 port. On the other hand, the second processor called ExtractJsonPath extracts data from the notification to generate the metadata
 The third processor UpdateCKANMetadata is in charge to build metadata fields dynamically adapted to each entity. Finally, the four-processor NGSIToCKAN
 takes the NGSI-LD events and persists that data and metadata into the CKAN creating the organization, package, resource, datastore, and view 
@@ -153,8 +153,8 @@ according to the received NGSI-LD event.
 Before starting the processors, you need to set your CKAN API KEY  For
 doing that please follow the instructions:
 
-1.  Do right-click on any part of the Draco GUI userspace, and then click on configure.
-    ![ckan-configurarion](../images/step1.pg)
+1.  Do right-click over the NGSIToCKAN processor inside of the Draco GUI userspace, and then click on configure.
+Then, put the correct value to the properties, CKAN Host, CKAN Port and CKAN API KEY,according to your corresponding deployment.
 
 2. Select all the processors (press shift and click on every processor) and start them by clicking on the start button.
     Now, you can see that the status icon of each processor turned from red to green.
