@@ -145,38 +145,58 @@ Then, put the correct value to the properties, CKAN Host, CKAN Port and CKAN API
 2. Select all the processors (press shift and click on every processor) and start them by clicking on the start button.
     Now, you can see that the status icon of each processor turned from red to green.
 
+3. Open a new terminal and run the `subscription.sh` script for creating the subscription to notify Draco:
+
+```bash
+chmod a+x subscription.sh
+./scripts/yoda-use-cases/subscription.sh
+```
+
 Now to test your deployment, you may send an NGSI-like notification emulation to our listening port (5050) and path
 (ld/notify):
 
-(3) Open a new terminal and create and edit somewhere a `notification.sh` file:
+4. Create entity UniCAN Building (urn:ngsi-ld:Building:Building001). Run the script unican.sh
 
 ```bash
-touch notification.sh
+chmod a+x unican.sh
+./scripts/yoda-use-cases/unican.sh
+```
+You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000].
+
+* The organization Santander will be created
+![santander-organization](../images/santander-org.png)
+* The package urn_ngsi-ld_building_building001 will be created -> NGSIToCKAN processors generates the package name taken from the notification as it was not defined in the UpdateCKANMetadataAttributes
+![unican-package](../images/unican-build.png)
+* The resource UniCAN will be created
+![unican-resource](../images/unican-res.png)
+
+5. Download the catalog from CKAN. Go to the browser and put the following url:
+
+```
+https://{ckan-instance-host}/catalog.{format}?[page={page}]&[modified_since={date}]&[profiles={profile1},{profile2}]&[q={query}]&[fq={filter query}]
+```
+for example:
+
+```
+http://localhost:5000/dataset/urn_ngsi-ld_building_building003.rdf?profile=euro_dcat_ap,edp_dcat_ap
+```
+6. Using the maq-scoring and validation tool for get teh scoring. Open a new terminal and clone the respository of the mqa-scoring tool:
+
+```
+https://github.com/YourOpenDAta/mqa-scoring.git
+cd mqa-scoring
+pip install -r requirements.txt
 ```
 
-Copy and paste this content to the notification.sh file
+Use the mqa-scoring tool for getting the escore of the rfd file that you donwlads in the step 5:
 
-```bash
-URL=$1
-
-curl $URL -v -s -S --header 'Content-Type: application/json; charset=utf-8' --header 'Accept: application/json' --header "Fiware-Service: qsg" --header "Fiware-ServicePath: test" -d @- <<EOF
-
-EOF
+```
+python mqa-scoring.py -f ./downloads/urn_ngsi-ld_building_building003.rdf
 ```
 
-This script will emulate the sending of an Orion notification to the URL endpoint passed as an argument. The above
-notification is about an entity named `Room1` of type `Room` belonging to the FIWARE service `qsg` and the FIWARE
-service path `test`; it has a single attribute named `temperature` of type `float`.
+Get the MQA score:
 
-(4) Give execution permissions to `notification.sh` and run it, passing as an argument the URL of the listening
-`HTTPSource`:
-
-```bash
-chmod a+x notification.sh
-./notification.sh http://localhost:5050/ld/notify
-```
-
-(5) You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000].
+![mqa-score](../images/mqa-score.png)
 
 
 Now you can receive NGSI-LD notifications from Orion Context Broker and store the data and metadata into CKAN using Draco.
