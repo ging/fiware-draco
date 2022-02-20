@@ -108,29 +108,15 @@ git clone https://github.com/YourOpenDAta/open-data-connectors
 cd open-data-connectors
 ```
 
-Change directory:
-
-```bash
-cd docker
-```
-
 And run the following command:
 
 ```bash
-sudo docker-compose up -d
+sudo ./up_all.sh
 ```
 
 Once finished (it may take a while) the console will display the logs of each container.
 
-If you want, you can open another terminal and check the available images at your docker by typing:
-
-```text
-sudo docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-
-```
-
-(2) Once you have your containers up and running, you can add the template provided for persisting data to MySQL.
+(2) Once you have your containers up and running, you can add the template provided for persisting data and metadata into CKAN.
 
 First, go to your browser and open Draco using this URL `http://localhost:9090/nifi`
 
