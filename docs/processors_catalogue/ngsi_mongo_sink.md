@@ -109,7 +109,7 @@ of them. Each document contains a variable number of fields, depending on the co
     -   `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 it can be Json object or
         Json array.
     -   `attrMetadata`: will be stored only if it was configured to (attr_metadata_store set to true in the
-        configuration file ngsi_agent.conf). It is a Json object.
+        configuration). It is a Json object.
 -   Data model by attribute:
     -   `recvTimeTs`: UTC timestamp expressed in miliseconds.
     -   `recvTime`: UTC timestamp in human-readable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
@@ -117,7 +117,7 @@ of them. Each document contains a variable number of fields, depending on the co
     -   `attrValue`: In its simplest form, this value is just a string, but since Orion 0.11.0 it can be Json object or
         Json array.
     -   `attrMetadata`: will be stored only if it was configured to (attr_metadata_store set to true in the
-        configuration file ngsi_agent.conf). It is a Json object.
+        configuration). It is a Json object.
 
 #### Column-like storing
 

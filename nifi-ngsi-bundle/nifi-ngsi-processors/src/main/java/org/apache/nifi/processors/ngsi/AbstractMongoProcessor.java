@@ -22,10 +22,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
 import com.mongodb.MongoClientURI;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.annotation.lifecycle.OnScheduled;
 import org.apache.nifi.annotation.lifecycle.OnStopped;
-import org.apache.nifi.authentication.exception.ProviderCreationException;
 import org.apache.nifi.components.PropertyDescriptor;
 import org.apache.nifi.expression.ExpressionLanguageScope;
 import org.apache.nifi.flowfile.FlowFile;
@@ -41,8 +39,6 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIEvent;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 import org.apache.nifi.security.util.ClientAuth;
 import org.apache.nifi.ssl.SSLContextService;
-import org.apache.nifi.security.util.SslContextFactory;
-
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -256,23 +252,12 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
         final String dataModel=context.getProperty(DATA_MODEL).getValue();
         // Set up the client for secure (SSL/TLS communications) if configured to do so
-        final SSLContextService sslService = null;//context.getProperty(SSL_CONTEXT_SERVICE).asControllerService(SSLContextService.class);
-        final String rawClientAuth = "none";//context.getProperty(CLIENT_AUTH).getValue();
+        final SSLContextService sslService = context.getProperty(SSL_CONTEXT_SERVICE).asControllerService(SSLContextService.class);
+        //final String rawClientAuth = "none";//context.getProperty(CLIENT_AUTH).getValue();
         final SSLContext sslContext;
 
         if (sslService != null) {
-            final SSLContextService.ClientAuth clientAuth;
-            if (StringUtils.isBlank(rawClientAuth)) {
-                clientAuth = SSLContextService.ClientAuth.REQUIRED;
-            } else {
-                try {
-                    clientAuth = SSLContextService.ClientAuth.valueOf(rawClientAuth);
-                } catch (final IllegalArgumentException iae) {
-                    throw new ProviderCreationException(String.format("Unrecognized client auth '%s'. Possible values are [%s]",
-                            rawClientAuth));
-                }
-            }
-            sslContext = sslService.createSSLContext(clientAuth);
+            sslContext = sslService.createContext();
         } else {
             sslContext = null;
         }
@@ -292,19 +277,16 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
     protected Builder getClientOptions(final SSLContext sslContext) {
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
         builder.sslEnabled(true);
-        builder.socketFactory(sslContext.getSocketFactory());
+        builder.sslContext(sslContext);
         return builder;
     }
 
     @OnStopped
     public final void closeClient() {
-        if (mongoClient != null) {
+        if (mongoClient.getClient() != null) {
             getLogger().info("Closing MongoClient");
-            // mongoClientSSL.close();
             mongoClient.getClient().close();
-        }else if (mongoClientSSL!=null){
-            getLogger().info("Closing MongoClient");
-            mongoClientSSL.close();
+            mongoClient = null;
         }
     }
 

@@ -1,10 +1,8 @@
 package org.apache.nifi.processors.ngsi.ngsi.aggregators;
 
-import com.mongodb.DBObject;
-import com.mongodb.util.JSON;
+import com.mongodb.BasicDBObject;
 import java.util.ArrayList;
 import java.util.Date;
-
 import org.apache.nifi.processors.ngsi.ngsi.backends.MongoBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
@@ -62,7 +60,7 @@ public abstract class MongoAggregator {
                     String attrName = contextAttribute.getAttrName();
                     String attrType = contextAttribute.getAttrType();
                     String attrValue = contextAttribute.getAttrValue();
-                    String attrMetadata = (contextAttribute.getAttrMetadata() != null) ? contextAttribute.getMetadataString() : "[]";
+                    String attrMetadata = (contextAttribute.getAttrMetadata() != null) ? contextAttribute.getMetadataString() : "{}";
 
                     // check if the metadata contains a TimeInstant value; use the notified reception time instead
                     Long recvTimeTs;
@@ -76,6 +74,7 @@ public abstract class MongoAggregator {
 
                     Document doc;
                     doc = createDocWithMetadata(recvTimeTs, entityId, entityType, attrName, attrType, attrValue, attrMetadata, dataModel);
+                    //doc = createDoc(recvTimeTs, entityId, entityType, attrName, attrType, attrValue, dataModel);
 
                     aggregation.add(doc);
                 } // for
@@ -92,18 +91,18 @@ public abstract class MongoAggregator {
                             .append("attrName", attrName)
                             .append("attrType", attrType)
                             .append("attrValue", attrValue)
-                            .append("attrMetadata", (DBObject)JSON.parse(attrMetadata));
+                            .append("attrMetadata",  BasicDBObject.parse(attrMetadata));
                     break;
                 case "db-by-entity":
                     doc.append("attrName", attrName)
                             .append("attrType", attrType)
                             .append("attrValue", attrValue)
-                            .append("attrMetadata", (DBObject)JSON.parse(attrMetadata));
+                            .append("attrMetadata",  BasicDBObject.parse(attrMetadata));
                     break;
                 case "db-by-attribute":
                     doc.append("attrType", attrType)
                             .append("attrValue", attrValue)
-                            .append("attrMetadata", (DBObject)JSON.parse(attrMetadata));
+                            .append("attrMetadata",  BasicDBObject.parse(attrMetadata));
                     break;
                 default:
                     return null; // this will never be reached
@@ -123,6 +122,7 @@ public abstract class MongoAggregator {
                             .append("attrName", attrName)
                             .append("attrType", attrType)
                             .append("attrValue", attrValue);
+                    System.out.println(doc);
                     break;
                 case "db-by-entity":
                     doc.append("attrName", attrName)
@@ -209,7 +209,9 @@ public abstract class MongoAggregator {
 
         try {
             backend.createDatabase(dbName);
-            backend.createCollection(dbName, collectionName, collectionsSize, maxDocuments, dataExpiration);
+            if (backend.getDatabase(dbName).getCollection(collectionName)==null) {
+                backend.createCollection(dbName, collectionName, collectionsSize, maxDocuments, dataExpiration);
+            }
             backend.insertContextDataRaw(dbName, collectionName, aggregation);
         } catch (Exception e) {
             System.out.println("-, " + e.getMessage());

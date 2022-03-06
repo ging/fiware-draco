@@ -7,7 +7,6 @@ import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,8 +14,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-
-import com.mongodb.util.JSON;
 import org.apache.nifi.processors.ngsi.ngsi.utils.CommonConstants;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSICharsets;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants;
@@ -645,18 +642,18 @@ public class MongoBackend {
                         .append("attrName", attrName)
                         .append("attrType", attrType)
                         .append("attrValue", attrValue)
-                        .append("attrMetadata", (DBObject) JSON.parse(attrMetadata));
+                        .append("attrMetadata", BasicDBObject.parse(attrMetadata));
                 break;
             case "db-by-entity":
                 doc.append("attrName", attrName)
                         .append("attrType", attrType)
                         .append("attrValue", attrValue)
-                        .append("attrMetadata", (DBObject)JSON.parse(attrMetadata));
+                        .append("attrMetadata", BasicDBObject.parse(attrMetadata));
                 break;
             case "db-by-attribute":
                 doc.append("attrType", attrType)
                         .append("attrValue", attrValue)
-                        .append("attrMetadata", (DBObject)JSON.parse(attrMetadata));
+                        .append("attrMetadata", BasicDBObject.parse(attrMetadata));
                 break;
             default:
                 return null; // this will never be reached
@@ -664,6 +661,10 @@ public class MongoBackend {
 
         return doc;
     } // createDocWithMetadata
+
+    public void close(){
+        client.close();
+    }
 
     private Document createDoc(long recvTimeTs, String entityId, String entityType, String attrName,
                                String attrType, String attrValue) {

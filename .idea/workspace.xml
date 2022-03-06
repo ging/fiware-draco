@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/use_cases/ckan_publication.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/use_cases/ckan_publication.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/processors_catalogue/ngsi_mongo_sink.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/AbstractMongoProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/aggregators/MongoAggregator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/MongoBackend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +27,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="fiware-draco" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,10 +44,17 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan/CKANBackend.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/mkdocs.yml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="/usr/local/Cellar/maven/3.6.3_1/libexec" />
+        <option name="mavenHome" value="/usr/local/Cellar/maven/3.8.4/libexec" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -55,7 +71,7 @@
     </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="1mIQxul0zguxgxrZjrYgn5nrSEK" />
   <component name="ProjectLevelVcsManager">
@@ -63,7 +79,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -151,6 +166,8 @@
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -159,19 +176,21 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
       <Java />
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
         <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" />
       </method>
     </configuration>
@@ -268,36 +287,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -330,6 +321,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -374,6 +366,8 @@
       <workItem from="1643032251395" duration="7805000" />
       <workItem from="1643286648342" duration="7574000" />
       <workItem from="1643295969265" duration="17804000" />
+      <workItem from="1645435797125" duration="1876000" />
+      <workItem from="1646533070576" duration="4579000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -731,7 +725,7 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -761,74 +755,6 @@
     <MESSAGE value="Fix coveralls test for travis" />
     <MESSAGE value="Add nifi-ngsi-dynamo" />
     <option name="LAST_COMMIT_MESSAGE" value="Add nifi-ngsi-dynamo" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser" timestamp="1639000564538">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639000564538" />
-    <state x="1973" y="127" key="#com.intellij.ide.util.MemberChooser/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638990845245" />
-    <state width="686" height="200" key="GridCell.Tab.0.bottom" timestamp="1639311208607">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state width="535" height="200" key="GridCell.Tab.0.bottom/1440.25.1280.999/0.25.1440.817@1440.25.1280.999" timestamp="1638984757849" />
-    <state width="535" height="200" key="GridCell.Tab.0.bottom/1440.25.1280.999/0.25.1440.818@1440.25.1280.999" timestamp="1638984213781" />
-    <state width="535" height="200" key="GridCell.Tab.0.bottom/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638982259257" />
-    <state width="686" height="200" key="GridCell.Tab.0.bottom/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639056584545" />
-    <state width="686" height="200" key="GridCell.Tab.0.bottom/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639311208607" />
-    <state width="686" height="200" key="GridCell.Tab.0.bottom/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638998440761" />
-    <state width="686" height="200" key="GridCell.Tab.0.center" timestamp="1639311208590">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state width="535" height="200" key="GridCell.Tab.0.center/1440.25.1280.999/0.25.1440.817@1440.25.1280.999" timestamp="1638984757847" />
-    <state width="535" height="200" key="GridCell.Tab.0.center/1440.25.1280.999/0.25.1440.818@1440.25.1280.999" timestamp="1638984213780" />
-    <state width="535" height="200" key="GridCell.Tab.0.center/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638982259255" />
-    <state width="686" height="200" key="GridCell.Tab.0.center/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639056584544" />
-    <state width="686" height="200" key="GridCell.Tab.0.center/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639311208590" />
-    <state width="686" height="200" key="GridCell.Tab.0.center/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638998440760" />
-    <state width="686" height="200" key="GridCell.Tab.0.left" timestamp="1639311208588">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state width="535" height="200" key="GridCell.Tab.0.left/1440.25.1280.999/0.25.1440.817@1440.25.1280.999" timestamp="1638984757845" />
-    <state width="535" height="200" key="GridCell.Tab.0.left/1440.25.1280.999/0.25.1440.818@1440.25.1280.999" timestamp="1638984213779" />
-    <state width="535" height="200" key="GridCell.Tab.0.left/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638982259253" />
-    <state width="686" height="200" key="GridCell.Tab.0.left/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639056584543" />
-    <state width="686" height="200" key="GridCell.Tab.0.left/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639311208588" />
-    <state width="686" height="200" key="GridCell.Tab.0.left/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638998440759" />
-    <state width="686" height="200" key="GridCell.Tab.0.right" timestamp="1639311208593">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state width="535" height="200" key="GridCell.Tab.0.right/1440.25.1280.999/0.25.1440.817@1440.25.1280.999" timestamp="1638984757848" />
-    <state width="535" height="200" key="GridCell.Tab.0.right/1440.25.1280.999/0.25.1440.818@1440.25.1280.999" timestamp="1638984213781" />
-    <state width="535" height="200" key="GridCell.Tab.0.right/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638982259256" />
-    <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639056584544" />
-    <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639311208593" />
-    <state width="686" height="200" key="GridCell.Tab.0.right/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638998440760" />
-    <state x="1839" y="278" key="com.intellij.ide.util.TipDialog" timestamp="1643295977681">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state x="1795" y="314" key="com.intellij.ide.util.TipDialog/1440.25.1280.999/0.25.1440.819@1440.25.1280.999" timestamp="1638981195302" />
-    <state x="1839" y="278" key="com.intellij.ide.util.TipDialog/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1643295977681" />
-    <state width="600" height="424" key="javadoc.popup" timestamp="1638996209454">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state width="600" height="424" key="javadoc.popup/1440.25.1440.875/0.25.1440.815@1440.25.1440.875" timestamp="1638996209454" />
-    <state x="1915" y="43" key="refactoring.ChangeSignatureDialog" timestamp="1639000549965">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state x="1915" y="43" key="refactoring.ChangeSignatureDialog/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1639000549965" />
-    <state x="1825" y="220" key="run.anything.popup" timestamp="1643293642900">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state x="1825" y="220" key="run.anything.popup/1440.25.1440.875/0.25.1440.814@1440.25.1440.875" timestamp="1643293642900" />
-    <state x="1825" y="199" width="670" height="676" key="search.everywhere.popup" timestamp="1639054468638">
-      <screen x="1440" y="25" width="1440" height="875" />
-    </state>
-    <state x="1825" y="199" width="670" height="676" key="search.everywhere.popup/1440.25.1440.875/0.25.1440.813@1440.25.1440.875" timestamp="1639054468638" />
-    <state x="450" y="399" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1643886663136">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="450" y="399" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.25.1440.813@0.25.1440.813" timestamp="1643886663136" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
