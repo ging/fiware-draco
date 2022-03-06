@@ -2,21 +2,21 @@
 Content:
 
 * [Functionality](#section1)
-    * [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
-    * [Mapping `NGSI-LDEvents` to DCAT-AP Metadata into CKAN data structures](#section1.2)
-        * [DCAT-AP Metadata tags for Organizations](#section1.2.1)
-        * [DCAT-AP Metadata tags for Packages/Datasets](#section1.2.2)
-        * [DCAT-AP Metadata tags for Resources](#section1.2.3)
+* [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
+* [Mapping `NGSI-LDEvents` to DCAT-AP Metadata into CKAN data structures](#section1.2)
+  * [DCAT-AP Metadata tags for Organizations](#section1.2.1)
+  * [DCAT-AP Metadata tags for Packages/Datasets](#section1.2.2)
+  * [DCAT-AP Metadata tags for Resources](#section1.2.3)
 * [Administration guide](#section2)
-    * [Configuration](#section2.1)
-    * [Use cases](#section2.2)
+  * [Configuration](#section2.1)
+* [Use cases](#section2.2)
 * [Programmers guide](#section3)
     * [`UpdateCKANMetadata` class](#section3.1)
 
 ## <a name="section1"></a>Functionality
 `UpdateCKANMetadata`, is a processor designed to add additional metadata to an incoming flowfile or NGSI-LD event. This processor was designed to include all the metadata fields needed for complying with [DCAT-AP v2.0.1](https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/news/dcat-ap-release-201) 
  This processor is intended to be used joined with the `NGSIToCKAN` processor for persist NGSI-LD-like context data events and DCAT-AP metadata within a [CKAN](http://ckan.org/) server. Usually, such a context data is notified by a
-Context Boker ([Orion Context Broker](https://github.com/telefonicaid/fiware-orion),[Orion-LD Context Broker](https://github.com/FIWARE/context.Orion-LD),[Scorpio Broker](https://github.com/ScorpioBroker/ScorpioBroker) ) instance, but could be any other system speaking the _NGSI language_.
+Context Broker ([Orion Context Broker](https://github.com/telefonicaid/fiware-orion),[Orion-LD Context Broker](https://github.com/FIWARE/context.Orion-LD),[Scorpio Broker](https://github.com/ScorpioBroker/ScorpioBroker) ) instance, but could be any other system speaking the _NGSI language_.
 
 Independently of the data generator, NGSI-LD context data is always transformed into internal `NGSI-LDEvent` objects at Draco sources. In the end, the information within these events must be mapped into specific CKAN data and metadata structures.
 
