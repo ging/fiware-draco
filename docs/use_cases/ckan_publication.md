@@ -180,7 +180,7 @@ for example:
 ```
 http://localhost:5000/dataset/urn_ngsi-ld_building_building003.rdf?profile=euro_dcat_ap,edp_dcat_ap
 ```
-6. Using the maq-scoring and validation tool for get teh scoring. Open a new terminal and clone the respository of the mqa-scoring tool:
+6. Using the maq-scoring and validation tool for get the scoring. Open a new terminal and clone the respository of the mqa-scoring tool:
 
 ```
 https://github.com/YourOpenDAta/mqa-scoring.git
@@ -188,7 +188,7 @@ cd mqa-scoring
 pip install -r requirements.txt
 ```
 
-Use the mqa-scoring tool for getting the escore of the rfd file that you donwlads in the step 5:
+Use the mqa-scoring tool for getting the score of the rfd file that you got in the step 5:
 
 ```
 python mqa-scoring.py -f ./downloads/urn_ngsi-ld_building_building003.rdf
