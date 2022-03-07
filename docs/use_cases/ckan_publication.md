@@ -50,7 +50,7 @@ A graphical view of this template is presented in the next figure:
 ![connector-ngsi-draco-ckan](../images/connector-ngsi-draco-ckan.png)
 
 -   [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions.
--   [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
+-   [UpdateCKANMetadataAttributes](../processors_catalogue/update_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
 -   [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN.
 
 For more details about the configuration of processors listed above, please go to the de documentation link provided. 
@@ -84,7 +84,7 @@ Example:
 The entity and subscription created in Orion for this use case are showed in the next figure:
 ![use-case-entity-subs](../images/use-case-entity-subs.png)
 
-An overview of the configuration used for the [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md) and [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md) processors are presented in the next figures respectively:
+An overview of the configuration used for the [UpdateCKANMetadataAttributes](../processors_catalogue/update_ckan_metadata.md) and [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md) processors are presented in the next figures respectively:
 
 ![use-case-configuration-metadata](../images/use-case-configuration-metadata.png)
 
