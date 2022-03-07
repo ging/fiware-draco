@@ -101,9 +101,9 @@ The following table summarizes the resource name composition:
 Regarding the specific data stored within the datastore associated to the resource, if `attr_persistence` parameter is set to `column` then a single line is composed for the whole notified entity, containing the following fields:
 
 -   `recvTimeTs` UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
--    `entityId`: Notified entity identifier.
--    `entityType`: Notified entity type.
--    For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
+-   `entityId`: Notified entity identifier.
+-   `entityType`: Notified entity type.
+-   For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
 
 
 [Top](#top)
