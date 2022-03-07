@@ -11,8 +11,8 @@ basic functionality focused on providing the needed procedure for configuring an
 ## Scenarios
 
 This use case is composed of two scenarios:
-* Publish data and metadata into CKAN coming from NGSI-LD data sources (NGSI-DRACO-CKAN connector).
-* Publish data and metadata into CKAN coming from REST data sources (REST-DRACO-CKAN connector).
+-   Publish data and metadata into CKAN coming from NGSI-LD data sources (NGSI-DRACO-CKAN connector).
+-   Publish data and metadata into CKAN coming from REST data sources (REST-DRACO-CKAN connector).
 
 ## Publish data and metadata into CKAN coming from NGSI-LD data sources (NGSI-DRACO-CKAN connector).
 This scenario covers the configuration and deployment of the needed components for being able to capture transform and process data and metadata coming from
@@ -49,17 +49,17 @@ A graphical view of this template is presented in the next figure:
 
 ![connector-ngsi-draco-ckan](../images/connector-ngsi-draco-ckan.png)
 
-* [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions.
-* [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
-* [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN.
+-   [ListenHTTP](../processors_catalogue/ngsi_rest_handler.md): it receives notifications from orion subscriptions.
+-   [UpdateCKANMetadataAttributes](../processors_catalogue/upadate_ckan_metadata.md): configures metadata for organizations, packages, resources and datastores.
+-   [NGSIToCKAN](../processors_catalogue/ngsi_ckan_sink.md):  creates organizations, packages, resources, datastores and views in CKAN.
 
 For more details about the configuration of processors listed above, please go to the de documentation link provided. 
 
 The first scenario presented in this guide is composed of the  following services:
- 
- * Orion
- * Draco
- * CKAN 
+
+-   Orion
+-   Draco
+-   CKAN 
 
 <a name="section1"></a>
 
@@ -74,10 +74,10 @@ All the scenario is running using docker containers. Thus, it is needed to have 
 This use case provides an example of how the user can publish data and metadata using the NGSI-DRACO-CKAN connector and other Generic enablers of the FIWARE ecosystem.
 It emulates the creation of a dataset with the context data about a Building entity containing information about buildings, their coordinates, and the city that the building belongs to.
 
-* Building Entities that want to be published in a CKAN portal
-* Each Building is stored as a new package with a resource pointing to a Context Broker URL
-* Each Building belongs to a city 
-* Each city has its organization in the CKAN portal
+-   Building Entities that want to be published in a CKAN portal
+-   Each Building is stored as a new package with a resource pointing to a Context Broker URL
+-   Each Building belongs to a city 
+-   Each city has its organization in the CKAN portal
 Example:
 ![use-case-example-entity](../images/use-case-example-entity.png)
 
@@ -163,11 +163,11 @@ chmod a+x unican.sh
 ```
 You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000].
 
-* The organization Santander will be created
+-   The organization Santander will be created
 ![santander-organization](../images/santander-org.png)
-* The package urn_ngsi-ld_building_building001 will be created -> NGSIToCKAN processors generates the package name taken from the notification as it was not defined in the UpdateCKANMetadataAttributes
+-   The package urn_ngsi-ld_building_building001 will be created -> NGSIToCKAN processors generates the package name taken from the notification as it was not defined in the UpdateCKANMetadataAttributes
 ![unican-package](../images/unican-build.png)
-* The resource UniCAN will be created
+-   The resource UniCAN will be created
 ![unican-resource](../images/unican-res.png)
 
 5. Download the catalog from CKAN. Go to the browser and put the following url:

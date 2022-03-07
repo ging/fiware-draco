@@ -1,25 +1,25 @@
 # NGSIToCKAN
 Content:
 
-- [Functionality](#section1)
-  - [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
-    - [Mapping `NGSI-LDEvents` to CKAN data structures](#section1.2)
-      - [Organizations naming conventions](#section1.2.1)
-        - [Package/dataset naming conventions](#section1.2.2)
-        - [Resource naming conventions](#section1.2.3)
-        - [Column-like storing](#section1.2.4)
-    - [Example](#section1.3)
-      - [NGSI-LDEvent](#section1.3.1)
-      - [Organization, dataset and resource names](#section1.3.2)
-      - [Column-like storing](#section1.3.3)
-- [Administration guide](#section2)
-  - [Configuration](#section2.1)
-  - [Use cases](#section2.2)
-  - [Important notes](#section2.3)
-    - [About the persistence mode](#section2.3.1)
-    - [About the encoding](#section2.3.3)
-- [Programmers guide](#section3)
-  - [`NGSICKANSink` class](#section3.1)
+-   [Functionality](#section1)
+  -   [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
+  -   [Mapping `NGSI-LDEvents` to CKAN data structures](#section1.2)
+      -   [Organizations naming conventions](#section1.2.1)
+        -   [Package/dataset naming conventions](#section1.2.2)
+        -   [Resource naming conventions](#section1.2.3)
+        -   [Column-like storing](#section1.2.4)
+    -   [Example](#section1.3)
+      -   [NGSI-LDEvent](#section1.3.1)
+      -   [Organization, dataset and resource names](#section1.3.2)
+      -   [Column-like storing](#section1.3.3)
+-   [Administration guide](#section2)
+  -   [Configuration](#section2.1)
+  -   [Use cases](#section2.2)
+  -   [Important notes](#section2.3)
+    -   [About the persistence mode](#section2.3.1)
+    -   [About the encoding](#section2.3.3)
+-   [Programmers guide](#section3)
+  -  [`NGSICKANSink` class](#section3.1)
 
 ## <a name="section1"></a>Functionality
 `NGSIToCKAN`, is a processor designed to persist NGSI-LD-like context data events within a [CKAN](http://ckan.org/) server.Usually, such a context data is notified by a
@@ -38,7 +38,7 @@ This is done at the Draco-ngsi Http listeners (in NiFi, processors) thanks to NG
 [Top](#top)
 
 ### <a name="section1.2"></a>Mapping `NGSI-LDEvent`s to CKAN data structures
-[CKAN ](http://docs.ckan.org/en/latest/user-guide.html) organizes the data in organizations containing packages or datasets; each one of these packages/datasets contains several resources whose data is finally stored in a PostgreSQL database (CKAN Datastore) or plain files (CKAN Filestore). Such organization is exploited by `NGSICKANSink` each time a `NGSI-LDEvent` is going to be persisted.
+[CKAN](http://docs.ckan.org/en/latest/user-guide.html) organizes the data in organizations containing packages or datasets; each one of these packages/datasets contains several resources whose data is finally stored in a PostgreSQL database (CKAN Datastore) or plain files (CKAN Filestore). Such organization is exploited by `NGSICKANSink` each time a `NGSI-LDEvent` is going to be persisted.
 
 [Top](#top)
 
@@ -49,7 +49,7 @@ https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTA
 Nevertheless, different than PostgreSQL, [organization lengths](http://docs.ckan.org/en/latest/api/#ckan.logic.action.create.organization_create) may be up to 100 characters (minimum, 2 characters).
 
 
-* Data model by entity id (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
+-  Data model by entity id (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
 
 The following table summarizes the organization name composition:
 
@@ -60,12 +60,12 @@ The following table summarizes the organization name composition:
 [Top](#top)
 
 #### <a name="section1.2.2"></a>Packages/datasets naming conventions
-* Data model by entity (`data_model=dm-by-entity`). A package/dataset named as the notified `fiware-service`  header value (or, in absence of such header, the defaulted value for the FIWARE service ) is created (if not existing yet) in the above organization.
+-   Data model by entity (`data_model=dm-by-entity`). A package/dataset named as the notified `fiware-service`  header value (or, in absence of such header, the defaulted value for the FIWARE service ) is created (if not existing yet) in the above organization.
 Since based in [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), it must be said only alphanumeric characters and the underscore (`_`) are accepted. The hyphen ('-') is also accepted. This leads to  certain [encoding](#section2.3.3) is applied depending on the `enable_encoding` configuration parameter
 Nevertheless, different than PostgreSQL, [dataset lengths](http://docs.ckan.org/en/latest/api/#ckan.logic.action.create.package_create) may be up to 100 characters (minimum, 2 characters).
 
 
-* Data model by entity id (`data_model=dm-by-entity-id`). A package/dataset name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
+-   Data model by entity id (`data_model=dm-by-entity-id`). A package/dataset name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
 
 The following table summarizes the package name composition:
 
@@ -78,10 +78,10 @@ The following table summarizes the package name composition:
 #### <a name="section1.2.3"></a>Resources naming conventions
 The resource name depends on the configured data model (see the [Configuration](#section2.1) section for more details):
 
-* Data model by entity (`data_model=dm-by-entity`). A resource name always take the concatenation of the entity ID and type. Such a name is already given in the `notified_entities`/`grouped_entities` header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`.
+-    Data model by entity (`data_model=dm-by-entity`). A resource name always take the concatenation of the entity ID and type. Such a name is already given in the `notified_entities`/`grouped_entities` header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`.
 
 
-* Data model by entity id (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
+-    Data model by entity id (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
 
 It must be noticed a CKAN Datastore (and a viewer) is also created and associated to the resource above. This datastore, which in the end is a PostgreSQL table, will hold the persisted data.
 
@@ -101,10 +101,10 @@ The following table summarizes the resource name composition:
 #### <a name="section1.2.3"></a>Column-like storing
 Regarding the specific data stored within the datastore associated to the resource, if `attr_persistence` parameter is set to `column` then a single line is composed for the whole notified entity, containing the following fields:
 
-* `recvTime`: UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
-* `entityId`: Notified entity identifier.
-* `entityType`: Notified entity type.
-*  For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
+-    `recvTimeTs` UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-    `entityId`: Notified entity identifier.
+-    `entityType`: Notified entity type.
+-    For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
 
 
 [Top](#top)
@@ -258,30 +258,30 @@ NOTE: `curl` is a Unix command allowing for interacting with REST APIs such as t
 ### <a name="section2.1"></a>Configuration
 `NGSIToCKAN` is configured through the following parameters:
 
-| Parameter | Mandatory | Default value | Comments |
-|---|---|---|---|
-| CKAN Host | no | localhost | FQDN/IP address where the CKAN server runs. ||
-| CKAN Port | no | 80 ||
-| CKAN Viewer | no | recline\_grid\_view | Please check the [available](http://docs.ckan.org/en/latest/maintaining/data-viewer.html) viewers at CKAN documentation. |
-| CKAN API Key | yes | N/A ||
-| ORION URL | yes | http://localhost:1026 | To be put as the filestore URL. |
-| SSL | no | false ||
-| NGSI Version | yes | ld | The NGSI version of the incoming notification could (currently only ngsi-ld available)|
-| Data Model | no | dm-by-entity | <i>dm-by-entity-id</i>, <i>dm-by-entity</i> |
-| Attribute Persistence | no | column | <i>column.</i>|
-| Default Service | no | test | The default Fiware service value for being used instead of the fiware-service header received for build the organization name |
-| Default Service Path| no | /path | The default Fiware service path value for being used instead of the fiware-service.path header received for build the package name (currently not used) |
-| Create DataStore | no | true | IF it is tru the DataStore is create and the data is stored in CKAN, otherwise teh Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
-| batch\_size | no | 1 | Number of events accumulated before persistence. |
-| Enable Encoding | no | false | <i>true</i> or <i>false</i>, <i>true</i> applies the new encoding, <i>false</i> applies the old encoding. ||
-| Enable Lowercase  | no | false | <i>true</i> or <i>false</i>. for applying lowercase to the name of organization, package dataset and resource||
-| Batch Size | no | 1 | Number of events accumulated before persistence. |
-| batch\_timeout | no | 30 | Number of seconds the batch will be building before it is persisted as it is. |
-| batch\_ttl | no | 10 | Number of retries when a batch cannot be persisted. Use `0` for no retries, `-1` for infinite retries. Please, consider an infinite TTL (even a very large one) may consume all the sink's channel capacity very quickly. |
-| batch\_retry\_intervals | no | 5000 | Comma-separated list of intervals (in miliseconds) at which the retries regarding not persisted batches will be done. First retry will be done as many miliseconds after as the first value, then the second retry will be done as many miliseconds after as second value, and so on. If the batch\_ttl is greater than the number of intervals, the last interval is repeated. |
-| Max Connections | no | 500 | Maximum number of connections allowed for a Http-based HDFS backend. |
-| Max Connections per route | no | 100 | Maximum number of connections per route allowed for a Http-based HDFS backend. |
-| Rollback on failure| false | false | Do a rollback in case of failure |
+| Parameter | Mandatory | Default value             | Comments |
+|---|---|---------------------------|---|
+| CKAN Host | no | localhost                 | FQDN/IP address where the CKAN server runs. ||
+| CKAN Port | no | 80                        ||
+| CKAN Viewer | no | recline\_grid\_view       | Please check the [available](http://docs.ckan.org/en/latest/maintaining/data-viewer.html) viewers at CKAN documentation. |
+| CKAN API Key | yes | N/A                       ||
+| ORION URL | yes | [http://localhost:1026](http://localhost:1026) | To be put as the filestore URL. |
+| SSL | no | false                     ||
+| NGSI Version | yes | ld                        | The NGSI version of the incoming notification could (currently only ngsi-ld available)|
+| Data Model | no | dm-by-entity              | <i>dm-by-entity-id</i>, <i>dm-by-entity</i> |
+| Attribute Persistence | no | column                    | <i>column.</i>|
+| Default Service | no | test                      | The default Fiware service value for being used instead of the fiware-service header received for build the organization name |
+| Default Service Path| no | /path                     | The default Fiware service path value for being used instead of the fiware-service.path header received for build the package name (currently not used) |
+| Create DataStore | no | true                      | IF it is tru the DataStore is create and the data is stored in CKAN, otherwise teh Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
+| batch\_size | no | 1                         | Number of events accumulated before persistence. |
+| Enable Encoding | no | false                     | <i>true</i> or <i>false</i>, <i>true</i> applies the new encoding, <i>false</i> applies the old encoding. ||
+| Enable Lowercase  | no | false                     | <i>true</i> or <i>false</i>. for applying lowercase to the name of organization, package dataset and resource||
+| Batch Size | no | 1                         | Number of events accumulated before persistence. |
+| batch\_timeout | no | 30                        | Number of seconds the batch will be building before it is persisted as it is. |
+| batch\_ttl | no | 10                        | Number of retries when a batch cannot be persisted. Use `0` for no retries, `-1` for infinite retries. Please, consider an infinite TTL (even a very large one) may consume all the sink's channel capacity very quickly. |
+| batch\_retry\_intervals | no | 5000                      | Comma-separated list of intervals (in miliseconds) at which the retries regarding not persisted batches will be done. First retry will be done as many miliseconds after as the first value, then the second retry will be done as many miliseconds after as second value, and so on. If the batch\_ttl is greater than the number of intervals, the last interval is repeated. |
+| Max Connections | no | 500                       | Maximum number of connections allowed for a Http-based HDFS backend. |
+| Max Connections per route | no | 100                       | Maximum number of connections per route allowed for a Http-based HDFS backend. |
+| Rollback on failure| false | false                     | Do a rollback in case of failure |
 
 A configuration example could be:
 ![NGSIToCKAN configuration example](../images/processor-ckan.png)
@@ -310,21 +310,21 @@ By default, `NGSIToCKAN` has a configured batch size and batch accumulation time
 #### <a name="section2.3.3"></a>About the encoding
 Until version 1.2.0 (included), Draco applied a very simple encoding:
 
-* All non alphanumeric characters were replaced by underscore, `_`.
-* The underscore was used as concatenator character as well.
+-   All non alphanumeric characters were replaced by underscore, `_`.
+-   The underscore was used as concatenator character as well.
 
 
 From version 1.3.0 (included), Draco applies this specific encoding tailored to CKAN data structures:
 
-* Lowercase alphanumeric characters are not encoded.
-* Upercase alphanumeric characters are encoded.
-* Numeric characters are not encoded.
-* Underscore character, `_`, is not encoded.
-* Hyphen character, `-`, is not encoded.
-* Equals character, `=`, is encoded as `xffff`.
-* All other characters, including the slash in the FIWARE service paths, are encoded as a `x` character followed by the [Unicode](http://unicode-table.com) of the character.
-* User defined strings composed of a `x` character and a Unicode are encoded as `xx` followed by the Unicode.
-* `xffff` is used as concatenator character.
+-   Lowercase alphanumeric characters are not encoded.
+-   Upercase alphanumeric characters are encoded.
+-   Numeric characters are not encoded.
+-   Underscore character, `_`, is not encoded.
+-   Hyphen character, `-`, is not encoded.
+-   Equals character, `=`, is encoded as `xffff`.
+-   All other characters, including the slash in the FIWARE service paths, are encoded as a `x` character followed by the [Unicode](http://unicode-table.com) of the character.
+-   User defined strings composed of a `x` character and a Unicode are encoded as `xx` followed by the Unicode.
+-   `xffff` is used as concatenator character.
 
 Despite the old encoding will be deprecated in the future, it is possible to switch the encoding type through the `enable_encoding` parameter as explained in the [configuration](#section2.1) section.
 

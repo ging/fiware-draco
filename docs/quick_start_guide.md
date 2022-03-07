@@ -62,8 +62,8 @@ mysql               latest              273a1eca2d3a        2 weeks ago         
 (2) Once you have your containers up and running, you can add the template provided for persisting data to MySQL.
 
 First, go to your browser and open Draco using this URL `https://localhost:9090/nifi/` using the following credentials in the login page:
-- `user: admin`
-- `password: pass1234567890`
+-   `user: admin`
+-   `password: pass1234567890`
 
 The next image provides you the location of many components of Draco. Please put special attention to the template
 button, play button and processor component, you will use them later.

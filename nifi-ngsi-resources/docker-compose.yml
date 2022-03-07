@@ -19,13 +19,13 @@ services:
   #     MYSQL_ROOT_PASSWORD: example
   #     ports:
   #     - "3306:3306"
-  db-postgres:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: example
-    ports:
-      - "5432:5432"
+ # db-postgres:
+  #  image: postgres
+  #  restart: always
+  #  environment:
+  #    POSTGRES_PASSWORD: example
+  #  ports:
+  #    - "5432:5432"
   # mongo-db:
   #   image: mongo:3.4
   #   restart: always

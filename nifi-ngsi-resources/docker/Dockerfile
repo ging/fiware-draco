@@ -1,5 +1,7 @@
 
-FROM openjdk:8u191-jre-alpine3.9
+ARG IMAGE_NAME=openjdk
+ARG IMAGE_TAG=8-jre
+FROM ${IMAGE_NAME}:${IMAGE_TAG}
 LABEL maintainer="Andrés Muñoz<joseandres.munoz@upm.es>"
 LABEL site="https://github.com/ging/fiware-draco"
 
@@ -22,17 +24,18 @@ ENV DRACO_RELEASE=2.1.0
 ENV NIFI_NGSI_NAR_VERSION=2.1.0
 
 ADD sh/ ${NIFI_BASE_DIR}/scripts/
+RUN chmod -R +x ${NIFI_BASE_DIR}/scripts/*.sh
 
 # Setup NiFi user and create necessary directories
 # change uid and gid for elasticsearch user
-RUN apk --no-cache add shadow
 
-RUN addgroup -g ${GID} -S nifi || groupmod -n nifi `getent group ${GID} | cut -d: -f1` \
-    && adduser -u ${UID} -S nifi -g ${GID} \
+# Setup NiFi user and create necessary directories
+RUN groupadd -g ${GID} nifi || groupmod -n nifi `getent group ${GID} | cut -d: -f1` \
+    && useradd --shell /bin/bash -u ${UID} -g ${GID} -m nifi \
     && mkdir -p ${NIFI_BASE_DIR} \
     && chown -R nifi:nifi ${NIFI_BASE_DIR} \
-    && apk update \
-    && apk add jq xmlstarlet procps curl
+    && apt-get update \
+    && apt-get install -y jq xmlstarlet procps
 
 USER nifi
 

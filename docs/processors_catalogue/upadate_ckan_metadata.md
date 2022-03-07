@@ -1,17 +1,17 @@
 # UpdateCKANMetadata
 Content:
 
-- [Functionality](#section1)
-- [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
-- [Mapping `NGSI-LDEvents` to DCAT-AP Metadata into CKAN data structures](#section1.2)
-  - [DCAT-AP Metadata tags for Organizations](#section1.2.1)
-  - [DCAT-AP Metadata tags for Packages/Datasets](#section1.2.2)
-  - [DCAT-AP Metadata tags for Resources](#section1.2.3)
-- [Administration guide](#section2)
-  - [Configuration](#section2.1)
-- [Use cases](#section2.2)
-- [Programmers guide](#section3)
-  - [`UpdateCKANMetadata` class](#section3.1)
+-   [Functionality](#section1)
+-   [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
+-   [Mapping `NGSI-LDEvents` to DCAT-AP Metadata into CKAN data structures](#section1.2)
+    -   [DCAT-AP Metadata tags for Organizations](#section1.2.1)
+    -   [DCAT-AP Metadata tags for Packages/Datasets](#section1.2.2)
+    -   [DCAT-AP Metadata tags for Resources](#section1.2.3)
+-   [Administration guide](#section2)
+    -   [Configuration](#section2.1)
+-   [Use cases](#section2.2)
+-   [Programmers guide](#section3)
+  -   [`UpdateCKANMetadata` class](#section3.1)
 
 ## <a name="section1"></a>Functionality
 `UpdateCKANMetadata`, is a processor designed to add additional metadata to an incoming flowfile or NGSI-LD event. This processor was designed to include all the metadata fields needed for complying with [DCAT-AP v2.0.1](https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/news/dcat-ap-release-201) 
