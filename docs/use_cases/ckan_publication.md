@@ -142,10 +142,10 @@ doing that please follow the instructions:
 1.  Do right-click over the NGSIToCKAN processor inside of the Draco GUI userspace, and then click on configure.
 Then, put the correct value to the properties, CKAN Host, CKAN Port and CKAN API KEY,according to your corresponding deployment.
 
-2. Select all the processors (press shift and click on every processor) and start them by clicking on the start button.
+2.  Select all the processors (press shift and click on every processor) and start them by clicking on the start button.
     Now, you can see that the status icon of each processor turned from red to green.
 
-3. Open a new terminal and run the `subscription.sh` script for creating the subscription to notify Draco:
+3.  Open a new terminal and run the `subscription.sh` script for creating the subscription to notify Draco:
 
 ```bash
 chmod a+x subscription.sh
@@ -155,13 +155,13 @@ chmod a+x subscription.sh
 Now to test your deployment, you may send an NGSI-like notification emulation to our listening port (5050) and path
 (ld/notify):
 
-4. Create entity UniCAN Building (urn:ngsi-ld:Building:Building001). Run the script unican.sh
+4.  Create entity UniCAN Building (urn:ngsi-ld:Building:Building001). Run the script unican.sh
 
 ```bash
 chmod a+x unican.sh
 ./scripts/yoda-use-cases/unican.sh
 ```
-You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000].
+You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000](http://localhost:5000).
 
 -   The organization Santander will be created
 ![santander-organization](../images/santander-org.png)
@@ -170,7 +170,7 @@ You can check if the Organization and package and dataset have been created. Fir
 -   The resource UniCAN will be created
 ![unican-resource](../images/unican-res.png)
 
-5. Download the catalog from CKAN. Go to the browser and put the following url:
+5.  Download the catalog from CKAN. Go to the browser and put the following url:
 
 ```
 https://{ckan-instance-host}/catalog.{format}?[page={page}]&[modified_since={date}]&[profiles={profile1},{profile2}]&[q={query}]&[fq={filter query}]
@@ -180,7 +180,7 @@ for example:
 ```
 http://localhost:5000/dataset/urn_ngsi-ld_building_building003.rdf?profile=euro_dcat_ap,edp_dcat_ap
 ```
-6. Using the maq-scoring and validation tool for get the scoring. Open a new terminal and clone the respository of the mqa-scoring tool:
+6.  Using the maq-scoring and validation tool for get the scoring. Open a new terminal and clone the respository of the mqa-scoring tool:
 
 ```
 https://github.com/YourOpenDAta/mqa-scoring.git

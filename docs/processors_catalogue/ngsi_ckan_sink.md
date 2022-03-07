@@ -2,24 +2,24 @@
 Content:
 
 -   [Functionality](#section1)
-  -   [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
-  -   [Mapping `NGSI-LDEvents` to CKAN data structures](#section1.2)
-      -   [Organizations naming conventions](#section1.2.1)
+    -   [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
+    -   [Mapping `NGSI-LDEvents` to CKAN data structures](#section1.2)
+        -   [Organizations naming conventions](#section1.2.1)
         -   [Package/dataset naming conventions](#section1.2.2)
         -   [Resource naming conventions](#section1.2.3)
         -   [Column-like storing](#section1.2.4)
     -   [Example](#section1.3)
-      -   [NGSI-LDEvent](#section1.3.1)
-      -   [Organization, dataset and resource names](#section1.3.2)
-      -   [Column-like storing](#section1.3.3)
+        -   [NGSI-LDEvent](#section1.3.1)
+        -   [Organization, dataset and resource names](#section1.3.2)
+        -   [Column-like storing](#section1.3.3)
 -   [Administration guide](#section2)
-  -   [Configuration](#section2.1)
-  -   [Use cases](#section2.2)
-  -   [Important notes](#section2.3)
+    -   [Configuration](#section2.1)
+-   [Use cases](#section2.2)
+-   [Important notes](#section2.3)
     -   [About the persistence mode](#section2.3.1)
     -   [About the encoding](#section2.3.3)
 -   [Programmers guide](#section3)
-  -  [`NGSICKANSink` class](#section3.1)
+    -   [`NGSICKANSink` class](#section3.1)
 
 ## <a name="section1"></a>Functionality
 `NGSIToCKAN`, is a processor designed to persist NGSI-LD-like context data events within a [CKAN](http://ckan.org/) server.Usually, such a context data is notified by a
@@ -43,13 +43,12 @@ This is done at the Draco-ngsi Http listeners (in NiFi, processors) thanks to NG
 [Top](#top)
 
 #### <a name="section1.2.1"></a>Organizations naming conventions
-* Data model by entity (`data_model=dm-by-entity`). An organization named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for the FIWARE service) is created (if not existing yet).
-Since based in [PostgreSQL only accepts] 
-https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), it must be said only alphanumeric characters and the underscore (`_`) are accepted. The hyphen ('-') is also accepted. This leads to certain [encoding](#section2.3.3) is applied depending on the `enable_encoding` configuration parameter.
+-   Data model by entity (`data_model=dm-by-entity`). An organization named as the notified `fiware-service` header value (or, in absence of such a header, the defaulted value for the FIWARE service) is created (if not existing yet).
+Since based in [PostgreSQL only accepts](https://www.postgresql.org/docs/current/static/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS), it must be said only alphanumeric characters and the underscore (`_`) are accepted. The hyphen ('-') is also accepted. This leads to certain [encoding](#section2.3.3) is applied depending on the `enable_encoding` configuration parameter.
 Nevertheless, different than PostgreSQL, [organization lengths](http://docs.ckan.org/en/latest/api/#ckan.logic.action.create.organization_create) may be up to 100 characters (minimum, 2 characters).
 
 
--  Data model by entity id (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
+-   Data model by entity id (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
 
 The following table summarizes the organization name composition:
 
@@ -78,10 +77,10 @@ The following table summarizes the package name composition:
 #### <a name="section1.2.3"></a>Resources naming conventions
 The resource name depends on the configured data model (see the [Configuration](#section2.1) section for more details):
 
--    Data model by entity (`data_model=dm-by-entity`). A resource name always take the concatenation of the entity ID and type. Such a name is already given in the `notified_entities`/`grouped_entities` header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`.
+-   Data model by entity (`data_model=dm-by-entity`). A resource name always take the concatenation of the entity ID and type. Such a name is already given in the `notified_entities`/`grouped_entities` header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`.
 
 
--    Data model by entity id (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
+-   Data model by entity id (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
 
 It must be noticed a CKAN Datastore (and a viewer) is also created and associated to the resource above. This datastore, which in the end is a PostgreSQL table, will hold the persisted data.
 
@@ -101,7 +100,7 @@ The following table summarizes the resource name composition:
 #### <a name="section1.2.3"></a>Column-like storing
 Regarding the specific data stored within the datastore associated to the resource, if `attr_persistence` parameter is set to `column` then a single line is composed for the whole notified entity, containing the following fields:
 
--    `recvTimeTs` UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
+-   `recvTimeTs` UTC timestamp in human-redable format ([ISO 8601](http://en.wikipedia.org/wiki/ISO_8601)).
 -    `entityId`: Notified entity identifier.
 -    `entityType`: Notified entity type.
 -    For each notified property/relationship, a field named as the property/relationship is considered. This field will store the property/relationship values along the time, if no unique value is presented, the values will be stored like a JSON string.
@@ -162,15 +161,15 @@ Assuming the following `NGSI-LDEvent` is created from a notified NGSI-LD context
 #### <a section="1.3.2"></a>Organization, dataset and resource names
 Given the above example and using the old encoding, these are the CKAN elements created
 
-* Orgnaization: `openiot`.
-* Package: `openiot`.
-* Resource: `urn_ngsi_ld_OffStreetParking_Downtown1`.
+-   Orgnaization: `openiot`.
+-   Package: `openiot`.
+-   Resource: `urn_ngsi_ld_OffStreetParking_Downtown1`.
 
 Using the new encdoing:
 
-* Orgnaization: `vehicles`.
-* Package: `vehicles`.
-* Resource: `urnxffffngsixffffldxffffOffStreetParkingxffffDowntown1`.
+-   Orgnaization: `vehicles`.
+-   Package: `vehicles`.
+-   Resource: `urnxffffngsixffffldxffffOffStreetParkingxffffDowntown1`.
 
 [Top](#top)
 
