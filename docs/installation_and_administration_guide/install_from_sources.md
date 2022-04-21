@@ -133,7 +133,7 @@ to use, etc. are configurable via the `conf/bootstrap.conf` file.
 The entire concept of how the application will integrate to a given OS and run as an enduring service is something we're
 working hard on and would appreciate ideas for. The user experience needs to be excellent.
 
-With the default settings you can point a web browser at `http://localhost:8080/nifi/`
+With the default settings you can point a web browser at `https://localhost:8443/nifi/`
 
 Logging is configured by default to log to `./logs/nifi-app.logv. The following log message should indicate the web UI
 is ready for use:
