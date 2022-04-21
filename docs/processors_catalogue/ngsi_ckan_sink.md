@@ -270,7 +270,7 @@ NOTE: `curl` is a Unix command allowing for interacting with REST APIs such as t
 | Attribute Persistence | no | column                    | <i>column.</i>|
 | Default Service | no | test                      | The default FIWARE service value for being used instead of the fiware-service header received for build the organization name |
 | Default Service Path| no | /path                     | The default FIWARE service path value for being used instead of the fiware-service.path header received for build the package name (currently not used) |
-| Create DataStore | no | true                      | If it is true the DataStore is create and the data is stored in CKAN, otherwise teh Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
+| Create DataStore | no | true                      | If it is true the DataStore is create and the data is stored in CKAN, otherwise the Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
 | batch\_size | no | 1                         | Number of events accumulated before persistence. |
 | Enable Encoding | no | false                     | <i>true</i> or <i>false</i>, <i>true</i> applies the new encoding, <i>false</i> applies the old encoding. ||
 | Enable Lowercase  | no | false                     | <i>true</i> or <i>false</i>. for applying lowercase to the name of organization, package dataset and resource||
