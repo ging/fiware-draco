@@ -263,7 +263,7 @@ NOTE: `curl` is a Unix command allowing for interacting with REST APIs such as t
 | CKAN Port | no | 80                        ||
 | CKAN Viewer | no | recline\_grid\_view       | Please check the [available](http://docs.ckan.org/en/latest/maintaining/data-viewer.html) viewers at CKAN documentation. |
 | CKAN API Key | yes | N/A                       ||
-| ORION URL | yes | `http://localhost:1026 | To be put as the filestore URL. |
+| ORION URL | yes | `http://localhost:1026` | To be put as the filestore URL. |
 | SSL | no | false                     ||
 | NGSI Version | yes | ld                        | The NGSI version of the incoming notification could (currently only ngsi-ld available)|
 | Data Model | no | dm-by-entity              | <i>dm-by-entity-id</i>, <i>dm-by-entity</i> |
