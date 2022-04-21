@@ -4,9 +4,9 @@ This document presents a complete description of a use case using Draco for data
   
 
 This guide was written in form of a quick start guide that overviews the steps a newbie programmer will have to follow to get familiar with Draco and its
-basic functionality focused on providing the needed procedure for configuring and deploying the use cases presented. For more detailed information, please refer to the [README](index.md); the
-[Installation and Administration Guide](./installation_and_administration_guide/introduction.md) and the
-[Processors Catalogue](processors_catalogue/introduction.md) fully document Draco.
+basic functionality focused on providing the needed procedure for configuring and deploying the use cases presented. For more detailed information, please refer to the [README](./docs/index.md); the
+[Installation and Administration Guide](./docs/installation_and_administration_guide/introduction.md) and the
+[Processors Catalogue](./docs/processors_catalogue/introduction.md) fully document Draco.
 
 ## Scenarios
 
@@ -161,7 +161,7 @@ Now to test your deployment, you may send an NGSI-like notification emulation to
 chmod a+x unican.sh
 ./scripts/yoda-use-cases/unican.sh
 ```
-You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to [http://localhost:5000](http://localhost:5000).
+You can check if the Organization and package and dataset have been created. First, enter CKAN GUI via browser to `http://localhost:5000`.
 
 -   The organization Santander will be created
 ![santander-organization](../images/santander-org.png)
