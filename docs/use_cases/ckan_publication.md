@@ -118,7 +118,7 @@ Once finished (it may take a while) the console will display the logs of each co
 
 (2) Once you have your containers up and running, you can add the template provided for persisting data and metadata into CKAN.
 
-First, go to your browser and open Draco using this URL `http://localhost:9090/nifi`
+First, go to your browser and open Draco using this URL `https://localhost:9090/nifi`
 
 The next image provides you with the location of many components of Draco. Please put special attention to the template
 button, play button, and processor component, you will use them later.
