@@ -49,4 +49,4 @@ NiFi can be shutdown by executing the command.
  ./bin/nifi.sh stop
 ```
 
-With the service running, you can access to the NiFi GUI using this link `http://localhost:8080/nifi`
+With the service running, you can access to the NiFi GUI using this link `https://localhost:8443/nifi`
