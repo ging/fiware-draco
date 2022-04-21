@@ -1,5 +1,6 @@
 # FIWARE Draco
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/75d90d50d0a14dc28728f74c709e8bda)](https://app.codacy.com/gh/ging/fiware-draco?utm_source=github.com&utm_medium=referral&utm_content=ging/fiware-draco&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35fcea6513143e4b2ac3eb28a0932c1)](https://app.codacy.com/app/anmunoz/fiware-draco?utm_source=github.com&utm_medium=referral&utm_content=ging/fiware-draco&utm_campaign=Badge_Grade_Dashboard)
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
