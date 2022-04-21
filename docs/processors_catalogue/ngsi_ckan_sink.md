@@ -48,7 +48,7 @@ Since based in [PostgreSQL only accepts](https://www.postgresql.org/docs/current
 Nevertheless, different than PostgreSQL, [organization lengths](http://docs.ckan.org/en/latest/api/#ckan.logic.action.create.organization_create) may be up to 100 characters (minimum, 2 characters).
 
 
--   Data model by entity id (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
+-   Data model by entity ID (`data_model=dm-by-entity-id`). The organization name will take the value of the notified header `fiware-service`. Note that in this case, encoding is never applied.
 
 The following table summarizes the organization name composition:
 
@@ -64,7 +64,7 @@ Since based in [PostgreSQL only accepts](https://www.postgresql.org/docs/current
 Nevertheless, different than PostgreSQL, [dataset lengths](http://docs.ckan.org/en/latest/api/#ckan.logic.action.create.package_create) may be up to 100 characters (minimum, 2 characters).
 
 
--   Data model by entity id (`data_model=dm-by-entity-id`). A package/dataset name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
+-   Data model by entity ID (`data_model=dm-by-entity-id`). A package/dataset name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
 
 The following table summarizes the package name composition:
 
@@ -80,7 +80,7 @@ The resource name depends on the configured data model (see the [Configuration](
 -   Data model by entity (`data_model=dm-by-entity`). A resource name always take the concatenation of the entity ID and type. Such a name is already given in the `notified_entities`/`grouped_entities` header values (depending on using or not the grouping rules, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`.
 
 
--   Data model by entity id (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
+-   Data model by entity ID (`data_model=dm-by-entity-id`). A resource name always take the entity ID. Such a name is already given in the NGSI-LDEvent values, see the [Configuration](#section2.1) section for more details) within the `NGSI-LDEvent`. Note that in this case, encoding is never applied.
 
 It must be noticed a CKAN Datastore (and a viewer) is also created and associated to the resource above. This datastore, which in the end is a PostgreSQL table, will hold the persisted data.
 
@@ -263,14 +263,14 @@ NOTE: `curl` is a Unix command allowing for interacting with REST APIs such as t
 | CKAN Port | no | 80                        ||
 | CKAN Viewer | no | recline\_grid\_view       | Please check the [available](http://docs.ckan.org/en/latest/maintaining/data-viewer.html) viewers at CKAN documentation. |
 | CKAN API Key | yes | N/A                       ||
-| ORION URL | yes | [http://localhost:1026](http://localhost:1026) | To be put as the filestore URL. |
+| ORION URL | yes | `http://localhost:1026 | To be put as the filestore URL. |
 | SSL | no | false                     ||
 | NGSI Version | yes | ld                        | The NGSI version of the incoming notification could (currently only ngsi-ld available)|
 | Data Model | no | dm-by-entity              | <i>dm-by-entity-id</i>, <i>dm-by-entity</i> |
 | Attribute Persistence | no | column                    | <i>column.</i>|
-| Default Service | no | test                      | The default Fiware service value for being used instead of the fiware-service header received for build the organization name |
-| Default Service Path| no | /path                     | The default Fiware service path value for being used instead of the fiware-service.path header received for build the package name (currently not used) |
-| Create DataStore | no | true                      | IF it is tru the DataStore is create and the data is stored in CKAN, otherwise teh Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
+| Default Service | no | test                      | The default FIWARE service value for being used instead of the fiware-service header received for build the organization name |
+| Default Service Path| no | /path                     | The default FIWARE service path value for being used instead of the fiware-service.path header received for build the package name (currently not used) |
+| Create DataStore | no | true                      | If it is true the DataStore is create and the data is stored in CKAN, otherwise teh Data store is not created and, in this way the  Organization, package and dataset with the metadata is created associated with a link with the external resource |
 | batch\_size | no | 1                         | Number of events accumulated before persistence. |
 | Enable Encoding | no | false                     | <i>true</i> or <i>false</i>, <i>true</i> applies the new encoding, <i>false</i> applies the old encoding. ||
 | Enable Lowercase  | no | false                     | <i>true</i> or <i>false</i>. for applying lowercase to the name of organization, package dataset and resource||
