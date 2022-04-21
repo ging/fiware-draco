@@ -1,7 +1,7 @@
 ## Draco User Interface
 
 Once you have your Draco instance installed and running, you can access to the user interface usually running at 8080
-port `http://localhost:8080/nifi` and identify his principal components.
+port `https://localhost:8443/nifi` and identify his principal components.
 
 The next image provides you the location of many components of Draco. Please put special attention to the template
 button, play button and processor component, you will use them later.
