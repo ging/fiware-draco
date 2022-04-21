@@ -590,7 +590,7 @@ metadata) instead of the reception time.
 <!-- textlint-disable write-good -->
 
 `NGSIToMongo` follows the
-[MongoDB naming restrictions](https://docs.mongodb.org/manual/reference/limits/#naming-restrictions). In a nutshell:
+[MongoDB naming restrictions](https://www.mongodb.com/docs/manual/reference/limits/#naming-restrictions). In a nutshell:
 
 <!-- textlint-enable write-good -->
 
