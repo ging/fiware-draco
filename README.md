@@ -84,7 +84,7 @@ The most easy way to deploy Draco is running the container available on DockerHu
 
 Start a container for this image by typing in a terminal:
 
-     $ docker run --name draco -p 8080:8080 -p 5050:5050 -d ging/fiware-draco
+     $ docker run --name draco -p 8443:8443 -p 5050:5050 -d ging/fiware-draco
 
 However if you want to have a custom installation please go to the **Installation and Administration Guide** at
 [readthedocs.org](docs/installation_and_administration_guide/README.md)
