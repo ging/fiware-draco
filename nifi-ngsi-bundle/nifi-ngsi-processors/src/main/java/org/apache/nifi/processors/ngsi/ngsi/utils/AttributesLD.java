@@ -7,6 +7,37 @@ public class AttributesLD {
     public String attrType;
     public Object attrValue;
     public String datasetId;
+
+    public String observedAt;
+
+    public String createdAt;
+
+    public String modifiedAt;
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(String modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public String getObservedAt() {
+        return observedAt;
+    }
+
+    public void setObservedAt(String observedAt) {
+        this.observedAt = observedAt;
+    }
+
     public boolean hasSubAttrs;
     public ArrayList<AttributesLD> subAttrs;
 
@@ -46,11 +77,12 @@ public class AttributesLD {
         return datasetId;
     }
 
-    public AttributesLD(String attrName, String attrType, String datasetId, Object attrValue,
+    public AttributesLD(String attrName, String attrType, String datasetId, String observedAt, Object attrValue,
             boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
         this.attrName = attrName;
         this.attrType = attrType;
         this.datasetId = datasetId;
+        this.observedAt = observedAt;
         this.attrValue = attrValue;
         this.hasSubAttrs = hasSubAttrs;
         this.subAttrs= subAttrs;

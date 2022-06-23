@@ -1,740 +1,95 @@
 package org.apache.nifi.processors.ngsi;
 
-import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import org.apache.nifi.processors.ngsi.ngsi.utils.Metadata;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
-import org.apache.nifi.util.TestRunner;
-import org.apache.nifi.util.TestRunners;
-import org.junit.Before;
+import org.json.JSONArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToPostgreSQL {
-    private TestRunner runner;
-    private PostgreSQLBackend backend;
+    private PostgreSQLBackend backend = new PostgreSQLBackend();
 
+    private NGSIUtils ngsiUtils = new NGSIUtils();
 
-    @Before
-    public void setUp() throws Exception {
-        //Mock the DBCP Controller Service so we can control the Results
-        runner = TestRunners.newTestRunner(NGSIToMySQL.class);
-        runner.setProperty(NGSIToPostgreSQL.CONNECTION_POOL, "dbcp");
-        runner.setProperty(NGSIToPostgreSQL.NGSI_VERSION, "v2");
-        runner.setProperty(NGSIToPostgreSQL.DATA_MODEL, "db-by-service-path");
-        runner.setProperty(NGSIToPostgreSQL.ATTR_PERSISTENCE, "row");
-        runner.setProperty(NGSIToPostgreSQL.ENABLE_ENCODING, "false");
-        runner.setProperty(NGSIToPostgreSQL.ENABLE_LOWERCASE, "false");
-        runner.setProperty(NGSIToPostgreSQL.BATCH_SIZE, "100");
-        runner.setProperty(RollbackOnFailure.ROLLBACK_ON_FAILURE, "false");
-        backend = new PostgreSQLBackend();
+    private InputStream inputStream = getClass().getClassLoader().getResourceAsStream("temporalEntity.json");
+
+    @Test
+    public void testValuesForInsertColumnForNgsiLd() throws IOException {
+        String data = readFromInputStream(inputStream);
+        ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(entities.get(3), "");
+
+        long creationTime = 1562561734983l;
+        TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
+        ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
+
+        List<String> timeStamps = entities.get(3).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt)).keySet().stream().collect(Collectors.toList());
+
+        String expectedValuesForInsert = "('0.34944123-0.32415766-0.3072652-0.30855495-0.30593967-0.3028966-0.30651844-0.30827406-0.31077954-0.31049716-0.30885014-0.30811214-0.3043771-0.3003832-0.2957132-0.2931525-0.29560313-0.2964879-0.29803914-0.2990379-0.30066556-0.29994768-0.29871973-0.29959038-0.2995688-0.29707655-0.2986042-0.2964256-0.29641816-0.29547918-0.291907-0.29169783-0.2903415-0.28780755-0.28604454-0.2864968-0.28618598-0.28226927-0.28288576-0.28220624-0.27975032-0.2795406-0.278664-0.27759662-0.27686507-0.27530807-0.2749262-0.27412018-0.2732852-0.2715867-0.27154332-0.27261332-0.27118307-0.27099013-0.27138162-0.27050668-0.2699476-0.2716659-0.26954666-0.2695933-0.26745608-0.26783624-0.26756752-0.26854938-0.2686887-0.26828912-0.26727334-0.26540932-0.2656524-0.2655901-0.26567256-0.26666725-0.26808578-0.26682115-0.26708144-0.26603967-0.26675877-0.26803017-0.27002114-0.26863557-0.2672063-0.2682099-0.26853663-0.26881462-0.26931205-0.27029905-0.27124438-0.2721271-0.27170712-0.27188423-0.27396426-0.27401495-0.27322963-0.27323526-0.27423725-0.27355447-0.27317145-0.27363068-0.2724783-0.2739294-0.27332857-0.27178755-0.27148366-0.27160507-0.27099782-0.2717871-0.27076796-0.2723923-0.27258486-0.2734231-0.2722952-0.27318266-0.27287984-0.27171746-0.273019-0.2721147-0.27194858-0.27121463-0.27036-0.26990783-0.26930192-0.26793072-0.26803744-0.26680467-0.26759195-0.26783347-0.26707804-0.26733038-0.26691008-0.2671964-0.2681563-0.2681742-0.26864722-0.26975495-0.2696539-0.27219784-0.27067336-0.27206865-0.27377665-0.27501073-0.275479-0.27633333-0.27576253-0.27492747-0.27466607-0.27668217-0.2787584-0.2803111-0.2826895-0.2851108-0.28731674-0.29144207-0.29401872-0.29914567-0.30502665-0.31111237-0.31869608-0.32225254-0.3278929-0.33499655-0.34023458-0.34320205-0.34701312-0.35116884-0.35364178-0.35598436-0.3580442-0.36053157-0.36390346-0.36393243-0.36471847-0.36623812-0.36946937-0.37243837-0.37273547-0.37479842-0.37529087-0.37477198-0.3754256-0.3748324-0.37489796-0.37413442-0.37510356-0.37357545-0.371788-0.3716578-0.36927506-0.36673775-0.36606938-0.36443707-0.36090052-0.3608684-0.36165372-0.36146113-0.36150908-0.36063817-0.3614172-0.36146975-0.36100012-0.3598923-0.36086115-0.36045706-0.35982618-0.35832256-0.35752884-0.358617-0.3565569-0.35802928-0.3568049-0.35795924-0.35754114-0.3568314-0.3569109-0.35581905-0.35641986-0.3545677-0.35477188-0.35241178-0.35025528-0.3484056-0.34673157-0.34454417-0.3431547-0.33934793-0.33773395-0.33757868-0.33252433-0.3313897-0.33280596-0.32944524-0.3221002-0.3226984-0.3204581-0.3224731-0.32046703-0.32059407-0.32100388-0.3216591-0.31857193-0.32001126-0.3188547-0.31097677-0.2950546-0.27814576-0.26328075-0.24463399-0.22101705-0.20268844-0.18668799-0.17968106-0.17162262-0.17417294-0.17698781-0.19054312-0.19953361-0.21006162-','2021-02-16T12:36:35.000000Z','urn:ngsi-ld:AgriCropRecord:gael:ble:35cf0844-bdb7-44b8-ac87-eea077343a10','AgriCropRecord','14','2021-02-16T12:36:35.000000Z','67','2021-02-16T12:36:35.000000Z',5.82,'2021-02-16T12:36:35.000000Z','1026','2021-02-16T12:36:35.000000Z','237','2021-02-16T12:36:35.000000Z','12.4','2021-02-16T12:36:35.000000Z','2019-07-08T04:55:34.983Z')";
+
+        List<String> valuesForInsert = backend.getValuesForInsert(entities.get(3), listOfFields, creationTime, "");
+        assertEquals(2, valuesForInsert.size());
+        assertEquals(expectedValuesForInsert, valuesForInsert.get(0));
+        for (int i = 0; i < timeStamps.size(); i++) {
+            assertTrue(valuesForInsert.get(i).contains(timeStamps.get(i)));
+            assertTrue(valuesForInsert.get(i).contains(DateTimeFormatter.ISO_INSTANT.format(creationDate)));
+        }
     }
 
-    /**
-     * [NGSIToPostgreSQL.buildDBName] -------- The schema name is equals to the encoding of the notified/defaulted
-     * service.
-     * @throws java.lang.Exception
-     */
     @Test
-    public void testBuildDBNameOldEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                + "-------- The schema name is equals to the encoding of the notified/defaulted service");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean(); // default
-        String service = "someService";
+    public void testInsertQueryForNgsiLd() throws Exception {
+        String data = readFromInputStream(inputStream);
+        ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
 
-        try {
-            String builtSchemaName = backend.buildSchemaName(service,enableEncoding,enableLowercase,false);
-            String expectedDBName = "someService";
+        String schemaName = backend.buildSchemaName("test",false,false);
+        String tableName = backend.buildTableName(entities.get(3),"db-by-entity-type",true, false);
 
-            try {
-                assertEquals(expectedDBName, builtSchemaName);
-                System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                        + "-  OK  - '" + expectedDBName + "' is equals to the encoding of <service>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                        + "- FAIL - '" + expectedDBName + "' is not equals to the encoding of <service>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                    + "- FAIL - There was some problem when building the DB name");
-            throw e;
-        } // try catch
-    } // testBuildDBNameOldEncoding
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(entities.get(3), "");
 
-    /**
-     * [NGSIToPostgreSQL.buildDBName] -------- The schema name is equals to the encoding of the notified/defaulted
-     * service.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildDBNameNewEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                + "-------- The schema name is equals to the encoding of the notified/defaulted service");
-
-        String service = "someService";
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-
-
-        try {
-            String builtSchemaName = backend.buildSchemaName(service,enableEncoding,enableLowercase,false);
-            String expectedDBName = "somex0053ervice";
-
-            try {
-                assertEquals(expectedDBName, builtSchemaName);
-                System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                        + "-  OK  - '" + expectedDBName + "' is equals to the encoding of <service>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                        + "- FAIL - '" + expectedDBName + "' is not equals to the encoding of <service>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildDBName]"
-                    + "- FAIL - There was some problem when building the DB name");
-            throw e;
-        } // try catch
-    } // testBuildDBNameNewEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a non root service-path is notified/defaulted and
-     * data_model is 'dm-by-service-path' the MySQL table name is the encoding of <service-path>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameNonRootServicePathDataModelByServicePathOldEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a non root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of <service-path>");
-
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-
-        String servicePath = "/somePath";
-        Entity entity = new Entity("someId", "someType", null);
-
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "somePath";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameNonRootServicePathDataModelByServicePathOldEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a non root service-path is notified/defaulted and
-     * data_model is 'dm-by-service-path' the MySQL table name is the encoding of <service-path>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameNonRootServicePathDataModelByServicePathNewEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a non root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of <service-path>");
-
-runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/somePath";
-        Entity entity = new Entity("someId", "someType", null);
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "x002fsomex0050ath";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameNonRootServicePathDataModelByServicePathNewEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a non root service-path is notified/defaulted and
-     * data_model is 'dm-by-entity' the MySQL table name is the encoding of the concatenation of \<service-path\>,
-     * \<entity_id\> and \<entity_type\>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameNonRootServicePathDataModelByEntityOldEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a non root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of the concatenation of <service-path>, "
-                + "<entityId> and <entityType>");
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-entity");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/somePath";
-        Entity entity = new Entity("someId","someType",null);
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "somePath_someId_someType";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>, <entityId> "
-                        + "and <entityType>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>, "
-                        + "<entityId> and <entityType>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameNonRootServicePathDataModelByEntityOldEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a non root service-path is notified/defaulted and
-     * data_model is 'dm-by-entity' the MySQL table name is the encoding of the concatenation of \<service-path\>,
-     * \<entity_id\> and \<entity_type\>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameNonRootServicePathDataModelByEntityNewEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a non root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of the concatenation of <service-path>, "
-                + "<entityId> and <entityType>");
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-entity");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/somePath";
-        Entity entity = new Entity("someId","someType",null);
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "x002fsomex0050athxffffsomex0049dxffffsomex0054ype";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>, <entityId> "
-                        + "and <entityType>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>, "
-                        + "<entityId> and <entityType>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameNonRootServicePathDataModelByEntityNewEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a root service-path is notified/defaulted and
-     * data_model is 'dm-by-service-path' the MySQL table name cannot be built.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameRootServicePathDataModelByServicePathOldEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name cannot be built");
-
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-service-path");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/";
-        Entity entity = new Entity("someId", "someType", null);
-        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-        String expecetedTableName = "";
-
-        try {
-
-            assertEquals(expecetedTableName,builtTableName);
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "-  OK  - The root service path was detected as not valid");
-
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - The root service path was not detected as not valid");
-
-        } // try catch
-    } // testBuildTableNameRootServicePathDataModelByServicePathOldEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a root service-path is notified/defaulted and
-     * data_model is 'dm-by-service-path' the MySQL table name is the encoding of \<service-path\>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameRootServicePathDataModelByServicePathNewEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of <service-path>");
-
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String servicePath = "/";
-        Entity entity = new Entity("someId", "someType", null);
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "x002f";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameRootServicePathDataModelByServicePathNewEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a root service-path is notified/defaulted and
-     * data_model is 'dm-by-entity' the MySQL table name is the encoding of the concatenation of \<service-path\>,
-     * \<entityId\> and \<entityType\>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameRootServicePathDataModelByEntityOldEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of the concatenation of <service-path>, "
-                + "<entityId> and <entityType>");
-
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-entity");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/";
-        Entity entity = new Entity("someId","someType",null);
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "someId_someType";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameRootServicePathDataModelByEntityOldencoding
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When a root service-path is notified/defaulted and
-     * data_model is 'dm-by-entity' the MySQL table name is the encoding of the concatenation of \<service-path\>,
-     * \<entityId\> and \<entityType\>.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameRootServicePathDataModelByEntityNewEncoding() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When a root service-path is notified/defaulted and data_model is "
-                + "'dm-by-service-path' the MySQL table name is the encoding of the concatenation of <service-path>, "
-                + "<entityId> and <entityType>");
-
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-entity");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/";
-        Entity entity = new Entity("someId","someType",null);
-
-        try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            String expecetedTableName = "x002fxffffsomex0049dxffffsomex0054ype";
-
-            try {
-                assertEquals(expecetedTableName, builtTableName);
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "-  OK  - '" + builtTableName + "' is equals to the encoding of <service-path>");
-            } catch (AssertionError e) {
-                System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                        + "- FAIL - '" + builtTableName + "' is not equals to the encoding of <service-path>");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - There was some problem when building the table name");
-            throw e;
-        } // try catch
-    } // testBuildTableNameRootServicePathDataModelByEntityNewEncoding
-
-    /**
-     * [NGSIToPostgreSQL.buildSchemaName] -------- A schema name length greater than 63 characters is detected.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildSchemaNameLength() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
-                + "-------- A schema name length greater than 63 characters is detected");
-
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String service = "tooLoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongService";
-
-        try {
-            backend.buildSchemaName(service,enableEncoding,enableLowercase,false);
-            fail("[NGSIToPostgreSQL.buildSchemaName]"
-                    + "- FAIL - A schema name length greater than 63 characters has not been detected");
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildSchemaName]"
-                    + "-  OK  - A schema name length greater than 63 characters has been detected");
-        } // try catch
-    } // testBuildSchemaNameLength
-
-    /**
-     * [NGSIToPostgreSQL.buildTableName] -------- When data model is by service path, a table name length greater
-     * than 63 characters is detected.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameLengthDataModelByServicePath() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When data model is by service path, a table name length greater than 63 characters is "
-                + "detected");
-
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-service-path");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/tooLooooooooooooooooooooooooooooooooooooooooooooooooooooooongServicePath";
-        Entity entity = new Entity("someId", "someType", null);
-
-        try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            fail("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - A table name length greater than 63 characters has not been detected");
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "-  OK  - A table name length greater than 63 characters has been detected");
-        } // try catch
-    } // testBuildTableNameLengthDataModelByServicePath
-
-    /**
-     * [NGSICartoDBSink.buildTableName] -------- When data model is by entity, a table name length greater than 63
-     * characters is detected.
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testBuildTableNameLengthDataModelByEntity() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                + "-------- When data model is by entity, a table name length greater than 63 characters is detected");
-
-        runner.setProperty(NGSIToMySQL.DATA_MODEL, "db-by-entity");
-        runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "false");
-        Boolean enableEncoding = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_ENCODING).asBoolean();
-        Boolean enableLowercase = runner.getProcessContext().getProperty(NGSIToMySQL.ENABLE_LOWERCASE).asBoolean();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/tooLooooooooooooooooooooongServicePath";
-        Entity entity = new Entity("tooLooooooooooooooooooooooooooongEntity", "someType",null);
-
-
-        try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
-            fail("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - A table name length greater than 63 characters has not been detected");
-        } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "-  OK  - A table name length greater than 63 characters has been detected");
-        } // try catch
-    } // testBuildTableNameLengthDataModelByEntity
-    
-    @Test
-    public void testRowFields() throws Exception {
-        System.out.println("[PostgreSQLBackend.listOfFields ]"
-                + "-------- When attrPersistence is column");
-
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-        
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
-        
-        try {
-            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, "");
-            List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "attrName", "attrType", "attrValue", "attrMd");
-            Set<String> expecetedListOfFields = new HashSet<>(expList);
-           
-            try {
-                assertEquals(expecetedListOfFields, listOfFields.keySet());
-                System.out.println("[PostgreSQLBackend.listOfFields]"
-                        + "-  OK  - '" + listOfFields + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.listOfFields]"
-                        + "- FAIL - '" + listOfFields + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.listOfFields]"
-                    + "- FAIL - There was some problem when building the list of fields");
-            throw e;
-        } // try catch
-
-    } // testRowFields
-
-    @Test
-    public void testColumnFields() throws Exception {
-        System.out.println("[PostgreSQLBackend.listOfFields ]"
-                + "-------- When attrPersistence is column");
-
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "SomeValue", null, null));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
-        
-        try {
-            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, "");
-            List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "someAttr", "someAttr_md");
-            Set<String> expecetedListOfFields = new HashSet<>(expList);
-           
-            try {
-                assertEquals(expecetedListOfFields, listOfFields.keySet());
-                System.out.println("[PostgreSQLBackend.listOfFields]"
-                        + "-  OK  - '" + listOfFields + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.listOfFields]"
-                        + "- FAIL - '" + listOfFields + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.listOfFields]"
-                    + "- FAIL - There was some problem when building the list of fields");
-            throw e;
-        } // try catch
-
-    } // testColumnFields
-    
-    @Test
-    public void testValuesForInsertRowWithoutMetada() throws Exception {
-        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                + "-------- When attrPersistence is column");
-
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-
-
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
         long creationTime = 1562561734983l;
-        String fiwareServicePath = "/";
-        
-        try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false, "");
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','[]')";
-           
-            try {
-                assertEquals(expecetedvaluesForInsert, valuesForInsert);
-                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                    + "- FAIL - There was some problem when building values for insert");
-            throw e;
-        } // try catch
 
-    } // testValuesForInsertRowWithoutMetada
-    
-    @Test
-    public void testValuesForInsertColumnWithoutMetadata() throws Exception {
-        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                + "-------- When attrPersistence is column");
+        String instertQueryValue = backend.insertQuery(
+                entities.get(3),
+                creationTime,
+                schemaName,
+                tableName,
+                listOfFields,
+                ""
+        );
 
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
+        assertTrue(instertQueryValue.split("\n").length ==2);
+    }
 
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", null, null));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
-        long creationTime = 1562561734983l;
-        String fiwareServicePath = "/";
-        
-        try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false, "");
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','[]')";
-           
-            try {
-                assertEquals(expecetedvaluesForInsert, valuesForInsert);
-                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                    + "- FAIL - There was some problem when building values for insert");
-            throw e;
-        } // try catch
-
-    } // testValuesForInsertColumnWithoutMetadata
-    
-    @Test
-    public void testValuesForInsertRowWithMetadata() throws Exception {
-        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                + "-------- When attrPersistence is column");
-
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "row");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-
-
-        ArrayList<Metadata> attrMetadata = new ArrayList<>();
-        attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", attrMetadata, "someMtdStr"));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
-        long creationTime = 1562561734983l;
-        String fiwareServicePath = "/";
-        
-        try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false, "");
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')";
-           
-            try {
-                assertEquals(expecetedvaluesForInsert, valuesForInsert);
-                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                    + "- FAIL - There was some problem when building values for insert");
-            throw e;
-        } // try catch
-
-    } // testValuesForInsertRowWithMetadata
-    
-    @Test
-    public void testValuesForInsertColumnWithMetadata() throws Exception {
-        System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                + "-------- When attrPersistence is column");
-
-        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
-        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
-        String ngsiVersion = runner.getProcessContext().getProperty(NGSIToMySQL.NGSI_VERSION).getValue();
-
-
-        ArrayList<Metadata> attrMetadata = new ArrayList<>();
-        attrMetadata.add(new Metadata("mtdName", "mtdType", "mtdValue"));
-        ArrayList<Attributes> entityAttrs = new ArrayList<>();
-        entityAttrs.add(new Attributes("someAttr", "someType", "someValue", attrMetadata, "someMtdStr"));
-        Entity entity = new Entity("someId", "someType", entityAttrs);
-        long creationTime = 1562561734983l;
-        String fiwareServicePath = "/";
-        
-        try {
-            String valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false, "");
-            String expecetedvaluesForInsert = "('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','someMtdStr')";
-           
-            try {
-                assertEquals(expecetedvaluesForInsert, valuesForInsert);
-                System.out.println("[PostgreSQLBackend.getValuesForInsert]"
-                        + "-  OK  - '" + valuesForInsert + "' is equals to the expected output");
-            } catch (AssertionError e) {
-                System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                        + "- FAIL - '" + valuesForInsert + "' is not equals to the expected output");
-                throw e;
-            } // try catch
-        } catch (Exception e) {
-            System.out.println("[PostgreSQLBackend.valuesForInsert]"
-                    + "- FAIL - There was some problem when building values for insert");
-            throw e;
-        } // try catch
-
-    } // testValuesForInsertColumnWithMetadata
-
+    private String readFromInputStream(InputStream inputStream)
+            throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
+    }
 }

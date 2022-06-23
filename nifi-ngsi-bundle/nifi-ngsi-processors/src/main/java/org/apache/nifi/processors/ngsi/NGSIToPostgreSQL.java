@@ -247,7 +247,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                    final RoutingResult result);
     }
 
-
     private final GroupingFunction groupFlowFilesBySQLBatch = (context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result) -> {
         for (final FlowFile flowFile : flowFiles) {
 
@@ -261,42 +260,28 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         postgres.buildSchemaName(
                                 fiwareService,
                                 context.getProperty(ENABLE_ENCODING).asBoolean(),
-                                context.getProperty(ENABLE_LOWERCASE).asBoolean(),
-                                context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                                context.getProperty(ENABLE_LOWERCASE).asBoolean()
                         );
                 ArrayList<Entity> entities =
                         "ld".equals(context.getProperty(NGSI_VERSION).getValue()) ? event.getEntitiesLD() : event.getEntities();
 
                 for (Entity entity : entities) {
                     Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields =
-                            postgres.listOfFields(
-                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
-                                    entity,
-                                    context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
-                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
-                            );
+                            postgres.listOfFields(entity, context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue());
                     String tableName =
                             postgres.buildTableName(
-                                    fiwareServicePath,
                                     entity,
                                     context.getProperty(DATA_MODEL).getValue(),
                                     context.getProperty(ENABLE_ENCODING).asBoolean(),
-                                    context.getProperty(ENABLE_LOWERCASE).asBoolean(),
-                                    context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                                    context.getProperty(ENABLE_LOWERCASE).asBoolean()
                             );
                     final String sql =
                             postgres.insertQuery(
                                     entity,
                                     creationTime,
-                                    fiwareServicePath,
                                     schemaName,
                                     tableName,
                                     listOfFields,
-                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
-                                    context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
                                     context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
                             );
                     getLogger().debug("Prepared insert query: {}", sql);
