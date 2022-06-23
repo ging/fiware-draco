@@ -48,6 +48,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.nifi.processors.ngsi.NGSIToPostgreSQL.ENABLE_TEMPORAL_ENTITIES;
+
 
 public abstract class AbstractMongoProcessor extends AbstractProcessor {
 
@@ -312,7 +314,7 @@ public abstract class AbstractMongoProcessor extends AbstractProcessor {
     protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile,ProcessSession session) {
         NGSIUtils n = new NGSIUtils();
         final String attrPersistence = context.getProperty(ATTR_PERSISTENCE).getValue();
-        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
+        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean());
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
         final long creationTime = event.getCreationTime();

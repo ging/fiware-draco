@@ -66,6 +66,8 @@ public final class NGSIConstants {
         NUMERIC
     }
 
+    public static final String OBSERVED_AT = "observedAt";
+
     /**
      * Constructor. It is private since utility classes should not have a public or default constructor.
      */

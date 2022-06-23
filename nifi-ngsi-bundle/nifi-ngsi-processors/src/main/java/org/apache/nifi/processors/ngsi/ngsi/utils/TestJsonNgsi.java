@@ -216,7 +216,7 @@ public class TestJsonNgsi {
                                     subAttrName = keyOne;
                                     subAttrValue = value2;
                                     hasSubAttrs = true;
-                                    subAttributes.add(new AttributesLD(subAttrName,subAttrValue,"", subAttrValue,false,null));
+                                    subAttributes.add(new AttributesLD(subAttrName,subAttrValue,"", "", subAttrValue,false,null));
                                 }
                                 else if (!"value".equals(keyOne)){
                                     JSONObject value2 = value.getJSONObject(keyOne);
@@ -234,13 +234,13 @@ public class TestJsonNgsi {
                                     System.out.println(subAttrType);
                                     System.out.println(subAttrValue);
                                     hasSubAttrs= true;
-                                    subAttributes.add(new AttributesLD(subAttrName,subAttrType,"", subAttrValue,false,null));
+                                    subAttributes.add(new AttributesLD(subAttrName,subAttrType,"", "", subAttrValue,false,null));
                                 }
                             }
                     }else if ("GeoProperty".contentEquals(attrType)){
                         attrValue = value.get("value").toString();
                     }
-                    attributes.add(new AttributesLD(key,attrType,"", attrValue, hasSubAttrs,subAttributes));
+                    attributes.add(new AttributesLD(key,attrType,"", "", attrValue, hasSubAttrs,subAttributes));
                     subAttributes=new ArrayList<>();
                     hasSubAttrs= false;
                 }
@@ -252,11 +252,11 @@ public class TestJsonNgsi {
 
         event = new NGSIEvent(000,"2",entitiesLD);
         for (Entity x: event.getEntitiesLD()){
-            p.listOfFields("column",x,"ld",false, "");
+            p.listOfFields("column",x,"ld",false, false,"");
         }
 
         for (Entity x: event.getEntitiesLD()){
-            Map<String, POSTGRESQL_COLUMN_TYPES> list=p.listOfFields("column",x,"ld",false, "");
+            Map<String, POSTGRESQL_COLUMN_TYPES> list=p.listOfFields("column",x,"ld",false, false, "");
             System.out.println(p.getFieldsForCreate(list));
             System.out.println(p.getFieldsForInsert(list.keySet()));
             System.out.println(p.getFieldsForInsert(list.keySet()));
@@ -269,7 +269,7 @@ public class TestJsonNgsi {
 
             System.out.println(p.addColumns("test","test",listC));
 
-            System.out.println(p.getValuesForInsert("column",x, Collections.emptyMap(), 000,"","ld",false, ""));
+            System.out.println(p.getValuesForInsert("column",x, Collections.emptyMap(), 000,"","ld", false,false, ""));
             for (AttributesLD y :x.getEntityAttrsLD()){
                 System.out.println(y.getAttrName()+"-------");
                 System.out.println(y.isHasSubAttrs());

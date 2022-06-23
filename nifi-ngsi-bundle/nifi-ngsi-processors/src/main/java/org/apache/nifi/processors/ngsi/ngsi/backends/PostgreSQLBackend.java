@@ -1,5 +1,6 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
@@ -27,6 +28,7 @@ public class PostgreSQLBackend {
             Entity entity,
             String ngsiVersion,
             boolean ckanCompatible,
+            boolean isTemporalEntities,
             String datasetIdPrefixToTruncate
     ) {
         Map<String, POSTGRESQL_COLUMN_TYPES> aggregation = new TreeMap<>();
@@ -55,34 +57,70 @@ public class PostgreSQLBackend {
                     } // for
                 } // if
             } //else if
-        }
-        else if ("ld".equals(ngsiVersion)){
-            aggregation.put(NGSIConstants.RECV_TIME, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
-            aggregation.put(NGSIConstants.ENTITY_ID, POSTGRESQL_COLUMN_TYPES.TEXT);
-            aggregation.put(NGSIConstants.ENTITY_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
-            if(ckanCompatible){
-                aggregation.put("_id", POSTGRESQL_COLUMN_TYPES.TEXT);
-            }
-            ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
-            if (attributes != null && !attributes.isEmpty()) {
-                for (AttributesLD attribute : attributes) {
-                    String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
-                    if (attribute.getAttrValue() instanceof BigDecimal)
-                        aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
-                    else
-                        aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
-                    logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
-                    if (attribute.isHasSubAttrs()) {
-                        for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                            String subAttrName = subAttribute.getAttrName();
-                            String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName, datasetIdPrefixToTruncate);
-                            if ("observedAt".equals(subAttrName))
-                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
-                            else if (subAttribute.getAttrValue() instanceof BigDecimal)
-                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
-                            else
-                                aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TEXT);
-                            logger.debug("Added subattribute {} ({}) to attribute {}", encodedSubAttrName, subAttrName, attrName);
+        } else if ("ld".equals(ngsiVersion)) {
+            if (!isTemporalEntities) {
+                aggregation.put(NGSIConstants.RECV_TIME, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                aggregation.put(NGSIConstants.ENTITY_ID, POSTGRESQL_COLUMN_TYPES.TEXT);
+                aggregation.put(NGSIConstants.ENTITY_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
+                if (ckanCompatible) {
+                    aggregation.put("_id", POSTGRESQL_COLUMN_TYPES.TEXT);
+                }
+
+                ArrayList<AttributesLD> attributes = entity.getEntityAttrsLD();
+                if (attributes != null && !attributes.isEmpty()) {
+                    for (AttributesLD attribute : attributes) {
+                        String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
+                        if (attribute.getAttrValue() instanceof BigDecimal)
+                            aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                        else
+                            aggregation.put(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
+                        logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
+                        if (attribute.isHasSubAttrs()) {
+                            for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                                String subAttrName = subAttribute.getAttrName();
+                                String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName, datasetIdPrefixToTruncate);
+                                if ("observedAt".equals(subAttrName))
+                                    aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                                else if (subAttribute.getAttrValue() instanceof BigDecimal)
+                                    aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                                else
+                                    aggregation.put(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TEXT);
+                                logger.debug("Added subattribute {} ({}) to attribute {}", encodedSubAttrName, subAttrName, attrName);
+                            }
+                        }
+                    } // for
+                } //if
+            } else {
+                Map<String, List<AttributesLD>> attributesByObservedAt = entity.getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
+
+                aggregation.putIfAbsent(NGSIConstants.RECV_TIME, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                aggregation.putIfAbsent(NGSIConstants.ENTITY_ID, POSTGRESQL_COLUMN_TYPES.TEXT);
+                aggregation.putIfAbsent(NGSIConstants.ENTITY_TYPE, POSTGRESQL_COLUMN_TYPES.TEXT);
+
+                for (String timeStamp : attributesByObservedAt.keySet()) {
+                    List<AttributesLD> attributes = attributesByObservedAt.get(timeStamp);
+                    if (attributes != null && !attributes.isEmpty()) {
+                        for (AttributesLD attribute : attributes) {
+                            String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
+                            if (attribute.getAttrValue() instanceof BigDecimal)
+                                aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            else aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
+                            String encodedObservedAt = encodeObservedAtToColumnName(attrName, NGSIConstants.OBSERVED_AT);
+                            aggregation.putIfAbsent(encodedObservedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                            if (attribute.isHasSubAttrs()) {
+                                for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                                    String subAttrName = subAttribute.getAttrName();
+                                    String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName, datasetIdPrefixToTruncate);
+                                    if ("observedAt".equals(subAttrName))
+                                        aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                                    else if (subAttribute.getAttrValue() instanceof BigDecimal)
+                                        aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                                    else
+                                        aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TEXT);
+                                    logger.debug("Added subattribute {} ({}) to attribute {}", encodedSubAttrName, subAttrName, attrName);
+                                }
+                            }
                         }
                     }
                 } // for
@@ -99,13 +137,18 @@ public class PostgreSQLBackend {
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
 
+    private String encodeObservedAtToColumnName(String encodedAttributeName, String observedAt) {
+        String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(observedAt);
+        return NGSIEncoders.truncateToMaxSize(encodedName);
+    }
+
     private String encodeSubAttributeToColumnName(String attributeName, String datasetId, String subAttributeName, String datasetIdPrefixToTruncate) {
         String encodedAttributeName = encodeAttributeToColumnName(attributeName, datasetId, datasetIdPrefixToTruncate);
         String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(subAttributeName);
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
 
-    public String getValuesForInsert(
+    public List<String> getValuesForInsert(
             String attrPersistence,
             Entity entity,
             Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields,
@@ -113,11 +156,13 @@ public class PostgreSQLBackend {
             String fiwareServicePath,
             String ngsiVersion,
             boolean ckanCompatible,
+            boolean isTemporalEntities,
             String datasetIdPrefixToTruncate
     ) {
         TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
-        String valuesForInsert = "";
+        List<String> valuesForInsertList = new ArrayList<>();
         if ("v2".equals(ngsiVersion)) {
+            String valuesForInsert = "";
             if ((NGSIConstants.ATTR_PER_ROW).equalsIgnoreCase(attrPersistence)) {
                 for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
                     if (i == 0) {
@@ -167,30 +212,72 @@ public class PostgreSQLBackend {
                 } //for
                 valuesForInsert += ")";
             } //else if
-        }
-        else if ("ld".equals(ngsiVersion)) {
-            Map<String, String> valuesForColumns = new TreeMap<>();
-            int i = 0;
-            if (ckanCompatible) {
-                valuesForColumns.put("_id", "'" + +i + "'");
-            }
-            ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
-            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
-            valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
-            valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
-            for (AttributesLD attribute : entity.getEntityAttrsLD()) {
-                String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
-                valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
-                if (attribute.isHasSubAttrs()) {
-                    for (AttributesLD subAttribute : attribute.getSubAttrs()) {
-                        String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName(), datasetIdPrefixToTruncate);
-                        valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
-                  }
+            valuesForInsertList.add(valuesForInsert);
+        } else if ("ld".equals(ngsiVersion)) {
+            if (!isTemporalEntities) {
+                Map<String, String> valuesForColumns = new TreeMap<>();
+                int i = 0;
+                if (ckanCompatible) {
+                    valuesForColumns.put("_id", "'" + +i + "'");
                 }
-            } //for
-            valuesForInsert = "(" + String.join(",", valuesForColumns.values()) + ")";
+                ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
+                valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
+                valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
+                valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
+                for (AttributesLD attribute : entity.getEntityAttrsLD()) {
+                    String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
+                    valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
+                    if (attribute.isHasSubAttrs()) {
+                        for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                            String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName(), datasetIdPrefixToTruncate);
+                            valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
+                        }
+                    }
+                }
+                valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
+            } else{
+                ListOrderedMap valuesForColumns = new ListOrderedMap();
+                int i = 0;
+                if (ckanCompatible) {
+                    valuesForColumns.put("_id", "'" + +i + "'");
+                }
+                Map<String, List<AttributesLD>> attributesByObservedAt = entity.getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
+                for(String timeStamp: attributesByObservedAt.keySet()) {
+                    for (AttributesLD attribute : attributesByObservedAt.get(timeStamp)) {
+                        ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
+                        ZonedDateTime observedAt = ZonedDateTime.parse(attribute.observedAt);
+                        if (creationDate.toEpochSecond() > observedAt.toEpochSecond())
+                            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(observedAt) + "'");
+                        else
+                            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
+
+                        valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
+                        valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
+
+                        String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
+                        valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
+
+                        String encodedObservedAt = encodeObservedAtToColumnName(encodedAttributeName, NGSIConstants.OBSERVED_AT);
+                        valuesForColumns.put(encodedObservedAt, formatFieldForValueInsert(attribute.getObservedAt(), listOfFields.get(encodedObservedAt)));
+
+                        if (attribute.isHasSubAttrs()) {
+                            for (AttributesLD subAttribute : attribute.getSubAttrs()) {
+                                String encodedSubAttributeName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttribute.getAttrName(), datasetIdPrefixToTruncate);
+                                valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
+                            }
+                        }
+                    }
+                    List<String> listofEncodedName = listOfFields.keySet().stream().collect(Collectors.toList());
+                    for(int j=0; j<listofEncodedName.size();j++){
+                        if(valuesForColumns.get(listofEncodedName.get(j))==null)
+                            valuesForColumns.put(j,listofEncodedName.get(j), null);
+                    }
+                    valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
+                }
+            }
+             //for
         } // if
-        return valuesForInsert;
+        return valuesForInsertList;
     } // getValuesForInsert
 
     private String formatFieldForValueInsert(Object attributeValue, POSTGRESQL_COLUMN_TYPES columnType) {
@@ -372,10 +459,13 @@ public class PostgreSQLBackend {
             String dataModel,
             String ngsiVersion,
             boolean ckanCompatible,
+            boolean isTemporalEntities,
             String datasetIdPrefixToTruncate) {
+        List<String> valuesForInsert = this.getValuesForInsert(dataModel, entity, listOfFields, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible, isTemporalEntities, datasetIdPrefixToTruncate);
+
         return "insert into " + schemaName + "." + tableName + " " +
                 this.getFieldsForInsert(listOfFields.keySet()) +
-                " values " + this.getValuesForInsert(dataModel, entity, listOfFields, creationTime, fiwareServicePath, ngsiVersion, ckanCompatible, datasetIdPrefixToTruncate);
+                " values " + String.join(",", valuesForInsert) + ";";
     }
 
     public String checkColumnNames(String tableName){

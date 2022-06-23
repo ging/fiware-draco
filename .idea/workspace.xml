@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ee2fa076-985b-4c58-8b92-2c7c09b7b91b" name="Default" comment="Add nifi-ngsi-dynamo">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/NGSIToPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/PostgreSQLBackend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/NGSIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/TestJsonNgsi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nifi-ngsi-resources/docker/ngsi-ld-notification.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-resources/docker/ngsi-ld-notification.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-bundle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-nar/nifi-ngsi-nar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/nifi-ngsi-processors.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +21,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="fiware-draco" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -38,6 +36,17 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="26080ac5-bcbf-4852-b4b4-d99d837267e0" />
+        <option name="url" value="https://github.com/easy-global-market/fiware-draco.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -64,22 +73,18 @@
   <component name="ProjectId" id="1mIQxul0zguxgxrZjrYgn5nrSEK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583776873645" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/utils/ngsiLD" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/main/java/org/apache/nifi/processors/ngsi/ngsi/backends/ckan" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "spring.configuration.checksum": "b025578b1715e1340c4cb6ae6350fa67"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -93,7 +98,7 @@
       <recent name="$PROJECT_DIR$/nifi-ngsi-resources/docker/templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestJsonNgsi">
+  <component name="RunManager" selected="JUnit.TestNGSIToPostgreSQL.testInsertQueryForNgsiLd">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -149,6 +154,8 @@
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -157,19 +164,21 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
       <Java />
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
         <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" />
       </method>
     </configuration>
@@ -193,22 +202,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToCassandra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-cassandra-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.cassandra.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi.cassandra" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.cassandra.TestNGSIToCassandra" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestNGSIToDynamo.testBuildTableNameNonRootServicePathDataModelByServicePathOldEncoding" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="nifi-ngsi-dynamo-processors" />
       <extension name="coverage">
@@ -226,24 +219,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="nifi-ngsi-processors" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
-      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToMySQL" />
-      <option name="METHOD_NAME" value="testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestNGSIToPostgreSQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestNGSIToPostgreSQL.testInsertQueryForNgsiLd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="nifi-ngsi-processors" />
       <extension name="coverage">
         <pattern>
@@ -253,7 +229,42 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
       <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testInsertQueryForNgsiLd" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIToPostgreSQL.testValuesForInsertColumnForNgsiLd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.TestNGSIToPostgreSQL" />
+      <option name="METHOD_NAME" value="testValuesForInsertColumnForNgsiLd" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestNGSIUtils.testTemporalEntities" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="nifi-ngsi-processors" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.apache.nifi.processors.ngsi.ngsi.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.apache.nifi.processors.ngsi.ngsi.utils" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.nifi.processors.ngsi.ngsi.utils.TestNGSIUtils" />
+      <option name="METHOD_NAME" value="testTemporalEntities" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -266,36 +277,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -318,16 +301,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.TestJsonNgsi" />
+      <item itemvalue="JUnit.TestNGSIToPostgreSQL.testInsertQueryForNgsiLd" />
+      <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnForNgsiLd" />
+      <item itemvalue="JUnit.TestNGSIUtils.testTemporalEntities" />
+      <item itemvalue="JUnit.TestNGSIToDynamo.testBuildTableNameNonRootServicePathDataModelByServicePathOldEncoding" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testInsertQueryForNgsiLd" />
+        <item itemvalue="JUnit.TestNGSIUtils.testTemporalEntities" />
+        <item itemvalue="JUnit.TestNGSIToPostgreSQL.testValuesForInsertColumnForNgsiLd" />
         <item itemvalue="Application.TestJsonNgsi" />
         <item itemvalue="JUnit.TestNGSIToDynamo.testBuildTableNameNonRootServicePathDataModelByServicePathOldEncoding" />
-        <item itemvalue="JUnit.TestNGSIToCassandra" />
-        <item itemvalue="JUnit.TestNGSIToPostgreSQL" />
-        <item itemvalue="JUnit.TestNGSIToMySQL.testBuildTableNameRootServicePathDataModelByServicePathNoEncoding" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -361,6 +352,7 @@
       <workItem from="1613997150966" duration="1080000" />
       <workItem from="1614003091589" duration="18563000" />
       <workItem from="1614513908609" duration="31913000" />
+      <workItem from="1656061157041" duration="12442000" />
     </task>
     <task id="LOCAL-00003" summary="adding roadmap documentation file">
       <created>1548151516164</created>
@@ -718,7 +710,7 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="including default values for fiware service and service path and fixing methods for reading flowfile attributes with case insensitive" />
@@ -748,111 +740,16 @@
     <MESSAGE value="Add nifi-ngsi-dynamo" />
     <option name="LAST_COMMIT_MESSAGE" value="Add nifi-ngsi-dynamo" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1613009488828">
-      <screen x="0" y="25" width="1440" height="830" />
-    </state>
-    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser/0.25.1440.829@0.25.1440.829" timestamp="1613003430400" />
-    <state x="513" y="121" key="#com.intellij.ide.util.MemberChooser/0.25.1440.830@0.25.1440.830" timestamp="1613009488828" />
-    <state x="326" y="280" width="748" height="282" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1613324925942">
-      <screen x="0" y="25" width="1440" height="831" />
-    </state>
-    <state x="326" y="280" width="748" height="282" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.25.1440.831@0.25.1440.831" timestamp="1613324925942" />
-    <state x="438" y="167" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612500059872">
-      <screen x="0" y="25" width="1440" height="829" />
-    </state>
-    <state x="438" y="167" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.829@0.25.1440.829" timestamp="1612500059872" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom" timestamp="1614655848587">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.824@0.25.1440.824" timestamp="1614651103346" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.825@0.25.1440.825" timestamp="1614655848587" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.826@0.25.1440.826" timestamp="1614621356374" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.827@0.25.1440.827" timestamp="1614617440679" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.829@0.25.1440.829" timestamp="1614251067153" />
-    <state width="667" height="197" key="GridCell.Tab.0.bottom/0.25.1440.830@0.25.1440.830" timestamp="1613270581984" />
-    <state width="667" height="197" key="GridCell.Tab.0.center" timestamp="1614655848584">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.824@0.25.1440.824" timestamp="1614651103343" />
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.825@0.25.1440.825" timestamp="1614655848584" />
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.826@0.25.1440.826" timestamp="1614621356373" />
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.827@0.25.1440.827" timestamp="1614617440676" />
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.829@0.25.1440.829" timestamp="1614251067069" />
-    <state width="667" height="197" key="GridCell.Tab.0.center/0.25.1440.830@0.25.1440.830" timestamp="1613270581982" />
-    <state width="667" height="197" key="GridCell.Tab.0.left" timestamp="1614655848584">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.824@0.25.1440.824" timestamp="1614651103342" />
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.825@0.25.1440.825" timestamp="1614655848584" />
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.826@0.25.1440.826" timestamp="1614621356372" />
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.827@0.25.1440.827" timestamp="1614617440676" />
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.829@0.25.1440.829" timestamp="1614251067068" />
-    <state width="667" height="197" key="GridCell.Tab.0.left/0.25.1440.830@0.25.1440.830" timestamp="1613270581981" />
-    <state width="667" height="197" key="GridCell.Tab.0.right" timestamp="1614655848585">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.824@0.25.1440.824" timestamp="1614651103344" />
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.825@0.25.1440.825" timestamp="1614655848585" />
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.826@0.25.1440.826" timestamp="1614621356373" />
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.827@0.25.1440.827" timestamp="1614617440677" />
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.829@0.25.1440.829" timestamp="1614251067149" />
-    <state width="667" height="197" key="GridCell.Tab.0.right/0.25.1440.830@0.25.1440.830" timestamp="1613270581983" />
-    <state width="679" height="245" key="GridCell.Tab.1.bottom" timestamp="1614516577293">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="679" height="245" key="GridCell.Tab.1.bottom/0.25.1440.825@0.25.1440.825" timestamp="1614516577293" />
-    <state width="679" height="245" key="GridCell.Tab.1.bottom/0.25.1440.827@0.25.1440.827" timestamp="1613744678693" />
-    <state width="679" height="245" key="GridCell.Tab.1.bottom/0.25.1440.829@0.25.1440.829" timestamp="1613166199609" />
-    <state width="679" height="245" key="GridCell.Tab.1.center" timestamp="1614516577292">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="679" height="245" key="GridCell.Tab.1.center/0.25.1440.825@0.25.1440.825" timestamp="1614516577292" />
-    <state width="679" height="245" key="GridCell.Tab.1.center/0.25.1440.827@0.25.1440.827" timestamp="1613744678690" />
-    <state width="679" height="245" key="GridCell.Tab.1.center/0.25.1440.829@0.25.1440.829" timestamp="1613166199607" />
-    <state width="679" height="245" key="GridCell.Tab.1.left" timestamp="1614516577291">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="679" height="245" key="GridCell.Tab.1.left/0.25.1440.825@0.25.1440.825" timestamp="1614516577291" />
-    <state width="679" height="245" key="GridCell.Tab.1.left/0.25.1440.827@0.25.1440.827" timestamp="1613744678690" />
-    <state width="679" height="245" key="GridCell.Tab.1.left/0.25.1440.829@0.25.1440.829" timestamp="1613166199607" />
-    <state width="679" height="245" key="GridCell.Tab.1.right" timestamp="1614516577292">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state width="679" height="245" key="GridCell.Tab.1.right/0.25.1440.825@0.25.1440.825" timestamp="1614516577292" />
-    <state width="679" height="245" key="GridCell.Tab.1.right/0.25.1440.827@0.25.1440.827" timestamp="1613744678691" />
-    <state width="679" height="245" key="GridCell.Tab.1.right/0.25.1440.829@0.25.1440.829" timestamp="1613166199608" />
-    <state x="238" y="75" key="Maven.ArtifactSearchDialog" timestamp="1613430713072">
-      <screen x="0" y="25" width="1440" height="827" />
-    </state>
-    <state x="238" y="75" key="Maven.ArtifactSearchDialog/0.25.1440.823@0.25.1440.823" timestamp="1611252608699" />
-    <state x="238" y="75" key="Maven.ArtifactSearchDialog/0.25.1440.827@0.25.1440.827" timestamp="1613430713072" />
-    <state x="238" y="75" key="Maven.ArtifactSearchDialog/0.25.1440.830@0.25.1440.830" timestamp="1612492712531" />
-    <state x="210" y="25" width="1024" height="826" key="SettingsEditor" timestamp="1614523593761">
-      <screen x="0" y="25" width="1440" height="825" />
-    </state>
-    <state x="188" y="25" width="1024" height="823" key="SettingsEditor/0.25.1440.823@0.25.1440.823" timestamp="1611252542217" />
-    <state x="210" y="25" key="SettingsEditor/0.25.1440.825@0.25.1440.825" timestamp="1614523593761" />
-    <state x="188" y="25" width="1024" height="826" key="SettingsEditor/0.25.1440.826@0.25.1440.826" timestamp="1614023008370" />
-    <state x="210" y="25" key="SettingsEditor/0.25.1440.829@0.25.1440.829" timestamp="1611758740749" />
-    <state width="681" height="445" key="SwitcherDM" timestamp="1613008476047">
-      <screen x="0" y="25" width="1440" height="830" />
-    </state>
-    <state width="681" height="445" key="SwitcherDM/0.25.1440.830@0.25.1440.830" timestamp="1613008476047" />
-    <state x="495" y="198" key="chooseDestDirectoryDialog" timestamp="1612500028682">
-      <screen x="0" y="25" width="1440" height="829" />
-    </state>
-    <state x="495" y="198" key="chooseDestDirectoryDialog/0.25.1440.829@0.25.1440.829" timestamp="1612500028682" />
-    <state x="379" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1614513923765">
-      <screen x="0" y="25" width="1440" height="826" />
-    </state>
-    <state x="379" y="243" key="com.intellij.ide.util.TipDialog/0.25.1440.823@0.25.1440.823" timestamp="1614003119786" />
-    <state x="379" y="244" key="com.intellij.ide.util.TipDialog/0.25.1440.826@0.25.1440.826" timestamp="1614513923765" />
-    <state x="379" y="245" key="com.intellij.ide.util.TipDialog/0.25.1440.829@0.25.1440.829" timestamp="1612493917990" />
-    <state x="365" y="179" width="670" height="676" key="search.everywhere.popup" timestamp="1613268427822">
-      <screen x="0" y="25" width="1440" height="830" />
-    </state>
-    <state x="365" y="179" width="670" height="676" key="search.everywhere.popup/0.25.1440.830@0.25.1440.830" timestamp="1613268427822" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/nifi-ngsi-bundle/nifi-ngsi-processors/src/test/java/org/apache/nifi/processors/ngsi/TestNGSIToPostgreSQL.java</url>
+          <line>791</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

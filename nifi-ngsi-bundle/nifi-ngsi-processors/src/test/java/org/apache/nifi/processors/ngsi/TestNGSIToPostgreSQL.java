@@ -4,18 +4,27 @@ import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
-
-import java.util.ArrayList;
-
 import org.apache.nifi.processors.ngsi.ngsi.utils.Metadata;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
+import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
+import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -24,6 +33,11 @@ public class TestNGSIToPostgreSQL {
     private TestRunner runner;
     private PostgreSQLBackend backend;
 
+    private NGSIUtils ngsiUtils = new NGSIUtils();
+
+    private InputStream inputStream = getClass().getClassLoader().getResourceAsStream("temporalEntity.json");
+
+    private String NGSI_LD_VERSION = "ld";
 
     @Before
     public void setUp() throws Exception {
@@ -737,4 +751,97 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
     } // testValuesForInsertColumnWithMetadata
 
+    @Test
+    public void testValuesForInsertColumnForNgsiLd() throws IOException {
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+
+        String data = readFromInputStream(inputStream);
+        ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
+                attrPersistence,
+                entities.get(0),
+                NGSI_LD_VERSION,
+                false,
+                true,
+                ""
+        );
+
+        long creationTime = 1562561734983l;
+
+        TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
+        ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
+
+        List<String> timeStamps = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt)).keySet().stream().collect(Collectors.toList());
+        String expectedValuesForInsert = "(62,'2021-02-19T13:18:19.000000Z',null,null,'2019-07-08T04:55:34.983Z','urn:ngsi-ld:AgriCropRecord:gael:ble:3d4bc657-744f-43d7-b741-b5fd6e9a1449',72,'2021-02-19T13:18:19.000000Z',1024,'2021-02-19T13:18:19.000000Z',14.6,'2021-02-19T13:18:19.000000Z','AgriCropRecord',25.2,null,null,'2021-02-19T09:13:15.000000Z',null,null)";
+        List<String> valuesForInsert = backend.getValuesForInsert(
+                attrPersistence,
+                entities.get(0),
+                listOfFields,
+                creationTime,
+                "",
+                NGSI_LD_VERSION,
+                false,
+                true,
+                ""
+        );
+        assertEquals(4, valuesForInsert.size());
+        assertEquals(expectedValuesForInsert, valuesForInsert.get(1));
+        for (int i = 0; i < timeStamps.size(); i++) {
+            assertTrue(valuesForInsert.get(i).contains(timeStamps.get(i)));
+            assertTrue(valuesForInsert.get(i).contains(DateTimeFormatter.ISO_INSTANT.format(creationDate)));
+        }
+    }
+
+    @Test
+    public void testInsertQueryForNgsiLd() throws Exception {
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+
+        String data = readFromInputStream(inputStream);
+        ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
+
+        String schemaName = backend.buildSchemaName("test", true, false, false);
+        String tableName = backend.buildTableName("", entities.get(0), "db-by-entity-type", true, false, NGSI_LD_VERSION, false);
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
+                attrPersistence,
+                entities.get(0),
+                NGSI_LD_VERSION,
+                false,
+                true,
+                ""
+        );
+
+        long creationTime = 1562561734983l;
+
+        String instertQueryValue = backend.insertQuery(
+                entities.get(0),
+                creationTime,
+                "",
+                schemaName,
+                tableName,
+                listOfFields,
+                "db-by-entity-type",
+                NGSI_LD_VERSION,
+                false,
+                true,
+                ""
+        );
+        assertTrue(instertQueryValue.split("values")[1].split("\\(").length == 5);
+    }
+
+    private String readFromInputStream(InputStream inputStream)
+            throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
+    }
 }
