@@ -78,7 +78,7 @@ public class AttributesLD {
     }
 
     public AttributesLD(String attrName, String attrType, String datasetId, String observedAt, Object attrValue,
-            boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
+                        boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
         this.attrName = attrName;
         this.attrType = attrType;
         this.datasetId = datasetId;

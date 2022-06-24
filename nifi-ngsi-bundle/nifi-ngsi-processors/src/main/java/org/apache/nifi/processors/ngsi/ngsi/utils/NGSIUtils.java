@@ -24,7 +24,7 @@ public class NGSIUtils {
     // FIXME even if createdAt and modifiedAt should not be present at entity level
     public static List<String> IGNORED_KEYS_ON_ENTITES = List.of("id", "type", "@context", "createdAt", "modifiedAt");
 
-    public NGSIEvent getEventFromFlowFile(FlowFile flowFile, final ProcessSession session, String version){
+    public NGSIEvent getEventFromFlowFile(FlowFile flowFile, final ProcessSession session, String version, Boolean isTemporalEntities){
 
         final byte[] buffer = new byte[(int) flowFile.getSize()];
 
@@ -37,12 +37,86 @@ public class NGSIUtils {
         String fiwareServicePath = (newFlowFileAttributes.get("fiware-servicepath")==null) ? "/nd":newFlowFileAttributes.get("fiware-servicepath");
         System.out.println(fiwareServicePath);
         long creationTime=flowFile.getEntryDate();
-        JSONArray content = new JSONArray(flowFileContent);
+        JSONArray data;
+        String entityType;
+        String entityId;
+        ArrayList<Entity> entities = new ArrayList<>();
         NGSIEvent event= null;
 
-        if ("ld".compareToIgnoreCase(version)==0) {
-            logger.debug("Received an NGSI-LD temporal data");
-            ArrayList<Entity> entities = parseNgsiLdEntities(content);
+        if("v2".compareToIgnoreCase(version)==0){
+            JSONObject content = new JSONObject(flowFileContent);
+            data = (JSONArray) content.get("data");
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject lData = data.getJSONObject(i);
+                entityId = lData.getString("id");
+                entityType = lData.getString("type");
+                ArrayList<Attributes> attrs  = new ArrayList<>();
+                Iterator<String> keys = lData.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    if (!"id".equals(key) && !"type".equals(key)){
+                        JSONObject value = lData.getJSONObject(key);
+                        JSONObject mtdo = (JSONObject) value.get("metadata");
+                        Iterator<String> keysOneLevel=mtdo.keys();
+                        String metadataString = value.get("metadata").toString();
+                        ArrayList<Metadata>  mtd = new ArrayList<>();
+                        while (keysOneLevel.hasNext()) {
+                            String keyOne = keysOneLevel.next();
+                            JSONObject value2 = mtdo.getJSONObject(keyOne);
+                            mtd.add(new Metadata(keyOne,value2.getString("type"),value2.get("value").toString()));
+                        }
+                        if(mtdo.length()<=0){
+                            attrs.add(new Attributes(key,value.getString("type"),value.get("value").toString(),null,""));
+                        }else{
+                            attrs.add(new Attributes(key,value.getString("type"),value.get("value").toString(),mtd,metadataString));
+                        }
+                    }
+                }
+                entities.add(new Entity(entityId,entityType,attrs));
+            }
+            event = new NGSIEvent(creationTime,fiwareService,fiwareServicePath,entities);
+        }else if ("ld".compareToIgnoreCase(version)==0) {
+            logger.debug("Received an NGSI-LD notification");
+            if(!isTemporalEntities){
+                JSONObject content = new JSONObject(flowFileContent);
+                data = (JSONArray) content.get("data");
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject entity = data.getJSONObject(i);
+                    entityId = entity.getString("id");
+                    entityType = entity.getString("type");
+                    logger.debug("Dealing with entity {} of type {}", entityId, entityType);
+                    ArrayList<AttributesLD> attributes  = new ArrayList<>();
+                    Iterator<String> keys = entity.keys();
+
+                    while (keys.hasNext()) {
+                        String key = keys.next();
+                        if (!IGNORED_KEYS_ON_ENTITES.contains(key)) {
+                            Object object = entity.get(key);
+                            if (object instanceof JSONObject) {
+                                // it is an attribute with one instance only
+                                JSONObject value = entity.getJSONObject(key);
+                                AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
+                                attributes.add(attributesLD);
+                            } else if (object instanceof JSONArray) {
+                                // it is a multi-attribute (see section 4.5.5 in NGSI-LD specification)
+                                JSONArray values = entity.getJSONArray(key);
+                                for (int j = 0; j < values.length(); j++) {
+                                    JSONObject value = values.getJSONObject(j);
+                                    AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
+                                    attributes.add(attributesLD);
+                                }
+                            } else {
+                                logger.warn("Attribute {} has unexpected value type: {}", key, object.getClass());
+                            }
+                        }
+                    }
+                    entities.add(new Entity(entityId,entityType,attributes,true));
+                }
+            } else {
+                JSONArray content = new JSONArray(flowFileContent);
+                logger.debug("Received an NGSI-LD temporal data");
+                entities = parseNgsiLdEntities(content);
+            }
             event = new NGSIEvent(creationTime,fiwareService,entities);
         }
         return event;
@@ -90,7 +164,6 @@ public class NGSIUtils {
     private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
         String attrType = value.getString("type");
         String datasetId = value.optString("datasetId");
-        String instanceId = value.optString("instanceId");
         String observedAt = value.optString("observedAt");
         Object attrValue;
         ArrayList<AttributesLD> subAttributes = new ArrayList<>();
@@ -132,6 +205,6 @@ public class NGSIUtils {
             subAttrValue = value.get("value").toString();
         }
 
-        return new AttributesLD(key, subAttrType, "", "", subAttrValue,false,null);
+        return new AttributesLD(key, subAttrType, "", "",  subAttrValue,false,null);
     }
 }

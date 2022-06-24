@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.apache.nifi.processors.ngsi.NGSIToPostgreSQL.ENABLE_TEMPORAL_ENTITIES;
+
 
 @SupportsBatching
 @InputRequirement(InputRequirement.Requirement.INPUT_REQUIRED)
@@ -248,8 +250,9 @@ public class NGSIToCKAN extends AbstractProcessor {
         NGSIUtils n = new NGSIUtils();
         final String ngsiVersion=context.getProperty(NGSI_VERSION).getValue();
         final String dataModel=context.getProperty(DATA_MODEL).getValue();
+        final Boolean isTemporalEntities = context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean();
 
-        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,ngsiVersion);
+        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,ngsiVersion, isTemporalEntities);
         final long creationTime = event.getCreationTime();
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
