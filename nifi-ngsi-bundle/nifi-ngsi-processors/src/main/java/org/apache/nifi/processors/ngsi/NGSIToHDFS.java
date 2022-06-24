@@ -330,6 +330,7 @@ public class NGSIToHDFS extends AbstractProcessor {
         properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
+        properties.add(ENABLE_TEMPORAL_ENTITIES);
         properties.add(OAUTH2_TOKEN);
         properties.add(SERVICE_AS_NAMESPACE);
         properties.add(FILE_FORMAT);
