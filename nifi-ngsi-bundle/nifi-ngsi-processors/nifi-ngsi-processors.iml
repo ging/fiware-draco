@@ -1,52 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-client:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-common:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-auth:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: com.nimbusds:nimbus-jose-jwt:4.41.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.curator:curator-framework:2.12.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.curator:curator-client:2.12.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.curator:curator-recipes:2.12.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-hdfs-client:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-yarn-api:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-yarn-client:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-core:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-yarn-common:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:9.3.24.v20180605" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.5" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.5" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.9.5" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-jobclient:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-common:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-annotations:3.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.12.7" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-serialization-services:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-syslog-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.palindromicity:simple-syslog-5424:0.0.13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-client-service-api:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-serialization-services:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-syslog-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.palindromicity:simple-syslog-5424:0.0.16" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.7.2" level="project" />
-    <orderEntry type="library" name="Maven: com.jayway.jsonpath:json-path:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: net.minidev:json-smart:2.3" level="project" />
-    <orderEntry type="library" name="Maven: net.minidev:accessors-smart:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm:5.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.8" level="project" />
+    <orderEntry type="library" name="Maven: com.jayway.jsonpath:json-path:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: net.minidev:json-smart:2.4.7" level="project" />
+    <orderEntry type="library" name="Maven: net.minidev:accessors-smart:2.4.7" level="project" />
+    <orderEntry type="library" name="Maven: org.ow2.asm:asm:9.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.8" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.10" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: io.krakens:java-grok:0.1.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avro:avro:1.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
@@ -65,118 +50,130 @@
     <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.17" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-framework-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-parameter:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-core-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-nar-utils:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-client-dto:1.13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-mongodb-processors:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-framework-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-parameter:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-core-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-nar-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-client-dto:1.14.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.swagger:swagger-annotations:1.6.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-site-to-site-client:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents.client5:httpclient5:5.0-beta4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents.core5:httpcore5:5.0-beta7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents.core5:httpcore5-h2:5.0-beta7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-site-to-site-client:1.14.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-authorization:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-data-model:0.8.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-framework-authorization:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-data-model:1.14.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: javax.validation:validation-api:2.0.1.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: javax.ws.rs:javax.ws.rs-api:2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-revision-entity-model:0.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-client:0.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-security-utils:0.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.inject:jersey-hk2:2.28" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-locator:2.5.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-api:2.5.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-utils:2.5.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.javassist:javassist:3.22.0-CR2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.core:jersey-common:2.28" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:2.1.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2.external:jakarta.inject:2.5.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.media:jersey-media-multipart:2.28" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jvnet.mimepull:mimepull:1.9.11" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-expression-language:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-data-provenance-utils:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-properties-loader:1.13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-revision-entity-model:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-client:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi.registry:nifi-registry-security-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.core:jersey-client:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:2.1.6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2.external:jakarta.inject:2.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.media:jersey-media-json-jackson:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.ext:jersey-entity-filtering:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.inject:jersey-hk2:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-locator:2.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2.external:aopalliance-repackaged:2.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-api:2.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:hk2-utils:2.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.javassist:javassist:3.25.0-GA" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.core:jersey-common:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.media:jersey-media-multipart:2.33" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.jvnet.mimepull:mimepull:1.9.13" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-expression-language:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-data-provenance-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-properties-loader:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-sensitive-property-provider:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-vault-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework.vault:spring-vault-core:2.3.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-context:5.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-aop:5.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-expression:5.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-beans:5.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-web:5.3.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-core:5.3.8" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-jcl:5.3.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-simple:1.8.0-beta4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-processor-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-path:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-properties:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-uuid5:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-processor-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-security-socket-ssl:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.11" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-event-transport:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.63.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-record-path:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-properties:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-property-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-uuid5:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.14" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-ssl-context-service-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-security-utils-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-lookup-service-api:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-flowfile-packager:1.13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-ssl-context-service-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-security-utils-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-lookup-service-api:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-flowfile-packager:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.20" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-http-context-map-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record-serialization-service-api:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-proxy-configuration-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-security-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.68" level="project" />
-    <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.68" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-http-context-map-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record-serialization-service-api:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-proxy-configuration-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-record:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-security-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-security-kms:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.69" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.69" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcutil-jdk15on:1.69" level="project" />
     <orderEntry type="library" name="Maven: at.favre.lib:bcrypt:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: at.favre.lib:bytes:1.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-configuration2:2.7" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.activation:javax.activation:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-socket-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-logging-utils:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-socket-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-logging-utils:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:3.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-load-distribution-service-api:1.13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-load-distribution-service-api:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-avro-record-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-record-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-dbcp-service-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-protocol:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-ssl-context-service:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-prioritizers:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock-record-utils:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-lookup-services:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-avro-record-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-record-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-dbcp-service-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-client-service:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-distributed-cache-protocol:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-ssl-context-service:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-prioritizers:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-mock-record-utils:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-lookup-services:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.maxmind.geoip2:geoip2:2.12.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.maxmind.db:maxmind-db:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.squareup.okhttp3:okhttp:3.10.0" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.14.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.burgstaller:okhttp-digest:1.18" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-web-utils:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.core:jersey-client:2.26" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.hk2.external:javax.inject:2.5.0-b42" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.media:jersey-media-json-jackson:2.26" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.ext:jersey-entity-filtering:2.26" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.10" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-utils:1.13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:2.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.4.10" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.github.rburgst:okhttp-digest:2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-standard-utils:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: com.bazaarvoice.jolt:jolt-core:0.1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: com.bazaarvoice.jolt:json-utils:0.1.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.10" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-schema-registry-service-api:1.13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-web-test-utils:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-schema-registry-service-api:1.14.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.nifi:nifi-standard-web-test-utils:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20201115" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-database-utils:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-json-utils:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-database-utils:1.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-json-utils:1.14.0" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-client:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-common:3.3.0" level="project" />
@@ -184,11 +181,11 @@
     <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-math3:3.1.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.35.v20201120" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-security:9.4.35.v20201120" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-util-ajax:9.4.35.v20201120" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.35.v20201120" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:9.4.35.v20201120" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.42.v20210604" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-security:9.4.42.v20210604" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-util-ajax:9.4.42.v20210604" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.42.v20210604" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:9.4.42.v20210604" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-servlet:1.19" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
@@ -223,6 +220,7 @@
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-hdfs-client:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp:okhttp:2.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-yarn-api:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-yarn-client:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.4.20.v20190813" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-client:9.4.20.v20190813" level="project" />
@@ -238,6 +236,9 @@
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.19" level="project" />
     <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-client:1.19" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.10.3" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.10.3" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.10.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-jobclient:3.3.0" level="project" />
@@ -247,7 +248,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: net.bytebuddy:byte-buddy:1.9.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.bytebuddy:byte-buddy-agent:1.9.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:2.6" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-test:2.5.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy:2.5.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-test:2.5.6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy:2.5.6" level="project" />
   </component>
 </module>
