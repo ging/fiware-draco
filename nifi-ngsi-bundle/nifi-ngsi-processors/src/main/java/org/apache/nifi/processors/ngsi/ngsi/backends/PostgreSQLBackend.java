@@ -458,7 +458,7 @@ public class PostgreSQLBackend {
 
         return "insert into " + schemaName + "." + tableName + " " +
                 this.getFieldsForInsert(listOfFields.keySet()) +
-                " values " + String.join(",", valuesForInsert);
+                " values " + String.join(",", valuesForInsert) + ";";
     }
 
     public String checkColumnNames(String tableName) {
