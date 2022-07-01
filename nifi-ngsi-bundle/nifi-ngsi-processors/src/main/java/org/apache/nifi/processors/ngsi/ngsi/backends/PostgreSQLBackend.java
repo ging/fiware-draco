@@ -236,7 +236,7 @@ public class PostgreSQLBackend {
                 }
                 valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
             } else{
-                ListOrderedMap valuesForColumns = new ListOrderedMap();
+                Map<String, String> valuesForColumns = new TreeMap<>();
                 int i = 0;
                 if (ckanCompatible) {
                     valuesForColumns.put("_id", "'" + +i + "'");
@@ -267,10 +267,9 @@ public class PostgreSQLBackend {
                             }
                         }
                     }
-                    List<String> listofEncodedName = listOfFields.keySet().stream().collect(Collectors.toList());
-                    for(int j=0; j<listofEncodedName.size();j++){
-                        if(valuesForColumns.get(listofEncodedName.get(j))==null)
-                            valuesForColumns.put(j,listofEncodedName.get(j), null);
+                    List<String> listofEncodedName = new ArrayList<>(listOfFields.keySet());
+                    for (String s : listofEncodedName) {
+                        valuesForColumns.putIfAbsent(s, null);
                     }
                     valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
                 }
