@@ -25,7 +25,6 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 
 import java.util.*;
 
-import static org.apache.nifi.processors.ngsi.NGSIToPostgreSQL.ENABLE_TEMPORAL_ENTITIES;
 
 @SupportsBatching
 @InputRequirement(InputRequirement.Requirement.INPUT_REQUIRED)
@@ -330,7 +329,6 @@ public class NGSIToHDFS extends AbstractProcessor {
         properties.add(DEFAULT_SERVICE_PATH);
         properties.add(ENABLE_ENCODING);
         properties.add(ENABLE_LOWERCASE);
-        properties.add(ENABLE_TEMPORAL_ENTITIES);
         properties.add(OAUTH2_TOKEN);
         properties.add(SERVICE_AS_NAMESPACE);
         properties.add(FILE_FORMAT);
@@ -393,7 +391,7 @@ public class NGSIToHDFS extends AbstractProcessor {
                 :new HDFSBackendBinary(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
                 hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace);
 
-        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean());
+        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), false);
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
 

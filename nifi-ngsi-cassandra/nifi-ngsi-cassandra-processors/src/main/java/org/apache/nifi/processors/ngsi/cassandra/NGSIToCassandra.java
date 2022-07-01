@@ -120,7 +120,7 @@ public class NGSIToCassandra extends AbstractCassandraProcessor {
 
         boolean error = false;
         NGSIUtils n = new NGSIUtils();
-        final NGSIEvent event=n.getEventFromFlowFile(inputFlowFile,session,context.getProperty(NGSI_VERSION).getValue());
+        final NGSIEvent event=n.getEventFromFlowFile(inputFlowFile,session,context.getProperty(NGSI_VERSION).getValue(), false);
         final long creationTime = event.getCreationTime();
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();

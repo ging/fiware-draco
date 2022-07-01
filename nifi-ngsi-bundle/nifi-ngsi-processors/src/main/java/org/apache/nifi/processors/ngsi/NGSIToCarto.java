@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 
 import static org.apache.nifi.processor.util.pattern.ExceptionHandler.createOnError;
-import static org.apache.nifi.processors.ngsi.NGSIToPostgreSQL.ENABLE_TEMPORAL_ENTITIES;
 
 @SupportsBatching
 @InputRequirement(Requirement.INPUT_REQUIRED)
@@ -410,7 +409,7 @@ public class NGSIToCarto extends AbstractSessionFactoryProcessor {
 
             NGSIUtils n = new NGSIUtils();
 
-            final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean());
+            final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), false);
 
             final long creationTime = event.getCreationTime();
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
