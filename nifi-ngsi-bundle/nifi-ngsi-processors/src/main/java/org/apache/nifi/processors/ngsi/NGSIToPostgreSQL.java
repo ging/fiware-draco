@@ -103,7 +103,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .displayName("Dataset id prefix to truncate")
             .description("Prefix to truncate from dataset ids when generating column names for multi-attributes")
             .required(false)
-            .defaultValue("")
+            .defaultValue("urn:ngsi-ld:Dataset:")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
