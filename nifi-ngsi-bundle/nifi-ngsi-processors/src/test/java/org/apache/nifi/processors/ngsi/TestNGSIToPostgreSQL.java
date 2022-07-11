@@ -769,7 +769,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
 
         List<String> timeStamps = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt)).keySet().stream().sorted().collect(Collectors.toList());
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',test 02,'2022-07-04T13:09:07.089953154Z','2022-07-04T13:10:02.467251082Z',null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','test 02','2022-07-04T13:09:07.089953154Z','2022-07-04T13:10:02.467251082Z',null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
@@ -782,12 +782,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 ""
         );
         assertEquals(entities.get(0).getEntityAttrsLD().size(), valuesForInsert.size());
-        assertEquals(expectedValuesForInsert, valuesForInsert.get(1));
-        for (int i = 0; i < timeStamps.size(); i++) {
-            if(timeStamps.get(i).equals("")) assertTrue(valuesForInsert.get(i).contains("null"));
-            else assertTrue(valuesForInsert.get(i).contains(timeStamps.get(i)));
-            assertTrue(valuesForInsert.get(i).contains(DateTimeFormatter.ISO_INSTANT.format(creationDate)));
-        }
+        assertEquals(expectedValuesForInsert, valuesForInsert.get(2));
     }
 
     @Test

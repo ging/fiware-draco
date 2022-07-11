@@ -101,9 +101,9 @@ public class PostgreSQLBackend {
                     if (attributes != null && !attributes.isEmpty()) {
                         for (AttributesLD attribute : attributes) {
                             String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
-                            if (attribute.getAttrValue() instanceof BigDecimal)
+                            if (attribute.getAttrValue() instanceof Number)
                                 aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
-                            else aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            else aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
                             logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
 
                             String encodedObservedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.OBSERVED_AT);
