@@ -1,6 +1,5 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends;
 
-import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
@@ -106,8 +105,16 @@ public class PostgreSQLBackend {
                                 aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
                             else aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
                             logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
-                            String encodedObservedAt = encodeObservedAtToColumnName(attrName, NGSIConstants.OBSERVED_AT);
+
+                            String encodedObservedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.OBSERVED_AT);
                             aggregation.putIfAbsent(encodedObservedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+
+                            String encodedModifiedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.MODIFIED_AT);
+                            aggregation.putIfAbsent(encodedModifiedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+
+                            String encodedCreatedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.CREATED_AT);
+                            aggregation.putIfAbsent(encodedCreatedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+
                             if (attribute.isHasSubAttrs()) {
                                 for (AttributesLD subAttribute : attribute.getSubAttrs()) {
                                     String subAttrName = subAttribute.getAttrName();
@@ -137,8 +144,8 @@ public class PostgreSQLBackend {
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
 
-    private String encodeObservedAtToColumnName(String encodedAttributeName, String observedAt) {
-        String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(observedAt);
+    private String encodeTimePropertyToColumnName(String encodedAttributeName, String timeProperty) {
+        String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(timeProperty);
         return NGSIEncoders.truncateToMaxSize(encodedName);
     }
 
@@ -242,14 +249,16 @@ public class PostgreSQLBackend {
                     valuesForColumns.put("_id", "'" + +i + "'");
                 }
                 Map<String, List<AttributesLD>> attributesByObservedAt = entity.getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
-                for(String timeStamp: attributesByObservedAt.keySet()) {
+                List<String> timeStamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
+                String oldestTimeStamp;
+
+                if(timeStamps.get(0).equals(""))oldestTimeStamp = timeStamps.get(1);
+                else oldestTimeStamp = timeStamps.get(0);
+
+                for(String timeStamp: timeStamps) {
                     for (AttributesLD attribute : attributesByObservedAt.get(timeStamp)) {
                         ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
-                        ZonedDateTime observedAt = ZonedDateTime.parse(attribute.observedAt);
-                        if (creationDate.toEpochSecond() > observedAt.toEpochSecond())
-                            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(observedAt) + "'");
-                        else
-                            valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
+                        valuesForColumns.put(NGSIConstants.RECV_TIME, "'" + DateTimeFormatter.ISO_INSTANT.format(creationDate) + "'");
 
                         valuesForColumns.put(NGSIConstants.ENTITY_ID, "'" + entity.getEntityId() + "'");
                         valuesForColumns.put(NGSIConstants.ENTITY_TYPE, "'" + entity.getEntityType() + "'");
@@ -257,8 +266,20 @@ public class PostgreSQLBackend {
                         String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
                         valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
 
-                        String encodedObservedAt = encodeObservedAtToColumnName(encodedAttributeName, NGSIConstants.OBSERVED_AT);
-                        valuesForColumns.put(encodedObservedAt, formatFieldForValueInsert(attribute.getObservedAt(), listOfFields.get(encodedObservedAt)));
+                        String encodedObservedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.OBSERVED_AT);
+                        if(attribute.getObservedAt().equals(""))
+                            valuesForColumns.put(encodedObservedAt, null);
+                        else valuesForColumns.put(encodedObservedAt, formatFieldForValueInsert(attribute.getObservedAt(), listOfFields.get(encodedObservedAt)));
+
+                        String encodedCreatedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.CREATED_AT);
+                        if(attribute.createdAt==null || attribute.createdAt.equals("") || ZonedDateTime.parse(attribute.createdAt).toEpochSecond() < ZonedDateTime.parse(oldestTimeStamp).toEpochSecond()){
+                            valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(oldestTimeStamp, listOfFields.get(encodedCreatedAt)));
+                        } else valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(attribute.createdAt, listOfFields.get(encodedCreatedAt)));
+
+                        String encodedModifiedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.MODIFIED_AT);
+                        if(attribute.modifiedAt!=null && !attribute.modifiedAt.equals("")){
+                            valuesForColumns.put(encodedModifiedAt, formatFieldForValueInsert(attribute.modifiedAt, listOfFields.get(encodedModifiedAt)));
+                        }
 
                         if (attribute.isHasSubAttrs()) {
                             for (AttributesLD subAttribute : attribute.getSubAttrs()) {
@@ -266,12 +287,22 @@ public class PostgreSQLBackend {
                                 valuesForColumns.put(encodedSubAttributeName, formatFieldForValueInsert(subAttribute.getAttrValue(), listOfFields.get(encodedSubAttributeName)));
                             }
                         }
+                        if(timeStamp.equals("")){
+                            List<String> listofEncodedName = new ArrayList<>(listOfFields.keySet());
+                            for (String s : listofEncodedName) {
+                                valuesForColumns.putIfAbsent(s, null);
+                            }
+                            valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
+                        }
+
                     }
-                    List<String> listofEncodedName = new ArrayList<>(listOfFields.keySet());
-                    for (String s : listofEncodedName) {
-                        valuesForColumns.putIfAbsent(s, null);
+                    if(!timeStamp.equals("")){
+                        List<String> listofEncodedName = new ArrayList<>(listOfFields.keySet());
+                        for (String s : listofEncodedName) {
+                            valuesForColumns.putIfAbsent(s, null);
+                        }
+                        valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
                     }
-                    valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
                 }
             }
              //for

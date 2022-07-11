@@ -31,7 +31,7 @@ public class TestNGSIUtils {
         return resultStringBuilder.toString();
     }
 
-    private InputStream inputStream = getClass().getClassLoader().getResourceAsStream("temporalEntity.json");
+    private InputStream inputStream = getClass().getClassLoader().getResourceAsStream("temporalEntities.json");
 
     private NGSIUtils ngsiUtils = new NGSIUtils();
 

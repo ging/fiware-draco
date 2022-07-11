@@ -135,7 +135,6 @@ public class NGSIUtils {
             logger.debug("Dealing with entity {} of type {}", entityId, entityType);
             ArrayList<AttributesLD> attributes  = new ArrayList<>();
             Iterator<String> keys = temporalEntity.keys();
-
             while (keys.hasNext()) {
                 String key = keys.next();
                 if (!IGNORED_KEYS_ON_ENTITES.contains(key)) {
@@ -158,7 +157,17 @@ public class NGSIUtils {
                     }
                 }
             }
-            entities.add(new Entity(entityId,entityType,attributes,true));
+
+            String finalEntityId = entityId;
+            if(entities.stream().anyMatch(entity -> entity.entityId.equals(finalEntityId))){
+                for (int x=0;x<entities.size();x++) {
+                    if (entities.get(x).entityId.equals(finalEntityId)){
+                        ArrayList<AttributesLD> attributesLDS = entities.get(x).entityAttrsLD;
+                        attributesLDS.addAll(attributes);
+                        entities.get(x).setEntityAttrsLD(attributesLDS);
+                    }
+                }
+            } else entities.add(new Entity(entityId,entityType,attributes,true));
         }
         return entities;
     }
@@ -167,6 +176,8 @@ public class NGSIUtils {
         String attrType = value.getString("type");
         String datasetId = value.optString("datasetId");
         String observedAt = value.optString("observedAt");
+        String createdAt = value.optString("createdAt");
+        String modifiedAt = value.optString("modifiedAt");
         Object attrValue;
         ArrayList<AttributesLD> subAttributes = new ArrayList<>();
 
@@ -186,14 +197,14 @@ public class NGSIUtils {
             String keyOne = keysOneLevel.next();
             if (("Property".equals(attrType) && "unitCode".equals(keyOne))) {
                 String value2 = value.getString(keyOne);
-                subAttributes.add(new AttributesLD(keyOne, "Property", "", "", value2, false,null));
+                subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "", value2, false,null));
             } else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
                 AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
                 subAttributes.add(subAttribute);
             }
         }
 
-        return new AttributesLD(key, attrType, datasetId, observedAt, attrValue, !subAttributes.isEmpty(), subAttributes);
+        return new AttributesLD(key, attrType, datasetId, observedAt, createdAt, modifiedAt, attrValue, !subAttributes.isEmpty(), subAttributes);
     }
 
     private AttributesLD parseNgsiLdSubAttribute(String key, JSONObject value) {
@@ -207,6 +218,6 @@ public class NGSIUtils {
             subAttrValue = value.get("value").toString();
         }
 
-        return new AttributesLD(key, subAttrType, "", "",  subAttrValue,false,null);
+        return new AttributesLD(key, subAttrType, "", "", "", "",  subAttrValue,false,null);
     }
 }

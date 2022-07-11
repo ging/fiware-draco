@@ -77,15 +77,25 @@ public class AttributesLD {
         return datasetId;
     }
 
-    public AttributesLD(String attrName, String attrType, String datasetId, String observedAt, Object attrValue,
-                        boolean hasSubAttrs, ArrayList<AttributesLD> subAttrs) {
+    public AttributesLD(
+            String attrName,
+            String attrType,
+            String datasetId,
+            String observedAt,
+            String createdAt,
+            String modifiedAt,
+            Object attrValue,
+            boolean hasSubAttrs,
+            ArrayList<AttributesLD> subAttrs
+    ) {
         this.attrName = attrName;
         this.attrType = attrType;
         this.datasetId = datasetId;
         this.observedAt = observedAt;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
         this.attrValue = attrValue;
         this.hasSubAttrs = hasSubAttrs;
         this.subAttrs= subAttrs;
-
     }
 }

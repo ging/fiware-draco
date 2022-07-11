@@ -2,11 +2,8 @@ package org.apache.nifi.processors.ngsi;
 
 import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
-import org.apache.nifi.processors.ngsi.ngsi.utils.Metadata;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
-import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIUtils;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.json.JSONArray;
@@ -32,10 +29,8 @@ import static org.junit.Assert.*;
 public class TestNGSIToPostgreSQL {
     private TestRunner runner;
     private PostgreSQLBackend backend;
-
     private NGSIUtils ngsiUtils = new NGSIUtils();
-
-    private InputStream inputStream = getClass().getClassLoader().getResourceAsStream("temporalEntity.json");
+    private InputStream inputStreamTemporalEntities = getClass().getClassLoader().getResourceAsStream("temporalEntities.json");
 
     private String NGSI_LD_VERSION = "ld";
 
@@ -756,7 +751,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
 
-        String data = readFromInputStream(inputStream);
+        String data = readFromInputStream(inputStreamTemporalEntities);
         ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
 
         Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
@@ -773,8 +768,8 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         TimeZone.setDefault(TimeZone.getTimeZone("CEST"));
         ZonedDateTime creationDate = Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC);
 
-        List<String> timeStamps = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt)).keySet().stream().collect(Collectors.toList());
-        String expectedValuesForInsert = "(62,'2021-02-19T13:18:19.000000Z',null,null,'2019-07-08T04:55:34.983Z','urn:ngsi-ld:AgriCropRecord:gael:ble:3d4bc657-744f-43d7-b741-b5fd6e9a1449',72,'2021-02-19T13:18:19.000000Z',1024,'2021-02-19T13:18:19.000000Z',14.6,'2021-02-19T13:18:19.000000Z','AgriCropRecord',25.2,null,null,'2021-02-19T09:13:15.000000Z',null,null)";
+        List<String> timeStamps = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt)).keySet().stream().sorted().collect(Collectors.toList());
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',test 02,'2022-07-04T13:09:07.089953154Z','2022-07-04T13:10:02.467251082Z',null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
@@ -786,10 +781,11 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 true,
                 ""
         );
-        assertEquals(4, valuesForInsert.size());
+        assertEquals(entities.get(0).getEntityAttrsLD().size(), valuesForInsert.size());
         assertEquals(expectedValuesForInsert, valuesForInsert.get(1));
         for (int i = 0; i < timeStamps.size(); i++) {
-            assertTrue(valuesForInsert.get(i).contains(timeStamps.get(i)));
+            if(timeStamps.get(i).equals("")) assertTrue(valuesForInsert.get(i).contains("null"));
+            else assertTrue(valuesForInsert.get(i).contains(timeStamps.get(i)));
             assertTrue(valuesForInsert.get(i).contains(DateTimeFormatter.ISO_INSTANT.format(creationDate)));
         }
     }
@@ -799,7 +795,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
 
-        String data = readFromInputStream(inputStream);
+        String data = readFromInputStream(inputStreamTemporalEntities);
         ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
 
         String schemaName = backend.buildSchemaName("test", true, false, false);
@@ -829,11 +825,10 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 true,
                 ""
         );
-        assertTrue(instertQueryValue.split("values")[1].split("\\(").length == 5);
+        assertTrue(instertQueryValue.split("values")[1].split("\\(").length == (entities.get(0).getEntityAttrsLD().size()+1));
     }
 
-    private String readFromInputStream(InputStream inputStream)
-            throws IOException {
+    private String readFromInputStream(InputStream inputStream) throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br
                      = new BufferedReader(new InputStreamReader(inputStream))) {
