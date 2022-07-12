@@ -139,12 +139,7 @@ public class NGSIUtils {
                 String key = keys.next();
                 if (!IGNORED_KEYS_ON_ENTITES.contains(key)) {
                     Object object = temporalEntity.get(key);
-                    if (object instanceof JSONObject) {
-                        // it is an attribute with one instance only
-                        JSONObject value = temporalEntity.getJSONObject(key);
-                        AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
-                        attributes.add(attributesLD);
-                    } else if (object instanceof JSONArray) {
+                    if (object instanceof JSONArray) {
                         // it is a multi-attribute (see section 4.5.5 in NGSI-LD specification)
                         JSONArray values = temporalEntity.getJSONArray(key);
                         for (int j = 0; j < values.length(); j++) {
@@ -158,6 +153,7 @@ public class NGSIUtils {
                 }
             }
 
+            //here we group the observed and unobserved entities into one
             String finalEntityId = entityId;
             if(entities.stream().anyMatch(entity -> entity.entityId.equals(finalEntityId))){
                 for (int x=0;x<entities.size();x++) {
