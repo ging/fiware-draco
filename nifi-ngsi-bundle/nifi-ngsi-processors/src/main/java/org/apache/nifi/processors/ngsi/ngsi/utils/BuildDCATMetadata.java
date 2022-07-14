@@ -48,6 +48,7 @@ public class BuildDCATMetadata {
                 newFlowFileAttributes.get("version"),
                 newFlowFileAttributes.get("landingPage"),
                 newFlowFileAttributes.get("visibility"),
+                newFlowFileAttributes.get("datasetRights"),
                 newFlowFileAttributes.get("accessURL"),
                 newFlowFileAttributes.get("availability"),
                 newFlowFileAttributes.get("resourceDescription"),
@@ -57,7 +58,8 @@ public class BuildDCATMetadata {
                 newFlowFileAttributes.get("licenseType"),
                 newFlowFileAttributes.get("downloadURL"),
                 newFlowFileAttributes.get("byteSize"),
-                newFlowFileAttributes.get("resourceName")
+                newFlowFileAttributes.get("resourceName"),
+                newFlowFileAttributes.get("resourceRights")                
         );
         return dcatMetadata;
     }

@@ -22,6 +22,7 @@ public class DCATMetadata {
     private String version;
     private String landingPage;
     private String visibility;
+    private String datasetRights;
     private String accessURL;
     private String availability;
     private String resourceDescription;
@@ -32,12 +33,13 @@ public class DCATMetadata {
     private String downloadURL;
     private String byteSize;
     private String resourceName;
+    private String resourceRights;
 
     public void DCATMetadata(){
 
     }
 
-    public DCATMetadata(String organizationName, String organizationType, String packageDescription, String packageName, String contactPoint, String contactName, String contactEmail, String [] keywords, String publisherURL, String spatialUri, String spatialCoverage, String temporalStart, String temporalEnd, String themes, String version, String landingPage, String visibility, String accessURL, String availability, String resourceDescription, String format, String mimeType, String license, String licenseType, String downloadURL, String byteSize, String resourceName) {
+    public DCATMetadata(String organizationName, String organizationType, String packageDescription, String packageName, String contactPoint, String contactName, String contactEmail, String [] keywords, String publisherURL, String spatialUri, String spatialCoverage, String temporalStart, String temporalEnd, String themes, String version, String landingPage, String visibility, String datasetRights, String accessURL, String availability, String resourceDescription, String format, String mimeType, String license, String licenseType, String downloadURL, String byteSize, String resourceName, String resourceRights) {
         this.organizationName = organizationName;
         this.organizationType = organizationType;
         this.packageDescription = packageDescription;
@@ -55,6 +57,7 @@ public class DCATMetadata {
         this.version = version;
         this.landingPage = landingPage;
         this.visibility = visibility;
+        this.datasetRights = datasetRights;
         this.accessURL = accessURL;
         this.availability = availability;
         this.resourceDescription = resourceDescription;
@@ -65,6 +68,7 @@ public class DCATMetadata {
         this.downloadURL = downloadURL;
         this.byteSize = byteSize;
         this.resourceName = resourceName;
+        this.resourceRights = resourceRights;
     }
 
     public String getOrganizationName() {
@@ -203,6 +207,14 @@ public class DCATMetadata {
         this.visibility = visibility;
     }
 
+    public String getDatasetRights() {
+        return datasetRights;
+    }
+
+    public void setDatasetRights(String datasetRights) {
+        this.datasetRights = datasetRights;
+    }
+
     public String getAccessURL() {
         return accessURL;
     }
@@ -279,6 +291,14 @@ public class DCATMetadata {
         return resourceName;
     }
 
+    public String getResourceRights() {
+        return resourceRights;
+    }
+
+    public void setResourceRights(String resourceRights) {
+        this.resourceRights = resourceRights;
+    }
+
     @Override
     public String toString() {
         return "DCATMetadata{" +
@@ -299,6 +319,7 @@ public class DCATMetadata {
                 ", version='" + version + '\'' +
                 ", landingPage='" + landingPage + '\'' +
                 ", visibility='" + visibility + '\'' +
+                ", datasetRights='" + datasetRights + '\'' +
                 ", accessURL='" + accessURL + '\'' +
                 ", availability='" + availability + '\'' +
                 ", resourceDescription='" + resourceDescription + '\'' +
@@ -309,6 +330,7 @@ public class DCATMetadata {
                 ", downloadURL='" + downloadURL + '\'' +
                 ", byteSize='" + byteSize + '\'' +
                 ", resourceName='" + resourceName + '\'' +
+                ", resourceRights='" + resourceRights + '\'' +
                 '}';
     }
 

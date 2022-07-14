@@ -241,7 +241,7 @@ public class NGSIToCKAN extends AbstractProcessor {
         return rels;
     }
 
-    protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile, ProcessSession session) {
+    protected void persistFlowFile(final ProcessContext context, final FlowFile flowFile, ProcessSession session) throws Exception {
 
         final String[] host = {context.getProperty(CKAN_HOST).getValue()};
         final String port = context.getProperty(CKAN_PORT).getValue();
@@ -314,7 +314,7 @@ public class NGSIToCKAN extends AbstractProcessor {
             } // for
 
         }catch (Exception e){
-            getLogger().error(e.toString());
+            throw e;
         }
     }
 

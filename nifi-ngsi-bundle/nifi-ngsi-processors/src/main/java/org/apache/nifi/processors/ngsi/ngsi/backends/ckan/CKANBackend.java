@@ -64,7 +64,7 @@ public class CKANBackend extends HttpBackend {
             resId = resourceLookupOrCreate(orgName, pkgName, resName, createEnabled, dcatMetadata,createDataStore);
         }
         if (resId == null) {
-            throw new Error("Cannot persist the data (orgName=" + orgName + ", pkgName=" + pkgName
+            throw new Exception("Cannot persist the data (orgName=" + orgName + ", pkgName=" + pkgName
                     + ", resName=" + resName + ")");
         } else {
             if (createDataStore){
@@ -92,7 +92,7 @@ public class CKANBackend extends HttpBackend {
             throws Exception {
         if (!cache.isCachedOrg(orgName)) {
             System.out.println("The organization was not cached nor existed in CKAN (orgName=" + orgName + ")");
-
+            
             String orgId = createOrganization(orgName,dcatMetadata);
             cache.addOrg(orgName);
             cache.setOrgId(orgName, orgId);
@@ -249,7 +249,7 @@ public class CKANBackend extends HttpBackend {
         if (res.getStatusCode() == 200) {
             System.out.println("Successful insert (resource/datastore id=" + resId + ")");
         } else {
-            throw new Error("Could not insert (resId=" + resId + ", statusCode="
+            throw new Exception("Could not insert (resId=" + resId + ", statusCode="
                     + res.getStatusCode() + ")");
         } // if else
     } // insert
@@ -287,7 +287,7 @@ public class CKANBackend extends HttpBackend {
             System.out.println("Successful organization creation (orgName/OrgId=" + orgName + "/" + orgId + ")");
             return orgId;
         } else {
-            throw new Error("Could not create the orgnaization (orgName=" + orgName
+            throw new Exception("Could not create the orgnaization (orgName=" + orgName
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // createOrganization
@@ -355,6 +355,11 @@ public class CKANBackend extends HttpBackend {
             extrasJson.addProperty("key","theme");
             extrasJson.addProperty("value",dcatMetadata.getThemes());
             extrasJsonArray.add(extrasJson);
+            extrasJson=new JsonObject();
+            extrasJson.addProperty("key","access_rights");
+            extrasJson.addProperty("value",dcatMetadata.getDatasetRights());
+            extrasJsonArray.add(extrasJson);
+
 
             //espacio para tags
             keywords=dcatMetadata.getKeywords();
@@ -396,7 +401,7 @@ public class CKANBackend extends HttpBackend {
             } // if else
         */
         } else {
-            throw new Error("Could not create the package (orgId=" + orgId
+            throw new Exception("Could not create the package (orgId=" + orgId
                     + ", pkgName=" + pkgName + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // createPackage
@@ -426,7 +431,7 @@ public class CKANBackend extends HttpBackend {
         dataJson.addProperty("download_url",dcatMetadata.getDownloadURL());
         dataJson.addProperty("size",dcatMetadata.getByteSize());
         dataJson.addProperty("url",dcatMetadata.getDownloadURL());
-
+        dataJson.addProperty("rights",dcatMetadata.getResourceRights());
         extrasJson.addProperty("key","license_type");
         extrasJson.addProperty("value",dcatMetadata.getLicenseType());
         //extrasJsonArray.add(extrasJson);
@@ -445,7 +450,7 @@ public class CKANBackend extends HttpBackend {
                     + ")");
             return resourceId;
         } else {
-            throw new Error("Could not create the resource (pkgId=" + pkgId
+            throw new Exception("Could not create the resource (pkgId=" + pkgId
                     + ", resName=" + resName + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // createResource
@@ -482,7 +487,7 @@ public class CKANBackend extends HttpBackend {
         if (res.getStatusCode() == 200) {
             System.out.println("Successful datastore creation (resourceId=" + resId + ")");
         } else {
-            throw new Error("Could not create the datastore (resId=" + resId
+            throw new Exception("Could not create the datastore (resId=" + resId
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // createResource
@@ -532,7 +537,7 @@ public class CKANBackend extends HttpBackend {
         if (res.getStatusCode() == 200) {
             System.out.println("Successful datastore creation (resourceId=" + resId + ")");
         } else {
-            throw new Error("Could not create the datastore (resId=" + resId
+            throw new Exception("Could not create the datastore (resId=" + resId
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // createResource
@@ -559,7 +564,7 @@ public class CKANBackend extends HttpBackend {
             if (res.getStatusCode() == 200) {
                 System.out.println("Successful view creation (resourceId=" + resId + ")");
             } else {
-                throw new Error("Could not create the datastore (resId=" + resId
+                throw new Exception("Could not create the datastore (resId=" + resId
                         + ", statusCode=" + res.getStatusCode() + ")");
             } // if else
         } // if
@@ -580,7 +585,7 @@ public class CKANBackend extends HttpBackend {
             System.out.println("Successful view listing (resourceId=" + resId + ")");
             return (((JSONArray) res.getJsonObject().get("result")).size() > 0);
         } else {
-            throw new Error("Could not check if the view exists (resId=" + resId
+            throw new Exception("Could not check if the view exists (resId=" + resId
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // existsView
@@ -608,7 +613,7 @@ public class CKANBackend extends HttpBackend {
             System.out.println("Successful search (resourceId=" + resId + ")");
             return res.getJsonObject();
         } else {
-            throw new Error("Could not search for the records (resId=" + resId
+            throw new Exception("Could not search for the records (resId=" + resId
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // getRecords
@@ -633,7 +638,7 @@ public class CKANBackend extends HttpBackend {
         if (res.getStatusCode() == 200) {
             System.out.println("Successful deletion (resourceId=" + resId + ")");
         } else {
-            throw new Error("Could not delete the records (resId=" + resId
+            throw new Exception("Could not delete the records (resId=" + resId
                     + ", statusCode=" + res.getStatusCode() + ")");
         } // if else
     } // deleteRecords
@@ -739,7 +744,7 @@ public class CKANBackend extends HttpBackend {
                         } // if else
                     } // for
                 } catch (ParseException e) {
-                    throw new Error("Data expiration error ParseException"+ e.getMessage());
+                    throw new Exception("Data expiration error ParseException"+ e.getMessage());
                 } // try catch
 
                 if (records.isEmpty()) {

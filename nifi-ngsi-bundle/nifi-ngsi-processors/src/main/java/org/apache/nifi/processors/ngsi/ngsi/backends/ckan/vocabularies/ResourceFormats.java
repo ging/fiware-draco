@@ -48,6 +48,7 @@ public class ResourceFormats {
     public static final Format JPEG = new Format("JPEG", "JPG Image File", "image/jpeg");
     public static final Format JS = new Format("JS", "JavaScript", "application/x-javascript");
     public static final Format JSON = new Format("JSON", "JavaScript Object Notation", "application/json");
+    public static final Format JSON_LD = new Format("JSON_LD", "JavaScript Object Notation Linked Data", "application/ld+json");    
     public static final Format KML = new Format("KML", "KML File", "application/vnd.google-earth.kml+xml");
     public static final Format KMZ = new Format("KMZ", "KMZ File", "application/vnd.google-earth.kmz+xml");
     public static final Format MDB = new Format("MDB", "Access Database", "application/x-msaccess");
@@ -155,6 +156,7 @@ public class ResourceFormats {
         resourceFormats.put(JPEG.getName(), JPEG);
         resourceFormats.put(JS.getName(), JS);
         resourceFormats.put(JSON.getName(), JSON);
+        resourceFormats.put(JSON_LD.getName(), JSON_LD);
         resourceFormats.put(KML.getName(), KML);
         resourceFormats.put(KMZ.getName(), KMZ);
         resourceFormats.put(MDB.getName(), MDB);

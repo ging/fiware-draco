@@ -180,7 +180,7 @@ public class CKANCache extends HttpBackend {
             case 404:
                 return false;
             default:
-                throw new Error("Could not check if the organization exists ("
+                throw new Exception("Could not check if the organization exists ("
                         + "orgName=" + orgName + ", statusCode=" + res.getStatusCode() + ")");
         } // switch
     } // isCachedOrg
@@ -217,7 +217,7 @@ public class CKANCache extends HttpBackend {
                 String pkgState = result.get("state").toString();
                 
                 if (pkgState.equals("deleted")) {
-                    throw new Error("The package '" + pkgName + "' exists but it is in a "
+                    throw new Exception("The package '" + pkgName + "' exists but it is in a "
                             + "deleted state");
                 } // if
                 
@@ -237,7 +237,7 @@ public class CKANCache extends HttpBackend {
             case 404:
                 return false;
             default:
-                throw new Error("Could not check if the package exists ("
+                throw new Exception("Could not check if the package exists ("
                         + "orgName=" + orgName + ", pkgName=" + pkgName + ", statusCode=" + res.getStatusCode() + ")");
         } // switch
     } // isCachedPkg
@@ -307,7 +307,7 @@ public class CKANCache extends HttpBackend {
             case 404:
                 return false;
             default:
-                throw new Error("Could not check if the resource exists ("
+                throw new Exception("Could not check if the resource exists ("
                         + "orgName=" + orgName + ", pkgName=" + pkgName + ", resName=" + resName
                         + ", statusCode=" + res.getStatusCode() + ")");
         } // switch
@@ -340,7 +340,7 @@ public class CKANCache extends HttpBackend {
             String pkgState = pkg.get("state").toString();
 
             if (pkgState.equals("deleted")) {
-                throw new Error("The package '" + pkgName + "' exists but it is in a deleted state");
+                throw new Exception("The package '" + pkgName + "' exists but it is in a deleted state");
             } // if
             
             // put the package in the tree and in the packages map

@@ -1,17 +1,17 @@
 # UpdateCKANMetadata
 Content:
 
--   [Functionality](#section1)
--   [Mapping NGSI-LD events to `NGSI-LDEvent` objects](#section1.1)
--   [Mapping `NGSI-LDEvents` to DCAT-AP Metadata into CKAN data structures](#section1.2)
-    -   [DCAT-AP Metadata tags for Organizations](#section1.2.1)
-    -   [DCAT-AP Metadata tags for Packages/Datasets](#section1.2.2)
-    -   [DCAT-AP Metadata tags for Resources](#section1.2.3)
--   [Administration guide](#section2)
-    -   [Configuration](#section2.1)
--   [Use cases](#section2.2)
--   [Programmers guide](#section3)
-    -   [`UpdateCKANMetadata` class](#section3.1)
+- [UpdateCKANMetadata](#updateckanmetadata)
+  - [<a name="section1"></a>Functionality](#functionality)
+    - [<a name="section1.1"></a>Mapping NGSI-LD events to `NGSI-LDEvent` objects](#mapping-ngsi-ld-events-to-ngsi-ldevent-objects)
+    - [<a name="section1.2"></a>Mapping `NGSI-LDEvent`s to DCAT-AP Metadata into CKAN data structures](#mapping-ngsi-ldevents-to-dcat-ap-metadata-into-ckan-data-structures)
+      - [<a name="section1.2.1"></a>DCAT-AP Metadata tags for Organizations](#dcat-ap-metadata-tags-for-organizations)
+      - [<a name="section1.2.2"></a>DCAT-AP Metadata tags for Packages/Datasets](#dcat-ap-metadata-tags-for-packagesdatasets)
+      - [<a name="section1.2.3"></a>DCAT-AP Metadata tags for Resources](#dcat-ap-metadata-tags-for-resources)
+  - [<a name="section2"></a>Administration guide](#administration-guide)
+    - [<a name="section2.1"></a>Configuration](#configuration)
+  - [<a name="section3"></a>Programmers guide](#programmers-guide)
+    - [<a name="section3.1"></a>`UpdateCKANMetadata` class](#updateckanmetadata-class)
 
 ## <a name="section1"></a>Functionality
 `UpdateCKANMetadata`, is a processor designed to add additional metadata to an incoming flowfile or NGSI-LD event. This processor was designed to include all the metadata fields needed for complying with [DCAT-AP v2.0.1](https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/news/dcat-ap-release-201) 
@@ -66,6 +66,7 @@ DCAT-AP v2.0.1 specification defines some mandatory tags in metadata for complyi
 | \-                | temporalEnd                                | temporalEnd                                                         | extra:temporal\_end                                                                 |
 | dcat:theme        | \-                                         | themes                                                              | themes                                                                              | extra:theme                    | Recommended property for Dataset |
 | dcat:landingPage  | \-                                         | landingPage                                                         | landingPage                                                                         | URL                            | Optional property for Dataset    |
+| dct:accessRights  | \-                                         | datasetRights                                                         | datasetRights                                                                         | extra:access_rights                            | Optional property for Dataset    |
 | owl:versionInfo   | \-                                         | version                                                             | version                                                                             | extra:dcat_version             | Optional property for Dataset    |
 
 #### <a name="section1.2.3"></a>DCAT-AP Metadata tags for Resources
@@ -82,6 +83,7 @@ DCAT-AP v2.0.1 specification defines some mandatory tags in metadata for complyi
 | licenseType         | licenseType | resource:license\_type |
 | dcat:byteSize       | \-          | byteSize               | byteSize                          | resource:size                      | Optional property for Distribution    |
 | dcat:downloadURL    | \-          | downloadURL            | downloadURL                       | `resource:download\_url`             | Optional property for Distribution    |
+| dct:rights    | \-          | resourceRights            | resourceRights                       | `resource:rights             | Optional property for Distribution    |
 | dct:title           | entity ID, entity ID + entity type               | resourceName (expression language for dates) | (resourceName or entity ID) -> (if ld && dataModel = db-by-entity-id) ,  (resourceName or entity ID + entity type) -> (if ld && dataModel = db-by-entity) | resource:name   | Optional property for Distribution |
 
 [Top](#top)

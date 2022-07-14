@@ -210,6 +210,14 @@ public class UpdateCkanMetadataAttributes extends AbstractProcessor {
                         .allowableValues("public", "private")
                         .build();
 
+        public static final PropertyDescriptor DATASET_RIGHTS = new PropertyDescriptor.Builder().name("datasetRights")
+                        .displayName("Dataset Rights")
+                        .description("Dataset Rights. Example: http://publications.europa.eu/resource/authority/access-right/RESTRICTED")
+                        .required(false)
+                        .expressionLanguageSupported(ExpressionLanguageScope.FLOWFILE_ATTRIBUTES)
+                        .addValidator(StandardValidators.URI_VALIDATOR)
+                        .build();
+
         public static final PropertyDescriptor ACCESS_URL = new PropertyDescriptor.Builder().name("accessURL")
                         .displayName("Access URL")
                         .description("The access URL, "
@@ -300,6 +308,14 @@ public class UpdateCkanMetadataAttributes extends AbstractProcessor {
                         .expressionLanguageSupported(ExpressionLanguageScope.FLOWFILE_ATTRIBUTES)
                         .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
                         .build();
+        
+        public static final PropertyDescriptor RESOURCE_RIGHTS = new PropertyDescriptor.Builder().name("resourceRights")
+                        .displayName("Resource Rights")
+                        .description("Resource Rights. Example: http://publications.europa.eu/resource/authority/access-right/RESTRICTED")
+                        .required(false)
+                        .expressionLanguageSupported(ExpressionLanguageScope.FLOWFILE_ATTRIBUTES)
+                        .addValidator(StandardValidators.URI_VALIDATOR)
+                        .build();
 
         public static final Relationship REL_SUCCESS = new Relationship.Builder()
                         .name("Success")
@@ -330,6 +346,7 @@ public class UpdateCkanMetadataAttributes extends AbstractProcessor {
                 descriptors.add(VERSION);
                 descriptors.add(LANDING_PAGE);
                 descriptors.add(VISIBILITY);
+                descriptors.add(DATASET_RIGHTS);
                 descriptors.add(ACCESS_URL);
                 descriptors.add(AVAILABILITY);
                 descriptors.add(RESOURCE_DESCRIPTION);
@@ -340,6 +357,7 @@ public class UpdateCkanMetadataAttributes extends AbstractProcessor {
                 descriptors.add(DOWNLOAD_URL);
                 descriptors.add(BYTE_SIZE);
                 descriptors.add(RESOURCE_NAME);
+                descriptors.add(RESOURCE_RIGHTS);
                 this.descriptors = Collections.unmodifiableList(descriptors);
 
                 final Set<Relationship> relationships = new HashSet<>();
