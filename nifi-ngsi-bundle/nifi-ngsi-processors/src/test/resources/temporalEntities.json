@@ -1,65 +1,87 @@
 [
   {
-    "id": "urn:ngsi-ld:NifiTest:Test01",
-    "type": "NifiTest",
-    "temperature": [
-      {
-        "type": "Property",
-        "value": 16,
-        "createdAt": "2022-07-04T13:09:07.092021704Z",
-        "instanceId": "urn:ngsi-ld:Instance:ecdaf9f1-adff-4c2f-9e54-bac898b479ad",
-        "modifiedAt": "2022-07-04T13:09:32.358436714Z",
-        "observedAt": "2020-10-29T09:00:00Z"
-      },
-      {
-        "type": "Property",
-        "value": 14,
-        "createdAt": "2022-07-04T13:09:07.092021704Z",
-        "instanceId": "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
-        "observedAt": "2020-09-29T09:00:00Z"
+    "id" : "urn:ngsi-ld:NifiTest:Test01",
+    "type" : "NifiTest",
+    "hasRel" : {
+      "type" : "Relationship",
+      "object" : "urn:ngsi-ld:RelationTest:Test03",
+      "RelationshipDetails" : {
+        "id" : "urn:ngsi-ld:RelationTest:Test03",
+        "type" : "RelationTest",
+        "country" : {
+          "type" : "Property",
+          "value" : "  FR"
+        }
       }
-    ],
-    "name": []
+    },
+    "hasRelation" : {
+      "type" : "Relationship",
+      "object" : "urn:ngsi-ld:RelationTest:Test02",
+      "RelationshipDetails" : {
+        "id" : "urn:ngsi-ld:RelationTest:Test02",
+        "type" : "RelationTest",
+        "country" : {
+          "type" : "Property",
+          "value" : "USA"
+        }
+      }
+    },
+    "name" : {
+      "type" : "Property",
+      "value" : "test 01"
+    },
+    "temperature" : [ {
+      "type" : "Property",
+      "value" : 16,
+      "createdAt" : "2022-07-04T13:09:07.092021704Z",
+      "instanceId" : "urn:ngsi-ld:Instance:ecdaf9f1-adff-4c2f-9e54-bac898b479ad",
+      "modifiedAt" : "2022-07-04T13:09:32.358436714Z",
+      "observedAt" : "2020-10-29T09:00:00Z"
+    }, {
+      "type" : "Property",
+      "value" : 14,
+      "createdAt" : "2022-07-04T13:09:07.092021704Z",
+      "instanceId" : "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
+      "observedAt" : "2020-09-29T09:00:00Z"
+    } ]
   },
   {
-    "id": "urn:ngsi-ld:NifiTest:Test01",
-    "type": "NifiTest",
-    "name": [
-      {
-        "type": "Property",
-        "value": "test 01",
-        "createdAt": "2022-07-04T13:09:07.089953154Z",
-        "instanceId": "urn:ngsi-ld:Instance:235e5d13-2229-4053-9aaa-6a6eb2ddb7a5",
-        "modifiedAt": "2022-07-07T09:27:35.425573882Z"
-      },
-      {
-        "type": "Property",
-        "value": "test 02",
-        "createdAt": "2022-07-04T13:09:07.089953154Z",
-        "instanceId": "urn:ngsi-ld:Instance:44542fb5-c7b3-4abb-a692-3665acc360fd",
-        "modifiedAt": "2022-07-04T13:10:02.467251082Z"
+    "id" : "urn:ngsi-ld:NifiTest:Test02",
+    "type" : "NifiTest",
+    "hasRel" : {
+      "type" : "Relationship",
+      "object" : "urn:ngsi-ld:RelationTest:Test04",
+      "RelationshipDetails" : {
+        "id" : "urn:ngsi-ld:RelationTest:Test04",
+        "type" : "RelationTest",
+        "country" : {
+          "type" : "Property",
+          "value" : "  NZ"
+        }
       }
-    ],
-    "temperature": []
-  },
-  {
-    "id": "urn:ngsi-ld:NifiTest:Test02",
-    "type": "NifiTest",
-    "temperature": [
-      {
-        "type": "Property",
-        "value": 14,
-        "createdAt": "2022-07-05T11:57:38.941415997Z",
-        "instanceId": "urn:ngsi-ld:Instance:3e934677-c427-40ac-b820-963200c1f08d",
-        "observedAt": "2020-09-29T09:00:00Z"
+    },
+    "hasRelation" : {
+      "type" : "Relationship",
+      "object" : "urn:ngsi-ld:RelationTest:Test01",
+      "RelationshipDetails" : {
+        "id" : "urn:ngsi-ld:RelationTest:Test01",
+        "type" : "RelationTest",
+        "country" : {
+          "type" : "Property",
+          "value" : "UK"
+        }
       }
-    ],
-    "name": []
-  },
-  {
-    "id": "urn:ngsi-ld:NifiTest:Test02",
-    "type": "NifiTest",
-    "name": [],
-    "temperature": []
+    },
+    "name" : {
+      "type" : "Property",
+      "value" : "test"
+    },
+    "temperature" : [ {
+      "type" : "Property",
+      "value" : 14,
+      "createdAt" : "2022-07-05T11:57:38.941415997Z",
+      "instanceId" : "urn:ngsi-ld:Instance:3e934677-c427-40ac-b820-963200c1f08d",
+      "observedAt" : "2020-09-29T09:00:00Z"
+    } ]
   }
 ]

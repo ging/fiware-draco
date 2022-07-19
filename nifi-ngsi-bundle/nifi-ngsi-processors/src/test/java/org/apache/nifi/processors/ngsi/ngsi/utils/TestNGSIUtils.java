@@ -39,10 +39,10 @@ public class TestNGSIUtils {
     public void testTemporalEntities() throws IOException {
         String data = readFromInputStream(inputStream);
         ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
-        assertEquals(3, entities.size());
+        assertEquals(2, entities.size());
 
         ArrayList<AttributesLD> attributes = entities.get(0).entityAttrsLD;
         Map<String, List<AttributesLD>> attributesByObservedAt = attributes.stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
-        assertEquals(4, attributesByObservedAt.size());
+        assertEquals(3, attributesByObservedAt.size());
     }
 }

@@ -16,7 +16,6 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.SynchronousQueue;
 import java.util.stream.Collectors;
 
 public class PostgreSQLBackend {
@@ -255,7 +254,7 @@ public class PostgreSQLBackend {
 
                 for(String observedTimestamp: observedTimestamps) {
                     //unobserved attributes are grouped by modifiedAt timeproperty and add to columns
-                    if(observedTimestamp.equals("")){
+                    /*if(observedTimestamp.equals("")){
                         Map<String, List<AttributesLD>> attributesByModifiedAt = attributesByObservedAt.get(observedTimestamp).stream().collect(Collectors.groupingBy(attrs -> attrs.modifiedAt));
                         List<String> modifiedTimestamps = attributesByModifiedAt.keySet().stream().sorted().collect(Collectors.toList());
                         for(String modifiedTimestamp: modifiedTimestamps){
@@ -277,7 +276,15 @@ public class PostgreSQLBackend {
                             valuesForColumns.putIfAbsent(s, null);
                         }
                         valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
+                    }*/
+                    for (AttributesLD attribute : attributesByObservedAt.get(observedTimestamp)) {
+                        valuesForColumns.putAll(insertAttributesValues(attribute,valuesForColumns, entity, oldestTimeStamp, listOfFields, creationTime, datasetIdPrefixToTruncate));
                     }
+                    List<String> listofEncodedName = new ArrayList<>(listOfFields.keySet());
+                    for (String s : listofEncodedName) {
+                        valuesForColumns.putIfAbsent(s, null);
+                    }
+                    valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
                 }
             }
              //for

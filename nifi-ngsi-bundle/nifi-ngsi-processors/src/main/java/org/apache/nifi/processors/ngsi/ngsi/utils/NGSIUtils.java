@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.collections.map.CaseInsensitiveMap;
 import org.slf4j.Logger;
@@ -147,23 +144,28 @@ public class NGSIUtils {
                             AttributesLD attributesLD = parseNgsiLdAttribute(key, value);
                             attributes.add(attributesLD);
                         }
+                    } else if (object instanceof JSONObject) {
+                        AttributesLD attributesLD = parseNgsiLdAttribute(key, (JSONObject) object);
+                        attributes.add(attributesLD);
                     } else {
                         logger.warn("Attribute {} has unexpected value type: {}", key, object.getClass());
                     }
                 }
             }
 
-            //here we group the observed and unobserved entities into one
-            String finalEntityId = entityId;
-            if(entities.stream().anyMatch(entity -> entity.entityId.equals(finalEntityId))){
-                for (int x=0;x<entities.size();x++) {
-                    if (entities.get(x).entityId.equals(finalEntityId)){
-                        ArrayList<AttributesLD> attributesLDS = entities.get(x).entityAttrsLD;
-                        attributesLDS.addAll(attributes);
-                        entities.get(x).setEntityAttrsLD(attributesLDS);
-                    }
-                }
-            } else entities.add(new Entity(entityId,entityType,attributes,true));
+//            //here we group the observed and unobserved entities into one
+//            String finalEntityId = entityId;
+//            if(entities.stream().anyMatch(entity -> entity.entityId.equals(finalEntityId))){
+//                for (int x=0;x<entities.size();x++) {
+//                    if (entities.get(x).entityId.equals(finalEntityId)){
+//                        ArrayList<AttributesLD> attributesLDS = entities.get(x).entityAttrsLD;
+//                        attributesLDS.addAll(attributes);
+//                        entities.get(x).setEntityAttrsLD(attributesLDS);
+//                    }
+//                }
+//            } else entities.add(new Entity(entityId,entityType,attributes,true));
+
+            entities.add(new Entity(entityId,entityType,attributes,true));
         }
         return entities;
     }
@@ -194,7 +196,18 @@ public class NGSIUtils {
             if (("Property".equals(attrType) && "unitCode".equals(keyOne))) {
                 String value2 = value.getString(keyOne);
                 subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "", value2, false,null));
-            } else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
+            }
+            else if ("RelationshipDetails".contains(keyOne)) {
+                JSONObject relation = value.getJSONObject(keyOne);
+                relation.remove("id");
+                relation.remove("type");
+
+                for(String relationKey : relation.keySet()){
+                    AttributesLD subAttribute = parseNgsiLdSubAttribute(relationKey, relation.getJSONObject(relationKey));
+                    subAttributes.add(subAttribute);
+                }
+            }
+            else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
                 AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
                 subAttributes.add(subAttribute);
             }

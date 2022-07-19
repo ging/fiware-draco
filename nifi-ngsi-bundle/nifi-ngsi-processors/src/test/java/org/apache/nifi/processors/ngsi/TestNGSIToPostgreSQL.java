@@ -7,6 +7,7 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUM
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -765,7 +766,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         long creationTime = 1562561734983l;
 
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','test 01','2022-07-04T13:09:07.089953154Z','2022-07-07T09:27:35.425573882Z',null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','urn:ngsi-ld:RelationTest:Test03','  FR','2020-09-29T09:00:00Z',null,null,'urn:ngsi-ld:RelationTest:Test02','USA','2020-09-29T09:00:00Z',null,null,'test 01','2020-09-29T09:00:00Z',null,null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
@@ -777,8 +778,12 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 true,
                 ""
         );
-        assertEquals(entities.get(0).getEntityAttrsLD().size(), valuesForInsert.size());
-        assertEquals(expectedValuesForInsert, valuesForInsert.get(2));
+
+        Map<String, List<AttributesLD>> attributesByObservedAt = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
+        List<String> observedTimestamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
+
+        assertEquals(observedTimestamps.size(), valuesForInsert.size());
+        assertEquals(expectedValuesForInsert, valuesForInsert.get(1));
     }
 
     @Test
@@ -816,7 +821,11 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 true,
                 ""
         );
-        assertTrue(instertQueryValue.split("values")[1].split("\\(").length == (entities.get(0).getEntityAttrsLD().size()+1));
+
+        Map<String, List<AttributesLD>> attributesByObservedAt = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
+        List<String> observedTimestamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
+
+        assertEquals(instertQueryValue.split("values")[1].split("\\(").length, observedTimestamps.size()+1);
     }
 
     private String readFromInputStream(InputStream inputStream) throws IOException {
