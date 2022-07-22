@@ -194,8 +194,7 @@ public class NGSIUtils {
         while (keysOneLevel.hasNext()) {
             String keyOne = keysOneLevel.next();
             if (("Property".equals(attrType) && "unitCode".equals(keyOne))) {
-                String value2 = value.getString(keyOne);
-                subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "", value2, false,null));
+                subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "",  value.get(keyOne), false,null));
             }
             else if ("RelationshipDetails".contains(keyOne)) {
                 JSONObject relation = value.getJSONObject(keyOne);
@@ -203,8 +202,21 @@ public class NGSIUtils {
                 relation.remove("type");
 
                 for(String relationKey : relation.keySet()){
-                    AttributesLD subAttribute = parseNgsiLdSubAttribute(relationKey, relation.getJSONObject(relationKey));
-                    subAttributes.add(subAttribute);
+                    Object object = relation.get(relationKey);
+                    if (object instanceof JSONArray) {
+                        // it is a multi-attribute (see section 4.5.5 in NGSI-LD specification)
+                        JSONArray valuesArray = relation.getJSONArray(relationKey);
+                        for (int j = 0; j < valuesArray.length(); j++) {
+                            JSONObject valueObject = valuesArray.getJSONObject(j);
+                            AttributesLD subAttribute = parseNgsiLdSubAttribute(relationKey, valueObject);
+                            subAttributes.add(subAttribute);
+                        }
+                    } else if (object instanceof JSONObject) {
+                        AttributesLD subAttribute = parseNgsiLdSubAttribute(relationKey, (JSONObject) object);
+                        subAttributes.add(subAttribute);
+                    } else {
+                        logger.warn("Sub Attribute {} has unexpected value type: {}", relationKey, object.getClass());
+                    }
                 }
             }
             else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {

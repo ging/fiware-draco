@@ -8,10 +8,14 @@
       "RelationshipDetails" : {
         "id" : "urn:ngsi-ld:RelationTest:Test03",
         "type" : "RelationTest",
-        "country" : {
+        "country" : [{
           "type" : "Property",
-          "value" : "  FR"
-        }
+          "value" : "FR"
+        },
+        {
+                  "type" : "Property",
+                  "value" : "ES"
+                }]
       }
     },
     "hasRelation" : {
@@ -33,6 +37,7 @@
     "temperature" : [ {
       "type" : "Property",
       "value" : 16,
+      "unitCode" : "CEL",
       "createdAt" : "2022-07-04T13:09:07.092021704Z",
       "instanceId" : "urn:ngsi-ld:Instance:ecdaf9f1-adff-4c2f-9e54-bac898b479ad",
       "modifiedAt" : "2022-07-04T13:09:32.358436714Z",
@@ -40,6 +45,7 @@
     }, {
       "type" : "Property",
       "value" : 14,
+      "unitCode" : null,
       "createdAt" : "2022-07-04T13:09:07.092021704Z",
       "instanceId" : "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
       "observedAt" : "2020-09-29T09:00:00Z"
@@ -51,13 +57,19 @@
     "hasRel" : {
       "type" : "Relationship",
       "object" : "urn:ngsi-ld:RelationTest:Test04",
-      "RelationshipDetails" : {
+      "RelationshipDetails" :
+      {
         "id" : "urn:ngsi-ld:RelationTest:Test04",
         "type" : "RelationTest",
-        "country" : {
+        "country" : [{
           "type" : "Property",
-          "value" : "  NZ"
-        }
+          "value" : "NZ"
+        },
+        {
+                  "type" : "Property",
+                  "value" : "ES"
+                }
+                ]
       }
     },
     "hasRelation" : {

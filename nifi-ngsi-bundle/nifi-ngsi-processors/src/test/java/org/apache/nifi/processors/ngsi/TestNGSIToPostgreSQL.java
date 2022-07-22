@@ -766,7 +766,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         long creationTime = 1562561734983l;
 
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','urn:ngsi-ld:RelationTest:Test03','  FR','2020-09-29T09:00:00Z',null,null,'urn:ngsi-ld:RelationTest:Test02','USA','2020-09-29T09:00:00Z',null,null,'test 01','2020-09-29T09:00:00Z',null,null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z')";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','urn:ngsi-ld:RelationTest:Test03','ES','2020-09-29T09:00:00Z',null,null,'urn:ngsi-ld:RelationTest:Test02','USA','2020-09-29T09:00:00Z',null,null,'test 01','2020-09-29T09:00:00Z',null,null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z','null')";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
