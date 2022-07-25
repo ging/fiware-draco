@@ -394,7 +394,7 @@ public class PostgreSQLBackend {
         return "create table if not exists "+schemaName+"." + tableName + " " + getFieldsForCreate(listOfFields) + ";";
     }
 
-    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, boolean ckanCompatible)throws Exception{
+    public String buildTableName(String fiwareServicePath,Entity entity, String dataModel, boolean enableEncoding, boolean enableLowercase, String ngsiVersion, boolean ckanCompatible, boolean isTemporalEntities, String attributeTableName)throws Exception{
         String tableName="";
         String servicePath=(enableLowercase)?fiwareServicePath.toLowerCase():fiwareServicePath;
         String entityId = (enableLowercase) ? entity.getEntityId().toLowerCase() : entity.getEntityId();
@@ -476,7 +476,16 @@ public class PostgreSQLBackend {
                         tableName = NGSICharsets.encodePostgreSQL(entityId);
                         break;
                     case "db-by-entity-type":
-                        tableName = NGSICharsets.encodePostgreSQL(entityType);
+                        if(!isTemporalEntities){
+                            tableName = NGSICharsets.encodePostgreSQL(entityType);
+                        }
+                        else {
+                            if(attributeTableName!=null)
+                                tableName = NGSICharsets.encodePostgreSQL(entityType)
+                                        + CommonConstants.OLD_CONCATENATOR
+                                        + attributeTableName;
+                            else tableName = NGSICharsets.encodePostgreSQL(entityType);
+                        }
                         break;
                     default:
                         System.out.println("Unknown data model '" + dataModel
@@ -489,8 +498,16 @@ public class PostgreSQLBackend {
                         tableName = NGSIEncoders.encodePostgreSQL(entityId);
                         break;
                     case "db-by-entity-type":
-                        tableName = (NGSIEncoders.encodePostgreSQL(entityType));
-
+                        if(!isTemporalEntities){
+                            tableName = NGSICharsets.encodePostgreSQL(entityType);
+                        }
+                        else {
+                            if(attributeTableName!=null)
+                                tableName = NGSICharsets.encodePostgreSQL(entityType)
+                                        + CommonConstants.OLD_CONCATENATOR
+                                        + attributeTableName;
+                            else tableName = NGSICharsets.encodePostgreSQL(entityType);
+                        }
                         break;
                     default:
                         System.out.println("Unknown data model '" + dataModel

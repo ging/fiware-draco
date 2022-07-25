@@ -141,7 +141,7 @@ public class TestNGSIToPostgreSQL {
 
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "somePath";
 
             try {
@@ -180,7 +180,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "x002fsomex0050ath";
 
             try {
@@ -221,7 +221,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "somePath_someId_someType";
 
             try {
@@ -264,7 +264,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "x002fsomex0050athxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -304,7 +304,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
-        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
         String expecetedTableName = "";
 
         try {
@@ -339,7 +339,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "x002f";
 
             try {
@@ -381,7 +381,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "someId_someType";
 
             try {
@@ -423,7 +423,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             String expecetedTableName = "x002fxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -487,7 +487,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false,null );
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -517,7 +517,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false);
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -766,7 +766,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         long creationTime = 1562561734983l;
 
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest','urn:ngsi-ld:RelationTest:Test03','ES','2020-09-29T09:00:00Z',null,null,'urn:ngsi-ld:RelationTest:Test02','USA','2020-09-29T09:00:00Z',null,null,'test 01','2020-09-29T09:00:00Z',null,null,'2019-07-08T04:55:34.983Z',14,'2022-07-04T13:09:07.092021704Z',null,'2020-09-29T09:00:00Z','null')";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',$$urn:ngsi-ld:RelationTest:Test03$$,$$ES$$,$$2020-09-29T09:00:00Z$$,null,null,$$urn:ngsi-ld:RelationTest:Test02$$,$$USA$$,$$2020-09-29T09:00:00Z$$,null,null,$$[3.63969,43.43358]$$,$$2020-09-29T09:00:00Z$$,null,null,$$test 01$$,$$2020-09-29T09:00:00Z$$,null,null,'2019-07-08T04:55:34.983Z',14,$$2022-07-04T13:09:07.092021704Z$$,null,$$2020-09-29T09:00:00Z$$,$$null$$)";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
@@ -795,7 +795,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
 
         String schemaName = backend.buildSchemaName("test", true, false, false);
-        String tableName = backend.buildTableName("", entities.get(0), "db-by-entity-type", true, false, NGSI_LD_VERSION, false);
+        String tableName = backend.buildTableName("", entities.get(0), "db-by-entity-type", true, false, NGSI_LD_VERSION, false, true, "test");
 
         Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
                 attrPersistence,

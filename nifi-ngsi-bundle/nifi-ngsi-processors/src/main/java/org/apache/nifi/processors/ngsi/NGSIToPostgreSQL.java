@@ -295,7 +295,9 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     context.getProperty(ENABLE_ENCODING).asBoolean(),
                                     context.getProperty(ENABLE_LOWERCASE).asBoolean(),
                                     context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean()
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean(),
+                                    flowFile.getAttribute("TableNameSuffix")
                             );
                     final String sql =
                             postgres.insertQuery(
