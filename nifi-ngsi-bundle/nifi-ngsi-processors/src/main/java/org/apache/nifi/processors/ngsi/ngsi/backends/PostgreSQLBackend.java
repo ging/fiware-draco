@@ -341,7 +341,7 @@ public class PostgreSQLBackend {
         String formattedField;
         switch (columnType) {
             case NUMERIC: formattedField = attributeValue.toString(); break;
-            default: formattedField = "'" + attributeValue.toString() + "'";
+            default: formattedField = "$$" + attributeValue.toString() + "$$";
         }
 
         return formattedField;

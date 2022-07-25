@@ -184,7 +184,7 @@ public class NGSIUtils {
         } else if ("Property".contentEquals(attrType)) {
             attrValue = value.get("value");
         } else if ("GeoProperty".contentEquals(attrType)) {
-            attrValue = value.get("value").toString();
+            attrValue = value.getJSONObject("value").get("coordinates").toString();
         } else {
             logger.warn("Unrecognized attribute type: {}", attrType);
             return null;

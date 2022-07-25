@@ -49,7 +49,17 @@
       "createdAt" : "2022-07-04T13:09:07.092021704Z",
       "instanceId" : "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
       "observedAt" : "2020-09-29T09:00:00Z"
-    } ]
+    } ],
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          3.63969,
+          43.43358
+        ]
+      }
+    }
   },
   {
     "id" : "urn:ngsi-ld:NifiTest:Test02",
@@ -94,6 +104,16 @@
       "createdAt" : "2022-07-05T11:57:38.941415997Z",
       "instanceId" : "urn:ngsi-ld:Instance:3e934677-c427-40ac-b820-963200c1f08d",
       "observedAt" : "2020-09-29T09:00:00Z"
-    } ]
+    } ],
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Point",
+        "coordinates": [
+          3.63969,
+          43.43358
+        ]
+      }
+    }
   }
 ]
