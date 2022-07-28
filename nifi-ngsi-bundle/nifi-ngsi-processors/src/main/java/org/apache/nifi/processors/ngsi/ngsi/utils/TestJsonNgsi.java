@@ -261,7 +261,7 @@ public class TestJsonNgsi {
             System.out.println(p.getFieldsForInsert(list.keySet()));
             System.out.println(p.getFieldsForInsert(list.keySet()));
             System.out.println(p.buildSchemaName("test",false,false,false));
-            System.out.println(p.buildTableName("",x,"db-by-entity-type",true,true,"ld",false));
+            System.out.println(p.buildTableName("",x,"db-by-entity-type",true,true,"ld",false, false, null));
             Map<String, POSTGRESQL_COLUMN_TYPES> listC = new HashMap<>();
             listC.put("a", POSTGRESQL_COLUMN_TYPES.TEXT);
             listC.put("b", POSTGRESQL_COLUMN_TYPES.TEXT);
@@ -277,10 +277,6 @@ public class TestJsonNgsi {
                     y.getSubAttrs().forEach(z->System.out.println(z.getAttrName()));
                 }
             }
-
         }
-
-
     }
-
 }

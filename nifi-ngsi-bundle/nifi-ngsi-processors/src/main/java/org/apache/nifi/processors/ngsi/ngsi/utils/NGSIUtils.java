@@ -220,8 +220,21 @@ public class NGSIUtils {
                 }
             }
             else if (!IGNORED_KEYS_ON_ATTRIBUTES.contains(keyOne)) {
-                AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
-                subAttributes.add(subAttribute);
+                Object object = value.get(keyOne);
+                if (object instanceof JSONArray) {
+                    JSONArray valuesArray = value.getJSONArray(keyOne);
+                    for (int j = 0; j < valuesArray.length(); j++) {
+                        JSONObject valueObject = valuesArray.getJSONObject(j);
+                        AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, valueObject);
+                        subAttributes.add(subAttribute);
+                    }
+                } else if (object instanceof JSONObject) {
+                    AttributesLD subAttribute = parseNgsiLdSubAttribute(keyOne, value.getJSONObject(keyOne));
+                    subAttributes.add(subAttribute);
+                }
+                else {
+                    logger.warn("Sub Attribute {} has unexpected value type: {}", keyOne, object.getClass());
+                }
             }
         }
 

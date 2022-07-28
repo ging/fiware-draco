@@ -100,8 +100,10 @@ public class PostgreSQLBackend {
                 attributesByObservedAt.forEach((timestamp, attributesLd) -> attributesLDS.addAll(attributesLd));
                         for (AttributesLD attribute : attributesLDS) {
                             String attrName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
-                            if (attribute.getAttrValue() instanceof Number)
-                                aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            if (attribute.getAttrValue() instanceof Number){
+                                if(aggregation.replace(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC)==null)
+                                    aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                            }
                             else aggregation.putIfAbsent(attrName, POSTGRESQL_COLUMN_TYPES.TEXT);
                             logger.debug("Added {} in the list of fields for entity {}", attrName, entity.entityId);
 
@@ -239,7 +241,7 @@ public class PostgreSQLBackend {
                     }
                 }
                 valuesForInsertList.add("(" + String.join(",", valuesForColumns.values()) + ")");
-            } else{
+            } else {
                 Map<String, String> valuesForColumns = new TreeMap<>();
                 int i = 0;
                 if (ckanCompatible) {
@@ -249,7 +251,10 @@ public class PostgreSQLBackend {
                 List<String> observedTimestamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
                 String oldestTimeStamp;
 
-                if(observedTimestamps.get(0).equals(""))oldestTimeStamp = observedTimestamps.get(1);
+                if(observedTimestamps.get(0).equals("")) {
+                    if(observedTimestamps.size()>1) oldestTimeStamp = observedTimestamps.get(1);
+                    else oldestTimeStamp = DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochMilli(creationTime).atZone(ZoneOffset.UTC));
+                }
                 else oldestTimeStamp = observedTimestamps.get(0);
 
                 for(String observedTimestamp: observedTimestamps) {
@@ -340,7 +345,10 @@ public class PostgreSQLBackend {
     private String formatFieldForValueInsert(Object attributeValue, POSTGRESQL_COLUMN_TYPES columnType) {
         String formattedField;
         switch (columnType) {
-            case NUMERIC: formattedField = attributeValue.toString(); break;
+            case NUMERIC:
+                if(attributeValue instanceof BigDecimal) formattedField = attributeValue.toString();
+                else formattedField = null;
+            break;
             default: formattedField = "$$" + attributeValue.toString() + "$$";
         }
 
@@ -380,6 +388,8 @@ public class PostgreSQLBackend {
             dbName = (enableLowercase) ? service.toLowerCase() : service;
         }
         if (dbName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
+            logger.error("Building database name '" + dbName
+                    + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
             throw new Exception("Building database name '" + dbName
                     + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
         } // if
@@ -516,7 +526,9 @@ public class PostgreSQLBackend {
             } // if else
 
             if (tableName.length() > NGSIConstants.POSTGRESQL_MAX_NAME_LEN) {
-                System.out.println("Building table name '" + tableName
+                logger.error("Building table name '" + tableName
+                        + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
+                throw new Exception("Building table name '" + tableName
                         + "' and its length is greater than " + NGSIConstants.POSTGRESQL_MAX_NAME_LEN);
             } // if
         }

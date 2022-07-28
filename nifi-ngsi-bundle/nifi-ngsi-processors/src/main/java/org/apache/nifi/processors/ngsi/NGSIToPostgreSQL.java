@@ -278,6 +278,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         "ld".equals(context.getProperty(NGSI_VERSION).getValue()) ? event.getEntitiesLD() : event.getEntities();
 
                 for (Entity entity : entities) {
+                    getLogger().info("Entity " + entity.toString());
                     Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields =
                             postgres.listOfFields(
                                     context.getProperty(ATTR_PERSISTENCE).getValue(),
@@ -337,17 +338,16 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                 conn.createStatement().execute(postgres.addColumns(schemaName, tableName, newColumns));
                             }
                         } catch (SQLException s) {
-                            getLogger().error(s.toString());
+                            getLogger().error(s.toString(), s);
                         }
                         stmt.addBatch();
                     }, onFlowFileError(context, session, result))) {
                         continue;
                     }
-
                     enclosure.addFlowFile(flowFile);
                 }
             }catch (Exception e){
-                getLogger().error(e.toString());
+                getLogger().error(e.toString(), e);
             }
         }
     };
