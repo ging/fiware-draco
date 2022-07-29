@@ -7,7 +7,6 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUM
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +16,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -766,7 +761,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
         long creationTime = 1562561734983l;
 
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',$$urn:ngsi-ld:RelationTest:Test03$$,$$ES$$,$$2020-09-29T09:00:00Z$$,null,null,$$urn:ngsi-ld:RelationTest:Test02$$,$$USA$$,$$2020-09-29T09:00:00Z$$,null,null,$$[3.63969,43.43358]$$,$$2020-09-29T09:00:00Z$$,null,null,$$test 01$$,$$2020-09-29T09:00:00Z$$,null,null,'2019-07-08T04:55:34.983Z',14,$$2022-07-04T13:09:07.092021704Z$$,null,$$2020-09-29T09:00:00Z$$,$$null$$)";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',$$urn:ngsi-ld:RelationTest:Test03$$,$$ES$$,$$2020-09-29T09:00:00Z$$,null,null,$$urn:ngsi-ld:RelationTest:Test02$$,$$USA$$,$$2020-09-29T09:00:00Z$$,null,null,$$[3.63969,43.43358]$$,$$2020-09-29T09:00:00Z$$,null,null,$$test 01$$,$$2020-09-29T09:00:00Z$$,null,null,'2019-07-08T04:55:34.983Z',null,$$2020-09-29T09:00:00Z$$,null,$$2020-09-29T09:00:00Z$$,null)";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),

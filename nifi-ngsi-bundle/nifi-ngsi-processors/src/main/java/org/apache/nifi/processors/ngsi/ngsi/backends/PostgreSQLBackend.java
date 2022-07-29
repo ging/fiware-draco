@@ -322,7 +322,7 @@ public class PostgreSQLBackend {
         else valuesForColumns.put(encodedObservedAt, formatFieldForValueInsert(attribute.getObservedAt(), listOfFields.get(encodedObservedAt)));
 
         String encodedCreatedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.CREATED_AT);
-        if(attribute.createdAt==null || attribute.createdAt.equals("") || ZonedDateTime.parse(attribute.createdAt).toEpochSecond() < ZonedDateTime.parse(oldestTimeStamp).toEpochSecond()){
+        if(attribute.createdAt==null || attribute.createdAt.equals("") || ZonedDateTime.parse(attribute.createdAt).toEpochSecond() > ZonedDateTime.parse(oldestTimeStamp).toEpochSecond()){
             valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(oldestTimeStamp, listOfFields.get(encodedCreatedAt)));
         } else valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(attribute.createdAt, listOfFields.get(encodedCreatedAt)));
 
@@ -349,9 +349,11 @@ public class PostgreSQLBackend {
                 if(attributeValue instanceof BigDecimal) formattedField = attributeValue.toString();
                 else formattedField = null;
             break;
-            default: formattedField = "$$" + attributeValue.toString() + "$$";
+            default:
+                if(attributeValue != null)
+                    formattedField = "$$" + attributeValue + "$$";
+                else formattedField = null;
         }
-
         return formattedField;
     }
 

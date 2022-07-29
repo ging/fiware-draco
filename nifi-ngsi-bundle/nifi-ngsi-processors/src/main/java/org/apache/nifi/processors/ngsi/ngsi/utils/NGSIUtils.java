@@ -194,7 +194,10 @@ public class NGSIUtils {
         while (keysOneLevel.hasNext()) {
             String keyOne = keysOneLevel.next();
             if (("Property".equals(attrType) && "unitCode".equals(keyOne))) {
-                subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "",  value.get(keyOne), false,null));
+                if(value.get(keyOne) instanceof String)
+                    subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "",  value.getString(keyOne), false,null));
+                else subAttributes.add(new AttributesLD(keyOne, "Property", "", "","", "",  null, false,null));
+
             }
             else if ("RelationshipDetails".contains(keyOne)) {
                 JSONObject relation = value.getJSONObject(keyOne);
