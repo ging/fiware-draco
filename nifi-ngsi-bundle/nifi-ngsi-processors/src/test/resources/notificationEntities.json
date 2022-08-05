@@ -1,0 +1,106 @@
+[ {
+  "id" : "urn:ngsi-ld:WeatherObserved:EGM-Farm-Demo",
+  "type" : "WeatherObserved",
+  "name" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.541201Z",
+    "value" : "EGM-Farm-Demo"
+  },
+  "createdAt" : "2021-10-27T14:23:22.270568Z",
+  "refCity" : {
+    "type" : "Relationship",
+    "createdAt" : "2021-10-27T14:23:22.532923Z",
+    "object" : "urn:ngsi-ld:City:Valbonne"
+  },
+  "location" : {
+    "type" : "GeoProperty",
+    "value" : {
+      "type" : "Point",
+      "coordinates" : [ 7.038174, 43.6197969 ]
+    }
+  },
+  "modifiedAt" : "2022-08-05T08:16:35.700936715Z",
+  "category" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.535621Z",
+    "value" : "EGM-WeatherStation"
+  },
+  "humidity" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.537137Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:humidity:P1:EdgeWeatherStation",
+    "value" : 44.0,
+    "modifiedAt" : "2022-08-05T08:16:35.330406412Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "P1"
+  },
+  "illuminance" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.538449Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:illuminance:LUX:EdgeWeatherStation",
+    "value" : 653.04,
+    "modifiedAt" : "2022-08-05T08:16:35.481848686Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "LUX"
+  },
+  "irradiance" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.539893Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:irradiance:MBR:EdgeWeatherStation",
+    "value" : 12200.0,
+    "modifiedAt" : "2022-08-05T08:16:35.554307734Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "D54"
+  },
+  "precipitation" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.542627Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:precipitation:MM:EdgeWeatherStation",
+    "period" : {
+      "type" : "Property",
+      "createdAt" : "2021-10-27T14:23:22.544023Z",
+      "value" : 10,
+      "unitCode" : "MIN"
+    },
+    "value" : 374.4,
+    "modifiedAt" : "2022-08-05T08:16:35.699198584Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "l/s"
+  },
+  "temperature" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.546605Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:temperature:CEL:EdgeWeatherStation",
+    "value" : 31.0,
+    "modifiedAt" : "2022-08-05T08:16:35.396963483Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "CEL"
+  },
+  "windDirection" : {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.548002Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:windDirection:DEG:EdgeWeatherStation",
+    "value" : 256.0,
+    "modifiedAt" : "2022-08-05T08:16:35.595968016Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "deg"
+  },
+  "windSpeed" : [ {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.549213Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:gust:KMH:EdgeWeatherStation",
+    "value" : 0.0,
+    "modifiedAt" : "2022-08-05T08:16:35.251849642Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "MTS"
+  }, {
+    "type" : "Property",
+    "createdAt" : "2021-10-27T14:23:22.550476Z",
+    "datasetId" : "urn:ngsi-ld:Dataset:wind:KMH:AVG:EdgeWeatherStation",
+    "value" : 0.0,
+    "modifiedAt" : "2022-08-05T08:16:35.640813175Z",
+    "observedAt" : "2022-08-05T08:13:25Z",
+    "unitCode" : "MTS"
+  } ],
+  "@context" : [ "https://raw.githubusercontent.com/easy-global-market/ngsild-api-data-models/master/precipitation/jsonld-contexts/precipitationCompouned.jsonld" ]
+} ]

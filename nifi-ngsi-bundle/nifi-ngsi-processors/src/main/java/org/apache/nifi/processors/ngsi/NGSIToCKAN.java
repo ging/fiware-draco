@@ -249,7 +249,7 @@ public class NGSIToCKAN extends AbstractProcessor {
         final String ngsiVersion=context.getProperty(NGSI_VERSION).getValue();
         final String dataModel=context.getProperty(DATA_MODEL).getValue();
 
-        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,ngsiVersion, false);
+        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,ngsiVersion);
         final long creationTime = event.getCreationTime();
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();

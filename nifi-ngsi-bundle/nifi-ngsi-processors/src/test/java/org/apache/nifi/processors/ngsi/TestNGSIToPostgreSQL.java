@@ -28,6 +28,8 @@ public class TestNGSIToPostgreSQL {
     private NGSIUtils ngsiUtils = new NGSIUtils();
     private InputStream inputStreamTemporalEntities = getClass().getClassLoader().getResourceAsStream("temporalEntities.json");
 
+    private InputStream inputStreamNotificationEntities = getClass().getClassLoader().getResourceAsStream("notificationEntities.json");
+
     private String NGSI_LD_VERSION = "ld";
 
     @Before
@@ -136,7 +138,7 @@ public class TestNGSIToPostgreSQL {
 
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "somePath";
 
             try {
@@ -175,7 +177,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "x002fsomex0050ath";
 
             try {
@@ -216,7 +218,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "somePath_someId_someType";
 
             try {
@@ -259,7 +261,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "x002fsomex0050athxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -299,7 +301,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
-        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+        String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
         String expecetedTableName = "";
 
         try {
@@ -334,7 +336,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String servicePath = "/";
         Entity entity = new Entity("someId", "someType", null);
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "x002f";
 
             try {
@@ -376,7 +378,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "someId_someType";
 
             try {
@@ -418,7 +420,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId","someType",null);
 
         try {
-            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            String builtTableName = backend.buildTableName(servicePath, entity, dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             String expecetedTableName = "x002fxffffsomex0049dxffffsomex0054ype";
 
             try {
@@ -482,7 +484,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", null);
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false,null );
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null );
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -512,7 +514,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
 
 
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, false, null);
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase,ngsiVersion,false, null);
             fail("[NGSIToPostgreSQL.buildTableName]"
                     + "- FAIL - A table name length greater than 63 characters has not been detected");
         } catch (Exception e) {
@@ -535,7 +537,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, false, "");
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, "");
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "attrName", "attrType", "attrValue", "attrMd");
             Set<String> expecetedListOfFields = new HashSet<>(expList);
            
@@ -570,7 +572,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
-            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, false, "");
+            Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(attrPersistence, entity,ngsiVersion,false, "");
             List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "someAttr", "someAttr_md");
             Set<String> expecetedListOfFields = new HashSet<>(expList);
            
@@ -608,7 +610,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,false,"");
+            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,"");
             List<String> expecetedvaluesForInsert = List.of("('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','[]')");
            
             try {
@@ -644,7 +646,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,false,"");
+            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,"");
             List<String> expecetedvaluesForInsert = List.of("('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','[]')");
            
             try {
@@ -683,7 +685,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,false,"");
+            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,"");
             List<String> expecetedvaluesForInsert = List.of("('1562561734983','07/08/2019 04:55:34','','someId','someType','someAttr','someType','someValue','someMtdStr')");
            
             try {
@@ -722,7 +724,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         String fiwareServicePath = "/";
         
         try {
-            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,false, "");
+            List<String> valuesForInsert = backend.getValuesForInsert(attrPersistence, entity, Collections.emptyMap(), creationTime, fiwareServicePath,ngsiVersion,false,"");
             List<String> expecetedvaluesForInsert = List.of("('1562561734983','07/08/2019 04:55:34','','someId','someType','someValue','someMtdStr')");
            
             try {
@@ -755,13 +757,12 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 entities.get(0),
                 NGSI_LD_VERSION,
                 false,
-                true,
                 ""
         );
 
         long creationTime = 1562561734983l;
 
-        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',$$urn:ngsi-ld:RelationTest:Test03$$,$$ES$$,$$2020-09-29T09:00:00Z$$,null,null,$$urn:ngsi-ld:RelationTest:Test02$$,$$USA$$,$$2020-09-29T09:00:00Z$$,null,null,$$[3.63969,43.43358]$$,$$2020-09-29T09:00:00Z$$,null,null,$$test 01$$,$$2020-09-29T09:00:00Z$$,null,null,'2019-07-08T04:55:34.983Z',null,$$2020-09-29T09:00:00Z$$,null,$$2020-09-29T09:00:00Z$$,null)";
+        String expectedValuesForInsert = "('urn:ngsi-ld:NifiTest:Test01','NifiTest',$$urn:ngsi-ld:RelationTest:Test03$$,$$ES$$,$$2020-09-29T09:00:00Z$$,null,$$urn:ngsi-ld:RelationTest:Test02$$,$$USA$$,$$2020-09-29T09:00:00Z$$,null,$$[3.63969,43.43358]$$,$$2020-09-29T09:00:00Z$$,null,$$test 01$$,$$2020-09-29T09:00:00Z$$,null,'2019-07-08T04:55:34.983Z',null,$$2020-09-29T09:00:00Z$$,null,$$2020-09-29T09:00:00Z$$,null)";
         List<String> valuesForInsert = backend.getValuesForInsert(
                 attrPersistence,
                 entities.get(0),
@@ -770,7 +771,6 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 "",
                 NGSI_LD_VERSION,
                 false,
-                true,
                 ""
         );
 
@@ -782,6 +782,41 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
     }
 
     @Test
+    public void testValuesForInsertColumnForNgsiLdNotification() throws IOException {
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+
+        String data = readFromInputStream(inputStreamNotificationEntities);
+        ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
+                attrPersistence,
+                entities.get(0),
+                NGSI_LD_VERSION,
+                false,
+                ""
+        );
+
+        long creationTime = 1562561734983l;
+
+        List<String> valuesForInsert = backend.getValuesForInsert(
+                attrPersistence,
+                entities.get(0),
+                listOfFields,
+                creationTime,
+                "",
+                NGSI_LD_VERSION,
+                false,
+                ""
+        );
+
+        Map<String, List<AttributesLD>> attributesByObservedAt = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
+        List<String> observedTimestamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
+
+        assertEquals(observedTimestamps.size(), valuesForInsert.size());
+    }
+
+    @Test
     public void testInsertQueryForNgsiLd() throws Exception {
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
@@ -790,14 +825,13 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         ArrayList<Entity> entities = ngsiUtils.parseNgsiLdEntities(new JSONArray(data));
 
         String schemaName = backend.buildSchemaName("test", true, false, false);
-        String tableName = backend.buildTableName("", entities.get(0), "db-by-entity-type", true, false, NGSI_LD_VERSION, false, true, "test");
+        String tableName = backend.buildTableName("", entities.get(0), "db-by-entity-type", true, false, NGSI_LD_VERSION, false, "test");
 
         Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = backend.listOfFields(
                 attrPersistence,
                 entities.get(0),
                 NGSI_LD_VERSION,
                 false,
-                true,
                 ""
         );
 
@@ -813,7 +847,6 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 "db-by-entity-type",
                 NGSI_LD_VERSION,
                 false,
-                true,
                 ""
         );
 

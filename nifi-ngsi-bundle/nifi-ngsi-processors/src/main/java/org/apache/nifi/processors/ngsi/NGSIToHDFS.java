@@ -391,7 +391,7 @@ public class NGSIToHDFS extends AbstractProcessor {
                 :new HDFSBackendBinary(host,port,username,password,oauth2Token,hiveServerVersion,hiveHost,
                 hivePort,enableKrb5,krb5User,krb5Password,krb5LoginConfFile,krb5ConfFile,serviceAsNamespace);
 
-        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), false);
+        final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
         final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
         final String fiwareServicePath = (event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
 

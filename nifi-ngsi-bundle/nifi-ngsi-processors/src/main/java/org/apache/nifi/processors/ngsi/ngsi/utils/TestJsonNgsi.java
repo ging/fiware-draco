@@ -252,16 +252,16 @@ public class TestJsonNgsi {
 
         event = new NGSIEvent(000,"2",entitiesLD);
         for (Entity x: event.getEntitiesLD()){
-            p.listOfFields("column",x,"ld",false, false,"");
+            p.listOfFields("column",x,"ld",false, "");
         }
 
         for (Entity x: event.getEntitiesLD()){
-            Map<String, POSTGRESQL_COLUMN_TYPES> list=p.listOfFields("column",x,"ld",false, false, "");
+            Map<String, POSTGRESQL_COLUMN_TYPES> list=p.listOfFields("column",x,"ld",false, "");
             System.out.println(p.getFieldsForCreate(list));
             System.out.println(p.getFieldsForInsert(list.keySet()));
             System.out.println(p.getFieldsForInsert(list.keySet()));
             System.out.println(p.buildSchemaName("test",false,false,false));
-            System.out.println(p.buildTableName("",x,"db-by-entity-type",true,true,"ld",false, false, null));
+            System.out.println(p.buildTableName("",x,"db-by-entity-type",true,true,"ld",false, null));
             Map<String, POSTGRESQL_COLUMN_TYPES> listC = new HashMap<>();
             listC.put("a", POSTGRESQL_COLUMN_TYPES.TEXT);
             listC.put("b", POSTGRESQL_COLUMN_TYPES.TEXT);
@@ -269,7 +269,7 @@ public class TestJsonNgsi {
 
             System.out.println(p.addColumns("test","test",listC));
 
-            System.out.println(p.getValuesForInsert("column",x, Collections.emptyMap(), 000,"","ld", false,false, ""));
+            System.out.println(p.getValuesForInsert("column",x, Collections.emptyMap(), 000,"","ld", false,""));
             for (AttributesLD y :x.getEntityAttrsLD()){
                 System.out.println(y.getAttrName()+"-------");
                 System.out.println(y.isHasSubAttrs());

@@ -107,15 +107,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
 
-    protected static final PropertyDescriptor ENABLE_TEMPORAL_ENTITIES = new PropertyDescriptor.Builder()
-            .name("enable-temporal-entities")
-            .displayName("Enable temporal entities")
-            .description("true or false, true allow add temporal data to superset, false allow add data to superset .")
-            .required(false)
-            .allowableValues("true", "false")
-            .defaultValue("false")
-            .build();
-
     protected static final PropertyDescriptor ENABLE_ENCODING= new PropertyDescriptor.Builder()
             .name("enable-encoding")
             .displayName("Enable Encoding")
@@ -188,7 +179,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
         properties.add(DEFAULT_SERVICE_PATH);
         properties.add(DATASETID_PREFIX_TRUNCATE);
         properties.add(ENABLE_ENCODING);
-        properties.add(ENABLE_TEMPORAL_ENTITIES);
         properties.add(CKAN_COMPATIBILITY);
         properties.add(ENABLE_LOWERCASE);
         properties.add(BATCH_SIZE);
@@ -260,9 +250,8 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
 
     private final GroupingFunction groupFlowFilesBySQLBatch = (context, session, fc, conn, flowFiles, groups, sqlToEnclosure, result) -> {
         for (final FlowFile flowFile : flowFiles) {
-
             NGSIUtils n = new NGSIUtils();
-            final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue(), context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean());
+            final NGSIEvent event=n.getEventFromFlowFile(flowFile,session,context.getProperty(NGSI_VERSION).getValue());
             final long creationTime = event.getCreationTime();
             final String fiwareService = (event.getFiwareService().compareToIgnoreCase("nd")==0)?context.getProperty(DEFAULT_SERVICE).getValue():event.getFiwareService();
             final String fiwareServicePath = ("ld".equals(context.getProperty(NGSI_VERSION).getValue()))?"":(event.getFiwareServicePath().compareToIgnoreCase("/nd")==0)?context.getProperty(DEFAULT_SERVICE_PATH).getValue():event.getFiwareServicePath();
@@ -285,7 +274,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     entity,
                                     context.getProperty(NGSI_VERSION).getValue(),
                                     context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
-                                    context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean(),
                                     context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
                             );
                     String tableName =
@@ -297,7 +285,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     context.getProperty(ENABLE_LOWERCASE).asBoolean(),
                                     context.getProperty(NGSI_VERSION).getValue(),
                                     context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
-                                    context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean(),
                                     flowFile.getAttribute("TableNameSuffix")
                             );
                     final String sql =
@@ -311,7 +298,6 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     context.getProperty(ATTR_PERSISTENCE).getValue(),
                                     context.getProperty(NGSI_VERSION).getValue(),
                                     context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
-                                    context.getProperty(ENABLE_TEMPORAL_ENTITIES).asBoolean(),
                                     context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
                             );
                     getLogger().debug("Prepared insert query: {}", sql);
