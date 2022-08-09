@@ -44,7 +44,7 @@
       "observedAt" : "2020-10-29T09:00:00Z"
     }, {
       "type" : "Property",
-      "value" : 14,
+      "value" : "<14>",
       "unitCode" : null,
       "createdAt" : "2022-07-04T13:09:07.092021704Z",
       "instanceId" : "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
@@ -104,7 +104,15 @@
       "createdAt" : "2022-07-05T11:57:38.941415997Z",
       "instanceId" : "urn:ngsi-ld:Instance:3e934677-c427-40ac-b820-963200c1f08d",
       "observedAt" : "2020-09-29T09:00:00Z"
-    } ],
+    },
+      {
+        "type" : "Property",
+        "value" : "<14>",
+        "unitCode" : null,
+        "createdAt" : "2022-07-04T13:09:07.092021704Z",
+        "instanceId" : "urn:ngsi-ld:Instance:d5069c40-41e4-4640-939c-12df5336eeb4",
+        "observedAt" : "2020-09-29T09:00:00Z"
+      }],
     "location": {
       "type": "GeoProperty",
       "value": {

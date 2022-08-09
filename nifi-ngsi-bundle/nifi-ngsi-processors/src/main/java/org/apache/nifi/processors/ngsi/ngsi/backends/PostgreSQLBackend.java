@@ -6,8 +6,6 @@ import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.NGSIConstants.POSTGRESQL_COLUMN_TYPES;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -69,13 +67,13 @@ public class PostgreSQLBackend {
                 if (!attribute.observedAt.equals("")) {
                     String encodedObservedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.OBSERVED_AT);
                     aggregation.putIfAbsent(encodedObservedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                } else {
+                    String encodedModifiedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.MODIFIED_AT);
+                    aggregation.putIfAbsent(encodedModifiedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+
+                    String encodedCreatedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.CREATED_AT);
+                    aggregation.putIfAbsent(encodedCreatedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
                 }
-
-                String encodedModifiedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.MODIFIED_AT);
-                aggregation.putIfAbsent(encodedModifiedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
-
-                String encodedCreatedAt = encodeTimePropertyToColumnName(attrName, NGSIConstants.CREATED_AT);
-                aggregation.putIfAbsent(encodedCreatedAt, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
 
                 if (attribute.isHasSubAttrs()) {
                     for (AttributesLD subAttribute : attribute.getSubAttrs()) {
@@ -83,8 +81,10 @@ public class PostgreSQLBackend {
                         String encodedSubAttrName = encodeSubAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), subAttrName, datasetIdPrefixToTruncate);
                         if ("observedAt".equals(subAttrName))
                             aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
-                        else if (subAttribute.getAttrValue() instanceof BigDecimal)
-                            aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                        else if (subAttribute.getAttrValue() instanceof Number){
+                            if (aggregation.replace(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC) == null)
+                                aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.NUMERIC);
+                        }
                         else aggregation.putIfAbsent(encodedSubAttrName, POSTGRESQL_COLUMN_TYPES.TEXT);
                         logger.debug("Added subattribute {} ({}) to attribute {}", encodedSubAttrName, subAttrName, attrName);
                     }
@@ -230,19 +230,21 @@ public class PostgreSQLBackend {
         String encodedAttributeName = encodeAttributeToColumnName(attribute.getAttrName(), attribute.getDatasetId(), datasetIdPrefixToTruncate);
         valuesForColumns.put(encodedAttributeName, formatFieldForValueInsert(attribute.getAttrValue(), listOfFields.get(encodedAttributeName)));
 
-        String encodedObservedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.OBSERVED_AT);
-        if (!attribute.getObservedAt().equals(""))
+        if (!attribute.getObservedAt().equals("")){
+            String encodedObservedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.OBSERVED_AT);
             valuesForColumns.put(encodedObservedAt, formatFieldForValueInsert(attribute.getObservedAt(), listOfFields.get(encodedObservedAt)));
+        }
+        else {
+            String encodedCreatedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.CREATED_AT);
+            if (attribute.createdAt == null || attribute.createdAt.equals("") || ZonedDateTime.parse(attribute.createdAt).toEpochSecond() > ZonedDateTime.parse(oldestTimeStamp).toEpochSecond()) {
+                valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(oldestTimeStamp, listOfFields.get(encodedCreatedAt)));
+            } else
+                valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(attribute.createdAt, listOfFields.get(encodedCreatedAt)));
 
-        String encodedCreatedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.CREATED_AT);
-        if (attribute.createdAt == null || attribute.createdAt.equals("") || ZonedDateTime.parse(attribute.createdAt).toEpochSecond() > ZonedDateTime.parse(oldestTimeStamp).toEpochSecond()) {
-            valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(oldestTimeStamp, listOfFields.get(encodedCreatedAt)));
-        } else
-            valuesForColumns.put(encodedCreatedAt, formatFieldForValueInsert(attribute.createdAt, listOfFields.get(encodedCreatedAt)));
-
-        String encodedModifiedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.MODIFIED_AT);
-        if (attribute.modifiedAt != null && !attribute.modifiedAt.equals("")) {
-            valuesForColumns.put(encodedModifiedAt, formatFieldForValueInsert(attribute.modifiedAt, listOfFields.get(encodedModifiedAt)));
+            String encodedModifiedAt = encodeTimePropertyToColumnName(encodedAttributeName, NGSIConstants.MODIFIED_AT);
+            if (attribute.modifiedAt != null && !attribute.modifiedAt.equals("")) {
+                valuesForColumns.put(encodedModifiedAt, formatFieldForValueInsert(attribute.modifiedAt, listOfFields.get(encodedModifiedAt)));
+            }
         }
 
         if (attribute.isHasSubAttrs()) {
@@ -260,7 +262,11 @@ public class PostgreSQLBackend {
         String formattedField;
         switch (columnType) {
             case NUMERIC:
-                if (attributeValue instanceof BigDecimal) formattedField = attributeValue.toString();
+                if (attributeValue != null && (attributeValue instanceof Number)) formattedField = attributeValue.toString();
+                else formattedField = null;
+                break;
+            case TIMESTAMPTZ:
+                if (attributeValue != null) formattedField = "'" + attributeValue + "'";
                 else formattedField = null;
                 break;
             default:
