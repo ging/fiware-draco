@@ -832,8 +832,10 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 entities.get(0),
                 NGSI_LD_VERSION,
                 false,
-                ""
+                "urn_ngsi_ld_Dataset"
         );
+
+        String createTable = backend.getFieldsForCreate(listOfFields);
 
         long creationTime = 1562561734983l;
 
@@ -847,7 +849,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                 "db-by-entity-type",
                 NGSI_LD_VERSION,
                 false,
-                ""
+                "urn_ngsi_ld_Dataset"
         );
 
         Map<String, List<AttributesLD>> attributesByObservedAt = entities.get(0).getEntityAttrsLD().stream().collect(Collectors.groupingBy(attrs -> attrs.observedAt));
