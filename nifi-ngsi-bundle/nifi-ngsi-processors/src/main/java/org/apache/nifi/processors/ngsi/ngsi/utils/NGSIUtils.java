@@ -136,7 +136,7 @@ public class NGSIUtils {
     }
 
     private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
-        String attrType = value.getString("type");
+        String attrType = value.optString("type");
         String datasetId = value.optString("datasetId");
         String observedAt = value.optString("observedAt");
         String createdAt = value.optString("createdAt");
@@ -150,6 +150,9 @@ public class NGSIUtils {
             attrValue = value.get("value");
         } else if ("GeoProperty".contentEquals(attrType)) {
             attrValue = value.getJSONObject("value").get("coordinates").toString();
+        } else if("".contentEquals(attrType)){
+            attrType = null;
+            attrValue = null;
         } else {
             logger.warn("Unrecognized attribute type: {}", attrType);
             return null;
