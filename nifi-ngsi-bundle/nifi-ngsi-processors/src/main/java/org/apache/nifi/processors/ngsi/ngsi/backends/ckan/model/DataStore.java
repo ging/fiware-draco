@@ -9,6 +9,7 @@ public class DataStore {
     private String resource_id;
     private ArrayList<JsonElement> fields;
     private String force;
+    private String aliases;
 
     public  DataStore(){}
 
@@ -35,4 +36,6 @@ public class DataStore {
     public void setForce(String force) {
         this.force = force;
     }
+
+    public void setAliases(String aliases) { this.aliases = aliases; }
 }

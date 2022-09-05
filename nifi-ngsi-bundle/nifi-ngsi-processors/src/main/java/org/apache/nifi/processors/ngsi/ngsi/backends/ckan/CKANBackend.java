@@ -103,7 +103,7 @@ public class CKANBackend extends HttpBackend {
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
             if(createDataStore){
-                createDataStoreWithFields(resId,records);
+                createDataStoreWithFields(resId,resName,records);
                 createView(resId);
             }
             return resId;
@@ -123,7 +123,7 @@ public class CKANBackend extends HttpBackend {
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
             if(createDataStore){
-                createDataStoreWithFields(resId,records);
+                createDataStoreWithFields(resId,resName,records);
                 createView(resId);
             }
             return resId;
@@ -140,7 +140,7 @@ public class CKANBackend extends HttpBackend {
             cache.addRes(orgName, pkgName, resName);
             cache.setResId(orgName, pkgName, resName, resId);
             if(createDataStore){
-                createDataStoreWithFields(resId,records);
+                createDataStoreWithFields(resId, resName, records);
                 createView(resId);
             }
             return resId;
@@ -169,7 +169,7 @@ public class CKANBackend extends HttpBackend {
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
                 if(createDataStore){
-                    createDataStore(resId);
+                    createDataStore(resId, resName);
                     createView(resId);
                 }
                 return resId;
@@ -192,7 +192,7 @@ public class CKANBackend extends HttpBackend {
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
                 if(createDataStore){
-                    createDataStore(resId);
+                    createDataStore(resId, resName);
                     createView(resId);
                 }
                 return resId;
@@ -212,7 +212,7 @@ public class CKANBackend extends HttpBackend {
                 cache.addRes(orgName, pkgName, resName);
                 cache.setResId(orgName, pkgName, resName, resId);
                 if(createDataStore){
-                    createDataStore(resId);
+                    createDataStore(resId, resName);
                     createView(resId);
                 }
                 return resId;
@@ -460,10 +460,11 @@ public class CKANBackend extends HttpBackend {
      * @param resId Identifies the resource whose datastore is going to be created.
      * @throws Exception
      */
-    private void createDataStore(String resId) throws Exception {
+    private void createDataStore(String resId, String resName) throws Exception {
         // create the CKAN request JSON
         // CKAN types reference: http://docs.ckan.org/en/ckan-2.2/datastore.html#valid-types
         String jsonString = "{ \"resource_id\": \"" + resId
+                + "\", \"aliases\": [\""+resName+"\"+ ],"
                 + "\", \"fields\": [ "
                 + "{ \"id\": \"" + NGSIConstants.RECV_TIME_TS + "\", \"type\": \"int\"},"
                 + "{ \"id\": \"" + NGSIConstants.RECV_TIME + "\", \"type\": \"timestamp\"},"
@@ -498,7 +499,7 @@ public class CKANBackend extends HttpBackend {
      * @param records Array list with the attributes names for being used as fields with column mode
      * @throws Exception
      */
-    private void createDataStoreWithFields(String resId, String records) throws Exception {
+    private void createDataStoreWithFields(String resId, String resName, String records) throws Exception {
         // create the CKAN request JSON
         // CKAN types reference: http://docs.ckan.org/en/ckan-2.2/datastore.html#valid-types
         org.json.JSONObject jsonContent = new org.json.JSONObject(records);
@@ -521,6 +522,7 @@ public class CKANBackend extends HttpBackend {
         }
 
         dataStore.setResource_id(resId);
+        dataStore.setAliases(resName);
         dataStore.setFields(jsonArray);
         dataStore.setForce("true");
         String jsonString = gson.toJson(dataStore);
