@@ -268,14 +268,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
 
                 for (Entity entity : entities) {
                     getLogger().info("Entity " + entity.toString());
-                    Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields =
-                            postgres.listOfFields(
-                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
-                                    entity,
-                                    context.getProperty(NGSI_VERSION).getValue(),
-                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
-                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
-                            );
+
                     String tableName =
                             postgres.buildTableName(
                                     fiwareServicePath,
@@ -287,6 +280,19 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
                                     flowFile.getAttribute("TableNameSuffix")
                             );
+
+                    Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields =
+                            postgres.listOfFields(
+                                    context.getProperty(ATTR_PERSISTENCE).getValue(),
+                                    entity,
+                                    context.getProperty(NGSI_VERSION).getValue(),
+                                    context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
+                                    context.getProperty(DATASETID_PREFIX_TRUNCATE).getValue()
+                            );
+
+                    ResultSet columnDataType = conn.createStatement().executeQuery(postgres.getColumnsTypesQuery(tableName));
+                    Map<String, POSTGRESQL_COLUMN_TYPES> updatedListOfTypedFields = postgres.getUpdatedListOfTypedFields(columnDataType, listOfFields);
+
                     final String sql =
                             postgres.insertQuery(
                                     entity,
@@ -294,7 +300,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                                     fiwareServicePath,
                                     schemaName,
                                     tableName,
-                                    listOfFields,
+                                    updatedListOfTypedFields,
                                     context.getProperty(ATTR_PERSISTENCE).getValue(),
                                     context.getProperty(NGSI_VERSION).getValue(),
                                     context.getProperty(CKAN_COMPATIBILITY).asBoolean(),
@@ -315,10 +321,10 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                         try {
                             getLogger().info("Gonna create schema {}", schemaName);
                             conn.createStatement().execute(postgres.createSchema(schemaName));
-                            getLogger().info("Gonna create table {} with columns {}", tableName, listOfFields);
-                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, listOfFields));
+                            getLogger().info("Gonna create table {} with columns {}", tableName, updatedListOfTypedFields);
+                            conn.createStatement().execute(postgres.createTable(schemaName, tableName, updatedListOfTypedFields));
                             ResultSet rs = conn.createStatement().executeQuery(postgres.checkColumnNames(tableName));
-                            Map<String, POSTGRESQL_COLUMN_TYPES> newColumns = postgres.getNewColumns(rs, listOfFields);
+                            Map<String, POSTGRESQL_COLUMN_TYPES> newColumns = postgres.getNewColumns(rs, updatedListOfTypedFields);
                             if (newColumns.size() > 0) {
                                 getLogger().info("Identified new columns to create: {}", newColumns);
                                 conn.createStatement().execute(postgres.addColumns(schemaName, tableName, newColumns));

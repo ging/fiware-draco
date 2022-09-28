@@ -1,5 +1,6 @@
 package org.apache.nifi.processors.ngsi.ngsi.backends;
 
+import org.apache.commons.math3.util.Pair;
 import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
@@ -96,18 +97,18 @@ public class PostgreSQLBackend {
 
     private String encodeAttributeToColumnName(String attributeName, String datasetId, String datasetIdPrefixToTruncate) {
         String encodedName = NGSIEncoders.encodePostgreSQL(attributeName) + (!datasetId.equals("") ? "_" + NGSIEncoders.encodePostgreSQL(datasetId.replaceFirst(datasetIdPrefixToTruncate, "")) : "");
-        return NGSIEncoders.truncateToMaxSize(encodedName);
+        return NGSIEncoders.truncateToMaxSize(encodedName).toLowerCase();
     }
 
     private String encodeTimePropertyToColumnName(String encodedAttributeName, String timeProperty) {
         String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(timeProperty);
-        return NGSIEncoders.truncateToMaxSize(encodedName);
+        return NGSIEncoders.truncateToMaxSize(encodedName).toLowerCase();
     }
 
     private String encodeSubAttributeToColumnName(String attributeName, String datasetId, String subAttributeName, String datasetIdPrefixToTruncate) {
         String encodedAttributeName = encodeAttributeToColumnName(attributeName, datasetId, datasetIdPrefixToTruncate);
         String encodedName = encodedAttributeName + "_" + NGSIEncoders.encodePostgreSQL(subAttributeName);
-        return NGSIEncoders.truncateToMaxSize(encodedName);
+        return NGSIEncoders.truncateToMaxSize(encodedName).toLowerCase();
     }
 
     public List<String> getValuesForInsert(String attrPersistence, Entity entity, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields, long creationTime, String fiwareServicePath, String ngsiVersion, boolean ckanCompatible, String datasetIdPrefixToTruncate) {
@@ -428,6 +429,43 @@ public class PostgreSQLBackend {
 
     public String checkColumnNames(String tableName) {
         return "select column_name from information_schema.columns where table_name ='" + tableName + "';";
+    }
+
+    public String getColumnsTypesQuery(String tableName) {
+        return "select column_name, data_type from information_schema.columns where table_name ='" + tableName + "';";
+    }
+
+    public Map<String, POSTGRESQL_COLUMN_TYPES> getUpdatedListOfTypedFields(ResultSet rs, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields) {
+        // create an initial map containing all the fields with columns names in lowercase
+        Map<String, POSTGRESQL_COLUMN_TYPES> newFields = listOfFields;
+
+        try {
+            // Get the column names; column indices start from 1
+            while (rs.next()) {
+                Pair<String, POSTGRESQL_COLUMN_TYPES> columnNameWithDataType;
+                if (rs.getString(2).equals("timestamp with time zone")) {
+                    columnNameWithDataType =
+                            new Pair<>(rs.getString(1), POSTGRESQL_COLUMN_TYPES.TIMESTAMPTZ);
+                } else {
+                    columnNameWithDataType =
+                            new Pair<>(rs.getString(1), POSTGRESQL_COLUMN_TYPES.valueOf(rs.getString(2).toUpperCase()));
+                }
+                if (newFields.containsKey(columnNameWithDataType.getFirst()) &&
+                        newFields.get(columnNameWithDataType.getFirst()) != columnNameWithDataType.getSecond()) {
+                    logger.info("Column {} with type {} already existed with a different type {}",
+                            columnNameWithDataType.getFirst(),
+                            newFields.get(columnNameWithDataType.getFirst()),
+                            columnNameWithDataType.getSecond()
+                    );
+                    // update the column type to avoid type inconsistencies when inserting new values
+                    // if a value in an entity does not match the current type in DB, a NULL value will be used
+                    newFields.replace(columnNameWithDataType.getFirst(), columnNameWithDataType.getSecond());
+                }
+            }
+        } catch (SQLException s) {
+            logger.error("Error while inspecting columns: {}", s.getMessage(), s);
+        }
+        return newFields;
     }
 
     public Map<String, POSTGRESQL_COLUMN_TYPES> getNewColumns(ResultSet rs, Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields) {

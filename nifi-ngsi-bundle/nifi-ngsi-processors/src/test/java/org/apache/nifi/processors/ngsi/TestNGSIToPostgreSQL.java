@@ -11,15 +11,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.Mockito;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.ResultSet;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(JUnit4.class)
 public class TestNGSIToPostgreSQL {
@@ -35,7 +38,7 @@ public class TestNGSIToPostgreSQL {
     @Before
     public void setUp() throws Exception {
         //Mock the DBCP Controller Service so we can control the Results
-        runner = TestRunners.newTestRunner(NGSIToMySQL.class);
+        runner = TestRunners.newTestRunner(NGSIToPostgreSQL.class);
         runner.setProperty(NGSIToPostgreSQL.CONNECTION_POOL, "dbcp");
         runner.setProperty(NGSIToPostgreSQL.NGSI_VERSION, "v2");
         runner.setProperty(NGSIToPostgreSQL.DATA_MODEL, "db-by-service-path");
@@ -856,6 +859,23 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         List<String> observedTimestamps = attributesByObservedAt.keySet().stream().sorted().collect(Collectors.toList());
 
         assertEquals(instertQueryValue.split("values")[1].split("\\(").length, observedTimestamps.size()+1);
+    }
+
+    @Test
+    public void testGetNewListOfFields() throws Exception {
+        ResultSet resultSetMock = Mockito.mock(ResultSet.class);
+        when(resultSetMock.getString(1)).thenReturn("temperature");
+        when(resultSetMock.getString(2)).thenReturn("numeric");
+        when(resultSetMock.next()).thenReturn(true).thenReturn(false);
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> listOfFields = new TreeMap<>();
+        listOfFields.put("temperature", POSTGRESQL_COLUMN_TYPES.TEXT);
+
+        Map<String, POSTGRESQL_COLUMN_TYPES> newListOfFields = backend.getUpdatedListOfTypedFields(resultSetMock, listOfFields);
+
+
+        assertTrue(newListOfFields != listOfFields);
+        assertEquals(POSTGRESQL_COLUMN_TYPES.NUMERIC, newListOfFields.get("temperature"));
     }
 
     private String readFromInputStream(InputStream inputStream) throws IOException {
