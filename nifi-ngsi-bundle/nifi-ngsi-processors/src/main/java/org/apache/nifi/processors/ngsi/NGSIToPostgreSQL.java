@@ -291,7 +291,10 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
                             );
 
                     ResultSet columnDataType = conn.createStatement().executeQuery(postgres.getColumnsTypesQuery(tableName));
-                    Map<String, POSTGRESQL_COLUMN_TYPES> updatedListOfTypedFields = postgres.getUpdatedListOfTypedFields(columnDataType, listOfFields);
+                    Map<String, POSTGRESQL_COLUMN_TYPES> updatedListOfTypedFields;
+                    if(columnDataType !=null)
+                        updatedListOfTypedFields = postgres.getUpdatedListOfTypedFields(columnDataType, listOfFields);
+                    else updatedListOfTypedFields = listOfFields;
 
                     final String sql =
                             postgres.insertQuery(

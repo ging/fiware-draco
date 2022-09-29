@@ -136,6 +136,7 @@ public class NGSIUtils {
     }
 
     private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
+        //Some flow file can give entity that contains attributes with only null values so attribute type can be set to null
         String attrType = value.optString("type");
         String datasetId = value.optString("datasetId");
         String observedAt = value.optString("observedAt");
