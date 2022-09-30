@@ -136,7 +136,8 @@ public class NGSIUtils {
     }
 
     private AttributesLD parseNgsiLdAttribute(String key, JSONObject value) {
-        //Some flow file can give entity that contains attributes with only null values so attribute type can be set to null
+        //When exporting the temporal history of an entity, the value of an attribute can be an empty array - as per the specification - if it has no history in the specified time range.
+        // In this case, some flow file can give entity that contains attributes with only null values so attribute type can be set to null
         String attrType = value.optString("type");
         String datasetId = value.optString("datasetId");
         String observedAt = value.optString("observedAt");
