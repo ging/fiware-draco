@@ -2,9 +2,11 @@
 
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Docker badge](https://img.shields.io/badge/quay.io-fiware%2Fdraco-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/draco)
 [![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
 [![Support badge](https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
+<br/>
+[![Quay.io badge](https://img.shields.io/badge/quay.io-fiware%2Fdraco-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/draco)
+[![Docker badge](https://img.shields.io/badge/docker-ging%2Ffiware--draco-blue?logo=docker)](https://hub.docker.com/r/ging/fiware-draco/)
 <br/>
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
 [![CI](https://github.com/ging/fiware-draco/workflows/CI/badge.svg)](https://github.com/ging/fiware-draco/actions?query=workflow%3ACI)
@@ -40,8 +42,8 @@ programming. It supports powerful and scalable directed graphs of data routing, 
 logic. It was built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of
 contexts, we use it here to mean the automated and managed flow of information between systems.
 
-| :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) | <img style="height:1em" src="https://quay.io/static/img/quay_favicon.png"/> [quay.io](https://quay.io/repository/fiware/draco) | :dart: [Roadmap](docs/roadmap.md) |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- |
+| :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) |  :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | <img style="height:1em" src="https://quay.io/static/img/quay_favicon.png"/> [quay.io](https://quay.io/repository/fiware/draco) | :dart: [Roadmap](docs/roadmap.md) |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- | --------------------------------- |
 
 
 ### Terminology
