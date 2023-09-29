@@ -1,16 +1,19 @@
 # FIWARE Draco
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/916af70ef1214f378608142c70ef3ad0)](https://www.codacy.com/gh/ging/fiware-draco/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ging/fiware-draco&amp;utm_campaign=Badge_Grade)
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License](https://img.shields.io/github/license/ging/fiware-draco.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Docker badge](https://img.shields.io/docker/pulls/ging/fiware-draco.svg)](https://hub.docker.com/r/ging/fiware-draco/)[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
+[![](https://img.shields.io/badge/tag-fiware--draco-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
 [![Support badge](https://img.shields.io/badge/support-askbot-yellowgreen.svg)](https://ask.fiware.org/questions/scope%3Aall/tags%3Adraco/)
+<br/>
+[![Quay.io badge](https://img.shields.io/badge/quay.io-fiware%2Fdraco-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/draco)
+[![Docker badge](https://img.shields.io/badge/docker-ging%2Ffiware--draco-blue?logo=docker)](https://hub.docker.com/r/ging/fiware-draco/)
 <br/>
 [![Documentation badge](https://readthedocs.org/projects/fiware-draco/badge/?version=latest)](http://fiware-draco.rtfd.io)
 [![CI](https://github.com/ging/fiware-draco/workflows/CI/badge.svg)](https://github.com/ging/fiware-draco/actions?query=workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/ging/fiware-draco/badge.svg?branch=develop)](https://coveralls.io/github/ging/fiware-draco?branch=develop)
 [![Known Vulnerabilities](https://snyk.io/test/github/ging/fiware-draco/badge.svg?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)](https://snyk.io/test/github/ging/fiware-draco?targetFile=nifi-ngsi-bundle/nifi-ngsi-processors/pom.xml)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/draco.svg)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/916af70ef1214f378608142c70ef3ad0)](https://www.codacy.com/gh/ging/fiware-draco/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ging/fiware-draco&amp;utm_campaign=Badge_Grade)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4613/badge)](https://bestpractices.coreinfrastructure.org/projects/4613)
 
 ## Table of Contents
@@ -33,14 +36,14 @@
 
 This project is part of [FIWARE](http://fiware.org), as part of the Core Context Management Chapter .
 
-Draco is a is an easy to use, powerful, and reliable system to process and distribute data. Internally, Draco is based
+Draco is an easy to use, powerful, and reliable system to process and distribute data. Internally, Draco is based
 on [Apache NiFi](https://nifi.apache.org/docs.html), NiFi is a dataflow system based on the concepts of flow-based
 programming. It supports powerful and scalable directed graphs of data routing, transformation, and system mediation
 logic. It was built to automate the flow of data between systems. While the term 'dataflow' is used in a variety of
 contexts, we use it here to mean the automated and managed flow of information between systems.
 
-| :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | :dart: [Roadmap](docs/roadmap.md) |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- |
+| :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) |  :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | <img style="height:1em" src="https://quay.io/static/img/quay_favicon.png"/> [quay.io](https://quay.io/repository/fiware/draco) | :dart: [Roadmap](docs/roadmap.md) |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- | --------------------------------- |
 
 
 ### Terminology
@@ -80,7 +83,7 @@ FIWARE storages like MySQL, MongoDB
 
 ## How to Deploy?
 
-The most easy way to deploy Draco is running the container available on DockerHub.
+The easiest way to deploy Draco is running the container available on either DockerHub or Quay.io.
 
 Start a container for this image by typing in a terminal:
 
